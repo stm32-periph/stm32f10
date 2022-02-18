@@ -1,13 +1,13 @@
 /**
-  @page I2S_SPI_I2S_Switch I2S_SPI_I2S_Switch
+  @page I2S_SPI_I2S_Switch SPI_I2S_Switch example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    I2S/SPI_I2S_Switch/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the SPI_I2S_Switch Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the SPI_I2S_Switch example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -25,24 +25,24 @@ SPIs in I2S mode, and how to switch between SPI and I2S modes, performing a
 transfer from Master to Slave in I2S modes then a transfer from master to slave 
 in SPI mode and finally a transfer from Slave to Master in I2S mode.
 
-I2S2 is configured as master transmitter and I2S3 as slave reciever and both are 
-in Phillips standard configuration with 16bit data size in 32bit packet length 
-and 48KHz audio frequnecy.
+I2S2 is configured as master transmitter and I2S3 as slave receiver and both are 
+in Philips standard configuration with 16bit data size in 32bit packet length 
+and 48KHz audio frequency.
 
 In the first phase, the master I2S2 starts the I2S2_Buffer_Tx transfer while the 
-slave I2S3 receieves and loads the values in I2S3_Buffer_Rx. Once the transfer is 
+slave I2S3 receives and loads the values in I2S3_Buffer_Rx. Once the transfer is 
 completed a comparison is done and TransferStatus1 gives the data transfer status 
 where it is PASSED if transmitted and received data are the same otherwise it is 
 FAILED.
 
-In the second step, both preripherals are configured in SPI modes (simplex 
+In the second step, both peripherals are configured in SPI modes (simplex 
 communication) and SPI2_Buffer_Tx transfer is performed in simplex mode from SPI2 to
 SPI3.Once the transfer is completed a comparison is done and TransferStatus2 gives 
 the data transfer status where it is PASSED if transmitted and received data are 
 the same otherwise it is FAILED.
 As the master/slave mode is managed by software (the master is the clock (CK and WS) 
 generator), this allows to I2S2 to become slave transmitter and I2S3 to become master 
-receiver whithout hardware modification. 
+receiver without hardware modification. 
 
 In the third step, the slave I2S2 prepares the first data to be sent before the 
 master is enabled. Once the master is enabled, the clocks are released from the 
@@ -84,7 +84,7 @@ For this purpose prior to configure the SPI3/I2S3 pins:
 - For STM32F10x High-Density devices, the user has to disable the JTAG and use 
   the SWD interface (when debugging the application), or disable both JTAG/SWD 
   interfaces (for standalone application).
-- For STM32F10x Connectivity-Line devices, the user can use the solution above 
+- For STM32F10x Connectivity Line devices, the user can use the solution above 
   (SWD or disable bothe JTAG and SWD), or it is possible to remap the SPI3 pins 
   on {PC10, PC11, PC12, PA4} GPIO pins in order to avoid the conflict with JTAG 
   pins (and it is possible in this case to use JTAG interface). This remap is 
@@ -92,23 +92,12 @@ For this purpose prior to configure the SPI3/I2S3 pins:
 
 @par How to use it ? 
 
-In order to make the program work, you must do the following:
-- Create a project and setup all project configuration
-- Add the required Library files:
-  - stm32f10x_flash.c   
-  - stm32f10x_gpio.c   
-  - stm32f10x_rcc.c   
-  - stm32f10x_spi.c 
-        
-- Edit stm32f10x.h file to select the device you are working on (#define 
-  STM32F10X_HD or #define STM32F10X_CL in this case).
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+In order to make the program work, you must do the following :
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -127,5 +116,5 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

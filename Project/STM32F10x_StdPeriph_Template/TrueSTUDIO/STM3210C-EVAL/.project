@@ -117,6 +117,11 @@
 			<locationURI>CurPath/Project/STM32F10x_StdPeriph_Template/TrueSTUDIO/STM3210C-EVAL/readme.txt</locationURI>
 		</link>
 		<link>
+			<name>STM32_EVAL/stm3210c_eval_ioe.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Utilities/STM32_EVAL/STM3210C_EVAL/stm3210c_eval_ioe.c</locationURI>
+		</link>
+		<link>
 			<name>STM32_EVAL/stm3210c_eval_lcd.c</name>
 			<type>1</type>
 			<locationURI>CurPath/Utilities/STM32_EVAL/STM3210C_EVAL/stm3210c_eval_lcd.c</locationURI>
@@ -127,9 +132,69 @@
 			<locationURI>CurPath/Utilities/STM32_EVAL/stm32_eval.c</locationURI>
 		</link>
 		<link>
+			<name>STM32_EVAL/stm32_eval_i2c_ee.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Utilities/STM32_EVAL/Common/stm32_eval_i2c_ee.c</locationURI>
+		</link>
+		<link>
+			<name>STM32_EVAL/stm32_eval_i2c_tsensor.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Utilities/STM32_EVAL/Common/stm32_eval_i2c_tsensor.c</locationURI>
+		</link>
+		<link>
+			<name>STM32_EVAL/stm32_eval_sdio_sd.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Utilities/STM32_EVAL/Common/stm32_eval_sdio_sd.c</locationURI>
+		</link>
+		<link>
+			<name>STM32_EVAL/stm32_eval_spi_flash.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Utilities/STM32_EVAL/Common/stm32_eval_spi_flash.c</locationURI>
+		</link>
+		<link>
+			<name>STM32_EVAL/stm32_eval_spi_sd.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Utilities/STM32_EVAL/Common/stm32_eval_spi_sd.c</locationURI>
+		</link>
+		<link>
 			<name>StdPeriph_Driver/misc.c</name>
 			<type>1</type>
 			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/misc.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_adc.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_bkp.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_can.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_cec.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_crc.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_dac.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_dbgmcu.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c</locationURI>
 		</link>
 		<link>
 			<name>StdPeriph_Driver/stm32f10x_dma.c</name>
@@ -140,6 +205,11 @@
 			<name>StdPeriph_Driver/stm32f10x_exti.c</name>
 			<type>1</type>
 			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_flash.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c</locationURI>
 		</link>
 		<link>
 			<name>StdPeriph_Driver/stm32f10x_fsmc.c</name>
@@ -157,9 +227,24 @@
 			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c</locationURI>
 		</link>
 		<link>
+			<name>StdPeriph_Driver/stm32f10x_iwdg.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_pwr.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c</locationURI>
+		</link>
+		<link>
 			<name>StdPeriph_Driver/stm32f10x_rcc.c</name>
 			<type>1</type>
 			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_rtc.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c</locationURI>
 		</link>
 		<link>
 			<name>StdPeriph_Driver/stm32f10x_sdio.c</name>
@@ -172,9 +257,19 @@
 			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c</locationURI>
 		</link>
 		<link>
+			<name>StdPeriph_Driver/stm32f10x_tim.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c</locationURI>
+		</link>
+		<link>
 			<name>StdPeriph_Driver/stm32f10x_usart.c</name>
 			<type>1</type>
 			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c</locationURI>
+		</link>
+		<link>
+			<name>StdPeriph_Driver/stm32f10x_wwdg.c</name>
+			<type>1</type>
+			<locationURI>CurPath/Libraries/STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c</locationURI>
 		</link>
 		<link>
 			<name>TrueSTUDIO/startup_stm32f10x_cl.s</name>

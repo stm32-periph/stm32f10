@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    CAN/DualCAN/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -17,7 +17,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -164,7 +165,7 @@ void CAN1_RX0_IRQHandler(void)
   else
   {
     /* Turn Off LED3 */
-    LED_Display(0x05); /* KO */
+    LED_Display(0x05); /* Error */
   }
 }
 
@@ -186,7 +187,7 @@ void CAN2_RX0_IRQHandler(void)
   else
   {
     /* Turn Off LED4 */
-    LED_Display(0x06); /* KO */
+    LED_Display(0x06); /* Error */
   }
 }
 
@@ -215,4 +216,4 @@ void CAN2_RX0_IRQHandler(void)
   */ 
 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

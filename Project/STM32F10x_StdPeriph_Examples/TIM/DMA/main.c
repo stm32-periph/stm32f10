@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    TIM/DMA/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -48,7 +49,7 @@ void DMA_Configuration(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief   Main program
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -82,11 +83,11 @@ int main(void)
   and a variable duty cycle that is changed by the DMA after a specific number of
   Update DMA request.
 
-  The number of this repetitive requests is defined by the TIM1 Repetion counter,
+  The number of this repetitive requests is defined by the TIM1 Repetition counter,
   each 3 Update Requests, the TIM1 Channel 3 Duty Cycle changes to the next new 
   value defined by the SRC_Buffer . 
   -----------------------------------------------------------------------------*/
-  /* Compute the value to be set in ARR regiter to generate signal frequency at 17.57 Khz */
+  /* Compute the value to be set in ARR register to generate signal frequency at 17.57 Khz */
   TimerPeriod = (SystemCoreClock / 17570 ) - 1;
   /* Compute CCR1 value to generate a duty cycle at 50% */
   SRC_Buffer[0] = (uint16_t) (((uint32_t) 5 * (TimerPeriod - 1)) / 10);
@@ -211,6 +212,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   while (1)
   {}
 }
+
 #endif
 
 /**
@@ -221,4 +223,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

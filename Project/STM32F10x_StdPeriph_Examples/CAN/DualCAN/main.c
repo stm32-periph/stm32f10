@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    CAN/DualCAN/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -32,7 +33,15 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
+
+#define CAN_BAUDRATE  1000      /* 1MBps   */
+/* #define CAN_BAUDRATE  500*/  /* 500kBps */
+/* #define CAN_BAUDRATE  250*/  /* 250kBps */
+/* #define CAN_BAUDRATE  125*/  /* 125kBps */
+/* #define CAN_BAUDRATE  100*/  /* 100kBps */ 
+/* #define CAN_BAUDRATE  50*/   /* 50kBps  */ 
+/* #define CAN_BAUDRATE  20*/   /* 20kBps  */ 
+/* #define CAN_BAUDRATE  10*/   /* 10kBps  */ 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 CAN_InitTypeDef        CAN_InitStructure;
@@ -71,7 +80,7 @@ int main(void)
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
 
-  /* LCD Initilalization */
+  /* LCD Initialization */
   STM3210C_LCD_Init();
   LCD_Clear(LCD_COLOR_WHITE);
 
@@ -87,6 +96,24 @@ int main(void)
 
   /* Set the LCD Back Color */
   LCD_SetBackColor(LCD_COLOR_BLUE);
+
+#if CAN_BAUDRATE == 1000 /* 1MBps */
+  LCD_DisplayStringLine(LCD_LINE_4, " BAUDRATE = 1MBps   ");
+#elif CAN_BAUDRATE == 500 /* 500KBps */
+  LCD_DisplayStringLine(LCD_LINE_4, " BAUDRATE = 500kBps   ");
+#elif CAN_BAUDRATE == 250 /* 250KBps */
+  LCD_DisplayStringLine(LCD_LINE_4, " BAUDRATE = 250kBps   ");
+#elif CAN_BAUDRATE == 125 /* 125KBps */
+  LCD_DisplayStringLine(LCD_LINE_4, " BAUDRATE = 125kBps   ");
+#elif  CAN_BAUDRATE == 100 /* 100KBps */
+  LCD_DisplayStringLine(LCD_LINE_4, " BAUDRATE = 100kBps   ");
+#elif  CAN_BAUDRATE == 50 /* 50KBps */
+  LCD_DisplayStringLine(LCD_LINE_4, " BAUDRATE = 50kBps   ");
+#elif  CAN_BAUDRATE == 20 /* 20KBps */
+  LCD_DisplayStringLine(LCD_LINE_4, " BAUDRATE = 20kBps   ");
+#elif  CAN_BAUDRATE == 10 /* 10KBps */
+  LCD_DisplayStringLine(LCD_LINE_4, " BAUDRATE = 10kBps   ");
+#endif
   /* Set the LCD Text Color */
   LCD_SetTextColor(LCD_COLOR_WHITE);   
     
@@ -196,10 +223,30 @@ void CAN_Config(void)
   CAN_InitStructure.CAN_RFLM = DISABLE;
   CAN_InitStructure.CAN_TXFP = ENABLE;
   CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
-  CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
+  CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;  
   CAN_InitStructure.CAN_BS1 = CAN_BS1_3tq;
   CAN_InitStructure.CAN_BS2 = CAN_BS2_2tq;
-  CAN_InitStructure.CAN_Prescaler =5;
+ 
+#if CAN_BAUDRATE == 1000 /* 1MBps */
+  CAN_InitStructure.CAN_Prescaler =6;
+#elif CAN_BAUDRATE == 500 /* 500KBps */
+  CAN_InitStructure.CAN_Prescaler =12;
+#elif CAN_BAUDRATE == 250 /* 250KBps */
+  CAN_InitStructure.CAN_Prescaler =24;
+#elif CAN_BAUDRATE == 125 /* 125KBps */
+  CAN_InitStructure.CAN_Prescaler =48;
+#elif  CAN_BAUDRATE == 100 /* 100KBps */
+  CAN_InitStructure.CAN_Prescaler =60;
+#elif  CAN_BAUDRATE == 50 /* 50KBps */
+  CAN_InitStructure.CAN_Prescaler =120;
+#elif  CAN_BAUDRATE == 20 /* 20KBps */
+  CAN_InitStructure.CAN_Prescaler =300;
+#elif  CAN_BAUDRATE == 10 /* 10KBps */
+  CAN_InitStructure.CAN_Prescaler =600;
+#else
+   #error "Please select first the CAN Baudrate in Private defines in main.c "
+#endif  /* CAN_BAUDRATE == 1000 */
+
   
   /*Initializes the CAN1  and CAN2 */
   CAN_Init(CAN1, &CAN_InitStructure);
@@ -239,14 +286,14 @@ void Init_RxMes(CanRxMsg *RxMessage)
 {
   uint8_t i = 0;
 
-  RxMessage->StdId = 0x00;
-  RxMessage->ExtId = 0x00;
+  RxMessage->StdId = 0;
+  RxMessage->ExtId = 0;
   RxMessage->IDE = CAN_ID_STD;
   RxMessage->DLC = 0;
   RxMessage->FMI = 0;
   for (i = 0; i < 8; i++)
   {
-    RxMessage->Data[i] = 0x00;
+    RxMessage->Data[i] = 0;
   }
 }
 
@@ -279,42 +326,44 @@ void NVIC_Config(void)
   */
 void LED_Display(uint8_t Ledstatus)
 {
+
+
   switch(Ledstatus)
   {
     case(1): 
       STM_EVAL_LEDOn(LED1);
-      LCD_DisplayStringLine(LCD_LINE_4, "CAN1 send Msg       ");
-      LCD_DisplayStringLine(LCD_LINE_5, "                    ");
+      LCD_DisplayStringLine(LCD_LINE_5, "CAN1 send Frame     ");
+      LCD_DisplayStringLine(LCD_LINE_6, "                    ");
       break;
    
     case(2): 
       STM_EVAL_LEDOn(LED2);
-      LCD_DisplayStringLine(LCD_LINE_4, "                    ");
-      LCD_DisplayStringLine(LCD_LINE_5, "CAN2 send Msg       ");
+      LCD_DisplayStringLine(LCD_LINE_5, "                    ");
+      LCD_DisplayStringLine(LCD_LINE_6, "CAN2 send Frame     ");
       break;
             
     case(3): 
       STM_EVAL_LEDOff(LED1);
       STM_EVAL_LEDOn(LED3);
-      LCD_DisplayStringLine(LCD_LINE_4, "CAN1 receive Passed ");
+      LCD_DisplayStringLine(LCD_LINE_5, "CAN1 receive Passed ");
       break;
      
     case(4): 
       STM_EVAL_LEDOff(LED2);
       STM_EVAL_LEDOn(LED4);
-      LCD_DisplayStringLine(LCD_LINE_5, "CAN2 receive Passed ");
+      LCD_DisplayStringLine(LCD_LINE_6, "CAN2 receive Passed ");
       break;
 
     case(5): 
       STM_EVAL_LEDOff(LED1);
       STM_EVAL_LEDOff(LED3);
-      LCD_DisplayStringLine(LCD_LINE_6, "Communication Failed ");
+      LCD_DisplayStringLine(LCD_LINE_7, "Communication Failed ");
       break;
 
     case(6): 
       STM_EVAL_LEDOff(LED2);
       STM_EVAL_LEDOff(LED4);
-      LCD_DisplayStringLine(LCD_LINE_6, "Communication Failed ");
+      LCD_DisplayStringLine(LCD_LINE_7, "Communication Failed ");
       break;
       
     default:
@@ -355,6 +404,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
+
 #endif
 
 /**
@@ -365,4 +415,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -1,13 +1,13 @@
 /**
-  @page Dual_Boot XL-Density devices dual boot capability
+  @page Dual_Boot XL-Density devices FLASH Dual Boot capability example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    FLASH/Dual_Boot/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the FLASH Dual_Boot Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the XL-Density devices FLASH Dual Boot capability example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -160,5 +160,5 @@ In order to load the IAP code, you have to do the following:
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.  
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

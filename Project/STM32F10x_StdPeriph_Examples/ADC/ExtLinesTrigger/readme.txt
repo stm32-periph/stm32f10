@@ -1,12 +1,12 @@
 /**
-  @page ADC_ExtLinesTrigger ADC_ExtLinesTrigger
+  @page ADC_ExtLinesTrigger ADC external lines trigger example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    ADC/ExtLinesTrigger/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Description of the ADC external lines trigger example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -28,7 +28,7 @@ external trigger.
 ADC1 is configured to start regular group channel conversion on EXTI11 event.
 On detection of the first rising edge on PE.11 pin (PF.11 pin for High-Density Value line),
 the conversion of the first regular channel (ADC channel4) is done and its converted 
-value is transfered by DMA to ADC_RegularConvertedValueTab table. On the following edge 
+value is transferred by DMA to ADC_RegularConvertedValueTab table. On the following edge 
 detection, the second regular channel (ADC channel14) is automatically converted and 
 its converted value is stored by DMA in the same table. The number of transmitted data 
 by DMA, in this example is limited to 64 data.
@@ -101,24 +101,11 @@ devices.
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_adc.c 
-  - stm32f10x_dma.c 
-  - stm32f10x_exti.c
-  - stm32f10x_gpio.c 
-  - stm32f10x_rcc.c 
-  - misc.c  
-
-- Edit stm32f10x.h file to select the device you are working on.
-- Use STM32F10x system source file "system_stm32f10x.c" provided with this example.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -137,5 +124,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

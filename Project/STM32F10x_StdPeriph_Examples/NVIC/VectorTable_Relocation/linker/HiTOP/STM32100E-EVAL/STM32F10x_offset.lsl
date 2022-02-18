@@ -29,7 +29,7 @@
 #  define __HEAP                        2k
 #endif
 #ifndef __VECTOR_TABLE_ROM_ADDR
-#  define __VECTOR_TABLE_ROM_ADDR       0x08000000
+#  define __VECTOR_TABLE_ROM_ADDR       0x08003000
 #endif
 #ifndef __XVWBUF
 #define __XVWBUF                        256             /* buffer used by CrossView */
@@ -58,7 +58,7 @@ memory stm32f103flash
     mau = 8;
     type = rom;
     size = 504k;
-    map ( size = 504k, dest_offset=0x08002000, dest=bus:ARM:local_bus);
+    map ( size = 504k, dest_offset=0x08003000, dest=bus:ARM:local_bus);
 }
 
 memory stm32f103ram
@@ -152,7 +152,6 @@ section_setup ::linear
                         vector ( id = 59, optional, fill = "TIM12_IRQHandler" );             // TIM12_IRQHandler
                         vector ( id = 60, optional, fill = "TIM13_IRQHandler" );              // TIM13_IRQHandler
                         vector ( id = 61, optional, fill = "TIM14_IRQHandler" );             // TIM14_IRQHandler
-                        vector ( id = 64, optional, fill = "FSMC_IRQHandler" );                 // FSMC
                         vector ( id = 66, optional, fill = "TIM5_IRQHandler" );                 // TIM5
                         vector ( id = 67, optional, fill = "SPI3_IRQHandler" );                 // SPI3
                         vector ( id = 68, optional, fill = "UART4_IRQHandler" );                // UART4
@@ -163,6 +162,7 @@ section_setup ::linear
                         vector ( id = 73, optional, fill = "DMA2_Channel2_IRQHandler" );        // DMA2 Channel2
                         vector ( id = 74, optional, fill = "DMA2_Channel3_IRQHandler" );        // DMA2 Channel3
                         vector ( id = 75, optional, fill = "DMA2_Channel4_5_IRQHandler" );      // DMA2 Channel4 and DMA2 Channel5
+                        vector ( id = 76, optional, fill = "DMA2_Channel5_IRQHandler" );      // DMA2 Channel5
                 }
 }
 # endif

@@ -1,12 +1,12 @@
 /**
-  @page CAN_Networking CAN_Networking
+  @page CAN_Networking CAN Networking example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    CAN/Networking/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Description of the CAN Networking example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -31,9 +31,9 @@ of units will be limited by delay times and/or electrical loads on the bus line.
 This program behaves as follows:
   - After reset LED1 is ON
   - By Pressing on KEY Button : LED2 turns ON and all other Leds are OFF, on the N
-    eval-boards connected to the bus. 
+    eval boards connected to the bus. 
   - Press on KEY Button again to send CAN Frame to command LEDn+1 ON, all other Leds 
-    are OFF on the N eval-boards.
+    are OFF on the N eval boards.
     
 @note This example is tested with a bus of 3 units. The same program example is 
       loaded in all units to send and receive frames.
@@ -47,6 +47,17 @@ This program behaves as follows:
 		- RTR = Data
 		- DLC = 1 byte
 		- Data: Led number that should be turned ON
+
+
+User can select CAN1 or CAN2 cell using the private defines in main.c :
+
+@code
+#define __CAN1_USED__
+/* #define __CAN2_USED__*/
+@endcode
+   
+@note When using CAN2, please check that you device is Connectivity line.
+
 
 @par Directory contents 
 
@@ -75,7 +86,7 @@ This program behaves as follows:
       and PD.04 pins
     - Use Key Push Button connected to PB9
     - Connect a female/female CAN cable between at least 2 EVAL CAN connectors 
-      (on STM3210E-EVAL (CN2)/ STM3210C-EVAL (CN3) boards)
+      (on STM3210E-EVAL (CN2)/ STM3210C-EVAL (CN3 or CN4) boards)
        - Connector 1 DB9_PIN2 to Connector 2 DB9_PIN2  (CAN_L)
 		   - Connector 1 DB9_PIN5 to Connector 2 DB9_PIN5  ( GND )
 		   - Connector 1 DB9_PIN7 to Connector 2 DB9_PIN7  (CAN_H) 
@@ -109,33 +120,16 @@ This program behaves as follows:
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_can.c 
-  - stm32f10x_exti.c  
-  - stm32f10x_gpio.c   
-  - stm32f10x_rcc.c 
-  - stm32f10x_usart.c
-  - stm32f10x_i2c.c
-  - stm32f10x_spi.c
-  - misc.c
-  - stm32_eval.c       (under Utilities\STM32_EVAL) 
-         
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit CAN/Networking/platform_config.h file to select the evaluation board you will use.
-- or edit stm32_eval.h file to select the evaluation board you will use.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
-- In the first time the all leds are OFF.
-- By Pressing on Key Button : LED1 turn ON and all other Leds are OFF, on the N
-  eval-boards connected to the bus. 
-- Press on Key Button again to send CAN Frame to command LEDn+1 ON, all other Leds 
-  are OFF on the N eval-boards.
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
+ - In the first time the all leds are OFF.
+ - By Pressing on Key Button : LED1 turn ON and all other Leds are OFF, on the N
+   eval-boards connected to the bus. 
+ - Press on Key Button again to send CAN Frame to command LEDn+1 ON, all other Leds 
+   are OFF on the N eval-boards.
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -154,5 +148,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

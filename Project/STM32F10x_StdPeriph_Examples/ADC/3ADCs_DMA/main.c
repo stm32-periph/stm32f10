@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    ADC/3ADCs_DMA/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -127,7 +128,7 @@ int main(void)
   ADC_Init(ADC2, &ADC_InitStructure);
   /* ADC2 regular channels configuration */ 
   ADC_RegularChannelConfig(ADC2, ADC_Channel_13, 1, ADC_SampleTime_28Cycles5);
-  /* Enable ADC2 EOC interupt */
+  /* Enable ADC2 EOC interrupt */
   ADC_ITConfig(ADC2, ADC_IT_EOC, ENABLE);
 
   /* ADC3 configuration ------------------------------------------------------*/
@@ -146,12 +147,12 @@ int main(void)
   /* Enable ADC1 */
   ADC_Cmd(ADC1, ENABLE);
 
-  /* Enable ADC1 reset calibaration register */   
+  /* Enable ADC1 reset calibration register */   
   ADC_ResetCalibration(ADC1);
   /* Check the end of ADC1 reset calibration register */
   while(ADC_GetResetCalibrationStatus(ADC1));
 
-  /* Start ADC1 calibaration */
+  /* Start ADC1 calibration */
   ADC_StartCalibration(ADC1);
   /* Check the end of ADC1 calibration */
   while(ADC_GetCalibrationStatus(ADC1));
@@ -159,12 +160,12 @@ int main(void)
   /* Enable ADC2 */
   ADC_Cmd(ADC2, ENABLE);
 
-  /* Enable ADC2 reset calibaration register */   
+  /* Enable ADC2 reset calibration register */   
   ADC_ResetCalibration(ADC2);
   /* Check the end of ADC2 reset calibration register */
   while(ADC_GetResetCalibrationStatus(ADC2));
 
-  /* Start ADC2 calibaration */
+  /* Start ADC2 calibration */
   ADC_StartCalibration(ADC2);
   /* Check the end of ADC2 calibration */
   while(ADC_GetCalibrationStatus(ADC2));
@@ -172,12 +173,12 @@ int main(void)
   /* Enable ADC3 */
   ADC_Cmd(ADC3, ENABLE);
 
-  /* Enable ADC3 reset calibaration register */   
+  /* Enable ADC3 reset calibration register */   
   ADC_ResetCalibration(ADC3);
   /* Check the end of ADC3 reset calibration register */
   while(ADC_GetResetCalibrationStatus(ADC3));
 
-  /* Start ADC3 calibaration */
+  /* Start ADC3 calibration */
   ADC_StartCalibration(ADC3);
   /* Check the end of ADC3 calibration */
   while(ADC_GetCalibrationStatus(ADC3));
@@ -265,6 +266,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
+
 #endif
 
 /**
@@ -275,4 +277,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

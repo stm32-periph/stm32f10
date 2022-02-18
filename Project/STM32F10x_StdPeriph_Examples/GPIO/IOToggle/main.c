@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    GPIO/IOToggle/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body.
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -37,8 +38,6 @@
 GPIO_InitTypeDef GPIO_InitStructure;
 
 /* Private function prototypes -----------------------------------------------*/
-void Delay(__IO uint32_t nCount);
-
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -55,77 +54,76 @@ int main(void)
        system_stm32f10x.c file
      */     
        
-  /* Configure all unused GPIO port pins in Analog Input mode (floating input
-     trigger OFF), this will reduce the power consumption and increase the device
-     immunity against EMI/EMC *************************************************/
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB |
-                         RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOD |
-                         RCC_APB2Periph_GPIOE, ENABLE);
+  /* GPIOD Periph clock enable */
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_All;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
-  GPIO_Init(GPIOA, &GPIO_InitStructure);
-  GPIO_Init(GPIOB, &GPIO_InitStructure);
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  /* Configure PD0 and PD2 in output pushpull mode */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_2;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
-  GPIO_Init(GPIOE, &GPIO_InitStructure);
 
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB |
-                         RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOD |
-                         RCC_APB2Periph_GPIOE, DISABLE);  
-#if defined USE_STM3210E_EVAL || defined USE_STM32100E_EVAL
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOF | RCC_APB2Periph_GPIOG, ENABLE);
-
-  GPIO_Init(GPIOF, &GPIO_InitStructure);
-  GPIO_Init(GPIOG, &GPIO_InitStructure);
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOF | RCC_APB2Periph_GPIOG, DISABLE);
-#endif /* USE_STM3210E_EVAL */
-
-  /* Initialize Leds mounted on STM3210X-EVAL board */
-  STM_EVAL_LEDInit(LED1);
-  STM_EVAL_LEDInit(LED2);
-  STM_EVAL_LEDInit(LED3);
-  STM_EVAL_LEDInit(LED4);
-
+  /* To achieve GPIO toggling maximum frequency, the following  sequence is mandatory. 
+     You can monitor PD0 or PD2 on the scope to measure the output signal. 
+     If you need to fine tune this frequency, you can add more GPIO set/reset 
+     cycles to minimize more the infinite loop timing.
+     This code needs to be compiled with high speed optimization option.  */
   while (1)
   {
-    /* Turn on LD1 */
-    STM_EVAL_LEDOn(LED1);
-    /* Insert delay */
-    Delay(0xAFFFF);
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
 
-    /* Turn on LD2 and LD3 */
-    STM_EVAL_LEDOn(LED2);
-    STM_EVAL_LEDOn(LED3);
-    /* Turn off LD1 */
-    STM_EVAL_LEDOff(LED1);
-    /* Insert delay */
-    Delay(0xAFFFF);
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
 
-    /* Turn on LD4 */
-    STM_EVAL_LEDOn(LED4);
-    /* Turn off LD2 and LD3 */
-    STM_EVAL_LEDOff(LED2);
-    STM_EVAL_LEDOff(LED3);
-    /* Insert delay */
-    Delay(0xAFFFF);
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
 
-    /* Turn off LD4 */
-    STM_EVAL_LEDOff(LED4);
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
+
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
+
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
+
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
+
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
+
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
+
+    /* Set PD0 and PD2 */
+    GPIOD->BSRR = 0x00000005;
+    /* Reset PD0 and PD2 */
+    GPIOD->BRR  = 0x00000005;
   }
 }
 
-/**
-  * @brief  Inserts a delay time.
-  * @param  nCount: specifies the delay time length.
-  * @retval None
-  */
-void Delay(__IO uint32_t nCount)
-{
-  for(; nCount != 0; nCount--);
-}
-
 #ifdef  USE_FULL_ASSERT
+
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -143,6 +141,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
+
 #endif
 
 /**
@@ -153,4 +152,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

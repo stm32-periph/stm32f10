@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    FLASH/Program/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -105,7 +106,7 @@ int main(void)
 
   FLASH_LockBank1();
   
-  /* Check the corectness of written data */
+  /* Check the correctness of written data */
   Address = BANK1_WRITE_START_ADDR;
 
   while((Address < BANK1_WRITE_END_ADDR) && (MemoryProgramStatus != FAILED))
@@ -118,7 +119,7 @@ int main(void)
   }
 
 #ifdef STM32F10X_XL
-/* Porgram FLASH Bank2 ********************************************************/  
+/* Program FLASH Bank2 ********************************************************/  
   /* Unlock the Flash Bank2 Program Erase controller */
   FLASH_UnlockBank2();
 
@@ -145,7 +146,7 @@ int main(void)
 
   FLASH_LockBank2();
     
-  /* Check the corectness of written data */
+  /* Check the correctness of written data */
   Address = BANK2_WRITE_START_ADDR;
 
   while((Address < BANK2_WRITE_END_ADDR) && (MemoryProgramStatus2 != FAILED))
@@ -156,6 +157,7 @@ int main(void)
     }
     Address += 4;
   }
+
 #endif /* STM32F10X_XL */ 
   
   while (1)
@@ -181,6 +183,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
+
 #endif
 
 /**
@@ -191,4 +194,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -1,12 +1,12 @@
 /**
-  @page FSMC_OneNAND FSMC_OneNAND
+  @page FSMC_OneNAND FSMC OneNAND example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    FSMC/OneNAND/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Description of the FSMC OneNAND example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -24,9 +24,18 @@ This example shows how to configure the FSMC to drive the OneNAND memory mounted
 on STM32100E-EVAL board. 
 
 In this example a basic example of how to use the FSMC firmware library and
-an associate driver to perform read/write operations on the KFG1216U2A OneNAND
-memory.
+an associate driver to perform read/write operations on the KFG1216U2A/B-DIB6 
+OneNAND memory.
 
+The different OneNAND memory operations (Unlock, Erase, Write, Read) results are 
+signalled using four LEDs as follows:
+     - LED2, LED3 and LED4 are ON: OneNAND ID read failed
+     - LED3 and LED4 ON: Unlock Block failed
+     - LED2 and LED4 ON: Erase Block failed
+     - LED4 ON: Write Buffer failed
+     - LED2 ON: Asynchronous Read failed
+     - LED3 ON: Synchronous Read 
+     - LED1 ON: All OneNAND memory operations are OK
 
 
 @par Directory contents
@@ -47,28 +56,13 @@ memory.
 
     
 @par How to use it ? 
+
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - misc.c
-  - stm32f10x_dma.c
-  - stm32f10x_gpio.c
-  - stm32f10x_rcc.c
-  - stm32f10x_i2c.c
-  - stm32f10x_fsmc.c
-  - stm32f10x_usart.c
-  - stm32f10x_exti.c
-  - stm32_eval.c (under Utilities\STM32_EVAL)  
-  - stm32100e_eval_fsmc_onenand.c (under Utilities\STM32_EVAL\STM32100E_EVAL)   
-   
-- Edit stm32f10x.h file to select the device you are working on.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -87,5 +81,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
 
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

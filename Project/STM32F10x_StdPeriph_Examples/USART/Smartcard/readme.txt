@@ -1,13 +1,13 @@
 /**
-  @page USART_Smartcard USART_Smartcard
+  @page USART_Smartcard USART Smartcard example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    USART/Smartcard/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the USART Smartcard Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the USART Smartcard example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -89,23 +89,11 @@ SC_USART configured as follow:
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_exti.c
-  - stm32f10x_gpio.c 
-  - stm32f10x_rcc.c 
-  - stm32f10x_usart.c 
-  - misc.c 
-            
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit USART/Smartcard/platform_config.h file to select the evaluation board you will use.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -124,5 +112,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

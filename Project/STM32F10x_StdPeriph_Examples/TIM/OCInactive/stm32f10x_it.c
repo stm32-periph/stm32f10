@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    TIM/OCInactive/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and peripherals
   *          interrupt service routine.
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -17,7 +17,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -147,7 +148,7 @@ void TIM2_IRQHandler(void)
     /* Clear TIM2 Capture Compare1 interrupt pending bit*/
     TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
 
-    /* PC.06 turn-off after 1000 ms */
+    /* PC.06 turnoff after 1000 ms */
     GPIO_ResetBits(GPIOC, GPIO_Pin_6);
   }
   else if (TIM_GetITStatus(TIM2, TIM_IT_CC2) != RESET)
@@ -155,7 +156,7 @@ void TIM2_IRQHandler(void)
     /* Clear TIM2 Capture Compare2 interrupt pending bit*/
     TIM_ClearITPendingBit(TIM2, TIM_IT_CC2);
 
-    /* PC.07 turn-off after 500 ms */
+    /* PC.07 turnoff after 500 ms */
     GPIO_ResetBits(GPIOC, GPIO_Pin_7);
   }
   else if (TIM_GetITStatus(TIM2, TIM_IT_CC3) != RESET)
@@ -163,7 +164,7 @@ void TIM2_IRQHandler(void)
     /* Clear TIM2 Capture Compare3 interrupt pending bit*/
     TIM_ClearITPendingBit(TIM2, TIM_IT_CC3);
 
-    /* PC.08 turn-off after 250 ms */
+    /* PC.08 turnoff after 250 ms */
     GPIO_ResetBits(GPIOC, GPIO_Pin_8);
   }
   else
@@ -171,7 +172,7 @@ void TIM2_IRQHandler(void)
     /* Clear TIM2 Capture Compare4 interrupt pending bit*/
     TIM_ClearITPendingBit(TIM2, TIM_IT_CC4);
 
-    /* PC.09 turn-off after 125 ms */
+    /* PC.09 turnoff after 125 ms */
     GPIO_ResetBits(GPIOC, GPIO_Pin_9);
   }
 }
@@ -200,4 +201,4 @@ void TIM2_IRQHandler(void)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

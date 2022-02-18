@@ -1,12 +1,12 @@
 /**
-  @page  IOExpander_Example IOExpander_Example
+  @page  IOExpander_Example I2C and STMPE811 IO Expander communication example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    I2C/IOExpander/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Description of the I2C and STMPE811 IO Expander communication 
   *          example.
   ******************************************************************************
@@ -104,32 +104,14 @@ the push buttons state.
       IO_Pin_5, IO_Pin_6 and IO_Pin_7 (respectively UP, Right, Left, Down and Center)
 
           
+@par How to use it ? 
+
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_dma.c
-  - stm32f10x_exti.c 
-  - stm32f10x_fsmc.c  
-  - stm32f10x_gpio.c
-  - stm32f10x_i2c.c 
-  - stm32f10x_rcc.c  
-  - stm32f10x_spi.c
-  - stm32f10x_usart.c 
-  - misc.c   
-  - stm32_eval.c (under Utilities\STM32_EVAL)
-  - stm32100e_eval_ioe.c (under Utilities\STM32_EVAL\STM32100E_EVAL, for High-Density Value line)
-  - stm3210c_eval_ioe.c (under Utilities\STM32_EVAL\STM3210C_EVAL, for Connectivity line)
-  - stm32100e_eval_lcd.c (under Utilities\STM32_EVAL\STM32100E_EVAL, for High-Density Value line)
-  - stm3210c_eval_lcd.c (under Utilities\STM32_EVAL\STM3210C_EVAL, for Connectivity line)
-                
-- Edit stm32f10x.h file to select the device you are working on.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -148,5 +130,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

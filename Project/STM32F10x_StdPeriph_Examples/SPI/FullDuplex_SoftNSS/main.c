@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    SPI/FullDuplex_SoftNSS/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -60,7 +61,7 @@ void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode);
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
 /**
-  * @brief   Main program
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -120,7 +121,7 @@ int main(void)
     SPIy_Buffer_Rx[RxIdx++] = SPI_I2S_ReceiveData(SPIy);
   }
 
-  /* Check the corectness of written dada */
+  /* Check the correctness of written dada */
   TransferStatus1 = Buffercmp(SPIz_Buffer_Rx, SPIy_Buffer_Tx, BufferSize);
   TransferStatus2 = Buffercmp(SPIy_Buffer_Rx, SPIz_Buffer_Tx, BufferSize);
   /* TransferStatus1, TransferStatus2 = PASSED, if the transmitted and received data
@@ -165,7 +166,7 @@ int main(void)
     SPIz_Buffer_Rx[RxIdx++] = SPI_I2S_ReceiveData(SPIz);
   }
 
-  /* Check the corectness of written dada */
+  /* Check the correctness of written dada */
   TransferStatus3 = Buffercmp(SPIz_Buffer_Rx, SPIy_Buffer_Tx, BufferSize);
   TransferStatus4 = Buffercmp(SPIy_Buffer_Rx, SPIz_Buffer_Tx, BufferSize);
   /* TransferStatus3, TransferStatus4 = PASSED, if the transmitted and received data
@@ -230,12 +231,12 @@ void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode)
 
   if(SPIy_Mode == SPI_Mode_Master)
   {
-    /* Confugure SCK and MOSI pins as Alternate Function Push Pull */
+    /* Configure SCK and MOSI pins as Alternate Function Push Pull */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   }
   else
   {
-    /* Confugure SCK and MOSI pins as Input Floating */
+    /* Configure SCK and MOSI pins as Input Floating */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   }
   GPIO_Init(SPIy_GPIO, &GPIO_InitStructure);
@@ -244,12 +245,12 @@ void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode)
 
   if(SPIy_Mode == SPI_Mode_Master)
   {
-    /* Confugure MISO pin as Input Floating  */
+    /* Configure MISO pin as Input Floating  */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   }
   else
   {
-    /* Confugure MISO pin as Alternate Function Push Pull */
+    /* Configure MISO pin as Alternate Function Push Pull */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   }
   GPIO_Init(SPIy_GPIO, &GPIO_InitStructure);
@@ -259,12 +260,12 @@ void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode)
 
   if(SPIz_Mode == SPI_Mode_Slave)
   {
-    /* Confugure SCK and MOSI pins as Input Floating */
+    /* Configure SCK and MOSI pins as Input Floating */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   }
   else
   { 
-    /* Confugure SCK and MOSI pins as Alternate Function Push Pull */
+    /* Configure SCK and MOSI pins as Alternate Function Push Pull */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   }
   GPIO_Init(SPIz_GPIO, &GPIO_InitStructure);
@@ -272,11 +273,11 @@ void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode)
   GPIO_InitStructure.GPIO_Pin = SPIz_PIN_MISO;
   if(SPIz_Mode == SPI_Mode_Slave)
   {
-    /* Confugure MISO pin as Alternate Function Push Pull */
+    /* Configure MISO pin as Alternate Function Push Pull */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   }
   else
-  { /* Confugure MISO pin as Input Floating  */
+  { /* Configure MISO pin as Input Floating  */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   }
   GPIO_Init(SPIz_GPIO, &GPIO_InitStructure);
@@ -322,6 +323,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   while (1)
   {}
 }
+
 #endif
 /**
   * @}
@@ -331,4 +333,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

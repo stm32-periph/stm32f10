@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    CAN/Networking/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -17,7 +17,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -36,7 +37,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 CanRxMsg RxMessage;
-extern uint8_t KeyNumber  ;
+extern uint8_t KeyNumber;
 extern void LED_Display(uint8_t Ledstatus);
  
 /* Private function prototypes -----------------------------------------------*/
@@ -47,7 +48,7 @@ extern void LED_Display(uint8_t Ledstatus);
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -147,7 +148,6 @@ void SysTick_Handler(void)
 /*            STM32F10x Peripherals Interrupt Handlers                        */
 /******************************************************************************/
 
-
 /**
   * @brief  This function handles CAN1 Handler.
   * @param  None
@@ -167,6 +167,22 @@ void CAN1_RX0_IRQHandler(void)
   }
 }
 
+/**
+  * @brief  This function handles CAN2 Handler.
+  * @param  None
+  * @retval None
+  */
+#ifdef STM32F10X_CL
+void CAN2_RX0_IRQHandler(void)
+{
+  CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
+  if ((RxMessage.StdId == 0x321)&&(RxMessage.IDE == CAN_ID_STD) && (RxMessage.DLC == 1))
+  {
+    LED_Display(RxMessage.Data[0]);
+    KeyNumber = RxMessage.Data[0];
+  }
+}
+#endif
 /******************************************************************************/
 /*                 STM32F10x Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
@@ -192,4 +208,4 @@ void CAN1_RX0_IRQHandler(void)
   */ 
 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

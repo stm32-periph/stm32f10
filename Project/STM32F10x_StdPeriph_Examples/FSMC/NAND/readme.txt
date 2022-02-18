@@ -1,13 +1,13 @@
 /**
-  @page FSMC_NAND FSMC_NAND
+  @page FSMC_NAND FSMC NAND example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    FSMC/NAND/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the FSMC NAND Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the FSMC NAND example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -46,31 +46,15 @@ mounted on STM3210E-EVAL board.
 
 @note make sure that the Jumper 7 (JP7) is in position 1<-->2. 
     
+
 @par How to use it ? 
 
-In order to make the program work, you must do the following:
-- Create a project and setup all project configuration
-- Add the required Library files:
-  - stm32f10x_gpio.c
-  - stm32f10x_fsmc.c 
-  - stm32f10x_rcc.c 
-  - stm32f10x_exti.c
-  - stm32f10x_i2c.c
-  - stm32f10x_spi.c
-  - misc.c
-  - stm32f10x_usart.c
-  - stm32_eval.c (under Utilities\STM32_EVAL)
-  - stm3210e_eval_fsmc_nand.c (under Utilities\STM32_EVAL\STM3210E_EVAL)
-    
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit stm32_eval.h file to select the evaluation board you will use.
-   
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+In order to make the program work, you must do the following :
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -89,5 +73,5 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

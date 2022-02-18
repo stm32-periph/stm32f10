@@ -1,13 +1,13 @@
 /**
-  @page TIM_TIM1_Synchro TIM_TIM1_Synchro
+  @page TIM_TIM1_Synchro TIM1 Synchro example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    TIM/TIM1_Synchro/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the TIM TIM1_Synchro example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the TIM TIM1 Synchro example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -42,11 +42,11 @@ o For Low-density, Medium-density, High-density and Connectivity line devices:
   and the duty cycle is equal to: TIM1_CCR1/(TIM1_ARR + 1) = 50%
 
   The TIM3 is running at: 
-  (TIM1 frequency)/ ((TIM3 period +1)* (Repetion_Counter+1)) = 18.750 KHz and
+  (TIM1 frequency)/ ((TIM3 period +1)* (Repetition_Counter+1)) = 18.750 KHz and
   a duty cycle equal to TIM3_CCR1/(TIM3_ARR + 1) = 33.3%
 
   The TIM4 is running at:
-  (TIM1 frequency)/ ((TIM4 period +1)* (Repetion_Counter+1)) = 28.125 KHz and
+  (TIM1 frequency)/ ((TIM4 period +1)* (Repetition_Counter+1)) = 28.125 KHz and
   a duty cycle equal to TIM4_CCR1/(TIM4_ARR + 1) = 50%
   
 o For Value line devices:
@@ -90,21 +90,12 @@ o For Value line devices:
   
 @par How to use it ? 
 
-In order to make the program work, you must do the following:
-- Create a project and setup all project configuration
-- Add the required Library files:
-  - stm32f10x_gpio.c 
-  - stm32f10x_rcc.c 
-  - stm32f10x_tim.c  
-  
-- Edit stm32f10x.h file to select the device you are working on.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+In order to make the program work, you must do the following :
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -123,5 +114,5 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

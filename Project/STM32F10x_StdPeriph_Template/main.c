@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    Project/STM32F10x_StdPeriph_Template/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,8 +15,9 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
-  */ 
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
+  */  
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
@@ -135,15 +136,15 @@ int main(void)
 
   /* Display message on STM3210X-EVAL LCD *************************************/
   /* Clear the LCD */ 
-  LCD_Clear(White);
+  LCD_Clear(LCD_COLOR_WHITE);
 
   /* Set the LCD Back Color */
-  LCD_SetBackColor(Blue);
+  LCD_SetBackColor(LCD_COLOR_BLUE);
   /* Set the LCD Text Color */
-  LCD_SetTextColor(White);
-  LCD_DisplayStringLine(Line0, MESSAGE1);
-  LCD_DisplayStringLine(Line1, MESSAGE2);
-  LCD_DisplayStringLine(Line2, MESSAGE3);
+  LCD_SetTextColor(LCD_COLOR_WHITE);
+  LCD_DisplayStringLine(LCD_LINE_0, (uint8_t *)MESSAGE1);
+  LCD_DisplayStringLine(LCD_LINE_1, (uint8_t *)MESSAGE2);
+  LCD_DisplayStringLine(LCD_LINE_2, (uint8_t *)MESSAGE3);
 
   /* Retarget the C library printf function to the USARTx, can be USART1 or USART2
      depending on the EVAL board you are using ********************************/
@@ -188,7 +189,7 @@ PUTCHAR_PROTOTYPE
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -210,4 +211,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   */
 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

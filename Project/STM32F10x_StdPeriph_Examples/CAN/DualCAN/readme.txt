@@ -1,13 +1,13 @@
 /**
-  @page CAN_DualCAN CAN_DualCAN
+  @page CAN_DualCAN Dual CAN example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    CAN/DualCAN/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the CAN DualCAN example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the Dual CAN example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -27,14 +27,28 @@ pressing KEY or TAMPER push buttons:
    when CAN2 receives correctly this message LED4 is turned ON. 
  - When TAMPER button is pressed, LED2 is turned ON and CAN2 sends a message to CAN1,
    when CAN1 receives correctly this message LED3 is turned ON. 
-	
-	The CAN1 and CAN2 are configured as follow:
+
+The CAN1 and CAN2 are configured as follow:
     - Bit Rate   = 1 Mbit/s  
     - CAN Clock  = external clock (HSE)
-		- ID Filter  = All identifiers are allowed
-		- RTR = Data
-		- DLC = 1 byte
-		- Data: Led number that should be turned ON
+    - ID Filter  = All identifiers are allowed
+    - RTR = Data
+    - DLC = 1 byte
+    - Data: Led number that should be turned ON
+@note 
+  user can select one from the preconfigured CAN baud rates from the private 
+  defines in main.c by uncommenting the desired define: 
+
+@code
+  #define CAN_BAUDRATE  1000      /* CAN baudrate = 1MBps   */
+/* #define CAN_BAUDRATE  500*/  /* CAN baudrate = 500kBps */
+/* #define CAN_BAUDRATE  250*/  /* CAN baudrate = 250kBps */
+/* #define CAN_BAUDRATE  125*/  /* CAN baudrate = 125kBps */
+/* #define CAN_BAUDRATE  100*/  /* CAN baudrate = 100kBps */ 
+/* #define CAN_BAUDRATE  50*/   /* CAN baudrate = 50kBps  */ 
+/* #define CAN_BAUDRATE  20*/   /* CAN baudrate = 20kBps  */ 
+/* #define CAN_BAUDRATE  10*/   /* CAN baudrate = 10kBps  */
+@endcode
 
 @par Directory contents 
 
@@ -59,38 +73,21 @@ pressing KEY or TAMPER push buttons:
       and PD.04 pins
     - Use Key Push Button connected to PB9
     - Use Tamper Push Button connected to PC13    
-    - Connect a female/female CAN cable between at the  CAN connectors 
+    - Connect a female/female CAN cable between the CAN connectors 
       (CN4 and CN3 on STM3210C-EVAL boards)
     - Connector 1 DB9_PIN2 to Connector 2 DB9_PIN2  (CAN_L)
     - Connector 1 DB9_PIN5 to Connector 2 DB9_PIN5  ( GND )
-	  - Connector 1 DB9_PIN7 to Connector 2 DB9_PIN7  (CAN_H) 
-		  @note JP6 or JP5 must be fitted.
-       	       
+    - Connector 1 DB9_PIN7 to Connector 2 DB9_PIN7  (CAN_H) 
+    - JP6 or JP5 must be fitted.
+
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_can.c 
-  - stm32f10x_exti.c  
-  - stm32f10x_gpio.c   
-  - stm32f10x_rcc.c 
-  - stm32f10x_usart.c
-  - stm32f10x_i2c.c
-  - stm32f10x_spi.c
-  - misc.c
-  - stm32_eval.c       (under Utilities\STM32_EVAL)
-  - stm3210c_eval_lcd.c  (under Utilities\STM32_EVAL\STM3210C_EVAL)      
-         
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit stm32_eval.h file to select the evaluation board you will use.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -109,5 +106,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

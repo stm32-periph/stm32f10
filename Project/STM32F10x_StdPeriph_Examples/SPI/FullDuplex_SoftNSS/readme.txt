@@ -1,13 +1,13 @@
 /**
-  @page SPI_FullDuplex_SoftNSS SPI_FullDuplex_SoftNSS
+  @page SPI_FullDuplex_SoftNSS SPI Full Duplex Software NSS example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    SPI/FullDuplex_SoftNSS/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the SPI FullDuplex_SoftNSS Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the SPI Full Duplex Software NSS example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -35,7 +35,7 @@ each data transfer direction where it is PASSED if transmitted and received data
 are the same otherwise it is FAILED.
 
 As the NSS pin is managed by software, this permit to SPIy to become slave and SPIz
-to become master whithout hardware modification.
+to become master without hardware modification.
 In the second step, the slave SPIy starts the SPIy_Buffer_Tx transfer while the 
 master SPIz transmit SPIz_Buffer_Tx. Once the transfer is completed a comparison 
 is done and TransferStatus3 and TransferStatus4 gives the data transfer status for
@@ -97,22 +97,11 @@ are the same otherwise it is FAILED.
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_flash.c
-  - stm32f10x_gpio.c  
-  - stm32f10x_rcc.c
-  - stm32f10x_spi.c  
-   
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit SPI/FullDuplex_SoftNSS/platform_config.h file to select the evaluation board you will use.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -131,5 +120,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

@@ -1,16 +1,16 @@
 /**
-  @page TrueSTUDIO_STM3210C Project Template for Connectivity line devices
+  @page TrueSTUDIO_STM3210C TrueSTUDIO Project Template for Connectivity line devices
  
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   This sub-directory contains all the user-modifiable files 
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   This sub directory contains all the user modifiable files 
   *          needed to create a new project linked with the STM32F10x  
   *          Standard Peripheral Library and working with TrueSTUDIO software 
-  *          toolchain (Version 1.4.0 and later)
+  *          toolchain (Version 2.0.1 and later)
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
@@ -67,5 +67,5 @@
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
 
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

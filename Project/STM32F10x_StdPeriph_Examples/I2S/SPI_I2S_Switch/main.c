@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    I2S/SPI_I2S_Switch/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -305,7 +306,7 @@ void RCC_Configuration(void)
     while (RCC_GetFlagStatus(RCC_FLAG_PLL3RDY) == RESET)
     {}
 
-    /* Configure I2S clock source: On Connectivity-Line Devices, the I2S can be 
+    /* Configure I2S clock source: On Connectivity Line Devices, the I2S can be 
         clocked by PLL3 VCO instead of SYS_CLK in order to guarantee higher 
         precision */
     RCC_I2S3CLKConfig(RCC_I2S3CLKSource_PLL3_VCO);
@@ -354,7 +355,7 @@ void GPIO_Configuration(void)
 
 #ifdef USE_STM3210E_EVAL
   /* Disable the JTAG interface and enable the SWJ interface
-      This operation is not necessary for Connectivity-Line devices since
+      This operation is not necessary for Connectivity Line devices since
       SPI3 I/Os can be remapped on other GPIO pins */
   GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
 #endif /* USE_STM3210E_EVAL */ 
@@ -396,7 +397,7 @@ void GPIO_Configuration(void)
   * @param  pBuffer1, pBuffer2: buffers to be compared.
   * @param  BufferLength: buffer's length
   * @retval PASSED: pBuffer1 identical to pBuffer2
-  *   FAILED: pBuffer1 differs from pBuffer2
+  *         FAILED: pBuffer1 differs from pBuffer2
   */
 TestStatus Buffercmp(uint16_t* pBuffer1, uint16_t* pBuffer2, uint16_t BufferLength)
 {
@@ -415,6 +416,7 @@ TestStatus Buffercmp(uint16_t* pBuffer1, uint16_t* pBuffer2, uint16_t BufferLeng
 }
 
 #ifdef  USE_FULL_ASSERT
+
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -431,6 +433,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   while (1)
   {}
 }
+
 #endif
 
 /**
@@ -441,4 +444,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

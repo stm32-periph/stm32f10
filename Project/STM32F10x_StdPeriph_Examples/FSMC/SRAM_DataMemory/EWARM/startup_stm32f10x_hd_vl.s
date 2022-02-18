@@ -1,10 +1,10 @@
-;/******************** (C) COPYRIGHT 2010 STMicroelectronics ********************
+;/******************** (C) COPYRIGHT 2011 STMicroelectronics ********************
 ;* File Name          : startup_stm32f10x_hd_vl.s
 ;* Author             : MCD Application Team
-;* Version            : V3.4.0
-;* Date               : 10/15/2010
+;* Version            : V3.5.0
+;* Date               : 08-April-2011
 ;* Description        : STM32F10x High Density Value Line Devices vector table 
-;*                      for EWARM5.x toolchain.
+;*                      for EWARM toolchain.
 ;*                      This module performs:
 ;*                      - Set the initial SP
 ;*                      - Configure the clock system and the external SRAM 
@@ -119,7 +119,7 @@ __vector_table
         DCD     TIM14_IRQHandler              ; TIM14
         DCD     0                             ; Reserved
         DCD     0                             ; Reserved
-        DCD     FSMC_IRQHandler               ; FSMC
+        DCD     0                             ; Reserved
         DCD     0                             ; Reserved
         DCD     TIM5_IRQHandler               ; TIM5
         DCD     SPI3_IRQHandler               ; SPI3
@@ -405,11 +405,6 @@ TIM13_IRQHandler
 TIM14_IRQHandler
         B TIM14_IRQHandler
 
-        PUBWEAK FSMC_IRQHandler
-        SECTION .text:CODE:REORDER(1)
-FSMC_IRQHandler
-        B FSMC_IRQHandler
-
         PUBWEAK TIM5_IRQHandler
         SECTION .text:CODE:REORDER(1)
 TIM5_IRQHandler
@@ -466,4 +461,4 @@ DMA2_Channel5_IRQHandler
         B DMA2_Channel5_IRQHandler
                 
         END
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    TIM/TIM1_Synchro/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -82,11 +83,11 @@ int main(void)
     and the duty cycle is equal to: TIM1_CCR1/(TIM1_ARR + 1) = 50%
 
     The TIM3 is running at: 
-    (TIM1 frequency)/ ((TIM3 period +1)* (Repetion_Counter+1)) = 18.750 KHz and
+    (TIM1 frequency)/ ((TIM3 period +1)* (Repetition_Counter+1)) = 18.750 KHz and
     a duty cycle equal to TIM3_CCR1/(TIM3_ARR + 1) = 33.3%
 
     The TIM4 is running at:
-    (TIM1 frequency)/ ((TIM4 period +1)* (Repetion_Counter+1)) = 28.125 KHz and
+    (TIM1 frequency)/ ((TIM4 period +1)* (Repetition_Counter+1)) = 28.125 KHz and
     a duty cycle equal to TIM4_CCR1/(TIM4_ARR + 1) = 50%
   
   o For Low-Density Value line and Medium-Density Value line devices:
@@ -212,7 +213,7 @@ void GPIO_Configuration(void)
   GPIO_InitTypeDef GPIO_InitStructure;
 
 #ifdef STM32F10X_CL
-  /*GPIOC Configuration: TIM3 channel1 as alternate function push-pull */
+  /* GPIOC Configuration: TIM3 channel1 as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_6;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -221,7 +222,7 @@ void GPIO_Configuration(void)
 
   GPIO_PinRemapConfig(GPIO_FullRemap_TIM3, ENABLE);	
 
-  /*GPIOE Configuration: TIM1 channel1 as alternate function push-pull */
+  /* GPIOE Configuration: TIM1 channel1 as alternate function push-pull */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_8;
 
   GPIO_Init(GPIOE, &GPIO_InitStructure);
@@ -259,6 +260,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   while (1)
   {}
 }
+
 #endif
 
 /**
@@ -269,4 +271,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

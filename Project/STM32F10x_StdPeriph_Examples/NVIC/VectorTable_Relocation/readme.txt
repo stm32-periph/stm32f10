@@ -1,13 +1,13 @@
 /**
-  @page NVIC_VectorTable_Relocation NVIC_VectorTable_Relocation
+  @page NVIC_VectorTable_Relocation NVIC VectorTable Relocation example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    NVIC/VectorTable_Relocation/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the NVIC VectorTable_Relocation Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the NVIC VectorTable Relocation example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -36,7 +36,7 @@ The associated program implements a "Delay" function based on SysTick end of cou
 interrupt, and toggles four leds with timing defined by the "Delay" function.
 
 When using the IAP to load your porgram, the vector table must be relocated at
-address 0x08002000.
+address 0x08003000.
 
 When using the DFU to load your porgram, the vector table must be relocated at
 address 0x08003000.
@@ -91,9 +91,9 @@ In order to make the program work, you must do the following :
 - Create a project and setup all project configuration:
 <ul>
     <li> MDK-ARM 
-         - In the project option menu, select 'Target' window and enter 0x08002000 
+         - In the project option menu, select 'Target' window and enter 0x08003000 
            as IROM start address
-         - In the project option menu, select 'Linker' window and enter 0x08002000 
+         - In the project option menu, select 'Linker' window and enter 0x08003000 
            as R/O base address                    
 
     <li> EWARM
@@ -119,25 +119,10 @@ In order to make the program work, you must do the following :
            other STM32 devices, this linker should be updated. 
          
 </ul>        
-- Add the required Library files:
-  - stm32f10x_gpio.c 
-  - stm32f10x_rcc.c 
-  - stm32f10x_exti.c  
-  - misc.c 
-  - stm32f10x_usart.c
-  - stm32f10x_i2c.c
-  - stm32f10x_spi.c
-  - stm32_eval.c (under Utilities\STM32_EVAL)
-
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit stm32_eval.h file to select the evaluation board you will use.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section. 
-        
-- In the main.c and linker files, the vector table is relocated at address 0x08002000.
+- Copy all source files from this example folder to the template folder under
+  Project\STM32F10x_StdPeriph_Template
+      
+- In the main.c and linker files, the vector table is relocated at address 0x08003000.
   You can modify this address depending on the requirement of your application.    
 - Rebuild all files 
 - Convert the program image to a binary file, *.bin, then you can download and
@@ -160,5 +145,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

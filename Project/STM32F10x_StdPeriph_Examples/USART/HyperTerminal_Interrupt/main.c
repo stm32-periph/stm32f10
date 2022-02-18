@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    USART/HyperTerminal_Interrupt/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -82,7 +83,7 @@ int main(void)
 
   STM_EVAL_COMInit(COM1, &USART_InitStructure);
 
-  /* Enable the EVAL_COM1 Transmoit interrupt: this interrupt is generated when the 
+  /* Enable the EVAL_COM1 Transmit interrupt: this interrupt is generated when the 
      EVAL_COM1 transmit data register is empty */  
   USART_ITConfig(EVAL_COM1, USART_IT_TXE, ENABLE);
 
@@ -113,6 +114,7 @@ void NVIC_Configuration(void)
 }
 
 #ifdef  USE_FULL_ASSERT
+
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -130,6 +132,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
+
 #endif
 
 /**
@@ -140,4 +143,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    CAN/Networking/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -30,9 +31,28 @@
   * @{
   */ 
 
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
+#define __CAN1_USED__
+/* #define __CAN2_USED__*/
+
+#ifdef  __CAN1_USED__
+  #define CANx                       CAN1
+  #define GPIO_CAN                   GPIO_CAN1
+  #define GPIO_Remapping_CAN         GPIO_Remapping_CAN1
+  #define GPIO_CAN                   GPIO_CAN1
+  #define GPIO_Pin_CAN_RX            GPIO_Pin_CAN1_RX
+  #define GPIO_Pin_CAN_TX            GPIO_Pin_CAN1_TX
+#else /*__CAN2_USED__*/
+  #define CANx                       CAN2
+  #define GPIO_CAN                   GPIO_CAN2
+  #define GPIO_Remapping_CAN             GPIO_Remap_CAN2
+  #define GPIO_CAN                   GPIO_CAN2
+  #define GPIO_Pin_CAN_RX            GPIO_Pin_CAN2_RX
+  #define GPIO_Pin_CAN_TX            GPIO_Pin_CAN2_TX
+#endif  /* __CAN1_USED__ */
+
 #define KEY_PRESSED     0x01
 #define KEY_NOT_PRESSED 0x00
 
@@ -75,13 +95,13 @@ int main(void)
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
   
-  /* Configure Push buttion key */
+  /* Configure Push button key */
   STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_GPIO); 
    
   /* CAN configuration */
   CAN_Config();
   
-  CAN_ITConfig(CAN1, CAN_IT_FMP0, ENABLE);
+  CAN_ITConfig(CANx, CAN_IT_FMP0, ENABLE);
 
   /* turn off all leds*/
   STM_EVAL_LEDOff(LED1);
@@ -102,7 +122,7 @@ int main(void)
       {
         LED_Display(++KeyNumber);
         TxMessage.Data[0] = KeyNumber;
-        CAN_Transmit(CAN1, &TxMessage);
+        CAN_Transmit(CANx, &TxMessage);
         Delay();
         
         while(STM_EVAL_PBGetState(BUTTON_KEY) != KEY_NOT_PRESSED)
@@ -123,8 +143,13 @@ void CAN_Config(void)
   GPIO_InitTypeDef  GPIO_InitStructure;
   
   /* GPIO clock enable */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO |RCC_APB2Periph_GPIO_CAN, ENABLE);
-  
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+#ifdef  __CAN1_USED__
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_CAN1, ENABLE);
+#else /*__CAN2_USED__*/
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_CAN1, ENABLE);
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_CAN2, ENABLE);
+#endif  /* __CAN1_USED__ */
   /* Configure CAN pin: RX */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_CAN_RX;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
@@ -136,14 +161,19 @@ void CAN_Config(void)
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_Init(GPIO_CAN, &GPIO_InitStructure);
   
-  GPIO_PinRemapConfig(GPIO_Remap_CAN , ENABLE);
+  GPIO_PinRemapConfig(GPIO_Remapping_CAN , ENABLE);
   
-  /* CAN1 Periph clock enable */
+  /* CANx Periph clock enable */
+#ifdef  __CAN1_USED__
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
+#else /*__CAN2_USED__*/
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN2, ENABLE);
+#endif  /* __CAN1_USED__ */
   
   
   /* CAN register init */
-  CAN_DeInit(CAN1);
+  CAN_DeInit(CANx);
   CAN_StructInit(&CAN_InitStructure);
 
   /* CAN cell init */
@@ -154,14 +184,20 @@ void CAN_Config(void)
   CAN_InitStructure.CAN_RFLM = DISABLE;
   CAN_InitStructure.CAN_TXFP = DISABLE;
   CAN_InitStructure.CAN_Mode = CAN_Mode_Normal;
+  
+  /* CAN Baudrate = 1MBps*/
   CAN_InitStructure.CAN_SJW = CAN_SJW_1tq;
   CAN_InitStructure.CAN_BS1 = CAN_BS1_3tq;
   CAN_InitStructure.CAN_BS2 = CAN_BS2_5tq;
   CAN_InitStructure.CAN_Prescaler = 4;
-  CAN_Init(CAN1, &CAN_InitStructure);
+  CAN_Init(CANx, &CAN_InitStructure);
 
   /* CAN filter init */
+#ifdef  __CAN1_USED__
   CAN_FilterInitStructure.CAN_FilterNumber = 0;
+#else /*__CAN2_USED__*/
+  CAN_FilterInitStructure.CAN_FilterNumber = 14;
+#endif  /* __CAN1_USED__ */
   CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;
   CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_32bit;
   CAN_FilterInitStructure.CAN_FilterIdHigh = 0x0000;
@@ -192,9 +228,19 @@ void NVIC_Config(void)
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
   
 #ifndef STM32F10X_CL
+#ifdef  __CAN1_USED__
   NVIC_InitStructure.NVIC_IRQChannel = USB_LP_CAN1_RX0_IRQn;
+#else  /*__CAN2_USED__*/
+  /* CAN2 is not implemented in the device */
+   #error "CAN2 is implemented only in Connectivity line devices"
+#endif /*__CAN1_USED__*/
 #else
- NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX0_IRQn;
+#ifdef  __CAN1_USED__ 
+  NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX0_IRQn;
+#else  /*__CAN2_USED__*/
+  NVIC_InitStructure.NVIC_IRQChannel = CAN2_RX0_IRQn;
+#endif /*__CAN1_USED__*/
+
 #endif /* STM32F10X_CL*/
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0;
@@ -217,7 +263,9 @@ void Init_RxMes(CanRxMsg *RxMessage)
   RxMessage->DLC = 0;
   RxMessage->FMI = 0;
   for (i = 0;i < 8;i++)
+  {
     RxMessage->Data[i] = 0x00;
+  }
 }
 
 /**
@@ -288,6 +336,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
+
 #endif
 
 /**
@@ -298,4 +347,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

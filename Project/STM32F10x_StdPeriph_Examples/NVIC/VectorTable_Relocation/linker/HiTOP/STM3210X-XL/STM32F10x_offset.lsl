@@ -29,7 +29,7 @@
 #  define __HEAP                        2k
 #endif
 #ifndef __VECTOR_TABLE_ROM_ADDR
-#  define __VECTOR_TABLE_ROM_ADDR       0x08002000
+#  define __VECTOR_TABLE_ROM_ADDR       0x08003000
 #endif
 #ifndef __XVWBUF
 #define __XVWBUF                        256             /* buffer used by CrossView */
@@ -58,7 +58,7 @@ memory stm32f103flash
     mau = 8;
     type = rom;
     size =0xFE000;
-    map ( size = 0xFE000, dest_offset=0x08002000, dest=bus:ARM:local_bus);
+    map ( size = 0xFE000, dest_offset=0x08003000, dest=bus:ARM:local_bus);
 }
 
 memory stm32f103ram

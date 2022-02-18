@@ -1,12 +1,12 @@
 /**
-  @page DAC_OneChannel_NoiseWave DAC_OneChannel_NoiseWave
+  @page DAC_OneChannel_NoiseWave DAC one channel noise wave example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    DAC/OneChannel_NoiseWave/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Description of the DAC one channel noise wave example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -24,7 +24,7 @@ This example describes how to use one DAC channel to generate a signal with nois
 waves on DAC Channel1 output.
 
 DAC channel1 conversion are configured to be triggered by software with noise wave 
-generation.12bit left data alignement is selected since we choose to acces DAC_DHR12L1
+generation.12bit left data alignment is selected since we choose to access DAC_DHR12L1
 register. Bits 0 to 8 are masked for the Linear feedback shift register. 
 DAC channel1 is then enabled. DAC Channel1 DHR12L1 register is configured to have
 an output voltage of VREF/2.
@@ -71,21 +71,12 @@ an oscilloscope.
     
 @par How to use it ? 
 
-In order to make the program work, you must do the following:
-- Create a project and setup all project configuration
-- Add the required Library files:
-  - stm32f10x_dac.c  
-  - stm32f10x_gpio.c
-  - stm32f10x_rcc.c   
-        
-- Edit stm32f10x.h file to select the device you are working on.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+In order to make the program work, you must do the following :
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -104,5 +95,5 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

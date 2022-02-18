@@ -1,13 +1,13 @@
 /**
-  @page PWR_STOP PWR_STOP
+  @page PWR_STOP PWR STOP example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    PWR/STOP/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the PWR STOP Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the PWR STOP example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -93,35 +93,17 @@ Three leds LED1, LED2 and LED3 are used to monitor the system state as following
   (floating input trigger OFF). Refer to GPIO\IOToggle example for more details. 
 - Replace jumper JP9 in the STM3210B-EVAL board, JP12 in the STM3210E-EVAL, 
   JP23 (position 1-2) in the STM3210C-EVAL board or JP8 (position 1-2) in the 
-  STM32100B-EVAL board by an ampermeter.
+  STM32100B-EVAL board by an amperemeter.
 
          
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_rcc.c 
-  - stm32f10x_gpio.c 
-  - stm32f10x_rtc.c   
-  - stm32f10x_pwr.c   
-  - stm32f10x_bkp.c 
-  - stm32f10x_exti.c 
-  - misc.c 
-  - stm32f10x_usart.c
-  - stm32f10x_i2c.c
-  - stm32f10x_spi.c
-  - stm32_eval.c (under Utilities\STM32_EVAL)
-     
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit stm32_eval.h file to select the evaluation board you will use.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example in standalone mode (without debugger connection)
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example in standalone mode (without debugger connection)
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -140,5 +122,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

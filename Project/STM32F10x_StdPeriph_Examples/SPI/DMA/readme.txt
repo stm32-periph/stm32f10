@@ -1,13 +1,13 @@
 /**
-  @page SPI_DMA SPI_DMA
+  @page SPI_DMA SPI DMA example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    SPI/DMA/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the SPI DMA Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the SPI DMA example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -58,14 +58,13 @@ same otherwise it is FAILED.
     Value line, Medium-Density, XL-Density, Medium-Density Value line, Low-Density 
     and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density 
-    Value line), STM32100B-EVAL (Medium-Density Value line), STM3210C-EVAL (Connectivity line), 
-    STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL (Medium-Density)
-    evaluation boards and can be easily tailored to any other supported device 
-    and development board.
+  - This example has been tested with STMicroelectronics STM3210C-EVAL (Connectivity
+    line), STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL 
+    (Medium-Density) evaluation boards and can be easily tailored to any other 
+    supported device and development board.
     This example can't be tested with STMicroelectronics STM32100E-EVAL (STM32F10x 
-    High-Density Value line) STM32100B-EVAL (STM32F10x Medium-Density Value line) 
-    evaluation boards To select the STMicroelectronics evaluation board used to 
+    High-Density Value line) and STM32100B-EVAL (STM32F10x Medium-Density Value line) 
+    evaluation boards. To select the STMicroelectronics evaluation board used to 
     run the example,uncomment the corresponding line in SPI/DMA/platform_config.h file.  
 
   
@@ -90,22 +89,11 @@ same otherwise it is FAILED.
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_dma.c   
-  - stm32f10x_gpio.c 
-  - stm32f10x_rcc.c 
-  - stm32f10x_spi.c 
-   
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit SPI/DMA/platform_config.h file to select the evaluation board you will use.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -124,5 +112,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

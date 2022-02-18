@@ -1,13 +1,13 @@
 /**
-  @page USART_IrDA_Transmit USART_IrDA_Transmit
+  @page USART_IrDA_Transmit USART IrDA Transmit example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    USART/IrDA/Transmit/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the USART IrDA Transmit Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the USART IrDA Transmit example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -76,7 +76,7 @@ to be able to run the full demonstration:
     - Use SEL push-button connected to pin PG.07
     - Use RIGHT push-button connected to pin PG.13
     - Use RIGHT push-button connected to pin PG.14   
-    - Use an IrDA tranceiver connected to the USART3 Tx and Rx pins (U16 
+    - Use an IrDA transceiver connected to the USART3 Tx and Rx pins (U16 
       connector, JP15 jumper must be fitted).
       
   - STM32100B-EVAL Set-up  
@@ -85,12 +85,12 @@ to be able to run the full demonstration:
     - Use SEL push-button connected to pin PD.12
     - Use RIGHT push-button connected to pin PE.01
     - Use RIGHT push-button connected to pin PE.00                   
-    - Use an IrDA tranceiver connected to the USART3 Tx and Rx pins (U14 
+    - Use an IrDA transceiver connected to the USART3 Tx and Rx pins (U14 
       connector, JP11 jumper must be fitted).
 
   - STM3210C-EVAL Set-up 
     - The JoyStick push buttons are connected to the IO Expander on I2C.  
-    - Use an IrDA tranceiver connected to the USART2 Tx and Rx pins (U12 
+    - Use an IrDA transceiver connected to the USART2 Tx and Rx pins (U12 
       connector, JP16 should be in position 1<-->2).
           
   - STM3210E-EVAL Set-up 
@@ -99,7 +99,7 @@ to be able to run the full demonstration:
     - Use SEL push-button connected to pin PG.07
     - Use RIGHT push-button connected to pin PG.13
     - Use RIGHT push-button connected to pin PG.14   
-    - Use an IrDA tranceiver connected to the USART3 Tx and Rx pinsn (U13 
+    - Use an IrDA transceiver connected to the USART3 Tx and Rx pins (U13 
       connector, JP21 and JP22 jumper must be fitted).
 
   - STM3210B-EVAL Set-up  
@@ -108,35 +108,17 @@ to be able to run the full demonstration:
     - Use SEL push-button connected to pin PD.12
     - Use RIGHT push-button connected to pin PE.00
     - Use RIGHT push-button connected to pin PE.01                   
-    - Use an IrDA tranceiver connected to the USART3 Tx and Rx pins (U11 
+    - Use an IrDA transceiver connected to the USART3 Tx and Rx pins (U11 
       connector, JP5 jumper must be fitted).
    
 @par How to use it ? 
 
-In order to make the program work, you must do the following:
-- Create a project and setup all project configuration
-- Add the required Library files:
-  - stm32f10x_exti.c  
-  - stm32f10x_gpio.c 
-  - stm32f10x_rcc.c 
-  - stm32f10x_usart.c 
-  - stm32f10x_i2c.c
-  - stm32f10x_spi.c
-  - stm32_eval.c         (under Utilities\STM32_EVAL)
-    
-If you are using STM3210C-EVAL 
-    - stm3210c_eval_ioe.c (under Utilities\STM32_EVAL\STM3210C_EVAL)
-
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit stm32_eval.h file to select the evaluation board you will use.
-- or edit USART/IrDA/Transmit/platform_config.h file to select the evaluation board you will use.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+In order to make the program work, you must do the following :
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -155,5 +137,5 @@ If you are using STM3210C-EVAL
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

@@ -2,12 +2,12 @@
   @page mdkarm MDK-ARM Project Template
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   This sub-directory contains all the user-modifiable files needed 
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   This sub directory contains all the user modifiable files needed 
   *          to create a new project linked with the STM32F10x Standard Peripheral  
   *          Library and working with RealView MDK-ARM toolchain (Version 4.12 and later).
   ******************************************************************************
@@ -24,6 +24,9 @@
  
  - Project.Uv2/.Opt: A pre-configured project file with the provided library structure
                      that produces an executable image with MDK-ARM
+
+Enabling "Options for Target 'Output' Browser Information" is useful for quick 
+source files navigation but may slow the compilation time.  
               
 @note the @subpage note file contains the needed steps to follow when using the 
 default startup file provided by MDK-ARM when creating new projects.
@@ -78,5 +81,5 @@ default startup file provided by MDK-ARM when creating new projects.
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

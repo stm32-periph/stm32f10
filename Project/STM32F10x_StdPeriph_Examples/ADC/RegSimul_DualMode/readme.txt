@@ -1,13 +1,13 @@
 /**
-  @page ADC_RegSimul_DualMode ADC_RegSimul_DualMode
+  @page ADC_RegSimul_DualMode ADC regular simultaneous dual mode example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    ADC/RegSimul_DualMode/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the ADC regular simultaneous dual mode Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the ADC regular simultaneous dual mode example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -30,9 +30,9 @@ on ADC1 and channel11 is converted on ADC2 on the same time. The 32bits conversi
 result is then stored on ADC1 DR register. The DMA will transfer this data which
 will be stored ADC_DualConvertedValueTab table. Consecutively to those conversion,
 channel17 is converted on ADC1 and channel12 on ADC2. The combined conversion
-result is also transfered by DMA to the same destination buffer. 
+result is also transferred by DMA to the same destination buffer. 
 
-The same procedure is repeated until the specified number of data to be transfered
+The same procedure is repeated until the specified number of data to be transferred
 by DMA is reached.
 
 The ADCs clocks are set to 14 MHz.
@@ -73,22 +73,11 @@ The ADCs clocks are set to 14 MHz.
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_adc.c
-  - stm32f10x_dma.c
-  - stm32f10x_gpio.c
-  - stm32f10x_rcc.c
-
-- Edit stm32f10x.h file to select the device you are working on.
-- Use STM32F10x system source file "system_stm32f10x.c" provided with this example.
-
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -105,5 +94,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

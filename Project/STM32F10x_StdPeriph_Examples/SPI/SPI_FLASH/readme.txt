@@ -1,13 +1,13 @@
 /**
-  @page SPI_FLASH SPI_FLASH
+  @page SPI_FLASH SPI SPI_FLASH example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    SPI/SPI_FLASH/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the SPI SPI_FLASH Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the SPI SPI_FLASH example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -63,7 +63,7 @@ and the read operations are defined in the main.c file.
     (High-Density and XL-Density) and STM3210B-EVAL (Medium-Density) evaluation
     boards and can be easily tailored to any other supported device 
     and development board.
-    This example can't be tested with STM3210C-EVAL (Connectivity-Line)
+    This example can't be tested with STM3210C-EVAL (Connectivity Line)
     evaluation board (no SPI FLASH available).
     To select the STMicroelectronics evaluation board used to run the example, 
     uncomment the corresponding line in stm32_eval.h file.
@@ -72,8 +72,7 @@ and the read operations are defined in the main.c file.
     - Use LED1 and LED2 connected respectively to PF.06 and PF.07 pins
     - M25P128 FLASH is already available on this board.
 @note
- - On STM32100E-EVAL Rev A, the SPI FLASH example is only working in standalone
-  mode without debugger connection and just only after a POR reset.
+  - The SPI FLASH example is only working on STM32100E-EVAL Rev B.
         
   - STM32100B-EVAL Set-up  
     - Use LED1 and LED2 connected respectively to PC.06 and PC.07 pins
@@ -83,7 +82,7 @@ and the read operations are defined in the main.c file.
     - Use LED1 and LED2 connected respectively to PF.06 and PF.07 pins
     - M25P64 FLASH is already available on this board.
     @note The jumper 14 (USB Disconnect) must be set in position 1<->2 in order
-          to not interfer with SPI2 MISO pin PB14.
+          to not interfere with SPI2 MISO pin PB14.
       
   - STM3210B-EVAL Set-up  
     - Use LED1 and LED2 connected respectively to PC.06 and PC.07 pins
@@ -107,27 +106,11 @@ and the read operations are defined in the main.c file.
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Create a project and setup all project configuration
-- Add the required Library files :
-  - stm32f10x_exti.c
-  - stm32f10x_gpio.c  
-  - stm32f10x_rcc.c 
-  - stm32f10x_i2c.c
-  - stm32f10x_spi.c
-  - stm32f10x_usart.c
-  - misc.c
-  - stm32_eval.c (under Utilities\STM32_EVAL)
-  - stm32_eval_spi_flash.c (under Utilities\STM32_EVAL\Common)
-
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit stm32_eval.h file to select the evaluation board you will use
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -146,5 +129,5 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

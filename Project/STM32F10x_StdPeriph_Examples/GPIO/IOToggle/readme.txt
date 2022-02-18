@@ -1,13 +1,13 @@
 /**
-  @page GPIO_IOToggle GPIO_IOToggle
+  @page GPIO_IOToggle GPIO IO Toggle example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    GPIO/IOToggle/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the GPIO IOToggle Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the GPIO IO Toggle example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -20,11 +20,20 @@
 
 @par Example Description 
 
-This example describes how to use GPIO BSRR (Port bit set/reset register) and 
-BRR (Port bit reset register) for IO toggling.
-These registers allow modifying only one or several GPIO pins in a single atomic
-write access.
-Four LEDs are toggled in an infinite loop.
+GPIO ports are connected on APB2 bus, using BSRRH and BSRRL registers 2 cycles 
+are required to set a pin and another cycle to reset it. So GPIO pins can toggle 
+at AHB clock divided by 4.
+
+This example describes how to use BSRR and BRR (Port Bit Set/Reset Register
+and Port Bit Reset Register) for maximum IO toggling.
+
+PD0 and PD2 (configured in output pushpull mode) toggles in a forever loop:
+ - Set PD0 and PD2 by setting corresponding bits in BSRR register
+ - Reset PD0 and PD2 by setting corresponding bits in BRR register
+
+In this example, HCLK is configured at 72 MHz so PD0 and PD2 toggles at 18MHz.
+To achieve the maximum IO toggling frequency, you have to configure your compiler
+options for high speed optimization.
 
 @par Directory contents 
 
@@ -48,50 +57,14 @@ Four LEDs are toggled in an infinite loop.
     To select the STMicroelectronics evaluation board used to run the example, 
     uncomment the corresponding line in stm32_eval.h file (under Utilities\STM32_EVAL)
 
-  - STM32100E-EVAL Set-up  
-    - Use LED1, LED2, LED3 and LED4 connected respectively to PF.06, PF.07, PF.08
-      and PF.09 pins
-      
-  - STM32100B-EVAL Set-up  
-    - Use LED1, LED2, LED3 and LED4 connected respectively to PC.06, PC.07, PC.08
-      and PC.09 pins
-      
-  - STM3210C-EVAL Set-up 
-    - Use LED1, LED2, LED3 and LED4 connected respectively to PD.07, PD.13, PF.03
-      and PD.04 pins
-
-  - STM3210E-EVAL Set-up 
-    - Use LED1, LED2, LED3 and LED4 connected respectively to PF.06, PF0.7, PF.08
-      and PF.09 pins
-
-  - STM3210B-EVAL Set-up  
-    - Use LED1, LED2, LED3 and LED4 connected respectively to PC.06, PC.07, PC.08
-      and PC.09 pins
-
-
 @par How to use it ? 
 
-In order to make the program work, you must do the following:
-- Create a project and setup all project configuration
-- Add the required Library files:
-  - stm32f10x_gpio.c 
-  - stm32f10x_exti.c
-  - stm32f10x_rcc.c
-  - stm32f10x_usart.c     
-  - misc.c
-  - stm32f10x_i2c.c
-  - stm32f10x_spi.c
-  - stm32_eval.c       (under Utilities\STM32_EVAL)  
-
-- Edit stm32f10x.h file to select the device you are working on.
-- Edit stm32_eval.h file to select the evaluation board you will use.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+In order to make the program work, you must do the following :
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -110,5 +83,5 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

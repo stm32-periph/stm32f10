@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    USART/HalfDuplex/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -120,7 +121,7 @@ int main(void)
     /* Write one byte in the USARTy Transmit Data Register */
     USART_SendData(USARTy, TxBuffer1[TxCounter1++]);
 
-    /* Wait the byte is entirtly received by USARTz */  
+    /* Wait the byte is entirely received by USARTz */  
     while(USART_GetFlagStatus(USARTz, USART_FLAG_RXNE) == RESET)
     {
     }
@@ -140,7 +141,7 @@ int main(void)
     /* Write one byte in the USARTz Transmit Data Register */
     USART_SendData(USARTz, TxBuffer2[TxCounter2++]);
 
-    /* Wait the byte is entirtly received by USARTy */
+    /* Wait the byte is entirely received by USARTy */
     while(USART_GetFlagStatus(USARTy,USART_FLAG_RXNE) == RESET)
     {
     }
@@ -222,7 +223,7 @@ void GPIO_Configuration(void)
   * @param  pBuffer1, pBuffer2: buffers to be compared.
   * @param  BufferLength: buffer's length
   * @retval PASSED: pBuffer1 identical to pBuffer2
-  *   FAILED: pBuffer1 differs from pBuffer2
+  *         FAILED: pBuffer1 differs from pBuffer2
   */
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
 {
@@ -241,6 +242,7 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 }
 
 #ifdef  USE_FULL_ASSERT
+
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -258,6 +260,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
+
 #endif
 
 /**
@@ -268,4 +271,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

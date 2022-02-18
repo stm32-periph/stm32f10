@@ -1,13 +1,13 @@
 /**
-  @page I2S_Interrupt I2S_Interrupt
+  @page I2S_Interrupt I2S Interrupt example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    I2S/Interrupt/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the I2S Interrupt Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the I2S Interrupt example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -24,8 +24,8 @@ This example provides a description of how to set a communication between two
 SPIs in I2S mode using interrupts and performing a transfer from Master to Slave.
 
 In the first step, I2S3 is configured as master transmitter and I2S2 as slave 
-reciever and both are in Phillips standard configuration with 16bit extended to 
-32 bit data packet and 48KHz audio frequnecy. 
+reliever and both are in Philips standard configuration with 16bit extended to 
+32 bit data packet and 48KHz audio frequency. 
 
 The I2S3 transmit interrupt and the I2S2 receive interrupt are both enabled. And
 in these interrupts subroutines, the I2S3_Buffer_Tx is transmitted and the received
@@ -37,10 +37,10 @@ Once the transfer is completed a comparison is done and TransferStatus1 gives th
 data transfer status where it is PASSED if transmitted and received data are the 
 same otherwise it is FAILED.
 
-In the second step both peripherals are configured in I2S Phillips standard 24 bits
+In the second step both peripherals are configured in I2S Philips standard 24 bits
 data length in 32 bits packets and 16KHz audio frequency. The interrupts are
 enabled and the transfer is performed from the I2S3 master to the I2S2 slave.
-The 24 bits are transmited then the 8 remaining LSBs are filled automatically
+The 24 bits are transmitted then the 8 remaining LSBs are filled automatically
 with 0 values.
 
 Once the transfer is completed a comparison is done (on the 24 MSBs only, the 8 
@@ -61,7 +61,7 @@ it is PASSED if transmitted and received data are the same otherwise it is FAILE
     Devices.
   
   - This example has been tested with STMicroelectronics STM3210E-EVAL (High-Density
-    and XL-Density) and STM3210C-EVAL (Coneectivity Line) evaluation boards 
+    and XL-Density) and STM3210C-EVAL (Connectivity Line) evaluation boards 
     and can be easily tailored to any other supported device and development board.
 
   - STM3210C-EVAL Set-up 
@@ -81,32 +81,20 @@ For this purpose prior to configure the SPI3/I2S3 pins:
 - For STM32F10x High-Density devices, the user has to disable the JTAG and use 
   the SWD interface (when debugging the application), or disable both JTAG/SWD 
   interfaces (for standalone application).
-- For STM32F10x Connectivity-Line devices, the user can use the solution above 
-  (SWD or disable bothe JTAG and SWD), or it is possible to remap the SPI3 pins 
+- For STM32F10x Connectivity Line devices, the user can use the solution above 
+  (SWD or disable both JTAG and SWD), or it is possible to remap the SPI3 pins 
   on {PC10, PC11, PC12, PA4} GPIO pins in order to avoid the conflict with JTAG 
   pins (and it is possible in this case to use JTAG interface). This remap is 
   used for STM3210C-EVAL evaluation boards in this example.
 
 @par How to use it ? 
 
-In order to make the program work, you must do the following:
-- Create a project and setup all project configuration
-- Add the required Library files:
-  - stm32f10x_flash.c
-  - stm32f10x_gpio.c   
-  - stm32f10x_rcc.c   
-  - stm32f10x_spi.c 
-  - misc.c 
-      
-- Edit stm32f10x.h file to select the device you are working on (#define 
-  STM32F10X_HD or #define STM32F10X_CL in this case).
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+In order to make the program work, you must do the following :
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -125,5 +113,5 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

@@ -2,11 +2,11 @@
   @page note Note for TrueSTUDIO
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics ********************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics ********************
   * @file    note.txt
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   This file contains the needed step to use "printf" with TrueSTUDIO 
   *          toolchain.
   ******************************************************************************
@@ -17,7 +17,7 @@
   * CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
   * INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   ******************************************************************************
-
+  @endverbatim
 
 The C runtime library include many functions, including some that typically 
 handle I/O. The I/O related runtime functions include printf(), fopen(), fclose(),
@@ -31,11 +31,16 @@ system middleware.
 The free Lite version of TrueSTUDIO do not support I/O redirection, and instead 
 have do-nothing stubs compiled into the C runtime library.
 
-To support printf() redirection in the full version, just add the following code 
-in in _write() function in the TrueSTUDIO Minimal System calls file "syscalls.c" 
-located at TrueSTUDIO Pro install directory.
+To support printf() redirection in the professional version, you should do the following:
+ - Open TrueSTUDIO professional and load your project. 
+ - In the Project explorer, Right click on the project and select New->Other...
+ - Expand System calls
+ - Select Minimal System Calls Implementation and click next.
+ - Click on Finish and verify that "syscalls.c" is added to your project.
+ - Add the following code in the _write() function in "syscalls.c". 
 
-/*****************************************/
+  @code
+   /*****************************************/
    int Index;
   
    for (Index = 0; Index < len; Index++)
@@ -44,9 +49,10 @@ located at TrueSTUDIO Pro install directory.
    }
 
    return len;
-/*****************************************/
-     
- @endverbatim
+   /*****************************************/
+   @endcode
+   
+ - Finally, Rebuild your project.
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -65,5 +71,5 @@ located at TrueSTUDIO Pro install directory.
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers. 
   
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

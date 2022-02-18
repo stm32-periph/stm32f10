@@ -1,13 +1,13 @@
 /**
-  @page FLASH_Write_Protection FLASH_Write_Protection
+  @page FLASH_Write_Protection FLASH Write Protection example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    FLASH/Write_Protection/readme.txt 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
-  * @brief   Description of the FLASH Write_Protection Example.
+  * @version V3.5.0
+  * @date    08-April-2011
+  * @brief   Description of the FLASH Write Protection example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -27,7 +27,7 @@ for the STM32F10x FLASH:
    To enable the Write Protection, uncomment the line "#define WRITE_PROTECTION_ENABLE"
    in main.c file.  
    To protect a set of pages, the user has to call the function FLASH_EraseOptionBytes
-   to erase all the option bytes then to call the function  FLASH_EnableWriteProtection .
+   to erase all the option bytes then to call the function  FLASH_EnableWriteProtection.
    The parameter of the later function will define the number of pages to be protected
    (The desired pages and already protected pages).
    To load the new option byte values, a system Reset is necessary, for this, the
@@ -42,8 +42,8 @@ for the STM32F10x FLASH:
    To load the new option byte values, a system Reset is necessary, for this, the
    function NVIC_SystemReset() is used.
    
-- Programm the selected pages:
-  To programm the desired pages (if the flash is not write protected) uncomment the line
+- Program the selected pages:
+  To program the desired pages (if the flash is not write protected) uncomment the line
   "#define FLASH_PAGE_PROGRAM" in main.c file. 
 
 If the desired pages are not write protected, an erase and a write operation are
@@ -73,19 +73,12 @@ performed.
   
 @par How to use it ? 
 
-In order to make the program work, you must do the following:
-- Create a project and setup all project configuration
-- Add the required Library files:
-  - stm32f10x_flash.c 
-   
-- Edit stm32f10x.h file to select the device you are working on.
-  
-@b Tip: You can tailor the provided project template to run this example, for 
-        more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
-        manual; select "Peripheral Examples" then follow the instructions 
-        provided in "How to proceed" section.   
-- Link all compiled files and load your image into target memory
-- Run the example
+In order to make the program work, you must do the following :
+ - Copy all source files from this example folder to the template folder under
+   Project\STM32F10x_StdPeriph_Template
+ - Open your preferred toolchain 
+ - Rebuild all files and load your image into target memory
+ - Run the example 
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -104,5 +97,5 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h3>
  */

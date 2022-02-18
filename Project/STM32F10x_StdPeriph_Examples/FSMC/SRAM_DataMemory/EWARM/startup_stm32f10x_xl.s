@@ -1,9 +1,9 @@
-;/******************** (C) COPYRIGHT 2010 STMicroelectronics ********************
+;/******************** (C) COPYRIGHT 2011 STMicroelectronics ********************
 ;* File Name          : startup_stm32f10x_xl.s
 ;* Author             : MCD Application Team
-;* Version            : V3.4.0
-;* Date               : 10/15/2010
-;* Description        : STM32F10x XL-Density Devices vector table for EWARM5.x 
+;* Version            : V3.5.0
+;* Date               : 08-April-2011
+;* Description        : STM32F10x XL-Density Devices vector table for EWARM 
 ;*                      toolchain.
 ;*                      This module performs:
 ;*                      - Set the initial SP
@@ -497,4 +497,4 @@ DMA2_Channel4_5_IRQHandler
         
         END
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

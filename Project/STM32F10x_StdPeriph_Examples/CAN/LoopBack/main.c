@@ -2,11 +2,11 @@
   ******************************************************************************
   * @file    CAN/LoopBack/main.c 
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    10/15/2010
+  * @version V3.5.0
+  * @date    08-April-2011
   * @brief   Main program body
   ******************************************************************************
-  * @copy
+  * @attention
   *
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -15,7 +15,8 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  ******************************************************************************
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -30,10 +31,21 @@
   * @{
   */ 
 
-/* Private typedef -----------------------------------------------------------*/
-typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
+
 
 /* Private define ------------------------------------------------------------*/
+#define __CAN1_USED__
+/* #define __CAN2_USED__*/   /* Please check that you device is 
+                                Connectivity line when using CAN2 */
+
+#ifdef  __CAN1_USED__
+  #define CANx CAN1
+#else /*__CAN2_USED__*/
+  #define CANx CAN2
+#endif  /* __CAN1_USED__ */
+
+/* Private typedef -----------------------------------------------------------*/
+typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 __IO uint32_t ret = 0; /* for return of the interrupt handling */
@@ -60,8 +72,16 @@ int main(void)
        system_stm32f10x.c file
      */     
        
-  /* CAN1 Periph clock enable */
+
+
+#ifdef  __CAN1_USED__
+  /* CANx Periph clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
+#else /*__CAN2_USED__*/
+  /* CAN1 & 2  Periph clock enable */
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN2, ENABLE);
+#endif  /* __CAN1_USED__ */
 
   /* NVIC Configuration */
   NVIC_Configuration();
@@ -72,13 +92,13 @@ int main(void)
   STM_EVAL_LEDInit(LED3);
   STM_EVAL_LEDInit(LED4);
   
-  /*Turns selected LED Off */  
+  /* Turns selected LED Off */  
   STM_EVAL_LEDOff(LED1);
   STM_EVAL_LEDOff(LED2);
   STM_EVAL_LEDOff(LED3);
   STM_EVAL_LEDOff(LED4);
   
-  /* CAN transmit at 100Kb/s and receive by polling in loopback mode */
+  /* CAN transmit at 125Kb/s and receive by polling in loopback mode */
   TestRx = CAN_Polling();
 
   if (TestRx == FAILED)
@@ -127,7 +147,8 @@ TestStatus CAN_Polling(void)
   uint8_t TransmitMailbox = 0;
 
   /* CAN register init */
-  CAN_DeInit(CAN1);
+  CAN_DeInit(CANx);
+
   CAN_StructInit(&CAN_InitStructure);
 
   /* CAN cell init */
@@ -138,21 +159,29 @@ TestStatus CAN_Polling(void)
   CAN_InitStructure.CAN_RFLM=DISABLE;
   CAN_InitStructure.CAN_TXFP=DISABLE;
   CAN_InitStructure.CAN_Mode=CAN_Mode_LoopBack;
+  
+  /* Baudrate = 125kbps*/
   CAN_InitStructure.CAN_SJW=CAN_SJW_1tq;
-  CAN_InitStructure.CAN_BS1=CAN_BS1_8tq;
-  CAN_InitStructure.CAN_BS2=CAN_BS2_7tq;
-  CAN_InitStructure.CAN_Prescaler=5;
-  CAN_Init(CAN1, &CAN_InitStructure);
+  CAN_InitStructure.CAN_BS1=CAN_BS1_2tq;
+  CAN_InitStructure.CAN_BS2=CAN_BS2_3tq;
+  CAN_InitStructure.CAN_Prescaler=48;
+  CAN_Init(CANx, &CAN_InitStructure);
 
   /* CAN filter init */
+#ifdef  __CAN1_USED__
   CAN_FilterInitStructure.CAN_FilterNumber=0;
+#else /*__CAN2_USED__*/
+  CAN_FilterInitStructure.CAN_FilterNumber=14;
+#endif  /* __CAN1_USED__ */
   CAN_FilterInitStructure.CAN_FilterMode=CAN_FilterMode_IdMask;
   CAN_FilterInitStructure.CAN_FilterScale=CAN_FilterScale_32bit;
   CAN_FilterInitStructure.CAN_FilterIdHigh=0x0000;
   CAN_FilterInitStructure.CAN_FilterIdLow=0x0000;
   CAN_FilterInitStructure.CAN_FilterMaskIdHigh=0x0000;
-  CAN_FilterInitStructure.CAN_FilterMaskIdLow=0x0000;
+  CAN_FilterInitStructure.CAN_FilterMaskIdLow=0x0000;  
   CAN_FilterInitStructure.CAN_FilterFIFOAssignment=0;
+
+
   CAN_FilterInitStructure.CAN_FilterActivation=ENABLE;
   CAN_FilterInit(&CAN_FilterInitStructure);
 
@@ -164,15 +193,15 @@ TestStatus CAN_Polling(void)
   TxMessage.Data[0]=0xCA;
   TxMessage.Data[1]=0xFE;
 
-  TransmitMailbox=CAN_Transmit(CAN1, &TxMessage);
+  TransmitMailbox=CAN_Transmit(CANx, &TxMessage);
   i = 0;
-  while((CAN_TransmitStatus(CAN1, TransmitMailbox) != CANTXOK) && (i != 0xFF))
+  while((CAN_TransmitStatus(CANx, TransmitMailbox) != CANTXOK) && (i != 0xFFFF))
   {
     i++;
   }
 
   i = 0;
-  while((CAN_MessagePending(CAN1, CAN_FIFO0) < 1) && (i != 0xFF))
+  while((CAN_MessagePending(CANx, CAN_FIFO0) < 1) && (i != 0xFFFF))
   {
     i++;
   }
@@ -183,7 +212,7 @@ TestStatus CAN_Polling(void)
   RxMessage.DLC=0;
   RxMessage.Data[0]=0x00;
   RxMessage.Data[1]=0x00;
-  CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
+  CAN_Receive(CANx, CAN_FIFO0, &RxMessage);
 
   if (RxMessage.StdId!=0x11)
   {
@@ -221,7 +250,9 @@ TestStatus CAN_Interrupt(void)
   uint32_t i = 0;
 
   /* CAN register init */
-  CAN_DeInit(CAN1);
+  CAN_DeInit(CANx);
+
+
   CAN_StructInit(&CAN_InitStructure);
 
   /* CAN cell init */
@@ -233,13 +264,19 @@ TestStatus CAN_Interrupt(void)
   CAN_InitStructure.CAN_TXFP=DISABLE;
   CAN_InitStructure.CAN_Mode=CAN_Mode_LoopBack;
   CAN_InitStructure.CAN_SJW=CAN_SJW_1tq;
-  CAN_InitStructure.CAN_BS1=CAN_BS1_8tq;
-  CAN_InitStructure.CAN_BS2=CAN_BS2_7tq;
-  CAN_InitStructure.CAN_Prescaler=1;
-  CAN_Init(CAN1, &CAN_InitStructure);
+  
+  /* Baudrate = 500 Kbps */
+  CAN_InitStructure.CAN_BS1=CAN_BS1_2tq;
+  CAN_InitStructure.CAN_BS2=CAN_BS2_3tq;
+  CAN_InitStructure.CAN_Prescaler=12;
+  CAN_Init(CANx, &CAN_InitStructure);
 
   /* CAN filter init */
+#ifdef  __CAN1_USED__
   CAN_FilterInitStructure.CAN_FilterNumber=1;
+#else /*__CAN2_USED__*/
+  CAN_FilterInitStructure.CAN_FilterNumber=15;
+#endif  /* __CAN1_USED__ */
   CAN_FilterInitStructure.CAN_FilterMode=CAN_FilterMode_IdMask;
   CAN_FilterInitStructure.CAN_FilterScale=CAN_FilterScale_32bit;
   CAN_FilterInitStructure.CAN_FilterIdHigh=0x0000;
@@ -251,17 +288,17 @@ TestStatus CAN_Interrupt(void)
   CAN_FilterInit(&CAN_FilterInitStructure);
 
   /* CAN FIFO0 message pending interrupt enable */ 
-  CAN_ITConfig(CAN1, CAN_IT_FMP0, ENABLE);
+  CAN_ITConfig(CANx, CAN_IT_FMP0, ENABLE);
 
   /* transmit 1 message */
-  TxMessage.StdId=0x00;
+  TxMessage.StdId=0;
   TxMessage.ExtId=0x1234;
   TxMessage.IDE=CAN_ID_EXT;
   TxMessage.RTR=CAN_RTR_DATA;
   TxMessage.DLC=2;
   TxMessage.Data[0]=0xDE;
   TxMessage.Data[1]=0xCA;
-  CAN_Transmit(CAN1, &TxMessage);
+  CAN_Transmit(CANx, &TxMessage);
 
   /* initialize the value that will be returned */
   ret = 0xFF;
@@ -279,7 +316,7 @@ TestStatus CAN_Interrupt(void)
   }
 
   /* disable interrupt handling */
-  CAN_ITConfig(CAN1, CAN_IT_FMP0, DISABLE);
+  CAN_ITConfig(CANx, CAN_IT_FMP0, DISABLE);
 
   return (TestStatus)ret;
 }
@@ -293,11 +330,23 @@ void NVIC_Configuration(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
 
-  /* Enable CAN1 RX0 interrupt IRQ channel */
+  /* Enable CANx RX0 interrupt IRQ channel */
 #ifndef STM32F10X_CL
+
+#ifdef  __CAN1_USED__
   NVIC_InitStructure.NVIC_IRQChannel = USB_LP_CAN1_RX0_IRQn;
+#else  /*__CAN2_USED__*/
+  /* CAN2 is not implemented in the device */
+   #error "CAN2 is implemented only in Connectivity line devices"
+  
+#endif /*__CAN1_USED__*/
 #else
- NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX0_IRQn;
+#ifdef  __CAN1_USED__ 
+  NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX0_IRQn;
+#else  /*__CAN2_USED__*/
+  NVIC_InitStructure.NVIC_IRQChannel = CAN2_RX0_IRQn;
+#endif /*__CAN1_USED__*/
+
 #endif /* STM32F10X_CL*/
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
@@ -325,6 +374,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
+
 #endif
 
 /**
@@ -335,4 +385,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
