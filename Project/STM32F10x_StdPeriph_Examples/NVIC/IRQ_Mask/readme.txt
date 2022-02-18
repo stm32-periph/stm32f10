@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    NVIC/IRQ_Mask/readme.txt 
   * @author  MCD Application Team
-  * @version V3.5.0
-  * @date    08-April-2011
+  * @version V3.6.0
+  * @date    20-September-2021
   * @brief   Description of the NVIC IRQ Mask example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS

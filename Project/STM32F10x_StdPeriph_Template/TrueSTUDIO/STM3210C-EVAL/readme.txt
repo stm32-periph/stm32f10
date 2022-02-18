@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V3.5.0
-  * @date    08-April-2011
+  * @version V3.6.0
+  * @date    20-September-2021
   * @brief   This sub directory contains all the user modifiable files 
   *          needed to create a new project linked with the STM32F10x  
   *          Standard Peripheral Library and working with TrueSTUDIO software 

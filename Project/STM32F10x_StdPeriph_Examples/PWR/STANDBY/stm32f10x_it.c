@@ -2,24 +2,23 @@
   ******************************************************************************
   * @file    PWR/STANDBY/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.5.0
-  * @date    08-April-2011
+  * @version V3.6.0
+  * @date    20-September-2021
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and peripherals
   *          interrupt service routine.
   ******************************************************************************
   * @attention
   *
-  * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
-  * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
-  * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
-  * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
-  * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
-  * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  * Copyright (c) 2011 STMicroelectronics.
+  * All rights reserved.
   *
-  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
   ******************************************************************************
-  */ 
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
@@ -171,6 +170,24 @@ void EXTI9_5_IRQHandler(void)
     /* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
 
+   /* The Following Wakeup sequence is highly recommended prior to each Standby mode entry
+      mainly  when using more than one wakeup source this is to not miss any wakeup event.
+    - Disable all used wakeup sources,
+    - Clear all related wakeup flags, 
+    - Re-enable all used wakeup sources,
+    - Enter the Standby mode.
+    */
+    /* Disable all used wakeup sources */
+    /* Disable WKUP pin */
+    PWR_WakeUpPinCmd(DISABLE);
+  
+    /* Clear Wake-Up flag */
+    PWR_ClearFlag(PWR_FLAG_WU);
+
+    /* Re-enable all used wakeup sources */
+    /* Enable WKUP pin */
+    PWR_WakeUpPinCmd(ENABLE);
+
     /* Request to enter STANDBY mode (Wake Up flag is cleared in PWR_EnterSTANDBYMode function) */
     PWR_EnterSTANDBYMode();
   }
@@ -200,4 +217,3 @@ void EXTI9_5_IRQHandler(void)
   * @}
   */
 
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

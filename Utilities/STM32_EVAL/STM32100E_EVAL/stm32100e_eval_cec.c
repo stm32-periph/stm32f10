@@ -2,21 +2,20 @@
   ******************************************************************************
   * @file    stm32100e_eval_cec.c
   * @author  MCD Application Team
-  * @version V4.5.0
-  * @date    07-March-2011
+  * @version V4.5.1
+  * @date    20-September-2021
   * @brief   This file provides all the STM32100E-EVAL HDMI-CEC firmware functions.
   ******************************************************************************
   * @attention
   *
-  * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
-  * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
-  * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
-  * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
-  * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
-  * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  * Copyright (c) 2011 STMicroelectronics.
+  * All rights reserved.
   *
-  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -70,13 +69,13 @@
 
 __IO uint32_t ReceivedFrame = 0;
 __IO uint32_t SendFrame = 0;
-__IO uint32_t BufferCount = 0, TxCounter = 0, RxCounter = 0;
+uint32_t BufferCount = 0, TxCounter = 0, RxCounter = 0;
 __IO uint8_t BufferPointer[15];
 __IO uint32_t ReceiveStatus = 0;
 __IO uint32_t SendStatus = 0;
 __IO uint8_t TransErrorCode = 0;
 __IO uint8_t RecepErrorCode = 0;
-__IO uint8_t MyLogicalAddress = 0;
+uint8_t MyLogicalAddress = 0;
 __IO uint16_t MyPhysicalAddress = 0;
 __IO uint8_t DeviceType = 0;
 #ifdef HDMI_CEC_USE_DDC
@@ -512,6 +511,7 @@ void HDMI_CEC_CommandCallBack(void)
   uint8_t i = 0, sendcount = 0;
   HDMI_CEC_Error errorstatus = HDMI_CEC_OK;
   EXTI_InitTypeDef EXTI_InitStructure;
+  uint8_t tmpOperande1, tmpOperande2;
 
   switch (HDMI_CEC_RX_MessageStructPrivate.Opcode)
   {
@@ -631,10 +631,12 @@ void HDMI_CEC_CommandCallBack(void)
     case HDMI_CEC_OPCODE_ROUTING_CHANGE:
       for (i = 0;i < 0x14;i++)
       {
-        if ((HDMI_CEC_DeviceMap[i].PhysicalAddress_A == HDMI_CEC_RX_MessageStructPrivate.Operande[1] >> 4) &&
-            (HDMI_CEC_DeviceMap[i].PhysicalAddress_B == HDMI_CEC_RX_MessageStructPrivate.Operande[1]&0x0F) &&
-            (HDMI_CEC_DeviceMap[i].PhysicalAddress_C == HDMI_CEC_RX_MessageStructPrivate.Operande[0] >> 4) &&
-            (HDMI_CEC_DeviceMap[i].PhysicalAddress_D == HDMI_CEC_RX_MessageStructPrivate.Operande[0]&0x0F))
+        tmpOperande1 = HDMI_CEC_RX_MessageStructPrivate.Operande[0];
+        tmpOperande2 = HDMI_CEC_RX_MessageStructPrivate.Operande[1];
+        if ((HDMI_CEC_DeviceMap[i].PhysicalAddress_A == tmpOperande2 >> 4) &&
+            (HDMI_CEC_DeviceMap[i].PhysicalAddress_B == tmpOperande2 & 0x0F) &&
+            (HDMI_CEC_DeviceMap[i].PhysicalAddress_C == tmpOperande1 >> 4) &&
+            (HDMI_CEC_DeviceMap[i].PhysicalAddress_D == tmpOperande1 &0x0F))
         {
           HDMI_CEC_MapStruct.LogicalAddress = (HDMI_CEC_RX_MessageStructPrivate.Header >> 0x4) & 0x0F;
           HDMI_CEC_MapStruct.DeviceType = HDMI_CEC_RX_MessageStructPrivate.Operande[2];
@@ -1717,6 +1719,5 @@ static HDMI_CEC_Error LogicalAddressAllocation(void)
   * @}
   */  
 
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
 
 

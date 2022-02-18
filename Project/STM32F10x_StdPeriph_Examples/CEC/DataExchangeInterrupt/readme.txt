@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    CEC/DataExchangeInterrupt/readme.txt 
   * @author  MCD Application Team
-  * @version V3.5.0
-  * @date    08-April-2011
+  * @version V3.6.0
+  * @date    20-September-2021
   * @brief   Description of the CEC Data Exchange using Interrupt example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS

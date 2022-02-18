@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2011 STMicroelectronics *******************
   * @file    CortexM3/BitBand/readme.txt 
   * @author  MCD Application Team
-  * @version V3.5.0
-  * @date    08-April-2011
+  * @version V3.6.0
+  * @date    20-September-2021
   * @brief   Description of the CortexM3 BitBand example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS

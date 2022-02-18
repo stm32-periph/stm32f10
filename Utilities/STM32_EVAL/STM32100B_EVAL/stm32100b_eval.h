@@ -2,23 +2,22 @@
   ******************************************************************************
   * @file    stm32100b_eval.h
   * @author  MCD Application Team
-  * @version V4.5.0
-  * @date    07-March-2011
+  * @version V4.5.1
+  * @date    20-September-2021
   * @brief   This file contains definitions for STM32100B_EVAL's Leds, push-buttons
   *          COM ports, SD Card on SPI, sFLASH on SPI and Temperature Sensor LM75 on I2C
   *          hardware resources.
   ******************************************************************************
   * @attention
   *
-  * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
-  * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
-  * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
-  * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
-  * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
-  * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
+  * Copyright (c) 2011 STMicroelectronics.
+  * All rights reserved.
   *
-  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
-  ******************************************************************************  
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
   */ 
   
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -338,4 +337,3 @@ void LM75_LowLevel_Init(void);
   * @}
   */  
 
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
