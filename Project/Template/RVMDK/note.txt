@@ -5,11 +5,10 @@
 /******************** (C) COPYRIGHT 2009 STMicroelectronics ********************
 * @file     note.txt
 * @author   MCD Application Team
-* @version  V3.0.0
-* @date     04/06/2009
-* @brief    This file contains the needed steps to use the default
-*           startup file provided by RealView Microcontroller
-*           Development Kit(RVMDK).
+* @version  V3.1.0
+* @date     06/19/2009
+* @brief    This file contains the needed steps to use the default startup file
+*           provided by RealView Microcontroller Development Kit(RVMDK).
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
 * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.

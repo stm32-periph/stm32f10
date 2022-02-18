@@ -5,8 +5,8 @@
  ******************** (C) COPYRIGHT 2009 STMicroelectronics ********************
  * @file      readme.txt
  * @author    MCD Application Team
- * @version   V3.0.0
- * @date      04/06/2009
+ * @version   V3.1.0
+ * @date      06/19/2009
  * @brief     This sub-directory contains all the user-modifiable files 
  *            needed to create a new project linked with the STM32F10x  
  *            Standard Peripheral Library and working with RIDE7 software 
@@ -36,6 +36,7 @@
  
  - Open the Project.rprj project.
  - In the configuration toolbar(Project->properties) select the project config:
+     - STM3210C-EVAL: to configure the project for STM32 Connectivity line devices
      - STM3210B-EVAL: to configure the project for STM32 Medium-density devices
      - STM3210E-EVAL: to configure the project for STM32 High-density devices
  - Rebuild all files: Project->build project
@@ -48,7 +49,8 @@
  - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 32 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 256 and 512 Kbytes. 
+   the Flash memory density ranges between 256 and 512 Kbytes.
+ - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.   
 
  * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
  */
