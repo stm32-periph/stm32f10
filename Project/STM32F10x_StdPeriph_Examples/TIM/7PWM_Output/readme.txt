@@ -2,11 +2,11 @@
   @page TIM_7PWM_Output TIM_7PWM_Output
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/7PWM_Output/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the TIM 7PWM_Output example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -21,33 +21,21 @@
 @par Example Description 
 
 This example shows how to configure the TIM1 peripheral to generate 7 PWM signals 
-with 4 different duty cycles.
+with 4 different duty cycles (50%, 37.5%, 25% and 12.5%).
 
-TIM1CLK is fixed to 72 MHz, the TIM1 Prescaler is equal to 0 so the TIM1 counter
-clock used is 72 MHz.
+TIM1CLK = SystemCoreClock, Prescaler = 0, TIM1 counter clock = SystemCoreClock
+SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
+and Connectivity line devices. For Low-Density Value line and Medium-Density 
+Value line devices, SystemCoreClock is set to 24 MHz.
 
-TIM1 frequency is defined as follow:
-TIM1 frequency = TIM1CLK/(TIM1_Period + 1) = 17.57 KHz.
-
-The TIM1 CCR1 register value is equal to 0x7FF, so the TIM1 Channel 1 and TIM1 
-Channel 1N generate a PWM signal with a frequency equal to 17.57 KHz 
-and a duty cycle equal to:
-TIM1 Channel1 duty cycle = TIM1_CCR1 /( TIM1_Period + 1) = 50%.
-
-The TIM1 CCR2 register value is equal to 0x5FF, so the TIM1 Channel 2 and TIM1
-Channel 2N generate a PWM signal with a frequency equal to 17.57 KHz 
-and a duty cycle equal to:
-TIM1 Channel2 duty cycle = TIM1_CCR2 / ( TIM1_Period + 1)= 37.5%.
-
-The TIM1 CCR3 register value is equal to 0x3FF, so the TIM1 Channel 3 and TIM1 
-Channel 3N generate a PWM signal with a frequency equal to 17.57 KHz 
-and a duty cycle equal to:
-TIM1 Channel3 duty cycle = TIM1_CCR3 / ( TIM1_Period + 1) = 25%.
-
-The TIM1 CCR4 register value is equal to 0x1FF, so the TIM1 Channel 4 
-generate a PWM signal with a frequency equal to 17.57 KHz 
-and a duty cycle equal to:
-TIM1 Channel4 duty cycle = TIM1_CCR4 / ( TIM1_Period + 1) = 12.5%.
+The objective is to generate 7 PWM signal at 17.57 KHz:
+  - TIM1_Period = (SystemCoreClock / 17570) - 1
+The channel 1 and channel 1N duty cycle is set to 50%
+The channel 2 and channel 2N duty cycle is set to 37.5%
+The channel 3 and channel 3N duty cycle is set to 25%
+The channel 4 duty cycle is set to 12.5%
+The Timer pulse is calculated as follows:
+  - ChannelxPulse = DutyCycle * (TIM1_Period - 1) / 100
 
 The TIM1 waveform can be displayed using an oscilloscope.
 
@@ -60,13 +48,14 @@ The TIM1 waveform can be displayed using an oscilloscope.
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density 
-    and Low-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
+    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM3210C-EVAL (STM32F10x 
-    Connectivity line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL
-    (STM32F10x Medium-Density) evaluation boards and can be easily tailored to
-    any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL 
+    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
+    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
+    Medium-Density) evaluation boards and can be easily tailored to any 
+    other supported device and development board.
     
 
   - STM3210C-EVAL Set-up 
@@ -79,7 +68,7 @@ The TIM1 waveform can be displayed using an oscilloscope.
       - TIM1_CH3N pin (PE.13)
       - TIM1_CH4  pin (PE.14)      
 
-  - STM3210E-EVAL and STM3210B-EVAL Set-up 
+  - STM3210E-EVAL, STM3210B-EVAL and STM32100B-EVAL Set-up 
     - Connect the TIM1 pins to an oscilloscope to monitor the different waveforms:
       - TIM1_CH1  pin (PA.08)  
       - TIM1_CH1N pin (PB.13)  
@@ -97,7 +86,7 @@ In order to make the program work, you must do the following:
   - stm32f10x_gpio.c
   - stm32f10x_rcc.c  
   - stm32f10x_tim.c  
-  - system_stm32f10x.c (under Libraries\CMSIS\Core\CM3)
+  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
       
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -109,13 +98,17 @@ In order to make the program work, you must do the following:
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

@@ -2,11 +2,11 @@
   @page TIM_PWM_Input TIM_PWM_Input
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/PWM_Input/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the TIM PWM_Input example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -23,8 +23,12 @@
 This example shows how to use the TIM peripheral to measure the frequency and 
 duty cycle of an external signal.
 
-The TIMxCLK frequency is set to 72 MHz, the Prescaler is 0 so the TIM3 counter 
-clock is 72 MHz. so the minimum frequency value to measure is 1100 Hz.
+The TIMxCLK frequency is set to SystemCoreClock (Hz), the Prescaler is 0 so the 
+TIM3 counter clock is SystemCoreClock (Hz).
+SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
+and Connectivity line devices. For Low-Density Value line and Medium-Density 
+Value line devices, SystemCoreClock is set to 24 MHz.
+
 TIM3 is configured in PWM Input Mode: the external signal is connected to 
 TIM3 Channel2 used as input pin.
 To measure the frequency and the duty cycle we use the TIM3 CC2 interrupt request,
@@ -35,6 +39,11 @@ Frequency = TIM3 counter clock / TIM3_CCR2 in Hz,
 The "DutyCycle" variable contains the external signal duty cycle:
 DutyCycle = (TIM3_CCR1*100)/(TIM3_CCR2) in %.
 
+For Low-density, Medium-density, High-density and Connectivity line devices, 
+the minimum frequency value to measure is 1100 Hz. 
+For Low-Density Value line and Medium-Density Value line devices, the minimum
+frequency value to measure is 366 Hz.
+
 @par Directory contents 
 
   - TIM/PWM_Input/stm32f10x_conf.h  Library Configuration file
@@ -44,15 +53,16 @@ DutyCycle = (TIM3_CCR1*100)/(TIM3_CCR2) in %.
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density 
-    and Low-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
+    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM3210C-EVAL (STM32F10x 
-    Connectivity line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL
-    (STM32F10x Medium-Density) evaluation boards and can be easily tailored to
-    any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL 
+    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
+    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
+    Medium-Density) evaluation boards and can be easily tailored to any 
+    other supported device and development board.
 
-  - STM3210E-EVAL, STM3210B-EVAL and STM3210C-EVAL  Set-up 
+  - STM32100B-EVAL, STM3210E-EVAL, STM3210B-EVAL and STM3210C-EVAL  Set-up 
     - Connect the external signal to measure to the TIM3 CH2 pin (PA.07).   
   
 @par How to use it ? 
@@ -64,7 +74,7 @@ In order to make the program work, you must do the following:
   - stm32f10x_rcc.c 
   - stm32f10x_tim.c  
   - misc.c
-  - system_stm32f10x.c 
+  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
     
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -76,13 +86,17 @@ In order to make the program work, you must do the following:
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

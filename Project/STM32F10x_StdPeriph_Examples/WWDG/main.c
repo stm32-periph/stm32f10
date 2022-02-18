@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    WWDG/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body.
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 
@@ -35,8 +35,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-ErrorStatus HSEStartUpStatus;
-
 /* Private function prototypes -----------------------------------------------*/
 void NVIC_Configuration(void);
 
@@ -49,14 +47,17 @@ void NVIC_Configuration(void);
   */
 int main(void)
 {
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
 
   /* Initialize LED1 and Key Button mounted on STM3210X-EVAL board */       
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
-  STM_EVAL_PBInit(Button_KEY, Mode_EXTI);
+  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
 
 
   /* Check if the system has resumed from WWDG reset */
@@ -83,13 +84,15 @@ int main(void)
   /* Enable WWDG clock */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_WWDG, ENABLE);
 
-  /* WWDG clock counter = (PCLK1/4096)/8 = 1099 Hz (~910 µs)  */
+/* On Value line devices, WWDG clock counter = (PCLK1 (24MHz)/4096)/8 = 732 Hz (~1366 æs)  */
+/* On other devices, WWDG clock counter = (PCLK1(36MHz)/4096)/8 = 1099 Hz (~910 æs)  */
   WWDG_SetPrescaler(WWDG_Prescaler_8);
 
   /* Set Window value to 65 */
   WWDG_SetWindowValue(65);
 
-  /* Enable WWDG and set counter value to 127, WWDG timeout = ~910 µs * 64 = 58.25 ms */
+  /* On Value line devices, Enable WWDG and set counter value to 127, WWDG timeout = ~1366 æs * 64 = 87.42 ms */
+  /* On other devices, Enable WWDG and set counter value to 127, WWDG timeout = ~910 æs * 64 = 58.25 ms */
   WWDG_Enable(127);
 
   /* Clear EWI flag */
@@ -111,22 +114,25 @@ int main(void)
 void NVIC_Configuration(void)
 {
   NVIC_InitTypeDef NVIC_InitStructure;
+  
+  /* 1 bits for pre-emption priority and 3 bits for subpriority */
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 
-  /* 2 bits for Preemption Priority and 2 bits for Sub Priority */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+  /* Set Button EXTI Interrupt priority to 0 (highest) */
+  NVIC_SetPriority(KEY_BUTTON_EXTI_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0,0));
 
+  /* Set WWDG interrupt vector Preemption Priority to 1 */
   NVIC_InitStructure.NVIC_IRQChannel = WWDG_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-
   NVIC_Init(&NVIC_InitStructure);
 }
 
 #ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -150,4 +156,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

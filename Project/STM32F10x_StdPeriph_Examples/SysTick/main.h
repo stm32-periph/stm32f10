@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file SysTick/main.h 
+  * @file    SysTick/main.h 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
-  * @brief  Header for main.c module
+  * @version V3.2.0
+  * @date    03/01/2010
+  * @brief   Header for main.c module
   ******************************************************************************
   * @copy
   *
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -34,4 +34,4 @@ void TimingDelay_Decrement(void);
 
 #endif /* __MAIN_H */
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

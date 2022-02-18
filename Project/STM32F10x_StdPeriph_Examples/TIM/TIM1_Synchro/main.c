@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file TIM/TIM1_Synchro/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -36,7 +36,6 @@
 TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 TIM_OCInitTypeDef  TIM_OCInitStructure;
 TIM_BDTRInitTypeDef TIM_BDTRInitStructure;
-ErrorStatus HSEStartUpStatus;
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
@@ -51,6 +50,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -68,18 +74,26 @@ int main(void)
      - Gated mode is used, so starts and stops of slaves counters
        are controlled by the Master trigger output signal(update event).
 
-  TIM1CLK = 72 MHz, Prescaler = 0, TIM1 counter clock = 72 MHz
-  The Master Timer TIM1 is running at:
-  TIM1 frequency = TIM1 counter clock / (TIM1_Period + 1) = 281.250 KHz
-  and the duty cycle is equal to:
-  TIM1_CCR1/(TIM1_ARR + 1) = 50%
+  o For Low-density, Medium-density, High-density and Connectivity line devices:
+    The TIMxCLK is fixed to 72 MHz, Prescaler = 0 so the TIM1 counter clock is 72 MHz.
 
-  The TIM3 is running:
-  - At (TIM1 frequency)/((TIM3 period + 1)* (Repetion_Counter+1)) = 18.750 KHz
-   and a duty cycle equal to TIM3_CCR1/(TIM3_ARR + 1) = 33.3%
-  The TIM4 is running:
-  - At (TIM1 frequency)/((TIM4 period + 1)* (Repetion_Counter+1)) = 28.125 KHz
-   and a duty cycle equal to TIM4_CCR1/(TIM4_ARR + 1) = 50%
+    The Master Timer TIM1 is running at:
+    TIM1 frequency = TIM1 counter clock / (TIM1_Period + 1) = 281.250 KHz
+    and the duty cycle is equal to: TIM1_CCR1/(TIM1_ARR + 1) = 50%
+
+    The TIM3 is running at: 
+    (TIM1 frequency)/ ((TIM3 period +1)* (Repetion_Counter+1)) = 18.750 KHz and
+    a duty cycle equal to TIM3_CCR1/(TIM3_ARR + 1) = 33.3%
+
+    The TIM4 is running at:
+    (TIM1 frequency)/ ((TIM4 period +1)* (Repetion_Counter+1)) = 28.125 KHz and
+    a duty cycle equal to TIM4_CCR1/(TIM4_ARR + 1) = 50%
+  
+  o For Low-Density Value line and Medium-Density Value line devices:
+    The TIMxCLK is fixed to 24 MHz, Prescaler = 0 so the TIM1 counter clock is 24 MHz.
+    TIM1 frequency = 93.75 KHz
+    TIM3 frequency = 6.25 KHz
+    TIM4 frequency = 9.375 KHz
   --------------------------------------------------------------------------- */
 
   /* TIM3 Peripheral Configuration ----------------------------------------*/
@@ -100,7 +114,7 @@ int main(void)
   /* Slave Mode selection: TIM3 */
   TIM_SelectSlaveMode(TIM3, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM3, TIM_TS_ITR0);
-
+  
   /* TIM4 Peripheral Configuration ----------------------------------------*/
   /* TIM4 Slave Configuration: PWM1 Mode */
   TIM_TimeBaseStructure.TIM_Period = 1;
@@ -119,7 +133,7 @@ int main(void)
   /* Slave Mode selection: TIM4 */
   TIM_SelectSlaveMode(TIM4, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM4, TIM_TS_ITR0);
-
+  
   /* TIM1 Peripheral Configuration ----------------------------------------*/
   /* Time Base configuration */
   TIM_TimeBaseStructure.TIM_Prescaler = 0;
@@ -156,6 +170,9 @@ int main(void)
   /* Master Mode selection */
   TIM_SelectOutputTrigger(TIM1, TIM_TRGOSource_Update);
 
+  /* Select the Master Slave Mode */
+  TIM_SelectMasterSlaveMode(TIM1, TIM_MasterSlaveMode_Enable);
+  
   /* TIM1 counter enable */
   TIM_Cmd(TIM1, ENABLE);
 
@@ -177,13 +194,6 @@ int main(void)
   */
 void RCC_Configuration(void)
 {
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,  
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-
-  /* PCLK1 = HCLK/4 */
-  RCC_PCLK1Config(RCC_HCLK_Div4);
-
   /* TIM1, GPIOA and GPIOB clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1 | RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOE |
                          RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
@@ -236,7 +246,7 @@ void GPIO_Configuration(void)
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -259,4 +269,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

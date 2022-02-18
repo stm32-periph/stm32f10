@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file TIM/ExtTrigger_Synchro/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -50,6 +50,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -57,37 +64,43 @@ int main(void)
   GPIO_Configuration();
 
   /* Timers synchronisation in cascade mode with an external trigger -----
-     1/TIM1 is configured as Master Timer:
+    1/TIM1 is configured as Master Timer:
      - Toggle Mode is used
      - The TIM1 Enable event is used as Trigger Output 
 
-     2/TIM1 is configured as Slave Timer for an external Trigger connected
-      to TIM1 TI2 pin (TIM1 CH2 configured as input pin):
-      - The TIM1 TI2FP2 is used as Trigger Input
-      - Rising edge is used to start and stop the TIM1: Gated Mode.
+    2/TIM1 is configured as Slave Timer for an external Trigger connected
+     to TIM1 TI2 pin (TIM1 CH2 configured as input pin):
+     - The TIM1 TI2FP2 is used as Trigger Input
+     - Rising edge is used to start and stop the TIM1: Gated Mode.
 
-     3/TIM3 is slave for TIM1 and Master for TIM4,
+    3/TIM3 is slave for TIM1 and Master for TIM4,
      - Toggle Mode is used
      - The ITR1(TIM1) is used as input trigger 
      - Gated mode is used, so start and stop of slave counter
-      are controlled by the Master trigger output signal(TIM1 enable event).
-      - The TIM3 enable event is used as Trigger Output. 
+       are controlled by the Master trigger output signal(TIM1 enable event).
+     - The TIM3 enable event is used as Trigger Output. 
 
-      4/TIM4 is slave for TIM3,
-      - Toggle Mode is used
-      - The ITR2(TIM3) is used as input trigger
-      - Gated mode is used, so start and stop of slave counter
+    4/TIM4 is slave for TIM3,
+     - Toggle Mode is used
+     - The ITR2(TIM3) is used as input trigger
+     - Gated mode is used, so start and stop of slave counter
        are controlled by the Master trigger output signal(TIM3 enable event).
 
-     The TIMxCLK is fixed to 72 MHZ, the Prescaler is equal to 2 so the TIMx clock counter
-     is equal to 24 MHz.
-     The Three Timers are running at: 
-     TIMx frequency = TIMx clock counter/ 2*(TIMx_Period + 1) = 162.1 KHz.
+    * For Low-density, Medium-density, High-density and Connectivity line devices:
+      The TIMxCLK is fixed to 72 MHZ, the Prescaler is equal to 2 so the TIMx clock 
+      counter is equal to 24 MHz.
+      The Three Timers are running at: 
+      TIMx frequency = TIMx clock counter/ 2*(TIMx_Period + 1) = 162.1 KHz.
 
-     The starts and stops of the TIM1 counters are controlled by the 
-     external trigger.
-     The TIM3 starts and stops are controlled by the TIM1, and the TIM4 
-     starts and stops are controlled by the TIM3.  
+    * For Low-Density Value line and Medium-Density Value line devices:
+      The TIMxCLK is fixed to 24 MHz, the Prescaler is equal to 2 so the TIMx clock 
+      counter is equal to 8 MHz.
+      TIMx frequency = TIMx clock counter/ 2*(TIMx_Period + 1) = 54 KHz.
+
+    The starts and stops of the TIM1 counters are controlled by the 
+    external trigger.
+    The TIM3 starts and stops are controlled by the TIM1, and the TIM4 
+    starts and stops are controlled by the TIM3.  
   -------------------------------------------------------------------- */
 
   /* Time base configuration */
@@ -152,7 +165,7 @@ int main(void)
   /* Slave Mode selection: TIM4 */
   TIM_SelectInputTrigger(TIM4, TIM_TS_ITR2);
   TIM_SelectSlaveMode(TIM4, TIM_SlaveMode_Gated);
-
+  
   /* TIM1 Main Output Enable */
   TIM_CtrlPWMOutputs(TIM1, ENABLE);
 
@@ -172,10 +185,6 @@ int main(void)
   */
 void RCC_Configuration(void)
 {
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,  
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-  
   /* TIM1, TIM3 and TIM4 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 |
                          RCC_APB1Periph_TIM4, ENABLE);
@@ -251,7 +260,7 @@ void GPIO_Configuration(void)
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -274,4 +283,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

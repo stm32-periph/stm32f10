@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file TIM/Cascade_Synchro/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -49,6 +49,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -73,19 +80,26 @@ int main(void)
      - Gated mode is used, so start and stop of slave counter
       are controlled by the Master trigger output signal(TIM3 update event).
 
-     The TIMxCLK is fixed to 72 MHz, the TIM2 counter clock is 72 MHz.
+     * For Low-density, Medium-density, High-density and Connectivity line devices:
+       The TIMxCLK is fixed to 72 MHz, the TIM2 counter clock is 72 MHz.
 
-     The Master Timer TIM2 is running at TIM2 frequency :
-     TIM2 frequency = (TIM2 counter clock)/ (TIM2 period + 1) = 281.250 KHz 
-     and the duty cycle = TIM2_CCR1/(TIM2_ARR + 1) = 25%.
+       The Master Timer TIM2 is running at TIM2 frequency :
+       TIM2 frequency = (TIM2 counter clock)/ (TIM2 period + 1) = 281.250 KHz 
+       and the duty cycle = TIM2_CCR1/(TIM2_ARR + 1) = 25%.
 
-     The TIM3 is running:
-     - At (TIM2 frequency)/ (TIM3 period + 1) = 70.312 KHz and a duty cycle
-     equal to TIM3_CCR1/(TIM3_ARR + 1) = 25%
+       The TIM3 is running:
+       - At (TIM2 frequency)/ (TIM3 period + 1) = 70.312 KHz and a duty cycle
+         equal to TIM3_CCR1/(TIM3_ARR + 1) = 25%
 
-     The TIM4 is running:
-     - At (TIM3 frequency)/ (TIM4 period + 1) = 17.578 KHz and a duty cycle
-     equal to TIM4_CCR1/(TIM4_ARR + 1) = 25%
+        The TIM4 is running:
+      - At (TIM3 frequency)/ (TIM4 period + 1) = 17.578 KHz and a duty cycle
+        equal to TIM4_CCR1/(TIM4_ARR + 1) = 25%
+
+     * For Low-Density Value line and Medium-Density Value line devices:
+       The TIMxCLK is fixed to 24 MHz, the TIM2 counter clock is 24 MHz.
+       So TIM2 frequency = 93.750 KHz,
+       TIM3 is running at 23.437 KHz,
+       and TIM4 is running at 5.85 KHz
   -------------------------------------------------------------------- */
 
   /* Time base configuration */
@@ -138,7 +152,7 @@ int main(void)
   /* Slave Mode selection: TIM4 */
   TIM_SelectSlaveMode(TIM4, TIM_SlaveMode_Gated);
   TIM_SelectInputTrigger(TIM4, TIM_TS_ITR2);
-
+  
   /* TIM enable counter */
   TIM_Cmd(TIM3, ENABLE);
   TIM_Cmd(TIM2, ENABLE);
@@ -155,11 +169,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,  
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-  
+{  
   /* TIM2, TIM3 and TIM4 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3 |
                          RCC_APB1Periph_TIM4, ENABLE);
@@ -213,7 +223,7 @@ void GPIO_Configuration(void)
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -236,4 +246,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

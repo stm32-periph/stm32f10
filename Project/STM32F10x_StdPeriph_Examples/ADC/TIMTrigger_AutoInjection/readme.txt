@@ -2,11 +2,11 @@
   @page ADC_TIMTrigger_AutoInjection ADC_TIMTrigger_AutoInjection
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    ADC/TIMTrigger_AutoInjection/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the ADC TIM trigger and auto-injection Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -31,29 +31,38 @@ channel ADC channel11 after the end of the regular channel14. An ADC interrupt i
 generated then by JEOC flag at the end of the injected channel conversion and in 
 the interrupt routine the result is stored in the ADC_InjectedConvertedValueTab table.
 The procedure is repeated 32 times then the TIM1 peripheral is disabled and thus, 
-no conversion will be done neither regular or injected.
+no conversion will be done neither regular nor injected.
 TIM1 start conversion triggers can be visualized on oscilloscope on PA.08 and at the
 same time the toggle of pin PC.06 which indicates the automatic auto-injection conversion.
-The ADC1 clock is set to 14 MHz.
+
+The ADC1 clock is set to 12 MHz on Value line devices and to 14MHz on other 
+devices.
 
 @par Directory contents 
 
-  - ADC/TIMTrigger_AutoInjection/stm32f10x_conf.h  Library Configuration file
-  - ADC/TIMTrigger_AutoInjection/stm32f10x_it.c    Interrupt handlers
-  - ADC/TIMTrigger_AutoInjection/stm32f10x_it.h    Interrupt handlers header file
-  - ADC/TIMTrigger_AutoInjection/main.c            Main program
+  - ADC/TIMTrigger_AutoInjection/stm32f10x_conf.h     Library Configuration file
+  - ADC/TIMTrigger_AutoInjection/stm32f10x_it.c       Interrupt handlers
+  - ADC/TIMTrigger_AutoInjection/stm32f10x_it.h       Interrupt handlers header file
+  - ADC/TIMTrigger_AutoInjection/system_stm32f10x.c   STM32F10x system source file  
+  - ADC/TIMTrigger_AutoInjection/main.c               Main program
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density 
-    and Low-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
+    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM3210C-EVAL (STM32F10x 
-    Connectivity line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL
-    (STM32F10x Medium-Density) evaluation boards and can be easily tailored to
-    any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL 
+    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
+    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
+    Medium-Density) evaluation boards and can be easily tailored to any 
+    other supported device and development board.
 
-  - STM3210C-EVAL Set-up 
+  - STM32100B-EVAL Set-up
+    - Connect a variable power supply 0-3.3V to ADC Channel14 mapped on pin PC.04
+      (potentiometer RV2) and ADC Channel11 mapped on pin PC.01
+    - Connect PA.08 and PC.06 pins to an oscilloscope
+
+  - STM3210C-EVAL Set-up
     - Connect a known voltage, between 0-3.3V, to ADC Channel14 mapped on pin 
       PC.04 (potentiometer RV1) and ADC Channel11 mapped on pin PC.01
     - Connect PA.08 and PC.06 pins to an oscilloscope
@@ -74,15 +83,15 @@ In order to make the program work, you must do the following :
 - Create a project and setup all project configuration
 - Add the required Library files :
   - stm32f10x_adc.c 
-  - stm32f10x_dma.c 
-  - stm32f10x_flash.c
-  - stm32f10x_tim.c 
-  - stm32f10x_gpio.c 
-  - stm32f10x_rcc.c 
-  - misc.c 
-     
+  - stm32f10x_dma.c
+  - stm32f10x_gpio.c
+  - stm32f10x_tim.c
+  - stm32f10x_rcc.c
+  - misc.c
+
 - Edit stm32f10x.h file to select the device you are working on.
-  
+- Use STM32F10x system source file "system_stm32f10x.c" provided with this example.
+
 @b Tip: You can tailor the provided project template to run this example, for 
         more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
         manual; select "Peripheral Examples" then follow the instructions 
@@ -91,13 +100,17 @@ In order to make the program work, you must do the following :
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
  
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

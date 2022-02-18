@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/EEPROM/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,11 +15,11 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
-#include "i2c_ee.h"
+#include "stm32_eval_i2c_ee.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Examples
   * @{
@@ -50,7 +50,6 @@ uint8_t Rx1_Buffer[BufferSize1], Rx2_Buffer[BufferSize2];
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
     
 /* Private functions ---------------------------------------------------------*/
-void RCC_Configuration(void);
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
 /**
@@ -60,18 +59,22 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
   */
 int main(void)
 {
-  /* System clocks configuration ---------------------------------------------*/
-  RCC_Configuration();
-
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* Initialize the I2C EEPROM driver ----------------------------------------*/
-  I2C_EE_Init();  
+  sEE_Init();  
 
   /* First write in the memory followed by a read of the written data --------*/
   /* Write on I2C EEPROM from EEPROM_WriteAddress1 */
-  I2C_EE_BufferWrite(Tx1_Buffer, EEPROM_WriteAddress1, BufferSize1); 
+  sEE_WriteBuffer(Tx1_Buffer, EEPROM_WriteAddress1, BufferSize1); 
 
   /* Read from I2C EEPROM from EEPROM_ReadAddress1 */
-  I2C_EE_BufferRead(Rx1_Buffer, EEPROM_ReadAddress1, BufferSize1); 
+  sEE_ReadBuffer(Rx1_Buffer, EEPROM_ReadAddress1, BufferSize1); 
 
   /* Check if the data written to the memory is read correctly */
   TransferStatus1 = Buffercmp(Tx1_Buffer, Rx1_Buffer, BufferSize1);
@@ -81,14 +84,14 @@ int main(void)
      to/from the EEPROM are different */
 
   /* Wait for EEPROM standby state */
-  I2C_EE_WaitEepromStandbyState();
+  sEE_WaitEepromStandbyState();
 
   /* Second write in the memory followed by a read of the written data -------*/
   /* Write on I2C EEPROM from EEPROM_WriteAddress2 */
-  I2C_EE_BufferWrite(Tx2_Buffer, EEPROM_WriteAddress2, BufferSize2); 
+  sEE_WriteBuffer(Tx2_Buffer, EEPROM_WriteAddress2, BufferSize2); 
 
   /* Read from I2C EEPROM from EEPROM_ReadAddress2 */
-  I2C_EE_BufferRead(Rx2_Buffer, EEPROM_ReadAddress2, BufferSize2);
+  sEE_ReadBuffer(Rx2_Buffer, EEPROM_ReadAddress2, BufferSize2);
 
   /* Check if the data written to the memory is read correctly */
   TransferStatus2 = Buffercmp(Tx2_Buffer, Rx2_Buffer, BufferSize2);
@@ -103,23 +106,11 @@ int main(void)
 }
 
 /**
-  * @brief  Configures the different system clocks.
-  * @param  None
-  * @retval None
-  */
-void RCC_Configuration(void)
-{
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,  
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-}
-
-/**
   * @brief  Compares two buffers.
   * @param  pBuffer1, pBuffer2: buffers to be compared.
   * @param  BufferLength: buffer's length
   * @retval PASSED: pBuffer1 identical to pBuffer2
-  *   FAILED: pBuffer1 differs from pBuffer2
+  *         FAILED: pBuffer1 differs from pBuffer2
   */
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
 {
@@ -141,7 +132,7 @@ TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -166,4 +157,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

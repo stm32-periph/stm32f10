@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/3ADCs_DMA/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -39,13 +39,12 @@
 ADC_InitTypeDef ADC_InitStructure;
 DMA_InitTypeDef DMA_InitStructure;
 __IO uint16_t ADC1ConvertedValue = 0, ADC3ConvertedValue = 0;
-ErrorStatus HSEStartUpStatus;    
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
 void NVIC_Configuration(void);
-  
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -55,6 +54,13 @@ void NVIC_Configuration(void);
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* System clocks configuration ---------------------------------------------*/
   RCC_Configuration();
 
@@ -97,7 +103,7 @@ int main(void)
   DMA_Init(DMA2_Channel5, &DMA_InitStructure);  
   /* Enable DMA2 channel5 */
   DMA_Cmd(DMA2_Channel5, ENABLE);
-     
+
   /* ADC1 configuration ------------------------------------------------------*/
   ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
   ADC_InitStructure.ADC_ScanConvMode = DISABLE;
@@ -195,56 +201,10 @@ int main(void)
   */
 void RCC_Configuration(void)
 {
-  /* RCC system reset(for debug purpose) */
-  RCC_DeInit();
-
-  /* Enable HSE */
-  RCC_HSEConfig(RCC_HSE_ON);
-
-  /* Wait till HSE is ready */
-  HSEStartUpStatus = RCC_WaitForHSEStartUp();
-
-  if(HSEStartUpStatus == SUCCESS)
-  {
-    /* Enable Prefetch Buffer */
-    FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
-
-    /* Flash 2 wait state */
-    FLASH_SetLatency(FLASH_Latency_2);
-  
-    /* HCLK = SYSCLK */
-    RCC_HCLKConfig(RCC_SYSCLK_Div1); 
-  
-    /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1); 
-
-    /* PCLK1 = HCLK/2 */
-    RCC_PCLK1Config(RCC_HCLK_Div2);
-
-    /* ADCCLK = PCLK2/4 */
-    RCC_ADCCLKConfig(RCC_PCLK2_Div4); 
+  /* ADCCLK = PCLK2/4 */
+  RCC_ADCCLKConfig(RCC_PCLK2_Div4); 
     
-    /* PLLCLK = 8MHz * 7 = 56 MHz */
-    RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_7);
-
-    /* Enable PLL */ 
-    RCC_PLLCmd(ENABLE);
-
-    /* Wait till PLL is ready */
-    while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
-    {
-    }
-
-    /* Select PLL as system clock source */
-    RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
-
-    /* Wait till PLL is used as system clock source */
-    while(RCC_GetSYSCLKSource() != 0x08)
-    {
-    }
-  }
-
-/* Enable peripheral clocks --------------------------------------------------*/
+  /* Enable peripheral clocks ------------------------------------------------*/
   /* Enable DMA1 and DMA2 clocks */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1 | RCC_AHBPeriph_DMA2, ENABLE);
 
@@ -290,7 +250,7 @@ void NVIC_Configuration(void)
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -315,4 +275,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

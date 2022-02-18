@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file Lib_DEBUG/lib_dbg.c 
+  * @file    Lib_DEBUG/lib_dbg.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   This file provides all peripherals pointers initialization.
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -54,6 +54,7 @@ CAN_TypeDef             *CAN1_DBG;
 BKP_TypeDef             *BKP_DBG;
 PWR_TypeDef             *PWR_DBG;
 DAC_TypeDef             *DAC_DBG;
+CEC_TypeDef             *CEC_DBG;
 AFIO_TypeDef            *AFIO_DBG;
 EXTI_TypeDef            *EXTI_DBG;
 GPIO_TypeDef            *GPIOA_DBG;
@@ -70,6 +71,9 @@ SPI_TypeDef             *SPI1_DBG;
 TIM_TypeDef             *TIM8_DBG;
 USART_TypeDef           *USART1_DBG;
 ADC_TypeDef             *ADC3_DBG;
+TIM_TypeDef             *TIM15_DBG;
+TIM_TypeDef             *TIM16_DBG;
+TIM_TypeDef             *TIM17_DBG;
 SDIO_TypeDef            *SDIO_DBG;
 DMA_TypeDef             *DMA1_DBG;
 DMA_TypeDef             *DMA2_DBG;
@@ -103,7 +107,7 @@ SCB_Type                *SCB_DBG;
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief   This function handles debug exception.
+  * @brief  This function initialize peripherals pointers.
   * @param  None
   * @retval None
   */
@@ -122,6 +126,9 @@ void debug(void)
 /************************************* CAN ************************************/			
   CAN1_DBG = (CAN_TypeDef *)  CAN1_BASE;			
 
+/************************************* CEC ************************************/			
+  CEC_DBG = (CEC_TypeDef *)  CEC_BASE;	
+  
 /************************************* CRC ************************************/
   CRC_DBG = (CRC_TypeDef *)  CRC_BASE;
 
@@ -241,6 +248,12 @@ void debug(void)
   TIM7_DBG = (TIM_TypeDef *)  TIM7_BASE;
 
   TIM8_DBG = (TIM_TypeDef *)  TIM8_BASE;
+  
+  TIM15_DBG = (TIM_TypeDef *)  TIM15_BASE;
+
+  TIM16_DBG = (TIM_TypeDef *)  TIM16_BASE;
+
+  TIM17_DBG = (TIM_TypeDef *)  TIM17_BASE;      
 
 /************************************* USART **********************************/
   USART1_DBG = (USART_TypeDef *) USART1_BASE;
@@ -265,4 +278,4 @@ void debug(void)
   * @}
   */
   
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

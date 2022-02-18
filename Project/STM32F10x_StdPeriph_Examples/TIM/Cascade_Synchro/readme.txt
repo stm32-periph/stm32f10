@@ -2,11 +2,11 @@
   @page TIM_Cascade_Synchro TIM_Cascade_Synchro
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/Cascade_Synchro/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the TIM Cascade_Synchro example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -42,19 +42,26 @@ Timers synchronisation in cascade mode:
  - Gated mode is used, so start and stop of slave counter  are controlled by the
    Master trigger output signal(TIM3 update event).
 
-The TIMxCLK is fixed to 72 MHz, the TIM2 counter clock is 72 MHz.
+o For Low-density, Medium-density, High-density and Connectivity line devices:
+  The TIMxCLK is fixed to 72 MHz, the TIM2 counter clock is 72 MHz.
 
-The Master Timer TIM2 is running at TIM2 frequency :
-TIM2 frequency = (TIM2 counter clock)/ (TIM2 period + 1) = 281.250 KHz 
-and the duty cycle = TIM2_CCR1/(TIM2_ARR + 1) = 25%.
+  The Master Timer TIM2 is running at TIM2 frequency :
+  TIM2 frequency = (TIM2 counter clock)/ (TIM2 period + 1) = 281.250 KHz 
+  and the duty cycle = TIM2_CCR1/(TIM2_ARR + 1) = 25%.
 
-The TIM3 is running at:
-(TIM2 frequency)/ (TIM3 period + 1) = 70.312 KHz and a duty cycle equal 
-to TIM3_CCR1/(TIM3_ARR + 1) = 25%
+  The TIM3 is running at:
+  (TIM2 frequency)/ (TIM3 period + 1) = 70.312 KHz and a duty cycle equal 
+  to TIM3_CCR1/(TIM3_ARR + 1) = 25%
 
-The TIM4 is running at:
-(TIM3 frequency)/ (TIM4 period + 1) = 17.578 Hz and a duty cycle equal 
-to TIM4_CCR1/(TIM4_ARR + 1) = 25%  
+  The TIM4 is running at:
+  (TIM3 frequency)/ (TIM4 period + 1) = 17.578 Hz and a duty cycle equal 
+  to TIM4_CCR1/(TIM4_ARR + 1) = 25%  
+
+o For Low-Density Value line and Medium-Density Value line devices:
+  The TIMxCLK is fixed to 24 MHz, the TIM2 counter clock is 24 MHz.
+  So TIM2 frequency = 93.750 KHz,
+  TIM3 is running at 23.437 KHz,
+  and TIM4 is running at 5.85 KHz
 
 @par Directory contents 
 
@@ -65,13 +72,14 @@ to TIM4_CCR1/(TIM4_ARR + 1) = 25%
  
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density 
-    and Low-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
+    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM3210C-EVAL (STM32F10x 
-    Connectivity line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL
-    (STM32F10x Medium-Density) evaluation boards and can be easily tailored to
-    any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL 
+    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
+    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
+    Medium-Density) evaluation boards and can be easily tailored to any 
+    other supported device and development board.
 
   - STM3210C-EVAL Set-up 
     - Connect the following pins to an oscilloscope to monitor the different 
@@ -80,7 +88,7 @@ to TIM4_CCR1/(TIM4_ARR + 1) = 25%
         - TIM3 CH1 (PC.06) Remapped pin
         - TIM4 CH1 (PB.06) 
 
-  - STM3210E-EVAL and STM3210B-EVAL Set-up 
+  - STM3210E-EVAL, STM3210B-EVAL and STM32100B Set-up 
     - Connect the following pins to an oscilloscope to monitor the different 
       waveforms:
         - TIM2 CH1 (PA.00) 
@@ -92,10 +100,10 @@ to TIM4_CCR1/(TIM4_ARR + 1) = 25%
 In order to make the program work, you must do the following:
 - Create a project and setup all project configuration
 - Add the required Library files:
-  - stm32f10x_tim.c 
   - stm32f10x_gpio.c 
+  - stm32f10x_tim.c 
   - stm32f10x_rcc.c
-  - system_stm32f10x.c (under Libraries\CMSIS\Core\CM3)
+  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
     
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -107,13 +115,17 @@ In order to make the program work, you must do the following:
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

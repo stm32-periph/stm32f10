@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    NVIC/Priority/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and peripherals
   *          interrupt service routine.
@@ -17,7 +17,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -142,7 +142,7 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* If the EXTI0 IRQ Handler was preempted by SysTick Handler */
-  if(NVIC_GetActive(EXTI0_IRQn) != (IRQn_Type) RESET)
+  if(NVIC_GetActive(WAKEUP_BUTTON_EXTI_IRQn) != 0)
   {
     PreemptionOccured = TRUE;
   }
@@ -180,16 +180,16 @@ void EXTI9_5_IRQHandler(void)
     PreemptionPriorityValue = !PreemptionPriorityValue;
     PreemptionOccured = FALSE;
 
-    /* Modify the WAKEUP_BUTTON_IRQn Interrupt Preemption Priority */
-    NVIC_InitStructure.NVIC_IRQChannel = WAKEUP_BUTTON_IRQn;
+    /* Modify the WAKEUP_BUTTON_EXTI_IRQn Interrupt Preemption Priority */
+    NVIC_InitStructure.NVIC_IRQChannel = WAKEUP_BUTTON_EXTI_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = PreemptionPriorityValue;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
     
     /* Configure the SysTick Handler Priority: Preemption priority and subpriority */
-    NVIC_SetPriority(SysTick_IRQn, (!PreemptionPriorityValue << 0x03));
-    
+    NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), !PreemptionPriorityValue, 0));    
+
     /* Clear KEY_BUTTON_EXTI_LINE pending bit */
     EXTI_ClearITPendingBit(KEY_BUTTON_EXTI_LINE);
   }
@@ -219,4 +219,4 @@ void EXTI9_5_IRQHandler(void)
   * @}
   */
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

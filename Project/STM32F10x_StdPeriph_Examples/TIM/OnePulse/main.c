@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file TIM/OnePulse/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -36,6 +36,7 @@
 TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 TIM_ICInitTypeDef  TIM_ICInitStructure;
 TIM_OCInitTypeDef  TIM_OCInitStructure;
+uint16_t PrescalerValue = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
@@ -50,6 +51,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -57,26 +65,33 @@ int main(void)
   GPIO_Configuration();
 
   /* TIM4 configuration: One Pulse mode ------------------------
-     The external signal is connected to TIM4_CH2 pin (PA.01), 
+     The external signal is connected to TIM4_CH2 pin (PB.07), 
      The Rising edge is used as active edge,
-     The One Pulse signal is output on TIM4_CH1 pin (PA.00)
+     The One Pulse signal is output on TIM4_CH1 pin (PB.06)
      The TIM_Pulse defines the delay value 
      The (TIM_Period -  TIM_Pulse) defines the One Pulse value.
-     The TIM4CLK is fixed to 72 MHz, the Prescaler is 1, so the 
-     TIM4 counter clock is 36 MHz. 
-     The Autoreload value is 65535 (TIM4->ARR), so the maximum 
-     frequency value to trigger the TIM4 input is 500 Hz.
+     TIM2CLK = SystemCoreClock, we want to get TIM2 counter clock at 24 MHz:
+     - Prescaler = (TIM2CLK / TIM2 counter clock) - 1
+     The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value 
+     to trigger the TIM4 input is 24000000/65535 = 300 Hz.
+
      The TIM_Pulse defines the delay value, the delay value is fixed 
-     to 455.08 us:
-     delay =  CCR1/TIM4 counter clock = 455.08 us. 
+     to 682.6 us:
+     delay =  CCR1/TIM4 counter clock = 682.6 us. 
      The (TIM_Period - TIM_Pulse) defines the One Pulse value, 
-     the pulse value is fixed to 1.365ms:
-     One Pulse value = (TIM_Period - TIM_Pulse)/TIM4 counter clock = 1.365 ms.
+     the pulse value is fixed to 2.048 ms:
+     One Pulse value = (TIM_Period - TIM_Pulse) / TIM4 counter clock = 2.048 ms.
+
+  * SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
+    and Connectivity line devices and to 24 MHz for Low-Density Value line and
+    Medium-Density Value line devices
   ------------------------------------------------------------ */
 
+  /* Compute the prescaler value */
+  PrescalerValue = (uint16_t) (SystemCoreClock / 24000000) - 1;
   /* Time base configuration */
   TIM_TimeBaseStructure.TIM_Period = 65535;
-  TIM_TimeBaseStructure.TIM_Prescaler = 1;
+  TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
 
@@ -122,10 +137,6 @@ int main(void)
   */
 void RCC_Configuration(void)
 {
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,  
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-
   /* TIM4 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
 
@@ -160,7 +171,7 @@ void GPIO_Configuration(void)
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -183,4 +194,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

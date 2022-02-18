@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file CortexM3/Mode_Privilege/main.c 
+  * @file    CortexM3/Mode_Privilege/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body.
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -49,13 +49,12 @@ static __INLINE  void __SVC()                     { __ASM ("svc 0x01");}
 #elif defined   (  __GNUC__  )
 static __INLINE void __SVC()                      { __ASM volatile ("svc 0x01");}
 #endif
+
 /* Private variables ---------------------------------------------------------*/
 __IO uint8_t PSPMemAlloc[SP_PROCESS_SIZE];
 __IO uint32_t Index = 0, PSPValue = 0, CurrentStack = 0, ThreadMode = 0;
 
 /* Private function prototypes -----------------------------------------------*/
-void RCC_Configuration(void);
-
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -64,10 +63,14 @@ void RCC_Configuration(void);
   * @retval None
   */
 int main(void)
-{   
-  /* Clock configuration */
-  RCC_Configuration();
-    
+{
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
 /* Switch Thread mode Stack from Main to Process -----------------------------*/
   /* Initialize memory reserved for Process Stack */
   for(Index = 0; Index < SP_PROCESS_SIZE; Index++)
@@ -99,6 +102,7 @@ int main(void)
 /* Switch Thread mode from privileged to unprivileged ------------------------*/
   /* Thread mode has unprivileged access */
   __set_CONTROL(THREAD_MODE_UNPRIVILEGED | SP_PROCESS);
+
   /* Unprivileged access mainly affect ability to:
       - Use or not use certain instructions such as MSR fields
       - Access System Control Space (SCS) registers such as NVIC and SysTick */
@@ -141,22 +145,10 @@ int main(void)
   }
 }
 
-/**
-  * @brief  Configures the different system clocks.
-  * @param  None
-  * @retval None
-  */
-void RCC_Configuration(void)
-{
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,  
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-}
-
 #ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -181,4 +173,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

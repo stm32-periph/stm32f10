@@ -2,11 +2,11 @@
   @page TIM_OnePulse TIM_OnePulse
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/OnePulse/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the TIM OnePulse example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -23,20 +23,25 @@
 This example shows how to use the TIM peripheral to generate a One pulse Mode 
 after a Rising edge of an external signal is received in Timer Input pin.
 
-The TIM4CLK frequency is set to 72 MHz, the Prescaler is 1 so the TIM4 counter
-clock is 36 MHz. 
-The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value to trigger 
-the TIM4 input is 500 Hz.
+TIM2CLK = SystemCoreClock, we want to get TIM2 counter clock at 24 MHz:
+  - Prescaler = (TIM2CLK / TIM2 counter clock) - 1
+SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
+and Connectivity line devices and to 24 MHz for Low-Density Value line and
+Medium-Density Value line devices
+
+The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value to 
+trigger the TIM4 input is 24000000/65535 = 300 Hz.
 
 The TIM4 is configured as follows: 
-The One Pulse mode is used, the external signal is connected to TIM4 CH2 pin (PA.01), 
-the Rising edge is used as active edge, the One Pulse signal is output 
-on TIM4_CH1 (PA.00).
+The One Pulse mode is used, the external signal is connected to TIM4 CH2 pin (PB.07), 
+the rising edge is used as active edge, the One Pulse signal is output 
+on TIM4_CH1 (PB.06).
 
-The TIM_Pulse defines the delay value, the delay value is fixed to 455.08 us:
-delay =  CCR1/TIM4 counter clock = 455.08 us. 
-The (TIM_Period - TIM_Pulse) defines the One Pulse value, the pulse value is fixed to 1.365ms:
-One Pulse value = (TIM_Period - TIM_Pulse)/TIM4 counter clock = 1.365 ms.
+The TIM_Pulse defines the delay value, the delay value is fixed to:
+delay =  CCR1/TIM4 counter clock = 16383 / 24000000 = 682.6 us. 
+The (TIM_Period - TIM_Pulse) defines the One Pulse value, the pulse value is fixed to:
+One Pulse value = (TIM_Period - TIM_Pulse)/TIM4 counter clock 
+                = (65535 - 16383) / 24000000 = 2.048 ms.
 
 @par Directory contents 
 
@@ -47,15 +52,16 @@ One Pulse value = (TIM_Period - TIM_Pulse)/TIM4 counter clock = 1.365 ms.
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density 
-    and Low-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
+    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM3210C-EVAL (STM32F10x 
-    Connectivity line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL
-    (STM32F10x Medium-Density) evaluation boards and can be easily tailored to
-    any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL 
+    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
+    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
+    Medium-Density) evaluation boards and can be easily tailored to any 
+    other supported device and development board.
 
-  - STM3210E-EVAL, STM3210B-EVAL and STM3210C-EVAL  Set-up 
+  - STM32100B-EVAL, STM3210E-EVAL, STM3210B-EVAL and STM3210C-EVAL  Set-up 
    - Connect the external signal to the TIM4_CH2 pin (PB.07)
    - Connect the TIM4_CH1 (PB.06) pin to an oscilloscope to monitor the waveform.   
   
@@ -67,7 +73,7 @@ In order to make the program work, you must do the following:
   - stm32f10x_gpio.c 
   - stm32f10x_rcc.c 
   - stm32f10x_tim.c
-  - system_stm32f10x.c (under Libraries\CMSIS\Core\CM3) 
+  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x) 
 
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -79,13 +85,17 @@ In order to make the program work, you must do the following:
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

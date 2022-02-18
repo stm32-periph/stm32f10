@@ -2,11 +2,11 @@
   @page TIM_OCActive TIM_OCActive
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/OCActive/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the TIM OCActive example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -23,10 +23,12 @@
 This example shows how to configure the TIM peripheral to generate four different 
 signals with four different delays.
 
-The TIMxCLK frequency is set to 36 MHz, the Prescaler is set to 35999 and used in 
-Output Compare Active Mode.
- 
-TIM3 counter clock = TIMxCLK / (Prescaler +1) = 1 KHz 
+The TIM3CLK frequency is set to SystemCoreClock / 2 (Hz), and the objective is
+to get TIM3 counter clock at 1 KHz so the Prescaler is computed as following:
+   - Prescaler = (TIM3CLK / TIM3 counter clock) - 1
+SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
+and Connectivity line devices and to 24 MHz for Low-Density Value line and
+Medium-Density Value line devices
 
 The TIM3 CCR1 register value is equal to 1000:
 TIM3_CH1 delay = CCR1_Val/TIM3 counter clock  = 1000 ms
@@ -45,7 +47,8 @@ TIM3_CH4 delay = CCR4_Val/TIM3 counter clock = 125 ms
 so the TIM3 Channel 4 generates a signal with a delay equal to 125 ms.
 
 The delay correspond to the time difference between PC.06 and 
-TIM3_CHx signal rising edges in case of STM3210E-EVAL and STM3210B-EVAL 
+TIM3_CHx signal rising edges in case of STM32100B-EVAL, STM3210E-EVAL and 
+STM3210B-EVAL 
 
 The delay correspond to the time difference between PD.07 and 
 TIM3_CHx signal rising edges in case of STM3210C-EVAL
@@ -59,42 +62,43 @@ TIM3_CHx signal rising edges in case of STM3210C-EVAL
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density 
-    and Low-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
+    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM3210C-EVAL (STM32F10x 
-    Connectivity line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL
-    (STM32F10x Medium-Density) evaluation boards and can be easily tailored to
-    any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL 
+    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
+    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
+    Medium-Density) evaluation boards and can be easily tailored to any 
+    other supported device and development board.
     
 
   - STM3210C-EVAL Set-up 
-    - Connect the TIM3 pins(TIM3 full remapped pins) to an oscilloscope to monitor the different waveforms:
+    - Connect the TIM3 pins(TIM3 full remapped pins) to an oscilloscope to
+      monitor the different waveforms:
        - PD.07
        - PC.06 (TIM3_CH1)
        - PC.07 (TIM3_CH2)
        - PC.08 (TIM3_CH3)
        - PC.09 (TIM3_CH4)
 
-  - STM3210E-EVAL and STM3210B-EVAL Set-up 
+  - STM32100B-EVAL, STM3210E-EVAL and STM3210B-EVAL Set-up 
     - Connect the following pins to an oscilloscope to monitor the different 
       waveforms:
        - PC.06
-       - PA.00 (TIM3_CH1)
-       - PA.01 (TIM3_CH2)
-       - PA.02 (TIM3_CH3)
-       - PA.03 (TIM3_CH4)
+       - PA.06 (TIM3_CH1)
+       - PA.07 (TIM3_CH2)
+       - PB.00 (TIM3_CH3)
+       - PB.01 (TIM3_CH4)
   
 @par How to use it ? 
 
 In order to make the program work, you must do the following:
 - Create a project and setup all project configuration
 - Add the required Library files:
-  - stm32f10x_flash.c 
   - stm32f10x_gpio.c 
   - stm32f10x_rcc.c
   - stm32f10x_tim.c 
-  - system_stm32f10x.c (under Libraries\CMSIS\Core\CM3) 
+  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x) 
     
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -106,13 +110,17 @@ In order to make the program work, you must do the following:
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

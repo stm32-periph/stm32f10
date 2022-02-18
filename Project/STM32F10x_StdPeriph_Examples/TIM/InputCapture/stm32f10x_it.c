@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/InputCapture/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -17,7 +17,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -35,10 +35,10 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-__IO uint16_t ic3_readvalue1 = 0, ic3_readvalue2 = 0;
-__IO uint16_t capture_number = 0;
-__IO uint32_t CAPTURE = 0;
-__IO uint32_t TIM3_FREQ = 0;
+__IO uint16_t IC3ReadValue1 = 0, IC3ReadValue2 = 0;
+__IO uint16_t CaptureNumber = 0;
+__IO uint32_t Capture = 0;
+__IO uint32_t TIM3Freq = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -150,29 +150,29 @@ void TIM3_IRQHandler(void)
   {
     /* Clear TIM3 Capture compare interrupt pending bit */
     TIM_ClearITPendingBit(TIM3, TIM_IT_CC2);
-    if(capture_number == 0)
+    if(CaptureNumber == 0)
     {
       /* Get the Input Capture value */
-      ic3_readvalue1 = TIM_GetCapture2(TIM3);
-      capture_number = 1;
+      IC3ReadValue1 = TIM_GetCapture2(TIM3);
+      CaptureNumber = 1;
     }
-    else if(capture_number == 1)
+    else if(CaptureNumber == 1)
     {
       /* Get the Input Capture value */
-      ic3_readvalue2 = TIM_GetCapture2(TIM3); 
+      IC3ReadValue2 = TIM_GetCapture2(TIM3); 
       
       /* Capture computation */
-      if (ic3_readvalue2 > ic3_readvalue1)
+      if (IC3ReadValue2 > IC3ReadValue1)
       {
-        CAPTURE = (ic3_readvalue2 - ic3_readvalue1) - 1; 
+        Capture = (IC3ReadValue2 - IC3ReadValue1); 
       }
       else
       {
-        CAPTURE = ((0xFFFF - ic3_readvalue1) + ic3_readvalue2) - 1; 
+        Capture = ((0xFFFF - IC3ReadValue1) + IC3ReadValue2); 
       }
       /* Frequency computation */ 
-      TIM3_FREQ = (uint32_t)72000000 / CAPTURE;
-      capture_number = 0;
+      TIM3Freq = (uint32_t) SystemCoreClock / Capture;
+      CaptureNumber = 0;
     }
   }
 }
@@ -201,4 +201,4 @@ void TIM3_IRQHandler(void)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

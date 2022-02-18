@@ -2,11 +2,11 @@
   @page ADC_AnalogWatchdog ADC_AnalogWatchdog
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    ADC/AnalogWatchdog/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the ADC analog watchdog example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -23,33 +23,41 @@
 This example describes how to use the ADC analog watchdog to guard continuously  
 an ADC channel.
 The ADC1 is configured to convert continuously ADC channel14. The analog watchdog
-is configured and enabled to guard a single regular channel. 
-Each time the channel14 converted value exceed programmed analog watchdog high 
+is configured and enabled to guard a single regular channel.
+Each time the channel14 converted value exceeds programmed analog watchdog high 
 threshold (value 0x0B00) or goes down analog watchdog low threshold (value 0x0300)
 an AWD interrupt is generated and the output pin connected to LED1 is toggled. The
 LED will bright as long as the AWD interrupt is generated which means that the 
 converted value of regular ADC channel14 is outside the range limited by high and 
 low analog watchdog thresholds.
-The ADC1 clock is set to 14 MHz.
+The ADC1 clock is set to 12 MHz on Value line devices and to 14 MHz on other 
+devices.
 
 @par Directory contents 
 
-  - ADC/AnalogWatchdog/stm32f10x_conf.h   Library Configuration file
-  - ADC/AnalogWatchdog/stm32f10x_it.c     Interrupt handlers
-  - ADC/AnalogWatchdog/stm32f10x_it.h     Interrupt handlers header file
-  - ADC/AnalogWatchdog/main.c             Main program
+  - ADC/AnalogWatchdog/stm32f10x_conf.h     Library Configuration file
+  - ADC/AnalogWatchdog/stm32f10x_it.c       Interrupt handlers
+  - ADC/AnalogWatchdog/stm32f10x_it.h       Interrupt handlers header file
+  - ADC/AnalogWatchdog/system_stm32f10x.c   STM32F10x system source file
+  - ADC/AnalogWatchdog/main.c               Main program
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density 
-    and Low-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
+    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM3210C-EVAL (STM32F10x 
-    Connectivity line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL
-    (STM32F10x Medium-Density) evaluation boards and can be easily tailored to
-    any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL 
+    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
+    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
+    Medium-Density) evaluation boards and can be easily tailored to any 
+    other supported device and development board.
     To select the STMicroelectronics evaluation board used to run the example, 
     uncomment the corresponding line in stm32_eval.h file (under Utilities\STM32_EVAL)
+
+  - STM32100B-EVAL Set-up
+    - Use LED1 led connected to PC.06 pin
+    - Connect a variable power supply 0-3.3V to ADC Channel14 mapped on pin PC.04
+      (potentiometer RV2)
 
   - STM3210C-EVAL Set-up 
     - Use LED1 led connected to PD.07 pin
@@ -65,7 +73,7 @@ The ADC1 clock is set to 14 MHz.
     - Use LD1 led connected to PC.06 pin
     - Connect a variable power supply 0-3.3V to ADC Channel14 mapped on pin PC.04
       (potentiometer RV1) 
-         
+
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
@@ -73,16 +81,16 @@ In order to make the program work, you must do the following :
 - Add the required Library files :
   - stm32f10x_adc.c 
   - stm32f10x_gpio.c
-  - stm32f10x_flash.c 
-  - stm32f10x_rcc.c 
-  - stm32f10x_exti.c  
-  - misc.c   
-  - stm32f10x_usart.c
-  - system_stm32f10x.c (under Libraries\CMSIS\Core\CM3)
+  - stm32f10x_exti.c
+  - stm32f10x_rcc.c
+  - stm32f10x_usart.c 
+  - stm32f10x_i2c.c
+  - stm32f10x_spi.c 
+  - misc.c
   - stm32_eval.c (under Utilities\STM32_EVAL)
-        
+
 - Edit stm32f10x.h file to select the device you are working on.
-- Edit stm32_eval.h file to select the evaluation board you will use.
+- Use STM32F10x system source file "system_stm32f10x.c" provided with this example.
   
 @b Tip: You can tailor the provided project template to run this example, for 
         more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
@@ -92,13 +100,17 @@ In order to make the program work, you must do the following :
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
-    
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

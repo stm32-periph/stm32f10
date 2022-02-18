@@ -2,11 +2,11 @@
   @page I2S_SPI_I2S_Switch I2S_SPI_I2S_Switch
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    I2S/SPI_I2S_Switch/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the SPI_I2S_Switch Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -63,7 +63,7 @@ is PASSED if transmitted and received data are the same otherwise it is FAILED.
     Devices.
   
   - This example has been tested with STMicroelectronics STM3210E-EVAL (STM32F10x 
-    High-Density) and STM3210E-EVAL (STM32F10x Coneectivity-Line) evaluation boards 
+    High-Density) and STM3210C-EVAL (STM32F10x Coneectivity-Line) evaluation boards 
     and can be easily tailored to any other supported device and development board.
 
   - STM3210C-EVAL Set-up 
@@ -94,12 +94,11 @@ For this purpose prior to configure the SPI3/I2S3 pins:
 In order to make the program work, you must do the following:
 - Create a project and setup all project configuration
 - Add the required Library files:
-  - misc.c 
   - stm32f10x_flash.c   
+  - stm32f10x_gpio.c   
+  - stm32f10x_rcc.c   
   - stm32f10x_spi.c 
-  - stm32f10x_rcc.c 
-  - stm32f10x_gpio.c 
-  - system_stm32f10x.c
+  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
         
 - Edit stm32f10x.h file to select the device you are working on (#define 
   STM32F10X_HD or #define STM32F10X_CL in this case).
@@ -112,13 +111,17 @@ In order to make the program work, you must do the following:
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
- - High-density devices are STM32F105xx and STM32F107xx microcontrollers.
+ - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    NVIC/DMA_WFIMode/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and peripherals
   *          interrupt service routine.
@@ -17,7 +17,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -160,7 +160,7 @@ void DMA1_Channel5_IRQHandler(void)
 {
   if(DMA_GetITStatus(DMA1_IT_TC5))
   {
-    DMA_ClearITPendingBit(DMA1_IT_TC5);
+    DMA_ClearITPendingBit(DMA1_IT_GL5);
 
     /* Check the received buffer */
     TestStatus = Buffercmp16(SRC_Buffer, DST_Buffer, 10);
@@ -173,9 +173,6 @@ void DMA1_Channel5_IRQHandler(void)
     {
       STM_EVAL_LEDToggle(LED3);
     }
-
-    /* Re-configure DMA1 */
-    DMA_Configuration();
   }
 }
 
@@ -188,7 +185,7 @@ void DMA1_Channel6_IRQHandler(void)
 {
   if(DMA_GetITStatus(DMA1_IT_TC6))
   {
-    DMA_ClearITPendingBit(DMA1_IT_TC6);
+    DMA_ClearITPendingBit(DMA1_IT_GL6);
 
     /* Check the received buffer */
     TestStatus = Buffercmp16(SRC_Buffer, DST_Buffer, 10);
@@ -201,9 +198,6 @@ void DMA1_Channel6_IRQHandler(void)
     {
       STM_EVAL_LEDToggle(LED3);
     }
-
-    /* Re-configure DMA1 */
-    DMA_Configuration();
   }
 }
 
@@ -246,4 +240,4 @@ void EXTI9_5_IRQHandler(void)
   * @}
   */
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

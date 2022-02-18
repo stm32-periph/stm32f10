@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/Simplex_Interrupt/platform_config.h 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Evaluation board specific configuration file.
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -28,14 +28,15 @@
 /* Exported constants --------------------------------------------------------*/
 /* Uncomment the line corresponding to the STMicroelectronics evaluation board
    used to run the example */
-#if !defined (USE_STM3210B_EVAL) &&  !defined (USE_STM3210E_EVAL) &&  !defined (USE_STM3210C_EVAL)
+#if !defined (USE_STM32100B_EVAL) && !defined (USE_STM3210B_EVAL) &&  !defined (USE_STM3210E_EVAL) &&  !defined (USE_STM3210C_EVAL)
+ //#define USE_STM32100B_EVAL
  //#define USE_STM3210B_EVAL
  //#define USE_STM3210E_EVAL
  #define USE_STM3210C_EVAL
 #endif
 
 /* Define the STM32F10x hardware depending on the used evaluation board */
-#if defined (USE_STM3210B_EVAL) || defined (USE_STM3210E_EVAL) 
+#if defined (USE_STM3210B_EVAL) || defined (USE_STM3210E_EVAL) || defined(USE_STM32100B_EVAL)
   #define SPI_MASTER                   SPI1
   #define SPI_MASTER_CLK               RCC_APB2Periph_SPI1
   #define SPI_MASTER_GPIO              GPIOA
@@ -80,4 +81,4 @@
 
 #endif /* __PLATFORM_CONFIG_H */
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

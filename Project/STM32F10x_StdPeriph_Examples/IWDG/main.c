@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    IWDG/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body.
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -34,8 +34,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-ErrorStatus HSEStartUpStatus;
-
 /* Private function prototypes -----------------------------------------------*/
 void SysTick_Configuration(void);
 
@@ -48,14 +46,17 @@ void SysTick_Configuration(void);
   */
 int main(void)
 {
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* Initialize LED1 and Key Button mounted on STM3210X-EVAL board */       
   STM_EVAL_LEDInit(LED1);
   STM_EVAL_LEDInit(LED2);
-  STM_EVAL_PBInit(Button_KEY, Mode_EXTI);
+  STM_EVAL_PBInit(BUTTON_KEY, BUTTON_MODE_EXTI);
 
   /* Configure SysTick to generate an interrupt each 250ms */
   SysTick_Configuration();
@@ -64,7 +65,7 @@ int main(void)
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 
   /* Set Button EXTI Interrupt priority to 0 (highest) */
-  NVIC_SetPriority(KEY_BUTTON_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0,0));
+  NVIC_SetPriority(KEY_BUTTON_EXTI_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0,0));
 
   /* Set SysTick interrupt vector Preemption Priority to 1 */
   NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,0));
@@ -115,8 +116,8 @@ int main(void)
   */
 void SysTick_Configuration(void)
 {
-  /* SysTick interrupt each 250ms with counter clock equal to 9MHz */
-  if (SysTick_Config((SystemFrequency/8) / 4))
+  /* SysTick interrupt each 250ms with counter clock equal to (HCLK/8) */
+  if (SysTick_Config((SystemCoreClock/8) / 4))
   { 
     /* Capture error */
     while (1);
@@ -129,7 +130,7 @@ void SysTick_Configuration(void)
 #ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -153,4 +154,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USART/IrDA/Transmit/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -35,12 +35,12 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 USART_InitTypeDef USART_InitStructure;
-JOY_State_TypeDef MyKey = JOY_NONE;
+JOYState_TypeDef MyKey = JOY_NONE;
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
-JOY_State_TypeDef ReadKey(void);
+JOYState_TypeDef ReadKey(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -51,6 +51,13 @@ JOY_State_TypeDef ReadKey(void);
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -59,11 +66,11 @@ int main(void)
 
 #ifndef USE_STM3210C_EVAL
   /* Initialize JoyStick Button mounted on STM3210X-EVAL board */       
-  STM_EVAL_PBInit(Button_UP, Mode_GPIO);
-  STM_EVAL_PBInit(Button_DOWN, Mode_GPIO);
-  STM_EVAL_PBInit(Button_LEFT, Mode_GPIO);
-  STM_EVAL_PBInit(Button_RIGHT, Mode_GPIO);
-  STM_EVAL_PBInit(Button_SEL, Mode_GPIO);
+  STM_EVAL_PBInit(BUTTON_UP, BUTTON_MODE_GPIO);
+  STM_EVAL_PBInit(BUTTON_DOWN, BUTTON_MODE_GPIO);
+  STM_EVAL_PBInit(BUTTON_LEFT, BUTTON_MODE_GPIO);
+  STM_EVAL_PBInit(BUTTON_RIGHT, BUTTON_MODE_GPIO);
+  STM_EVAL_PBInit(BUTTON_SEL, BUTTON_MODE_GPIO);
 #else
   /* Configure the IO Expander */
   if (IOE_Config())
@@ -133,8 +140,8 @@ int main(void)
         {
         }
         break;
-      case JOY_CENTER:
-        USART_SendData(USARTy, JOY_CENTER);
+      case JOY_SEL:
+        USART_SendData(USARTy, JOY_SEL);
         while(USART_GetFlagStatus(USARTy, USART_FLAG_TXE) == RESET)
         {
         }
@@ -157,11 +164,7 @@ int main(void)
   * @retval None
   */
 void RCC_Configuration(void)
-{
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,  
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-  
+{  
   /* Enable GPIO clock */
   RCC_APB2PeriphClockCmd(USARTy_GPIO_CLK | RCC_APB2Periph_AFIO, ENABLE);
   
@@ -201,40 +204,40 @@ void GPIO_Configuration(void)
 /**
   * @brief  Reads key from demoboard.
   * @param  None
-  * @retval Return JOY_RIGHT, JOY_LEFT, JOY_CENTER, JOY_UP, JOY_DOWN or JOY_NONE
+  * @retval Return JOY_RIGHT, JOY_LEFT, JOY_SEL, JOY_UP, JOY_DOWN or JOY_NONE
   */
-JOY_State_TypeDef ReadKey(void)
+JOYState_TypeDef ReadKey(void)
 {
 #ifndef USE_STM3210C_EVAL
   /* "right" key is pressed */
-  if(!STM_EVAL_PBGetState(Button_RIGHT))
+  if(!STM_EVAL_PBGetState(BUTTON_RIGHT))
   {
-    while(STM_EVAL_PBGetState(Button_RIGHT) == Bit_RESET);
+    while(STM_EVAL_PBGetState(BUTTON_RIGHT) == Bit_RESET);
     return JOY_RIGHT; 
   }
   /* "left" key is pressed */
-  if(!STM_EVAL_PBGetState(Button_LEFT))
+  if(!STM_EVAL_PBGetState(BUTTON_LEFT))
   {
-    while(STM_EVAL_PBGetState(Button_LEFT) == Bit_RESET);
+    while(STM_EVAL_PBGetState(BUTTON_LEFT) == Bit_RESET);
     return JOY_LEFT; 
   }
   /* "up" key is pressed */
-  if(!STM_EVAL_PBGetState(Button_UP))
+  if(!STM_EVAL_PBGetState(BUTTON_UP))
   {
-    while(STM_EVAL_PBGetState(Button_UP) == Bit_RESET);
+    while(STM_EVAL_PBGetState(BUTTON_UP) == Bit_RESET);
     return JOY_UP; 
   }
   /* "down" key is pressed */
-  if(!STM_EVAL_PBGetState(Button_DOWN))
+  if(!STM_EVAL_PBGetState(BUTTON_DOWN))
   {
-    while(STM_EVAL_PBGetState(Button_DOWN) == Bit_RESET);
+    while(STM_EVAL_PBGetState(BUTTON_DOWN) == Bit_RESET);
     return JOY_DOWN; 
   }
   /* "sel" key is pressed */
-  if(!STM_EVAL_PBGetState(Button_SEL))
+  if(!STM_EVAL_PBGetState(BUTTON_SEL))
   {
-    while(STM_EVAL_PBGetState(Button_SEL) == Bit_RESET);
-    return JOY_CENTER; 
+    while(STM_EVAL_PBGetState(BUTTON_SEL) == Bit_RESET);
+    return JOY_SEL; 
   }
   /* No key is pressed */
   else 
@@ -250,7 +253,7 @@ JOY_State_TypeDef ReadKey(void)
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -275,4 +278,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

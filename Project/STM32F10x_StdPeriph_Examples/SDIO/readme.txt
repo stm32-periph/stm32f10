@@ -2,11 +2,11 @@
   @page SDIO_Example SDIO_Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    SDIO/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the SDIO Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -51,10 +51,10 @@ Below is a description of the different example steps:
   - SDIO/stm32f10x_conf.h  Library Configuration file
   - SDIO/stm32f10x_it.c    Interrupt handlers
   - SDIO/stm32f10x_it.h    Header for stm32f10x_it.c
-  - SDIO/sdcard.c          SD Card Driver file
-  - SDIO/sdcard.h          Header for sdcard.c
   - SDIO/main.c            Main program
-
+  - stm32_eval_sdio_sd.c   SD Card Driver file
+  - stm32_eval_sdio_sd.h   Header for stm32_eval_sdio_sd.c   
+  
 @par Hardware and Software environment 
 
   - This example runs only on STM32F10x High-Density Devices.
@@ -76,7 +76,11 @@ In order to make the program work, you must do the following:
   - misc.c 
   - stm32f10x_sdio.c 
   - stm32f10x_dma.c
-  - system_stm32f10x.c (under Libraries\CMSIS\Core\CM3)
+  - stm32f10x_usart.c
+  - stm32f10x_exti.c
+  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
+  - stm32_eval.c (under Utilities\STM32_EVAL)
+  - stm32_eval_sdio_sd.c (under Utilities\STM32_EVAL\Common)
       
 - Edit stm32f10x.h file to select the device you are working on (#define 
   STM32F10X_HD, in this case).
@@ -89,13 +93,17 @@ In order to make the program work, you must do the following:
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

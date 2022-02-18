@@ -2,11 +2,11 @@
   @page TIM_OCToggle TIM_OCToggle
   
   @verbatim
-  ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/OCToggle/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Description of the TIM OCToggle example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -23,10 +23,12 @@
 This example shows how to configure the TIM3 peripheral to generate four different 
 signals with four different frequencies.
 
-The TIM3CLK frequency is set to 36 MHz, the Prescaler is set to 2, and used in 
-Output Compare Toggle Mode.
-
-TIM3 counter clock = TIMxCLK / (Prescaler +1) = 12 MHz 
+The TIM3CLK frequency is set to SystemCoreClock / 2 (Hz), and we want to get TIM3
+counter clock at 12 MHz so the Prescaler is computed as following:
+   - Prescaler = (TIM3CLK / TIM3 counter clock) - 1
+SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
+and Connectivity line devices and to 24 MHz for Low-Density Value line and
+Medium-Density Value line devices
 
 The TIM3 CCR1 register value is equal to 32768: 
 CC1 update rate = TIM3 counter clock / CCR1_Val = 366.2 Hz,
@@ -53,23 +55,25 @@ so the TIM3 channel 4 generates a periodic signal with a frequency equal to 1464
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density 
-    and Low-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
+    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM3210C-EVAL (STM32F10x 
-    Connectivity line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL
-    (STM32F10x Medium-Density) evaluation boards and can be easily tailored to
-    any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL 
+    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
+    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
+    Medium-Density) evaluation boards and can be easily tailored to any 
+    other supported device and development board.
     
 
   - STM3210C-EVAL Set-up 
-    - Connect the TIM1 pins(TIM3 full remapped pins) to an oscilloscope to monitor the different waveforms:
+    - Connect the TIM1 pins(TIM3 full remapped pins) to an oscilloscope to monitor 
+      the different waveforms:
        - PC.06 (TIM3_CH1)
        - PC.07 (TIM3_CH2)
        - PC.08 (TIM3_CH3)
        - PC.09 (TIM3_CH4)
 
-  - STM3210E-EVAL and STM3210B-EVAL Set-up 
+  - STM32100B-EVAL, STM3210E-EVAL and STM3210B-EVAL Set-up 
     - Connect the following pins to an oscilloscope to monitor the different 
       waveforms:
        - PA.06 (TIM3_CH1)
@@ -82,12 +86,11 @@ so the TIM3 channel 4 generates a periodic signal with a frequency equal to 1464
 In order to make the program work, you must do the following:
 - Create a project and setup all project configuration
 - Add the required Library files:
-  - stm32f10x_flash.c
   - stm32f10x_gpio.c 
   - stm32f10x_rcc.c 
   - stm32f10x_tim.c
   - misc.c
-  - system_stm32f10x.c (under Libraries\CMSIS\Core\CM3)  
+  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)  
     
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -99,13 +102,17 @@ In order to make the program work, you must do the following:
 - Run the example
 
 @note
- - Low-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 16 and 32 Kbytes.
- - Medium-density devices are STM32F101xx and STM32F103xx microcontrollers where
-   the Flash memory density ranges between 32 and 128 Kbytes.
+ - Low-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 16 and 32 Kbytes.
+ - Low-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 16 and 32 Kbytes.
+ - Medium-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 64 and 128 Kbytes.  
+ - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
+   microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
- * <h3><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h3>
+ * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
  */

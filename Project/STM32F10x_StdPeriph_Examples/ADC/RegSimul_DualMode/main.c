@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/RegSimul_DualMode/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -38,7 +38,6 @@
 ADC_InitTypeDef ADC_InitStructure;
 DMA_InitTypeDef DMA_InitStructure;
 __IO uint32_t ADC_DualConvertedValueTab[16];
-ErrorStatus HSEStartUpStatus;
     
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
@@ -53,6 +52,13 @@ void GPIO_Configuration(void);
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* System clocks configuration ---------------------------------------------*/
   RCC_Configuration();
 
@@ -152,75 +158,9 @@ int main(void)
   */
 void RCC_Configuration(void)
 {
-  /* RCC system reset(for debug purpose) */
-  RCC_DeInit();
-
-  /* Enable HSE */
-  RCC_HSEConfig(RCC_HSE_ON);
-
-  /* Wait till HSE is ready */
-  HSEStartUpStatus = RCC_WaitForHSEStartUp();
-
-  if(HSEStartUpStatus == SUCCESS)
-  {
-    /* Enable Prefetch Buffer */
-    FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
-
-    /* Flash 2 wait state */
-    FLASH_SetLatency(FLASH_Latency_2);
- 
-    /* HCLK = SYSCLK */
-    RCC_HCLKConfig(RCC_SYSCLK_Div1); 
-  
-    /* PCLK2 = HCLK */
-    RCC_PCLK2Config(RCC_HCLK_Div1); 
-
-    /* PCLK1 = HCLK/2 */
-    RCC_PCLK1Config(RCC_HCLK_Div2);
-
-    /* ADCCLK = PCLK2/4 */
-    RCC_ADCCLKConfig(RCC_PCLK2_Div4); 
-  
-#ifndef STM32F10X_CL  
-    /* PLLCLK = 8MHz * 7 = 56 MHz */
-    RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_7);
-
-#else
-    /* Configure PLLs *********************************************************/
-    /* PLL2 configuration: PLL2CLK = (HSE / 5) * 8 = 40 MHz */
-    RCC_PREDIV2Config(RCC_PREDIV2_Div5);
-    RCC_PLL2Config(RCC_PLL2Mul_8);
-
-    /* Enable PLL2 */
-    RCC_PLL2Cmd(ENABLE);
-
-    /* Wait till PLL2 is ready */
-    while (RCC_GetFlagStatus(RCC_FLAG_PLL2RDY) == RESET)
-    {}
-
-    /* PLL configuration: PLLCLK = (PLL2 / 5) * 7 = 56 MHz */ 
-    RCC_PREDIV1Config(RCC_PREDIV1_Source_PLL2, RCC_PREDIV1_Div5);
-    RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_7);
-#endif
-
-    /* Enable PLL */ 
-    RCC_PLLCmd(ENABLE);
-
-    /* Wait till PLL is ready */
-    while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
-    {
-    }
-
-    /* Select PLL as system clock source */
-    RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
-
-    /* Wait till PLL is used as system clock source */
-    while(RCC_GetSYSCLKSource() != 0x08)
-    {
-    }
-  }
-
-/* Enable peripheral clocks --------------------------------------------------*/
+  /* ADCCLK = PCLK2/4 */
+  RCC_ADCCLKConfig(RCC_PCLK2_Div4);
+  /* Enable peripheral clocks ------------------------------------------------*/
   /* Enable DMA1 clock */
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
@@ -249,7 +189,7 @@ void GPIO_Configuration(void)
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -274,4 +214,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

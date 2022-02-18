@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    NVIC/IRQ_Channels/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -49,6 +49,13 @@ void TIM_Configuration(void);
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */  
+       
   /* Configure the system clocks */
   RCC_Configuration();
 
@@ -93,10 +100,6 @@ int main(void)
   */
 void RCC_Configuration(void)
 {
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,  
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-
   /* Enable TIM2, TIM3 and TIM4 clocks */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3 |
                          RCC_APB1Periph_TIM4, ENABLE);
@@ -114,7 +117,7 @@ void TIM_Configuration(void)
 
   /* TIM2 configuration */
   TIM_TimeBaseStructure.TIM_Period = 0x4AF;          
-  TIM_TimeBaseStructure.TIM_Prescaler = 0xEA5F;       
+  TIM_TimeBaseStructure.TIM_Prescaler = ((SystemCoreClock/1200) - 1);       
   TIM_TimeBaseStructure.TIM_ClockDivision = 0x0;    
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
   TIM_TimeBaseStructure.TIM_RepetitionCounter = 0x0000;
@@ -148,11 +151,11 @@ void TIM_Configuration(void)
   TIM_Cmd(TIM4, ENABLE);
 
   /* Immediate load of TIM2 Precaler value */
-  TIM_PrescalerConfig(TIM2, 0xEA5F, TIM_PSCReloadMode_Immediate);
+  TIM_PrescalerConfig(TIM2, ((SystemCoreClock/1200) - 1), TIM_PSCReloadMode_Immediate);
   /* Immediate load of TIM3 Precaler value */  
-  TIM_PrescalerConfig(TIM3, 0xEA5F, TIM_PSCReloadMode_Immediate);
+  TIM_PrescalerConfig(TIM3, ((SystemCoreClock/1200) - 1), TIM_PSCReloadMode_Immediate);
   /* Immediate load of TIM4 Precaler value */
-  TIM_PrescalerConfig(TIM4, 0xEA5F, TIM_PSCReloadMode_Immediate);
+  TIM_PrescalerConfig(TIM4, ((SystemCoreClock/1200) - 1), TIM_PSCReloadMode_Immediate);
 
   /* Clear TIM2 update pending flag */
   TIM_ClearFlag(TIM2, TIM_FLAG_Update);
@@ -172,7 +175,7 @@ void TIM_Configuration(void)
 #ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -197,4 +200,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

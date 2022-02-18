@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file RCC/stm32f10x_conf.h 
+  * @file    RCC/stm32f10x_conf.h 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Library configuration file.
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -27,6 +27,7 @@
 /* #include "stm32f10x_adc.h" */
 /* #include "stm32f10x_bkp.h" */
 /* #include "stm32f10x_can.h" */
+/* #include "stm32f10x_cec.h" */
 /* #include "stm32f10x_crc.h" */
 /* #include "stm32f10x_dac.h" */
 /* #include "stm32f10x_dbgmcu.h" */
@@ -73,4 +74,4 @@
 
 #endif /* __STM32F10x_CONF_H */
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

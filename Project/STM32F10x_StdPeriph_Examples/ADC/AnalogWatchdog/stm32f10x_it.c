@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/AnalogWatchdog/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and peripherals
   *          interrupt service routine.
@@ -17,7 +17,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -149,7 +149,11 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
+#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL)
+void ADC1_IRQHandler(void)
+#else
 void ADC1_2_IRQHandler(void)
+#endif
 {
   /* Toggle LED1 */
   STM_EVAL_LEDOn(LED1);
@@ -183,4 +187,4 @@ void ADC1_2_IRQHandler(void)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/

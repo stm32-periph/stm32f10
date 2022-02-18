@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file TIM/DMA/main.c 
   * @author  MCD Application Team
-  * @version V3.1.2
-  * @date    09/28/2009
+  * @version V3.2.0
+  * @date    03/01/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2009 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h2>
   */ 
 
 /* Includes ------------------------------------------------------------------*/
@@ -37,8 +37,8 @@
 /* Private variables ---------------------------------------------------------*/
 TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 TIM_OCInitTypeDef  TIM_OCInitStructure;
-uint16_t SRC_Buffer[3] = {3071, 1791, 511};
-ErrorStatus HSEStartUpStatus;
+uint16_t SRC_Buffer[3] = {0, 0, 0};
+uint16_t TimerPeriod = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
@@ -54,6 +54,13 @@ void DMA_Configuration(void);
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+       
   /* System Clocks Configuration */
   RCC_Configuration();
 
@@ -64,21 +71,35 @@ int main(void)
   DMA_Configuration();
 
   /* TIM1 DMA Transfer example -------------------------------------------------
-  TIM1CLK = 72 MHz, Prescaler = 0, TIM1 counter clock = 72 MHz 
-  The TIM1 Channel3 is configured to generate a complementary PWM signal with 
-  a frequency equal to: TIM1 counter clock / (TIM1_Period + 1) = 17.57 KHz and 
-  a variable duty cycle that is changed by the DMA after a specific number of
+  TIM1CLK = SystemCoreClock, Prescaler = 0, TIM1 counter clock = SystemCoreClock
+  SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
+  and Connectivity line devices and to 24 MHz for Low-Density Value line and
+  Medium-Density Value line devices.
+
+  The objective is to configure TIM1 channel 3 to generate complementary PWM
+  signal with a frequency equal to 17.57 KHz:
+     - TIM1_Period = (SystemCoreClock / 17570) - 1
+  and a variable duty cycle that is changed by the DMA after a specific number of
   Update DMA request.
+
   The number of this repetitive requests is defined by the TIM1 Repetion counter,
   each 3 Update Requests, the TIM1 Channel 3 Duty Cycle changes to the next new 
   value defined by the SRC_Buffer . 
   -----------------------------------------------------------------------------*/
+  /* Compute the value to be set in ARR regiter to generate signal frequency at 17.57 Khz */
+  TimerPeriod = (SystemCoreClock / 17570 ) - 1;
+  /* Compute CCR1 value to generate a duty cycle at 50% */
+  SRC_Buffer[0] = (uint16_t) (((uint32_t) 5 * (TimerPeriod - 1)) / 10);
+  /* Compute CCR1 value to generate a duty cycle at 37.5% */
+  SRC_Buffer[1] = (uint16_t) (((uint32_t) 375 * (TimerPeriod - 1)) / 1000);
+  /* Compute CCR1 value to generate a duty cycle at 25% */
+  SRC_Buffer[2] = (uint16_t) (((uint32_t) 25 * (TimerPeriod - 1)) / 100);
 
   /* TIM1 Peripheral Configuration --------------------------------------------*/
   /* Time Base configuration */
   TIM_TimeBaseStructure.TIM_Prescaler = 0;
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-  TIM_TimeBaseStructure.TIM_Period = 4095;
+  TIM_TimeBaseStructure.TIM_Period = TimerPeriod;
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;
   TIM_TimeBaseStructure.TIM_RepetitionCounter = 2;
 
@@ -88,7 +109,7 @@ int main(void)
   TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM2;
   TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
   TIM_OCInitStructure.TIM_OutputNState = TIM_OutputNState_Enable;
-  TIM_OCInitStructure.TIM_Pulse = 127;
+  TIM_OCInitStructure.TIM_Pulse = SRC_Buffer[0];
   TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;
   TIM_OCInitStructure.TIM_OCNPolarity = TIM_OCNPolarity_Low;
   TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Set;
@@ -116,10 +137,6 @@ int main(void)
   */
 void RCC_Configuration(void)
 {
-  /* Setup the microcontroller system. Initialize the Embedded Flash Interface,  
-     initialize the PLL and update the SystemFrequency variable. */
-  SystemInit();
-
   /* TIM1, GPIOA and GPIOB clock enable */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1 | RCC_APB2Periph_GPIOA |
                          RCC_APB2Periph_GPIOB, ENABLE);
@@ -181,7 +198,7 @@ void DMA_Configuration(void)
 
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -204,4 +221,4 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2010 STMicroelectronics *****END OF FILE****/
