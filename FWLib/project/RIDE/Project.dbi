@@ -1,0 +1,35 @@
+[Application]
+ApplicationPath=C:\VSS\Big_Piranha\Introduction Package\FIRMWARE\STM32F10xFWLib\FWLib\project\RIDE\STM3210E-EVAL\Project.elf
+CSX=0
+HighBankAddr=400000
+BootMode=0
+Format=ELF
+CodeOffset=0x0
+DataOffset=0x0
+LoaderTool=ARM
+Target=ARM
+DebugTool=RLINK_CORTEX
+[Device]
+Name=STM32F103ZET6
+[ARMSigDrv options]
+CXS=0
+[Debug]
+Explore=No
+Startup=1
+StartupSymb=main
+ToolName=RLINK_CORTEX
+[CortexDrv options]
+Debug=1
+CkSpeed=4000
+AloneInChain=1
+IRB=0
+IRA=0
+DRB=0
+DRA=0
+STM32_OB_Action=1
+STM32_OB_RDP=165
+STM32_OB_USER=255
+STM32_OB_WRP0=255
+STM32_OB_WRP1=255
+STM32_OB_WRP2=255
+STM32_OB_WRP3=255

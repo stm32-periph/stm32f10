@@ -1,0 +1,860 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>STM32 Standard library package</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	</head>
+	<body>
+		<table cellSpacing="0" cellPadding="0" width="900" border="0" align="center">
+			<tr vAlign="top">
+				<td>
+					<table width="100%">
+						<tr>
+							<td align="right"><IMG height="85" alt="STM32 Releasing your creativity" src="resc/stm32_ryc.jpg" width="900"></td>
+						</tr>
+					</table>
+					<br>
+					<table cellpadding="2" cellspacing="0" border="0" width="900">
+						<tr>
+							<td class="tabtitle"><strong><font color="#000000" size="4" face="Arial, Helvetica, sans-serif">Easy-to-use 
+										Firmware Library for STM32</font></strong></td>
+						</tr>
+					</table>
+					<table width="900" border="0" cellspacing="2" cellpadding="0">
+						<TBODY>
+							<tr>
+								<td valign="top"><P><FONT face="Arial, Helvetica, sans-serif" size="2">The <STRONG>STM32F10x 
+												Firmware Library</STRONG> for the STM32&nbsp;microcontrollers is complete 
+											package consisting of device drivers for all of the standard device 
+											peripherals. Each device driver includes a set of functions covering full 
+											peripheral functionality. The source code, developed in C language, is highly 
+											documented and thoroughly tested.</FONT></P>
+									<P><font size="2" face="Arial, Helvetica, sans-serif">For more details about this 
+											Firmware Library, please refer to the User manual "UM0427 ARM®-based 32-bit MCU 
+											STM32F101xx and STM32F103xx Firmware Library" available for download from the 
+											ST microcontrollers website: <A href="http://www.st.com/stm32">www.st.com/stm32</A></font></P>
+									<P><FONT face="Arial, Helvetica, sans-serif" size="2">Links below connect to example <em>folder</em>. 
+										The package contains the following examples:
+									</P>
+									<p><font size="2" face="Arial, Helvetica, sans-serif"> <em>Note</em>: These examples 
+											run on STMicroelectronics STM3210B-EVAL and STM3210E-EVAL evaluation boards and 
+											can be easily tailored to any other hardware. To select the STMicroelectronics 
+											evaluation board used to run the example, uncomment the corresponding line in 
+											platform_config.h file.</font></p>
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<TBODY>
+											<tr valign="top">
+												<td height="42">
+													<table width="100%" border="0" cellspacing="0" cellpadding="0">
+														<TBODY>
+															<tr valign="top">
+																<td width="93" height="18">&nbsp;</td>
+																<td width="18" height="18">&nbsp;</td>
+																<td height="18" width="192">&nbsp;</td>
+																<td height="18">&nbsp;</td>
+															</tr>
+															<TR>
+																<TD width="93" height="26" colSpan="1" rowSpan="1"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>ADC</STRONG></FONT></TD>
+																<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+																<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\ADC\3ADCs_DMA">3ADCs_DMA</A></FONT></FONT></TD>
+																<TD width="79%" height="26"><FONT size="2">Use 3ADCs in independant continuous 
+																		conversion mode with ADC1 and ADC3 using DMA transfer from ADC1 and ADC3 to 
+																		data buffers.</FONT></TD>
+															</TR>
+															<TR>
+																<TD width="93" height="26"></TD>
+																<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+																<TD width="192" height="26"><FONT size="2"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\ADC\ADC1_DMA">ADC1_DMA</A></FONT></FONT></TD>
+																<TD width="79%" height="26"><FONT size="2">Use the ADC and DMA to transfer continuously 
+																		converted data from ADC to a data buffer.</FONT></TD>
+															</TR>
+															<TR>
+																<TD width="93" height="26"></TD>
+																<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+																<TD width="192" height="26"><FONT size="2"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\ADC\AnalogWatchdog">AnalogWatchdog</A></FONT></FONT></TD>
+																<TD width="79%" height="26"><FONT size="2">Use the ADC analog watchdog to guard 
+																		continuously an ADC channel.</FONT></TD>
+															</TR>
+															<TR>
+																<TD width="93" height="26"></TD>
+																<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+																<TD width="192" height="26"><FONT size="2"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\ADC\ExtLinesTrigger">ExtLinesTrigger</A></FONT></FONT></TD>
+																<TD width="79%" height="26"><FONT size="2">Trigger ADC regular and injected groups 
+																		channel conversion using two external line event.</FONT></TD>
+															</TR>
+															<TR>
+																<TD width="93" height="26"></TD>
+																<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+																<TD width="192" height="26"><FONT size="2"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\ADC\RegSimul_DualMode">RegSimul_DualMode</A></FONT></FONT></TD>
+																<TD width="79%" height="26"><FONT size="2">Use ADC1 and ADC2 in regular simultaneous 
+																		dual mode</FONT></TD>
+															</TR>
+															<TR>
+																<TD width="93" height="26"></TD>
+																<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+																<TD width="192" height="26"><FONT size="2"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\ADC\TIMTrigger_AutoInjection">ExTIMTrigger_AutoInjection</A></FONT></FONT></TD>
+																<TD width="79%" height="26"><FONT size="2">Convert ADC regular group channels 
+																		continuously using TIM1 external trigger and injected group channels using the 
+																		auto-injected feature.</FONT></TD>
+															</TR>
+															<TR>
+																<TD width="93" height="22"></TD>
+																<TD width="18" height="22"></TD>
+																<TD width="192" height="22"></TD>
+																<TD width="79%" height="22"></TD>
+															</TR>
+															<tr valign="top">
+																<td width="93" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>BKP</STRONG></font></td>
+																<td width="18" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="13" src="resc/bulb16.gif" width="16"></font></td>
+																<td width="192" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><A href="FWLib\examples\BKP\Backup_Data">Backup_Data</A></font></td>
+																<td width="79%" height="26"><font size="2" face="Arial, Helvetica, sans-serif"> Store 
+																		user data in the Backup data registers.</font></td>
+															</tr>
+															<tr valign="top">
+																<td width="93" height="26"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;</font></td>
+																<td width="18" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="13" src="resc/bulb16.gif" width="16"></font></td>
+																<td width="192" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><A href="FWLib\examples\BKP\Tamper">Tamper</A></font></td>
+																<td height="26"><font size="2" face="Arial, Helvetica, sans-serif"> Write/read data 
+																		to/from Backup data registers and demonstrates the Tamper detection feature.</font></td>
+															</tr>
+															<tr valign="top">
+																<td width="93" height="22">&nbsp;</td>
+																<td width="18" height="22">&nbsp;</td>
+																<td width="192" height="22">&nbsp;</td>
+																<td height="22"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;</font></td>
+															</tr>
+															<tr valign="top">
+																<td width="93" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>CAN</STRONG></font></td>
+																<td width="18" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="13" src="resc/bulb16.gif" width="16"></font></td>
+																<td width="192" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><A href="FWLib\examples\CAN">Example</A></font></td>
+																<td width="79%" height="26"><font size="2" face="Arial, Helvetica, sans-serif">Set a 
+																		communication with the bxCAN in loopback mode.</font></td>
+															</tr>
+															<tr valign="top">
+																<td width="93" height="22">&nbsp;</td>
+																<td width="18" height="22">&nbsp;</td>
+																<td width="192" height="22">&nbsp;</td>
+																<td height="22"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;</font></td>
+															</tr>
+															<tr valign="top">
+																<td width="93" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>CortexM3</STRONG></font></td>
+																<td width="18" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="13" src="resc/bulb16.gif" width="16"></font></td>
+																<td width="192" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><A href="FWLib\examples\CortexM3\BitBand">BitBand</A></font></td>
+																<td width="79%" height="26"><font size="2" face="Arial, Helvetica, sans-serif"> Use 
+																		CortexM3 Bit-Band access to perform atomic read-modify-write and read 
+																		operations on a variable in SRAM.</font></td>
+															</tr>
+											</tr>
+											<TR>
+												<TD width="93" height="26"></TD>
+												<TD width="18" height="26"></TD>
+												<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\CortexM3\Mode_Privilege">Mode_Privilege</A></FONT></TD>
+												<TD width="79%" height="26"><FONT size="2">Modify CortexM3 Thread mode privilege access 
+														and stack.</FONT></TD>
+											</TR>
+											<tr valign="top">
+												<td width="93" colSpan="1" height="22" rowSpan="1">&nbsp;</td>
+												<td width="18" height="22">&nbsp;</td>
+												<td width="192" height="22">&nbsp;</td>
+												<td height="22"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;</font></td>
+											</tr>
+											<tr valign="top">
+												<td width="93" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>CRC</STRONG></font></td>
+												<td width="18" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="13" src="resc/bulb16.gif" width="16"></font></td>
+												<td width="192" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><A href="FWLib\examples\CRC">Example</A></font></td>
+												<td width="79%" height="26"><font size="2" face="Arial, Helvetica, sans-serif">Use the 
+														CRC calculation unit to get a CRC code of a given buffer of data word(32-bit).</font></td>
+											</tr>
+							</tr>
+							<tr valign="top">
+								<td width="93" height="22">&nbsp;</td>
+								<td width="18" height="22">&nbsp;</td>
+								<td width="192" height="22">&nbsp;</td>
+								<td height="22"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;</font></td>
+							</tr>
+							<tr valign="top">
+								<td width="93" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>DAC</STRONG></font></td>
+								<td width="18" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="13" src="resc/bulb16.gif" width="16"></font></td>
+								<td width="192" height="26"><font size="2" face="Arial, Helvetica, sans-serif"><A href="FWLib\examples\DAC\DualModeDMA_SineWave" target="">DualModeDMA_SineWave</A></font></td>
+								<td width="79%" height="26"><font size="2" face="Arial, Helvetica, sans-serif">&nbsp;Use 
+										DAC channels in dual mode with DMA to generate the same sine wave signal in 
+										12bit right data alignment mode. </font>
+								</td>
+							</tr>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\DAC\OneChannel_NoiseWave" target="">OneChannel_NoiseWave</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use DAC channel1 to generate a fixed signal 
+										with noise wave in 12bit left data alignment mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\DAC\OneChannelDMA_Escalator" target="">OneChannelDMA_Escalator</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use DAC channel1 with DMA to generate an 
+										escalator signal in 8bit right alignment mode</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\DAC\TwoChannels_TriangleWave" target="">TwoChannels_TriangleWave</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use DAC channels separately to generate two 
+										signals with different triangle waves in 12bit right data alignment mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>DMA</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\DMA\ADC_TIM1" target="">ADC_TIM1</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use a DMA channel to transfer continuously a 
+										data from a peripheral (ADC) to another (TIM1) supporting DMA transfer.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\DMA\FLASH_RAM" target="">FLASH_RAM</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use a DMA channel to transfer a word data 
+										buffer from memory (Flash) to memory (RAM).</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\DMA\FSMC">FSMC</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use two DMA1 channels to transfer a word 
+										data buffer from embedded FLASH to external memory through FSMC and from this 
+										external memory to embedded RAM.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\DMA\I2C_RAM">I2C_RAM</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use two DMA channels to transfer a data 
+										buffer from memory to I2C2 through I2C1.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\DMA\SPI_RAM">SPI_RAM</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use four DMA channels to transfer a data 
+										buffer from memory to SPI2 through SPI1 and a second data buffer from memory to 
+										SPI1 through SPI2 in full-duplex mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG id="IMG1" height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>EXTI</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\EXTI">Example</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure an external interrupt line.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>FLASH</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\FLASH\Program">Program</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Program the STM32F10x FLASH.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\FLASH\Write_Protection">Write_Protection</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Enable and disable the write protection for 
+										the STM32F10x FLASH.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26" colSpan="1" rowSpan="1"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>FSMC</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\FSMC\NAND">NAND</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the FSMC firmware library and an 
+										associate driver to communicate with a 8-Bit NAND memory: NAND512W3A2. Write 
+										into all memory, Read and verify the contents. </FONT>
+								</TD>
+							</TR>
+							<TR>
+								<TD width="93" height="40"></TD>
+								<TD width="18" height="40"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="40"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\FSMC\NOR">NOR</A></FONT></TD>
+								<TD width="79%" height="40"><FONT size="2">Use the FSMC firmware library and an 
+										associate driver to communicate with a 16-Bit NOR memory: M29W128FL, 
+										M29W128GL&nbsp;or&nbsp;S29GL128P. Write into all memory, Read and verify the 
+										contents . </FONT>
+								</TD>
+							</TR>
+							<TR>
+								<TD width="93" height="42"></TD>
+								<TD width="18" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\FSMC\NOR_CodeExecute">NOR_CodeExecute</A></FONT></TD>
+								<TD width="79%" height="42"><FONT size="2">Build an application to be loaded into the 
+										NOR memory mounted on STM3210E-EVAL board then execute it from internal Flash.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="42"></TD>
+								<TD width="18" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\FSMC\SRAM">SRAM</A></FONT></TD>
+								<TD width="79%" height="42"><FONT size="2">Use the FSMC firmware library and an 
+										associate driver to communicate with a 16-Bit SRAM memory: IS61WV51216BLL. 
+										Write into all memory, Read and verify the contents.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="42"></TD>
+								<TD width="18" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\FSMC\SRAM_DataMemory">SRAM_DataMemory</A></FONT></TD>
+								<TD width="79%" height="42"><FONT size="2">Use the external SRAM mounted on 
+										STM3210E-EVAL board as program data memory and internal SRAM for Stack.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>GPIO</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\GPIO\IOToggle">IOToggle</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the GPIO BSRR (Port bit set/reset 
+										register) and BRR (Port bit reset register) for IO toggling. These registers 
+										allow modifying only one or several GPIO pins in a single atomic write access.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\GPIO\JTAG_Remap">JTAG_Remap</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the JTAG IOs as standard GPIOs and gives 
+										a configuration sequence.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>I2C</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\I2C\10bitAddress">10bitAddress</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Transfer a data buffer from I2C1 to I2C2 in 
+										10-bit addressing mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\I2C\DualAddress">DualAddress</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Transfer two data buffer from I2C1 to I2C2 
+										through its two addresses in the same application.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\I2C\Interrupt">Interrupt</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Transfer a data buffer from I2C1 to I2C2 
+										using interrupts.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\I2C\M24C08_EEPROM">M24C08_EEPROM</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the I2C firmware library and an 
+										associate I2C EEPROM driver to communicate with an M24C08 EEPROM.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\I2C\SMBus">SMBus</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Send an ARP command from I2C1 to I2C2 in 
+										SMBus mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26" colSpan="1" rowSpan="1"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>I2S</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\I2S\Interrupt">Interrupt</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Describe how to configure and use the I2S 
+										mode interrupts with 16bits and 24 bits data in 32 bits packet frames.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\I2S\SPI_I2S_Switch">SPI_I2S_Switch</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Describe how to configure and use the I2S 
+										mode in alternation with the SPI maode. Simple communication is performed 
+										between two SPIs then between two I2Ss (raw data transfer and verification).</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>IWDG</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\IWDG">Example</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Reload at regulate period the IWDG counter 
+										using the SysTick interrupt.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"></TD>
+								<TD width="192" height="26"></TD>
+								<TD width="79%" height="26"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>LIB_DEBUG</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\Lib_DEBUG">Example</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Demonstrates the STM32F10x Firmware Library 
+										DEBUG mode. When the Debug mode is selected, the assert macro is expanded and 
+										run time checking is enabled in the firmware library code. The run-time 
+										checking allows checking that all the library functions input value lies within 
+										the parameter allowed values.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>NVIC</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\NVIC\CM3_LPModes">CM3_LPModes</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the NVIC firmware library to demonstrate 
+										the Cortex-M3 low power modes capabilities (WFE and WFI).</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\NVIC\DMA_WFIMode">DMA_WFIMode</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Enter the system to WFI mode with DMA 
+										transfer enabled and wake-up from this mode by the DMA End of Transfer 
+										interrupt.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\NVIC\IRQ_Channels">IRQ_Channels</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use of the Nested Vectored Interrupt 
+										Controller (NVIC) and IRQ Channels configuration.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\NVIC\Priority">Priority</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use of the Nested Vectored Interrupt 
+										Controller (NVIC) and priority mechanism (PreemptionPriority , SubPriority).</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\NVIC\System_Handlers">System_Handlers</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use of the Nested Vectored Interrupt 
+										Controller (NVIC) and system handlers.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\NVIC\VectorTable_Relocation">VectorTable_Relocation</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the NVIC firmware library to set the 
+										CortexM3 vector table in a specific address other than default. This can be 
+										used to build program which will be loaded into Flash memory by an application 
+										previously programmed in the sector0 of the Flash memory. Such application can 
+										be In-Application Programming (IAP, through USART) or Device Firmware Upgrade 
+										(DFU, through USB).</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>PWR</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\PWR\STANDBY">STANDBY</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Enter the system to STANDBY mode and wake-up 
+										from this mode using: external RESET, RTC Alarm or WKUP pin.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\PWR\STOP">STOP</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Enter the system to STOP mode and wake-up 
+										using EXTI Line interrupts. The EXTI Line sources are&nbsp;Key Button&nbsp;and 
+										RTC Alarm.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>RCC</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\RCC">Example</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the system clock source, AHB, APB2 
+										and APB1 prescaler. It demonstrates also the Clock Security System (CSS) which 
+										handles the High Speed External clock (HSE) failure detection and system clock 
+										back-up.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>RTC</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\RTC\Calendar">Calendar</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Explain how to use the RTC peripheral. As an 
+										application example, it demonstrates how to setup the RTC peripheral, in terms 
+										of prescaler and interrupts, to be used to keep time and to generate Second 
+										interrupt.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\RTC\LSI_Calib">LSI_Calib</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Describe how to use the LSI calibration to 
+										get RTC accurate time base.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>SDIO</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\SDIO">Example</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the SDIO firmware library and an 
+										associate driver to perform read/write operations on the SD Card memory.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>SPI</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\SPI\CRC">CRC</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Set a communication between two SPIs in 
+										full-duplex mode and performs a transfer from Master to Slave and Slave to 
+										Master followed by CRC transmission.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="42"></TD>
+								<TD width="18" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\SPI\DMA">DMA</A></FONT></TD>
+								<TD width="79%" height="42"><FONT size="2">Set a communication between the two SPIs in 
+										simplex mode and performs a transfer from Master in polling mode to the Slave 
+										in DMA receive mode. The NSS pin is managed by hardware.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="42"></TD>
+								<TD width="18" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\SPI\FullDuplex_SoftNSS">FullDuplex_SoftNSS</A></FONT></TD>
+								<TD width="79%" height="42"><FONT size="2">Set a communication between the two SPIs in 
+										full-duplex mode and performs a transfer from Master to Slave and then Slave to 
+										Master in the same application with software NSS management.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="42"></TD>
+								<TD width="18" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\SPI\M25P64_FLASH">M25P64_FLASH</A></FONT></TD>
+								<TD width="79%" height="42"><FONT size="2">Use the SPI firmware library and an 
+										associated SPI FLASH driver to communicate with an M25P64 FLASH.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="42"></TD>
+								<TD width="18" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="42"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\SPI\Simplex_Interrupt">Simplex_Interrupt</A></FONT></TD>
+								<TD width="79%" height="42"><FONT size="2">Set a communication between two SPIs in 
+										simplex mode and performs a data buffer transfer from Master to Slave using TxE 
+										interrupt for master and RxNE interrupt for slave.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>SysTick</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\SysTick">Example</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the SysTick to generate a time 
+										base equal to 1ms.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>TIM</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\6Steps">6Steps</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the TIM1 peripheral to generate 6 
+										Steps.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\7PWM_Output">7PWM_Output</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the TIM1 peripheral to generate 7 
+										PWM signals with 4 different duty cycles.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\Cascade_Synchro">Cascade_Synchro</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Synchronize TIM peripherals in cascade mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\ComplementarySignals">ComplementarySignals</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the TIM1 peripheral to generate 
+										three complementary TIM1 signals, to insert a defined dead time value, to use 
+										the break feature and to lock the desired parameters.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\DMA">DMA</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use DMA with TIM1 Update request to transfer 
+										Data from memory to TIM1 Capture Compare Register3.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\ExtTrigger_Synchro">ExtTrigger_Synchro</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Synchronize TIM peripherals in cascade mode 
+										with an external trigger.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\OCActive">OCActive</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the TIM peripheral to generate 
+										four different signals with four different delays.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\OCInactive">OCInactive</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the TIM peripheral in Output 
+										Compare Inactive mode with the corresponding Interrupt requests for each 
+										channel.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\OCToggle">OCToggle</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the TIM peripheral to generate 
+										four different signals with four different frequencies.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\OnePulse">OnePulse</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the TIM peripheral to generate One pulse 
+										after a Rising edge of an external signal is received in Timer Input pin.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\Parallel_Synchro">Parallel_Synchro</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Synchronize TIM peripherals in parallel 
+										mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\PWM_Input">PWM_Input</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the TIM peripheral to measure the 
+										frequency and duty cycle of an external signal.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\PWM_Output">PWM_Output</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the TIM peripheral in PWM (Pulse 
+										Width Modulation) mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\TIM1_Synchro">TIM1_Synchro</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Synchronize TIM1 and Timers (TIM3 and TIM4) 
+										in parallel mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\TIM\TimeBase">TimeBase</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Configure the TIM peripheral in Output 
+										Compare Timing mode with the corresponding Interrupt requests for each channel 
+										in order to generate 4 different time bases.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2">&nbsp;<STRONG><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG><STRONG>USART</STRONG></STRONG></FONT></STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\DMA_Interrupt">DMA_Interrupt</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Provide a basic communication between USART1 
+										and USART2 using DMA capability, flags and interrupts.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\DMA_Polling">DMA_Polling</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Provide a basic communication between USART1 
+										and USART2 using DMA capability.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\HalfDuplex">HalfDuplex</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Provide a basic communication between USART1 
+										and USART2 in Half-Duplex mode using flags.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\HyperTerminal_HwFlowControl">HyperTerminal_HwFlowControl</A>&nbsp;</FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the USART with hardware flow control and 
+										communicate with the Hyperterminal.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\HyperTerminal_Interrupt">HyperTerminal_Interrupt</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the USART1 interrupts to communicate 
+										with the hyperterminal.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\Interrupt">Interrupt</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Provide a basic communication between USART1 
+										and USART2 using interrupts.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\IrDA">IrDA</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use IrDA mode. Two projects are provided: 
+										one for IrDA transmitter and the second for IrDA receiver</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\MultiProcessor">MultiProcessor</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the USART in multi-processor mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\Polling">Polling</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Provide a basic communication between USART1 
+										and USART2 using flags.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\Printf">Printf</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Retarget the C library printf function to 
+										the USART. </FONT>
+								</TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\Smartcard">Smartcard</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Use the USART in Smart Card mode.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\USART\Synchronous">Synchronous</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Provide a basic communication between USART1 
+										(Synchronous mode) and SPI1 using flags.</FONT></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="22"></TD>
+								<TD width="18" height="22"></TD>
+								<TD width="192" height="22"></TD>
+								<TD width="79%" height="22"></TD>
+							</TR>
+							<TR>
+								<TD width="93" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="12" src="resc/ar_s.gif" width="14">&nbsp;<STRONG>WWDG</STRONG></FONT></TD>
+								<TD width="18" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><IMG height="13" src="resc/bulb16.gif" width="16"></FONT></TD>
+								<TD width="192" height="26"><FONT face="Arial, Helvetica, sans-serif" size="2"><A href="FWLib\examples\WWDG">Example</A></FONT></TD>
+								<TD width="79%" height="26"><FONT size="2">Update at regulate period the WWDG counter 
+										using the Early Wakeup interrupt (EWI).</FONT></TD>
+							</TR>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table cellpadding="2" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td class="tabtitle"><strong><font size="4" face="Arial, Helvetica, sans-serif">Firmware 
+							and documents</font></strong></td>
+			</tr>
+		</table>
+		<table cellpadding="0" cellspacing="5" border="0" width="100%">
+			<tr>
+				<td width="3%"><font size="2" face="Arial, Helvetica, sans-serif"><IMG height="12" src="resc/ar_s.gif" width="14"></font></td>
+				<td width="97%"><font size="2" face="Arial, Helvetica, sans-serif">For complete 
+						documentation refer to <a href="http://www.st.com/stm32" target="_blank">www.st.com/STM32</a><strong>
+						</strong></font>
+				</td>
+			</tr>
+		</table>
+		</TD></TR>
+		<TR vAlign="top">
+			<TD>&nbsp;</TD>
+		</TR>
+		</TBODY></TABLE></FONT></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+	</body>
+</html>

@@ -1,20 +1,21 @@
-/******************** (C) COPYRIGHT 2007 STMicroelectronics ********************
+/******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : main.c
 * Author             : MCD Application Team
-* Version            : V1.0
-* Date               : 10/08/2007
+* Version            : V2.0.1
+* Date               : 06/13/2008
 * Description        : Main program body.
 ********************************************************************************
-* THE PRESENT SOFTWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+* THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
 * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
 * AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY DIRECT,
 * INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING FROM THE
-* CONTENT OF SUCH SOFTWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
+* CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
 * INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
 *******************************************************************************/
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "platform_config.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -47,14 +48,14 @@ int main(void)
   /* System Clocks Configuration */
   RCC_Configuration();   
 
-  /* Configure PC.06, PC.07, PC.08 and PC.09 as Output push-pull -------------*/
+  /* Configure GPIO_LED Pin 6, Pin 7, Pin 8 and Pin 9 as Output push-pull ----*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  GPIO_Init(GPIO_LED, &GPIO_InitStructure);
 
-  /* Turn on Leds connected to PC.06 and PC.08 */
-  GPIO_Write(GPIOC, GPIO_Pin_6 | GPIO_Pin_8);
+  /* Turn on Leds connected to GPIO_LED Pin 6 and Pin 8 */
+  GPIO_Write(GPIO_LED, GPIO_Pin_6 | GPIO_Pin_8);
 
   /* NVIC configuration */
   NVIC_Configuration();
@@ -67,14 +68,14 @@ int main(void)
 
   while (1)
   {
-    /* Toggle leds connected to PC.06, PC.07, PC.08 and PC.09 pins */
-    GPIO_Write(GPIOC, (u16)~GPIO_ReadOutputData(GPIOC));
+    /* Toggle leds connected to GPIO_LED Pin 6, Pin 7, Pin 8 and Pin 9 */
+    GPIO_Write(GPIO_LED, (u16)~GPIO_ReadOutputData(GPIO_LED));
 
     /* Insert 500 ms delay */
     Delay(500);
 
-    /* Toggle leds connected to PC.06, PC.07, PC.08 and PC.09 pins */
-    GPIO_Write(GPIOC, (u16)~GPIO_ReadOutputData(GPIOC));
+    /* Toggle leds connected to GPIO_LED Pin 6, Pin 7, Pin 8 and Pin 9 */
+    GPIO_Write(GPIO_LED, (u16)~GPIO_ReadOutputData(GPIO_LED));
 
     /* Insert 300 ms delay */
     Delay(300);
@@ -136,8 +137,8 @@ void RCC_Configuration(void)
     }
   }
 
-  /* Enable GPIOC clock */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+  /* Enable GPIO_LED clock */
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_LED, ENABLE);
 }
 
 /*******************************************************************************
@@ -218,4 +219,4 @@ void assert_failed(u8* file, u32 line)
 }
 #endif
 
-/******************* (C) COPYRIGHT 2007 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/

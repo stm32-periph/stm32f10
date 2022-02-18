@@ -1,20 +1,21 @@
-/******************** (C) COPYRIGHT 2007 STMicroelectronics ********************
+/******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : main.c
 * Author             : MCD Application Team
-* Version            : V1.0
-* Date               : 10/08/2007
+* Version            : V2.0.1
+* Date               : 06/13/2008
 * Description        : Main program body
 ********************************************************************************
-* THE PRESENT SOFTWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+* THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
 * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
 * AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY DIRECT,
 * INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING FROM THE
-* CONTENT OF SUCH SOFTWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
+* CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
 * INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
 *******************************************************************************/
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_lib.h"
+#include "platform_config.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -51,18 +52,18 @@ int main(void)
   /* Configure the GPIO ports */
   GPIO_Configuration();
   
-  /* Connect EXTI Line9 to PB.09 */
-  GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource9);
+  /* Connect Key Button EXTI Line to Key Button GPIO Pin */
+  GPIO_EXTILineConfig(GPIO_PORT_SOURCE_KEY_BUTTON, GPIO_PIN_SOURCE_KEY_BUTTON);
 
-  /* Configure EXTI Line9 to generate an interrupt on falling edge */  
-  EXTI_InitStructure.EXTI_Line = EXTI_Line9;
+  /* Configure Key Button EXTI Line to generate an interrupt on falling edge */  
+  EXTI_InitStructure.EXTI_Line = EXTI_LINE_KEY_BUTTON;
   EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
   EXTI_InitStructure.EXTI_LineCmd = ENABLE;
   EXTI_Init(&EXTI_InitStructure);
 
-  /* Generate software interrupt: simulate a falling edge applied on EXTI line 9 */
-  EXTI_GenerateSWInterrupt(EXTI_Line9);
+  /* Generate software interrupt: simulate a falling edge applied on Key Button EXTI line */
+  EXTI_GenerateSWInterrupt(EXTI_LINE_KEY_BUTTON);
         
   while (1)
   {
@@ -124,8 +125,8 @@ void RCC_Configuration(void)
     }
   }
    
-  /* Enable GPIOB, GPIOC and AFIO clock */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC 
+  /* Enable Key Button GPIO Port, GPIO_LED and AFIO clock */
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIO_KEY_BUTTON | RCC_APB2Periph_GPIO_LED 
                          | RCC_APB2Periph_AFIO, ENABLE);
 }
 
@@ -140,16 +141,16 @@ void GPIO_Configuration(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
  
-  /* Configure PC.06 as Output push-pull */
+  /* Configure GPIO Led pin 6 as Output push-pull */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  GPIO_Init(GPIO_LED, &GPIO_InitStructure);
     
-  /* Configure PB.09 as input floating (EXTI Line 9) */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+  /* Configure Key Button GPIO Pin as input floating (Key Button EXTI Line) */
+  GPIO_InitStructure.GPIO_Pin = GPIO_PIN_KEY_BUTTON;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
-  GPIO_Init(GPIOB, &GPIO_InitStructure);
+  GPIO_Init(GPIO_KEY_BUTTON, &GPIO_InitStructure);
 }
 
 /*******************************************************************************
@@ -204,4 +205,4 @@ void assert_failed(u8* file, u32 line)
 }
 #endif
 
-/******************* (C) COPYRIGHT 2007 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/

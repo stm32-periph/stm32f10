@@ -1,20 +1,21 @@
-/******************** (C) COPYRIGHT 2007 STMicroelectronics ********************
+/******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : main.c
 * Author             : MCD Application Team
-* Version            : V1.0
-* Date               : 10/08/2007
+* Version            : V2.0.1
+* Date               : 06/13/2008
 * Description        : Main program body
 ********************************************************************************
-* THE PRESENT SOFTWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
+* THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
 * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
 * AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY DIRECT,
 * INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING FROM THE
-* CONTENT OF SUCH SOFTWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
+* CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE CODING
 * INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
 *******************************************************************************/
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_lib.h"
+#include "platform_config.h"
 
 /* Local includes ------------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
@@ -57,32 +58,32 @@ int main(void)
   /* GPIO ports pins Configuration */
   GPIO_Configuration();
   
-  /* CAN transmit at 100Kb/s and receive by polling in loopback mode*/
+  /* CAN transmit at 100Kb/s and receive by polling in loopback mode */
   TestRx = CAN_Polling();
 
   if (TestRx == FAILED)
   {
-    /* Turn on led connected to PC.08 pin (LD3) */
-    GPIO_SetBits(GPIOC, GPIO_Pin_8);
+    /* Turn on led connected to GPIO_LED pin8 (LD3) */
+    GPIO_SetBits(GPIO_LED, GPIO_Pin_8);
   }
   else
   {
-    /* Turn on led connected to PC.06 pin (LD1) */
-    GPIO_SetBits(GPIOC, GPIO_Pin_6);
+    /* Turn on led connected to GPIO_LED pin6 (LD1) */
+    GPIO_SetBits(GPIO_LED, GPIO_Pin_6);
   }
 
-  /* CAN transmit at 500Kb/s and receive by interrupt in loopback mode*/
+  /* CAN transmit at 500Kb/s and receive by interrupt in loopback mode */
   TestRx = CAN_Interrupt();
 
   if (TestRx == FAILED)
   {
-    /* Turn on led connected to PC.09 pin (LD4) */
-    GPIO_SetBits(GPIOC, GPIO_Pin_9); 
+    /* Turn on led connected to GPIO_LED pin9 (LD4) */
+    GPIO_SetBits(GPIO_LED, GPIO_Pin_9); 
   }
   else
   {
-    /* Turn on led connected to PC.07 pin (LD2) */
-    GPIO_SetBits(GPIOC, GPIO_Pin_7);
+    /* Turn on led connected to GPIO_LED pin7 (LD2) */
+    GPIO_SetBits(GPIO_LED, GPIO_Pin_7);
   }
   
   while (1)
@@ -119,8 +120,8 @@ void RCC_Configuration(void)
     /* PCLK2 = HCLK */
     RCC_PCLK2Config(RCC_HCLK_Div1); 
 
-    /* PCLK1 = HCLK/2 */
-    RCC_PCLK1Config(RCC_HCLK_Div2);
+    /* PCLK1 = HCLK */
+    RCC_PCLK1Config(RCC_HCLK_Div1);
 
     /* Select HSE as system clock source */
     RCC_SYSCLKConfig(RCC_SYSCLKSource_HSE);
@@ -131,8 +132,8 @@ void RCC_Configuration(void)
     }
   }
   
-  /* GPIOA and GPIOC clock enable */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOC, ENABLE);
+  /* GPIOA and GPIO_LED clock enable */
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIO_LED, ENABLE);
 
   /* CAN Periph clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN, ENABLE);
@@ -149,11 +150,11 @@ void GPIO_Configuration(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
 
-  /* Configure PC.06, PC.07, PC.08 and PC.09 as Output push-pull */
+  /* Configure GPIO_LED pin6, pin7, pin8 and pin9 as Output push-pull */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  GPIO_Init(GPIO_LED, &GPIO_InitStructure);
 
   /* Configure CAN pin: RX */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
@@ -185,8 +186,8 @@ void NVIC_Configuration(void)
   NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x0);   
 #endif
 
-  /* enabling interrupt */
-  NVIC_InitStructure.NVIC_IRQChannel=USB_LP_CAN_RX0_IRQChannel;
+  /* Enable CAN RX0 interrupt IRQ channel */
+  NVIC_InitStructure.NVIC_IRQChannel = USB_LP_CAN_RX0_IRQChannel;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
@@ -195,7 +196,7 @@ void NVIC_Configuration(void)
 
 /*******************************************************************************
 * Function Name  : CAN_Polling
-* Description    : Configures the CAN and transmit and receive by polling
+* Description    : Configures the CAN, transmit and receive by polling
 * Input          : None
 * Output         : None
 * Return         : PASSED if the reception is well done, FAILED in other case
@@ -281,7 +282,7 @@ TestStatus CAN_Polling(void)
 
 /*******************************************************************************
 * Function Name  : CAN_Interrupt
-* Description    : Configures the CAN and transmit and receive by interruption
+* Description    : Configures the CAN, transmit and receive using interrupt.
 * Input          : None
 * Output         : None
 * Return         : PASSED if the reception is well done, FAILED in other case
@@ -327,8 +328,8 @@ TestStatus CAN_Interrupt(void)
   CAN_ITConfig(CAN_IT_FMP0, ENABLE);
 
   /* transmit 1 message */
-  TxMessage.StdId=0x12;
-  TxMessage.ExtId=0x34;
+  TxMessage.StdId=0x00;
+  TxMessage.ExtId=0x1234;
   TxMessage.IDE=CAN_ID_EXT;
   TxMessage.RTR=CAN_RTR_DATA;
   TxMessage.DLC=2;
@@ -378,4 +379,5 @@ void assert_failed(u8* file, u32 line)
   }
 }
 #endif
-/******************* (C) COPYRIGHT 2007 STMicroelectronics *****END OF FILE****/
+
+/******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/
