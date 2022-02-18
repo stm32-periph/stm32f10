@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
   * @file    NVIC/VectorTable_Relocation/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    06/19/2009
+  * @version V3.1.2
+  * @date    09/28/2009
   * @brief   Description of the NVIC VectorTable_Relocation Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -43,12 +43,11 @@ address 0x08003000.
 
 @par Directory contents 
 
- - VectorTable_Relocation/linker:
-     - VectorTable_Relocation/linker/EWARMv5:                
+ - NVIC/VectorTable_Relocation/linker:
+     - EWARMv5:                
         - stm32f10x_flash_offset.icf    ILINK command file template for EWARM5 
-     - VectorTable_Relocation/linker/RIDE:                
-        - stm32f10x_flash_offset.ld     Linker script for RIDE 
-
+     - RIDE:                
+        - stm32f10x_flash_offset.ld     Linker script for RIDE        
  - NVIC/VectorTable_Relocation/stm32f10x_conf.h     Library Configuration file 
  - NVIC/VectorTable_Relocation/stm32f10x_it.c       Interrupt handlers 
  - NVIC/VectorTable_Relocation/stm32f10x_it.h       Interrupt handlers header file 
@@ -102,6 +101,7 @@ In order to make the program work, you must do the following :
               - Line39: RAM (xrw) : ORIGIN = 0x20000000, LENGTH = 20K
               - Line40: FLASH (rx) : ORIGIN = 0x8002000, LENGTH = 128K-0x2000
               - Line49: _estack = 0x20005000;
+           
 
 </ul>        
 - Add the required Library files:

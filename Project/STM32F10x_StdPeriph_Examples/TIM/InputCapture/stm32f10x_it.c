@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/InputCapture/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    06/19/2009
+  * @version V3.1.2
+  * @date    09/28/2009
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -171,7 +171,7 @@ void TIM3_IRQHandler(void)
         CAPTURE = ((0xFFFF - ic3_readvalue1) + ic3_readvalue2) - 1; 
       }
       /* Frequency computation */ 
-      TIM3_FREQ = (u32)72000000 / CAPTURE;
+      TIM3_FREQ = (uint32_t)72000000 / CAPTURE;
       capture_number = 0;
     }
   }

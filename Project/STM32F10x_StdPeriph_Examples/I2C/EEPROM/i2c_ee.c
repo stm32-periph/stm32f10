@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/EEPROM/i2c_ee.c 
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    06/19/2009
+  * @version V3.1.2
+  * @date    09/28/2009
   * @brief   This file provides a set of functions needed to manage the
   *          communication between I2C peripheral and I2C M24CXX EEPROM.
   ******************************************************************************
@@ -213,9 +213,6 @@ void I2C_EE_BufferRead(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t NumByteToRe
 
   /* Test on EV6 and clear it */
   while(!I2C_CheckEvent(I2C_EE, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
-  
-  /* Clear EV6 by setting again the PE bit */
-  I2C_Cmd(I2C_EE, ENABLE);
 
 #ifdef EE_M24C08  
   

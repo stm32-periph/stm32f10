@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FSMC/NAND/fsmc_nand.c 
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    06/19/2009
+  * @version V3.1.2
+  * @date    09/28/2009
   * @brief   This file provides a set of functions needed to drive the
   *          NAND512W3A2 memory mounted on STM3210E-EVAL board.
   ******************************************************************************

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RCC/main.c 
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    06/19/2009
+  * @version V3.1.2
+  * @date    09/28/2009
   * @brief   Main program body.
   ******************************************************************************
   * @copy
@@ -493,8 +493,8 @@ void SetSysClockTo56(void)
     /* Enable Prefetch Buffer */
     FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
 
-    /* Flash 1 wait state */
-    FLASH_SetLatency(FLASH_Latency_1);
+    /* Flash 2 wait state */
+    FLASH_SetLatency(FLASH_Latency_2);
  
     /* HCLK = SYSCLK */
     RCC_HCLKConfig(RCC_SYSCLK_Div1); 

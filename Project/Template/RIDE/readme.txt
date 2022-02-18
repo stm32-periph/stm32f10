@@ -5,8 +5,8 @@
  ******************** (C) COPYRIGHT 2009 STMicroelectronics ********************
  * @file      readme.txt
  * @author    MCD Application Team
- * @version   V3.1.0
- * @date      06/19/2009
+ * @version   V3.1.2
+ * @date      09/28/2009
  * @brief     This sub-directory contains all the user-modifiable files 
  *            needed to create a new project linked with the STM32F10x  
  *            Standard Peripheral Library and working with RIDE7 software 

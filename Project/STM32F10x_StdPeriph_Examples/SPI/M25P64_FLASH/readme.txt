@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2009 STMicroelectronics *******************
   * @file    SPI/M25P64_FLASH/readme.txt 
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    06/19/2009
+  * @version V3.1.2
+  * @date    09/28/2009
   * @brief   Description of the SPI M25P64_Flash Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS

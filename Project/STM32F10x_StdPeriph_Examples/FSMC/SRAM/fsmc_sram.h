@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FSMC/SRAM/fsmc_sram.h 
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    06/19/2009
+  * @version V3.1.2
+  * @date    09/28/2009
   * @brief   Header for fsmc_sram.c file.
   ******************************************************************************
   * @copy
