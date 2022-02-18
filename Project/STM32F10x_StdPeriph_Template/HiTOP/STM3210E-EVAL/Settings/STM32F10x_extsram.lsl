@@ -70,6 +70,15 @@ memory stm32f103ram
 }
 
 #endif /* __MEMORY */
+section_layout ::linear
+{
+	group( contiguous )
+	{
+		select ".bss.stack";
+		select "stack";
+	}
+}
+
 
 
 //
@@ -87,7 +96,7 @@ section_setup ::linear
                                               no_inline
                                             )
                 {
-                         vector ( id = 0, fill = "_START" ); // FIXME: "_lc_ub_stack" does not work
+                         vector ( id = 0, fill = "_stacklabel" ); // FIXME: "_lc_ub_stack" does not work
                         vector ( id = 1, fill = "_START" );
                         vector ( id = 2, optional, fill = "NMI_Handler" );
                         vector ( id = 3, optional, fill = "HardFault_Handler" );

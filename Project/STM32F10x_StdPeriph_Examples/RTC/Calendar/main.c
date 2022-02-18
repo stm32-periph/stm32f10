@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/Calendar/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -284,7 +284,15 @@ void Time_Adjust(void)
 void Time_Display(uint32_t TimeVar)
 {
   uint32_t THH = 0, TMM = 0, TSS = 0;
-
+  
+  /* Reset RTC Counter when Time is 23:59:59 */
+  if (RTC_GetCounter() == 0x0001517F)
+  {
+     RTC_SetCounter(0x0);
+     /* Wait until last write operation on RTC registers has finished */
+     RTC_WaitForLastTask();
+  }
+  
   /* Compute  hours */
   THH = TimeVar / 3600;
   /* Compute minutes */
@@ -307,7 +315,7 @@ void Time_Show(void)
   /* Infinite loop */
   while (1)
   {
-    /* If 1s has paased */
+    /* If 1s has been elapased */
     if (TimeDisplay == 1)
     {
       /* Display current time */

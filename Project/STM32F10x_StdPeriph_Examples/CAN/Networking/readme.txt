@@ -5,9 +5,9 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    CAN/Networking/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
-  * @brief   Description of the CAN Normal example.
+  * @version V3.4.0
+  * @date    10/15/2010
+  * @brief   Description of the CAN Networking example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
@@ -28,8 +28,17 @@ The CAN serial communication link is a bus to which a number of units may be
 connected. This number has no theoretical limit. Practically the total number
 of units will be limited by delay times and/or electrical loads on the bus line.
 
+This program behaves as follows:
+  - After reset LED1 is ON
+  - By Pressing on KEY Button : LED2 turns ON and all other Leds are OFF, on the N
+    eval-boards connected to the bus. 
+  - Press on KEY Button again to send CAN Frame to command LEDn+1 ON, all other Leds 
+    are OFF on the N eval-boards.
+    
 @note This example is tested with a bus of 3 units. The same program example is 
-loaded in all units to send and receive frames.
+      loaded in all units to send and receive frames.
+@note Any unit in the CAN bus may play the role of sender (by pressing KEY button)
+      or receiver.
 	
 	The CAN is configured as follow:
     - Bit Rate   = 1 Mbit/s  
@@ -46,7 +55,9 @@ loaded in all units to send and receive frames.
   - CAN/Networking/stm32f10x_it.c       Interrupt handlers
   - CAN/Networking/stm32f10x_it.h       Interrupt handlers header file
   - CAN/Networking/main.c               Main program
-
+  - CAN/Networking/system_stm32f10x.c   STM32F10x system source file
+  
+  
 @par Hardware and Software environment 
 
   - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
@@ -57,7 +68,7 @@ loaded in all units to send and receive frames.
     evaluation boards and can be easily tailored to any other supported device and
     development board.
     To select the STMicroelectronics evaluation board used to run the example, 
-    uncomment the corresponding line in CAN/Normal/platform_config.h or stm32_eval.h file  
+    uncomment the corresponding line in CAN/Networking/platform_config.h or stm32_eval.h file  
 
   - STM3210C-EVAL Set-up 
     - Use LED1, LED2, LED3 and LED4 connected respectively to PD.07, PD.13, PF.03
@@ -108,11 +119,10 @@ In order to make the program work, you must do the following :
   - stm32f10x_i2c.c
   - stm32f10x_spi.c
   - misc.c
-  - stm32_eval.c       (under Utilities\STM32_EVAL)  
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)   
+  - stm32_eval.c       (under Utilities\STM32_EVAL) 
          
 - Edit stm32f10x.h file to select the device you are working on.
-- Edit CAN/Normal/platform_config.h file to select the evaluation board you will use.
+- Edit CAN/Networking/platform_config.h file to select the evaluation board you will use.
 - or edit stm32_eval.h file to select the evaluation board you will use.
   
 @b Tip: You can tailor the provided project template to run this example, for 
@@ -136,6 +146,8 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.   
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

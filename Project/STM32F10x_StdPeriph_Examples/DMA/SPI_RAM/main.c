@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA/SPI_RAM/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
 #include "platform_config.h"
+#include "stm32_eval.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Examples
   * @{
@@ -75,7 +76,14 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
      */     
-       
+  
+  /* Configure the STM32_EVAL LED */
+  STM_EVAL_LEDInit(LED1);
+  STM_EVAL_LEDInit(LED2);
+  /* Turn Off LED1 and LED2 */
+  STM_EVAL_LEDOff(LED1);
+  STM_EVAL_LEDOff(LED2);     
+  
   /* System Clocks Configuration */
   RCC_Configuration();
        
@@ -94,7 +102,7 @@ int main(void)
   SPI_InitStructure.SPI_CRCPolynomial = CRCPolynomial;
   SPI_Init(SPI_MASTER, &SPI_InitStructure);
   
-  /* SPI_SLAVE configuration ------------------------------------------------------*/
+  /* SPI_SLAVE configuration -------------------------------------------------*/
   SPI_InitStructure.SPI_Mode = SPI_Mode_Slave;
   SPI_Init(SPI_SLAVE, &SPI_InitStructure);
 
@@ -197,6 +205,32 @@ int main(void)
   /* Read SPI_SLAVE received CRC value */
   SPI_SLAVECRCValue = SPI_I2S_ReceiveData(SPI_SLAVE);
 
+  if (TransferStatus1 != FAILED)
+  {
+    /* OK */
+    /* Turn on LD1 */
+    STM_EVAL_LEDOn(LED1);
+  }
+  else
+  { 
+    /* KO */
+    /* Turn Off LD1 */
+    STM_EVAL_LEDOff(LED1);
+  }
+    
+  if (TransferStatus2 != FAILED)
+  {	
+    /* OK */
+    /* Turn on LD2 */
+    STM_EVAL_LEDOn(LED2);
+  }
+  else
+  { 
+    /* KO */
+    /* Turn Off LD2 */
+    STM_EVAL_LEDOff(LED2);
+  }
+
   while (1)
   {
   }
@@ -247,14 +281,23 @@ void GPIO_Configuration(void)
   GPIO_PinRemapConfig(GPIO_Remap_SPI3, ENABLE);
 #endif
 
-  /* Configure SPI_MASTER pins: SCK, MISO and MOSI */
-  GPIO_InitStructure.GPIO_Pin = SPI_MASTER_PIN_SCK | SPI_MASTER_PIN_MISO | SPI_MASTER_PIN_MOSI;
+  /* Configure SPI_MASTER pins: SCK and MOSI */
+  GPIO_InitStructure.GPIO_Pin = SPI_MASTER_PIN_SCK | SPI_MASTER_PIN_MOSI;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(SPI_MASTER_GPIO, &GPIO_InitStructure);
+  /* Configure SPI_MASTER pins:  MISO */
+  GPIO_InitStructure.GPIO_Pin = SPI_MASTER_PIN_MISO;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  GPIO_Init(SPI_MASTER_GPIO, &GPIO_InitStructure);
 
-  /* Configure SPI_SLAVE pins: SCK, MISO and MOSI */
-  GPIO_InitStructure.GPIO_Pin = SPI_SLAVE_PIN_SCK | SPI_SLAVE_PIN_MISO | SPI_SLAVE_PIN_MOSI;
+  /* Configure SPI_SLAVE pins: SCK and MOSI */
+  GPIO_InitStructure.GPIO_Pin = SPI_SLAVE_PIN_SCK | SPI_SLAVE_PIN_MOSI;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  GPIO_Init(SPI_SLAVE_GPIO, &GPIO_InitStructure);
+  /* Configure SPI_SLAVE pins: MISO  */
+  GPIO_InitStructure.GPIO_Pin = SPI_SLAVE_PIN_MISO ;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(SPI_SLAVE_GPIO, &GPIO_InitStructure);
 }
 

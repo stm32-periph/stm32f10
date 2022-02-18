@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    CortexM3/BitBand/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the CortexM3 BitBand Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -25,20 +25,23 @@ read-modify-write and read operations on a variable in SRAM.
 
 @par Directory contents 
 
-  - CortexM3/BitBand/stm32f10x_conf.h  Library Configuration file
-  - CortexM3/BitBand/stm32f10x_it.c    Interrupt handlers
-  - CortexM3/BitBand/stm32f10x_it.h    Header for stm32f10x_it.c
-  - CortexM3/BitBand/main.c            Main program
-
+  - CortexM3/BitBand/stm32f10x_conf.h    Library Configuration file
+  - CortexM3/BitBand/stm32f10x_it.c      Interrupt handlers
+  - CortexM3/BitBand/stm32f10x_it.h      Header for stm32f10x_it.c
+  - CortexM3/BitBand/main.c              Main program
+  - CortexM3/BitBand/system_stm32f10x.c  STM32F10x system source file
+  
 @par Hardware and Software environment 
 
   - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+    XL-Density, High-Density Value line, Medium-Density Value line, Low-Density 
+    and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL (Medium-Density
-    Value line), STM3210C-EVAL (Connectivity line), STM3210E-EVAL (High-Density and
-    XL-Density) and STM3210B-EVAL (Medium-Density) evaluation boards and can be easily
-    tailored to any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density 
+    Value line), STM32100B-EVAL (Medium-Density Value line), STM3210C-EVAL 
+    (Connectivity line), STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL 
+    (Medium-Density) evaluation boards and can be easily tailored to any other 
+    supported device and development board.
     
 @par How to use it ? 
 
@@ -62,6 +65,8 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

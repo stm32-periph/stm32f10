@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USART/Polling/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -43,14 +43,14 @@ typedef enum { FAILED = 0, PASSED = !FAILED} TestStatus;
 USART_InitTypeDef USART_InitStructure;
 uint8_t TxBuffer[] = "Buffer Send from USARTy to USARTz using Flags";
 uint8_t RxBuffer[TxBufferSize];
-uint8_t TxCounter = 0, RxCounter = 0;  
+__IO uint8_t TxCounter = 0, RxCounter = 0;  
 volatile TestStatus TransferStatus = FAILED;  
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
-uint8_t index = 0;
+__IO uint8_t index = 0;
   
 /* Private functions ---------------------------------------------------------*/
 

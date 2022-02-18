@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USART/Interrupt/platform_config.h 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Evaluation board specific configuration file.
   ******************************************************************************
   * @copy
@@ -28,11 +28,12 @@
 /* Exported constants --------------------------------------------------------*/
 /* Uncomment the line corresponding to the STMicroelectronics evaluation board
    used to run the example */
-#if !defined (USE_STM3210B_EVAL) &&  !defined (USE_STM3210E_EVAL) &&  !defined (USE_STM3210C_EVAL) &&  !defined (USE_STM32100B_EVAL)
+#if !defined (USE_STM3210B_EVAL) &&  !defined (USE_STM3210E_EVAL) &&  !defined (USE_STM3210C_EVAL) &&  !defined (USE_STM32100B_EVAL) &&  !defined (USE_STM32100E_EVAL)
  //#define USE_STM32100B_EVAL  
  //#define USE_STM3210B_EVAL
  //#define USE_STM3210E_EVAL
- #define USE_STM3210C_EVAL
+ //#define USE_STM3210C_EVAL
+ #define USE_STM32100E_EVAL 
 #endif
 
 /* Define the STM32F10x hardware depending on the used evaluation board */
@@ -56,7 +57,7 @@
   #define USARTz_IRQn              USART2_IRQn
   #define USARTz_IRQHandler        USART2_IRQHandler
     
-#elif defined USE_STM3210E_EVAL
+#elif defined (USE_STM3210E_EVAL) || defined (USE_STM32100E_EVAL)
 
   #define USARTy                   USART1
   #define USARTy_GPIO              GPIOA
@@ -115,7 +116,7 @@
   #define USARTz_TxPin             GPIO_Pin_5
   #define USARTz_IRQn              USART2_IRQn
   #define USARTz_IRQHandler        USART2_IRQHandler
-  
+   
 #endif /* USE_STM3210B_EVAL */
 
 /* Exported macro ------------------------------------------------------------*/

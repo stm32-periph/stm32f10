@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/OnePulse/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the TIM OnePulse example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -26,8 +26,8 @@ after a Rising edge of an external signal is received in Timer Input pin.
 TIM2CLK = SystemCoreClock, we want to get TIM2 counter clock at 24 MHz:
   - Prescaler = (TIM2CLK / TIM2 counter clock) - 1
 SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
-and Connectivity line devices and to 24 MHz for Low-Density Value line and
-Medium-Density Value line devices
+and Connectivity line devices and to 24 MHz for Low-Density Value line,
+Medium-Density Value line and High-Density devices.
 
 The Autoreload value is 65535 (TIM4->ARR), so the maximum frequency value to 
 trigger the TIM4 input is 24000000/65535 = 300 Hz.
@@ -45,22 +45,25 @@ One Pulse value = (TIM_Period - TIM_Pulse)/TIM4 counter clock
 
 @par Directory contents 
 
-  - TIM/OnePulse/stm32f10x_conf.h  Library Configuration file
-  - TIM/OnePulse/stm32f10x_it.c    Interrupt handlers
-  - TIM/OnePulse/stm32f10x_it.h    Interrupt handlers header file
-  - TIM/OnePulse/main.c            Main program 
-
+  - TIM/OnePulse/stm32f10x_conf.h    Library Configuration file
+  - TIM/OnePulse/stm32f10x_it.c      Interrupt handlers
+  - TIM/OnePulse/stm32f10x_it.h      Interrupt handlers header file
+  - TIM/OnePulse/main.c              Main program 
+  - TIM/OnePulse/system_stm32f10x.c  STM32F10x system source file
+  
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, High-Density 
+    Value line, Medium-Density, XL-Density, Medium-Density Value line, Low-Density 
+    and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL (Medium-Density
-    Value line), STM3210C-EVAL (Connectivity line), STM3210E-EVAL (High-Density and
-    XL-Density) and STM3210B-EVAL (Medium-Density) evaluation boards and can be easily
-    tailored to any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density
+    Value line), STM32100B-EVAL (Medium-Density Value line), STM3210C-EVAL (Connectivity line), 
+    STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL (Medium-Density) 
+    evaluation boards and can be easily tailored to any other supported device 
+    and development board.
 
-  - STM32100B-EVAL, STM3210E-EVAL, STM3210B-EVAL and STM3210C-EVAL  Set-up 
+  - STM32100B-EVAL, STM3210E-EVAL, STM3210B-EVAL, STM32100E-EVAL and STM3210C-EVAL  Set-up 
    - Connect the external signal to the TIM4_CH2 pin (PB.07)
    - Connect the TIM4_CH1 (PB.06) pin to an oscilloscope to monitor the waveform.   
   
@@ -71,8 +74,7 @@ In order to make the program work, you must do the following:
 - Add the required Library files:
   - stm32f10x_gpio.c 
   - stm32f10x_rcc.c 
-  - stm32f10x_tim.c
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x) 
+  - stm32f10x_tim.c 
 
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -92,6 +94,8 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

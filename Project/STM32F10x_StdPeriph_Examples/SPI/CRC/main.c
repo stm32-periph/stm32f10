@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/CRC/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -51,7 +51,7 @@ uint16_t SPI2_Buffer_Tx[BufferSize] = {0x5152, 0x5354, 0x5556, 0x5758, 0x595A, 0
                                   0x8182, 0x8384, 0x8586, 0x8788, 0x898A, 0x8B8C,
                                   0x8D8E, 0x8F90};
 uint16_t SPI1_Buffer_Rx[BufferSize], SPI2_Buffer_Rx[BufferSize];
-uint8_t TxIdx = 0, RxIdx = 0;
+uint32_t TxIdx = 0, RxIdx = 0;
 __IO uint16_t CRC1Value = 0, CRC2Value = 0;
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 
@@ -212,14 +212,27 @@ void GPIO_Configuration(void)
   GPIO_InitTypeDef GPIO_InitStructure;
 
   /* Configure SPI1 pins: SCK, MISO and MOSI ---------------------------------*/
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
+  /* Confugure SCK and MOSI pins as Alternate Function Push Pull */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_7;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
-
+  /* Confugure MISO pin as Input Floating  */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  GPIO_Init(GPIOA, &GPIO_InitStructure);
+  
   /* Configure SPI2 pins: SCK, MISO and MOSI ---------------------------------*/
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
+  /* Confugure SCK and MOSI pins as Input Floating */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_15;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
+  /* Confugure MISO pin as Alternate Function Push Pull */
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  GPIO_Init(GPIOB, &GPIO_InitStructure);
+ 
 }
 
 /**

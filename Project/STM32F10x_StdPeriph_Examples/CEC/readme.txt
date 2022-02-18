@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    CEC/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the CEC example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -37,22 +37,25 @@ CEC_DEVICE2).
  
 @par Directory contents 
 
-  - CEC/stm32f10x_conf.h   Library Configuration file
-  - CEC/stm32f10x_it.h     Interrupt handlers header file
-  - CEC/stm32f10x_it.c     Interrupt handlers
-  - CEC/main.c             Main program
+  - CEC/stm32f10x_conf.h    Library Configuration file
+  - CEC/stm32f10x_it.h      Interrupt handlers header file
+  - CEC/stm32f10x_it.c      Interrupt handlers
+  - CEC/main.c              Main program
+  - CEC/system_stm32f10x.c  STM32F10x system source file
            
 @par Hardware and Software environment
 
-  - This example runs on STM32F10x Medium-Density Value line and Low-Density 
-    Value line Devices.
+  - This example runs on STM32F10x High-Density Value line, Medium-Density Value 
+    line and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL 
-    (STM32F10x Medium-Density Value line) evaluation board and can be easily 
+  - This example has been tested with STMicroelectronics STM32100E-EVAL 
+    (STM32F10x High-Density Value line), STM32100B-EVAL 
+    (STM32F10x Medium-Density Value line) evaluation boards and can be easily 
     tailored to any other supported device and development board.
     
   - Connect the boards by using one of the two following alternatives:
-  - A HDMI Cables between all boards HDMI-CEC connectors (CN15 or CN16)
+  - A HDMI Cables between all boards HDMI-CEC connectors (CN15 or CN16) on 
+    STM32100B-EVAL or between connectors (CN3 or CN4) on STM32100E-EVAL board. 
   - Use a simple wire between all devices CEC Lines (PB.08), in this case don't 
     forget to connect all boards grounds together.
    
@@ -61,9 +64,9 @@ CEC_DEVICE2).
    only the Device address and selecting the corresponding followers.
  - You can use also the STM3210B-EVAL with the UM0685 associated firmware as a
    CEC device. This configuration is available only when use a simple wire connected
-   between STM3210B-EVAL PA.00 and STM32100B-EVAL PB.08 pins. Don't forget to
-   add a 27KOhm pull-up resistor on the STM3210B-EVAL PA.00 and to to connect 
-   all boards grounds together.
+   between STM3210B-EVAL PA.00 and STM32100B-EVAL PB.08 or STM32100E-EVAL PB.08 
+   pins. Don't forget to add a 27KOhm pull-up resistor on the STM3210B-EVAL PA.00 
+   and to to connect all boards grounds together.
 
 In order to make the program work, you must do the following :
 - Create a project and setup all project configuration
@@ -76,7 +79,6 @@ In order to make the program work, you must do the following :
   - stm32f10x_usart.c
   - stm32f10x_i2c.c
   - stm32f10x_spi.c
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
   - stm32_eval.c (under Utilities\STM32_EVAL)
     
 - Edit stm32f10x.h file to select the device you are working on.
@@ -103,6 +105,8 @@ In order to make the program work, you must do the following :
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.   
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers. 

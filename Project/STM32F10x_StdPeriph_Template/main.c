@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Project/STM32F10x_StdPeriph_Template/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -28,9 +28,11 @@
 #elif defined USE_STM3210B_EVAL
  #include "stm3210b_eval_lcd.h"
 #elif defined USE_STM3210E_EVAL
- #include "stm3210e_eval_lcd.h"
+ #include "stm3210e_eval_lcd.h" 
 #elif defined USE_STM3210C_EVAL
  #include "stm3210c_eval_lcd.h"
+#elif defined USE_STM32100E_EVAL
+ #include "stm32100e_eval_lcd.h"
 #endif
 
 /** @addtogroup STM32F10x_StdPeriph_Template
@@ -58,7 +60,11 @@
 #elif defined (USE_STM3210C_EVAL)
   #define MESSAGE1   " STM32 Connectivity " 
   #define MESSAGE2   " Line Device running" 
-  #define MESSAGE3   " on STM3210C-EVAL   " 
+  #define MESSAGE3   " on STM3210C-EVAL   "
+#elif defined (USE_STM32100E_EVAL)
+  #define MESSAGE1   "STM32 HD Value Line " 
+  #define MESSAGE2   " Device running on  " 
+  #define MESSAGE3   "  STM32100E-EVAL    "   
 #endif
 
 /* Private macro -------------------------------------------------------------*/
@@ -123,6 +129,8 @@ int main(void)
   STM3210E_LCD_Init();
 #elif defined (USE_STM3210C_EVAL)
   STM3210C_LCD_Init();
+#elif defined (USE_STM32100E_EVAL)
+  STM32100E_LCD_Init();  
 #endif
 
   /* Display message on STM3210X-EVAL LCD *************************************/

@@ -6,8 +6,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    RTC/LSI_Calib/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the RTC LSI_Calib Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -55,17 +55,24 @@ toggled into the RTC Second interrupt service routine.
   - RTC/LSI_Calib/stm32f10x_it.h       Header for stm32f10x_it.c
   - RTC/LSI_Calib/main.h               Main header file
   - RTC/LSI_Calib/main.c               Main program
-
+  - RTC/LSI_Calib/system_stm32f10x.c   STM32F10x system source file
+  
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density and XL-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density Value line,
+    High-Density and XL-Density Devices.
   
-  - This example has been tested with STMicroelectronics STM3210E-EVAL (High-Density
-    and XL-Density) and STM3210C-EVAL (Coneectivity Line) evaluation boards 
-    and can be easily tailored to any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density 
+    Value line), STM3210E-EVAL (High-Density and XL-Density) and STM3210C-EVAL 
+    (Connectivity Line) evaluation boards and can be easily tailored to any other 
+    supported device and development board.
     To select the STMicroelectronics evaluation board used to run the example, 
     uncomment the corresponding line in stm32_eval.h file (under Utilities\STM32_EVAL)
 
+  - STM32100E-EVAL Set-up 
+    - Use LD1 and LD2 leds connected respectively to PF.06 and PF.07 pins
+    - Use the Key push button connected to PG.08 pin
+    
   - STM3210C-EVAL Set-up 
     - Use LD1 and LD2 leds connected respectively to PD.07 and PD.13 pins
     - Use the Key push-button connected to PB.09 pin
@@ -89,7 +96,6 @@ In order to make the program work, you must do the following :
   - stm32f10x_usart.c
   - stm32f10x_i2c.c
   - stm32f10x_spi.c
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
   - stm32_eval.c (under Utilities\STM32_EVAL)
 
 - Edit stm32f10x.h file to select the device you are working on.
@@ -111,6 +117,8 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

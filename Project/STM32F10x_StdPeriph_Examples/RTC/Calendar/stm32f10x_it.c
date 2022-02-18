@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/Calendar/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
@@ -163,13 +163,6 @@ void RTC_IRQHandler(void)
     /* Wait until last write operation on RTC registers has finished */
     RTC_WaitForLastTask();
     
-    /* Reset RTC Counter when Time is 23:59:59 */
-    if (RTC_GetCounter() == 0x00015180)
-    {
-      RTC_SetCounter(0x0);
-      /* Wait until last write operation on RTC registers has finished */
-      RTC_WaitForLastTask();
-    }
   }
 }
 

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    FSMC/NAND/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the FSMC NAND Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -30,8 +30,7 @@ mounted on STM3210E-EVAL board.
   - FSMC/NAND/stm32f10x_it.c      Interrupt handlers
   - FSMC/NAND/stm32f10x_it.h      Header for stm32f10x_it.c
   - FSMC/NAND/main.c              Main program
-  - stm3210e_eval_fsmc_nand.c     Driver for NAND memory
-  - stm3210e_eval_fsmc_nand.h     Header for stm3210e_eval_fsmc_nand.c 
+  - FSMC/NAND/system_stm32f10x.c  STM32F10x system source file
   
 @par Hardware and Software environment 
 
@@ -60,7 +59,6 @@ In order to make the program work, you must do the following:
   - stm32f10x_spi.c
   - misc.c
   - stm32f10x_usart.c
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
   - stm32_eval.c (under Utilities\STM32_EVAL)
   - stm3210e_eval_fsmc_nand.c (under Utilities\STM32_EVAL\STM3210E_EVAL)
     
@@ -83,6 +81,8 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.   
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

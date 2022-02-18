@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RCC/main.h 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Header for main.c module
   ******************************************************************************
   * @copy
@@ -33,7 +33,7 @@
 //#define SYSCLK_HSE
 #define SYSCLK_FREQ_24MHz
 
-#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL
+#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL && !defined STM32F10X_HD_VL
   //#define SYSCLK_FREQ_36MHz
   //#define SYSCLK_FREQ_48MHz
   //#define SYSCLK_FREQ_56MHz

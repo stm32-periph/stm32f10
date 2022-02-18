@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CAN/DualCAN/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -155,13 +155,16 @@ void SysTick_Handler(void)
 void CAN1_RX0_IRQHandler(void)
 {
   CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
+
   if ((RxMessage.StdId == 0x321)&&(RxMessage.IDE == CAN_ID_STD)&&(RxMessage.DLC == 1)&&(RxMessage.Data[0] == 0xAA))
   {
-    LED_Display(0x03);
+    /* Turn On LED3 */
+    LED_Display(0x03); /* OK */
   }
   else
   {
-    LED_Display(0x05);
+    /* Turn Off LED3 */
+    LED_Display(0x05); /* KO */
   }
 }
 
@@ -174,13 +177,16 @@ void CAN1_RX0_IRQHandler(void)
 void CAN2_RX0_IRQHandler(void)
 {
   CAN_Receive(CAN2, CAN_FIFO0, &RxMessage);
+
   if ((RxMessage.StdId == 0x321)&&(RxMessage.IDE == CAN_ID_STD)&&(RxMessage.DLC == 1)&&(RxMessage.Data[0] == 0x55))
   {
-    LED_Display(0x04);
+    /* Turn On LED4 */
+    LED_Display(0x04); /* OK */
   }
   else
   {
-    LED_Display(0x05);
+    /* Turn Off LED4 */
+    LED_Display(0x06); /* KO */
   }
 }
 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USART/DMA_Interrupt/platform_config.h 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Evaluation board specific configuration file.
   ******************************************************************************
   * @copy
@@ -28,10 +28,11 @@
 /* Exported constants --------------------------------------------------------*/
 /* Uncomment the line corresponding to the STMicroelectronics evaluation board
    used to run the example */
-#if !defined (USE_STM32100B_EVAL) && !defined (USE_STM3210B_EVAL) &&  !defined (USE_STM3210E_EVAL) &&  !defined (USE_STM3210C_EVAL)
+#if !defined (USE_STM32100B_EVAL) && !defined (USE_STM3210B_EVAL) &&  !defined (USE_STM3210E_EVAL) &&  !defined (USE_STM32100E_EVAL) 
  //#define USE_STM32100B_EVAL
  //#define USE_STM3210B_EVAL
  //#define USE_STM3210E_EVAL
+ //#define USE_STM32100E_EVAL
  #define USE_STM3210C_EVAL 
 #endif
 
@@ -59,7 +60,7 @@
   #define USARTz_DR_Base           0x40004404
   #define USARTz_IRQn              USART2_IRQn
 
-#elif defined (USE_STM3210E_EVAL)
+#elif defined (USE_STM3210E_EVAL) || defined (USE_STM32100E_EVAL)
 
   #define USARTy                   USART1
   #define USARTy_GPIO              GPIOA

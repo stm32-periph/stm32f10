@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file I2S/SPI_I2S_Switch/main.c 
+  * @file    I2S/SPI_I2S_Switch/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -55,9 +55,9 @@ uint16_t SPI3_Buffer_Tx[BufferSize] = {0x5152, 0x5354, 0x5556, 0x5758, 0x595A, 0
                                   0x8182, 0x8384, 0x8586, 0x8788, 0x898A, 0x8B8C,
                                   0x8D8E, 0x8F90};
 
-uint16_t I2S2_Buffer_Rx[BufferSize];
-uint16_t SPI2_Buffer_Rx[BufferSize];
-uint8_t TxIdx = 0, RxIdx = 0;
+__IO uint16_t I2S2_Buffer_Rx[BufferSize];
+__IO uint16_t SPI2_Buffer_Rx[BufferSize];
+__IO uint8_t TxIdx = 0, RxIdx = 0;
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 volatile TestStatus TransferStatus3 = FAILED;
 ErrorStatus HSEStartUpStatus;
@@ -86,7 +86,11 @@ int main(void)
 
   /* GPIO configuration ------------------------------------------------------*/
   GPIO_Configuration();
-
+ 
+  /* Deinitializes the SPI2 and SPI3 peripheral registers --------------------*/
+  SPI_I2S_DeInit(SPI2);
+  SPI_I2S_DeInit(SPI3);
+  
   /* I2S peripheral configuration */
   I2S_InitStructure.I2S_Standard = I2S_Standard_Phillips;
   I2S_InitStructure.I2S_DataFormat = I2S_DataFormat_16bextended;
@@ -125,7 +129,7 @@ int main(void)
     I2S2_Buffer_Rx[RxIdx++] = SPI_I2S_ReceiveData(SPI2);
   }
 
-  TransferStatus1 = Buffercmp(I2S2_Buffer_Rx, I2S3_Buffer_Tx, BufferSize);
+  TransferStatus1 = Buffercmp((uint16_t *)I2S2_Buffer_Rx, I2S3_Buffer_Tx, BufferSize);
   /* TransferStatus1 = PASSED, if the data transmitted from I2S3 and received by
                                I2S2 are the same 
      TransferStatus1 = FAILED, if the data transmitted from I2S3 and received by
@@ -174,7 +178,7 @@ int main(void)
     SPI2_Buffer_Rx[RxIdx++] = SPI_I2S_ReceiveData(SPI2);
   }
 
-  TransferStatus2 = Buffercmp(SPI2_Buffer_Rx, SPI3_Buffer_Tx, BufferSize);
+  TransferStatus2 = Buffercmp((uint16_t *)SPI2_Buffer_Rx, SPI3_Buffer_Tx, BufferSize);
   /* TransferStatus2 = PASSED, if the data transmitted from SPI3 and received by
                                SPI2 are the same
      TransferStatus2 = FAILED, if the data transmitted from SPI3 and received by
@@ -226,12 +230,12 @@ int main(void)
     SPI_I2S_SendData(SPI3, I2S3_Buffer_Tx[TxIdx++]);
   }
 
-  TransferStatus3 = Buffercmp(I2S2_Buffer_Rx, I2S3_Buffer_Tx, BufferSize);
+  TransferStatus3 = Buffercmp((uint16_t *)I2S2_Buffer_Rx, I2S3_Buffer_Tx, BufferSize);
   /* TransferStatus3 = PASSED, if the data transmitted from I2S3 and received by
                                I2S2 are the same
      TransferStatus3 = FAILED, if the data transmitted from I2S3 and received by
                                I2S2 are different */
-
+ 
   while (1)
   {}
 }

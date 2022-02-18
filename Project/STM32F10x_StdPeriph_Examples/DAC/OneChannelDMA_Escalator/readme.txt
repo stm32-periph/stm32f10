@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    DAC/OneChannelDMA_Escalator/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the DAC one channel DMA escalator example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -41,16 +41,19 @@ pin to an oscilloscope.
   - DAC/OneChannelDMA_Escalator/stm32f10x_it.c       Interrupt handlers
   - DAC/OneChannelDMA_Escalator/stm32f10x_it.h       Header for stm32f10x_it.c
   - DAC/OneChannelDMA_Escalator/main.c               Main program
-
+  - DAC/OneChannelDMA_Escalator/system_stm32f10x.c   STM32F10x system source file
+  
 @par Hardware and Software environment 
 
   - This example runs on STM32F10x Connectivity line, High-Density, XL-Density,
-    Medium-Density Value line and Low-Density Value line Devices.
+    High-Density Value line, Medium-Density Value line and Low-Density Value 
+    line Devices.
   
   - This example has been tested with STMicroelectronics STM32100B-EVAL 
-    (Medium-Density Value line), STM3210C-EVAL (Connectivity line) and 
-    STM3210E-EVAL (High-Density and XL-Density) evaluation boards and can be 
-    easily tailored to any other supported device and development board.   
+    (Medium-Density Value line),STM32100E-EVAL (High-Density Value line),
+     STM3210C-EVAL (Connectivity line) and STM3210E-EVAL (High-Density and 
+     XL-Density) evaluation boards and can be easily tailored to any other 
+     supported device and development board.   
 
   - STM32100B-EVAL Set-up 
     - Connect PA.04 pin to an oscilloscope 
@@ -62,6 +65,9 @@ pin to an oscilloscope.
         
   - STM3210E-EVAL Set-up 
     - Connect PA.04 pin to an oscilloscope
+	
+  - STM32100E-EVAL Set-up 
+    - Connect PA.04 pin to an oscilloscope
     
 @par How to use it ? 
 
@@ -72,8 +78,7 @@ In order to make the program work, you must do the following:
   - stm32f10x_dma.c 
   - stm32f10x_gpio.c 
   - stm32f10x_rcc.c
-  - stm32f10x_tim.c
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)   
+  - stm32f10x_tim.c   
         
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -93,6 +98,8 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

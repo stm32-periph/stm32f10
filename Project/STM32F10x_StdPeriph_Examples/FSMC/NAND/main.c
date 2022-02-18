@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FSMC/NAND/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body 
   ******************************************************************************
   * @copy
@@ -41,7 +41,7 @@
 NAND_IDTypeDef NAND_ID;
 NAND_ADDRESS WriteReadAddr;
 uint8_t TxBuffer[BUFFER_SIZE], RxBuffer[BUFFER_SIZE];
-__IO uint32_t PageNumber = 2, WriteReadStatus = 0, status= 0;
+uint32_t PageNumber = 2, WriteReadStatus = 0, status= 0;
 uint32_t j = 0;
 
 /* Private function prototypes -----------------------------------------------*/

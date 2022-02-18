@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USART/DMA_Interrupt/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -47,7 +47,7 @@ uint8_t TxBuffer2[] = "USART DMA Interrupt: USARTz -> USARTy using DMA Tx and Rx
 uint8_t RxBuffer1[TxBufferSize2];
 uint8_t RxBuffer2[TxBufferSize1];
 uint8_t NbrOfDataToRead = TxBufferSize1;
-uint8_t index = 0;
+uint32_t index = 0;
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 
 /* Private function prototypes -----------------------------------------------*/

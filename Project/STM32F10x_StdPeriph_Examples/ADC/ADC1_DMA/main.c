@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC1_DMA/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -127,7 +127,7 @@ int main(void)
   */
 void RCC_Configuration(void)
 {
-#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL)
+#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || defined (STM32F10X_HD_VL)
   /* ADCCLK = PCLK2/2 */
   RCC_ADCCLKConfig(RCC_PCLK2_Div2); 
 #else

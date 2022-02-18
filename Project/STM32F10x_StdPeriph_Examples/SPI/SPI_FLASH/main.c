@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/SPI_FLASH/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -38,7 +38,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 #define  FLASH_ReadAddress      FLASH_WriteAddress
 #define  FLASH_SectorToErase    FLASH_WriteAddress
 
-#if defined(USE_STM32100B_EVAL)
+#if defined(USE_STM32100B_EVAL) || defined(USE_STM32100E_EVAL)
   #define  sFLASH_ID       sFLASH_M25P128_ID
 #else
   #define  sFLASH_ID       sFLASH_M25P64_ID
@@ -51,7 +51,8 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 /* Private variables ---------------------------------------------------------*/
 uint8_t Tx_Buffer[] = "STM32F10x SPI Firmware Library Example: communication with an M25P SPI FLASH";
-uint8_t Index, Rx_Buffer[BufferSize];
+uint8_t  Rx_Buffer[BufferSize];
+__IO uint8_t Index = 0x0;
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = PASSED;
 __IO uint32_t FlashID = 0;
 

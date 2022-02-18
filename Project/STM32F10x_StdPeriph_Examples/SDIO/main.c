@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SDIO/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -213,7 +213,8 @@ TestStatus eBuffercmp(uint8_t* pBuffer, uint32_t BufferLength)
 {
   while (BufferLength--)
   {
-    if (*pBuffer != 0x00)
+    /* In some SD Cards the erased state is 0xFF, in others it's 0x00 */
+    if ((*pBuffer != 0xFF) && (*pBuffer != 0x00))
     {
       return FAILED;
     }

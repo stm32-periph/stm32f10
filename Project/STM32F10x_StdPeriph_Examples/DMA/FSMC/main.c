@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA/FSMC/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body.
   ******************************************************************************
   * @copy
@@ -19,7 +19,11 @@
   */ 
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm3210e_eval_fsmc_sram.h"
+#ifdef STM32F10X_HD_VL /* High-density Value line devices */
+ #include "stm32100e_eval_fsmc_sram.h"
+#else /* High- and XL-density */
+ #include "stm3210e_eval_fsmc_sram.h"
+#endif
 
 /** @addtogroup STM32F10x_StdPeriph_Examples
   * @{
@@ -49,7 +53,8 @@ const uint32_t SRC_Const_Buffer[BufferSize]= {
                             0x51525354,0x55565758,0x595A5B5C,0x5D5E5F60,
                             0x61626364,0x65666768,0x696A6B6C,0x6D6E6F70,
                             0x71727374,0x75767778,0x797A7B7C,0x7D7E7F80};
-uint8_t DST_Buffer[4*BufferSize], Idx = 0;
+uint8_t DST_Buffer[4*BufferSize];
+uint32_t Idx = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);

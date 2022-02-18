@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DAC/DualModeDMA_SineWave/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body.
   ******************************************************************************
   * @copy
@@ -37,7 +37,8 @@
 DAC_InitTypeDef            DAC_InitStructure;
 DMA_InitTypeDef            DMA_InitStructure;
 TIM_TimeBaseInitTypeDef    TIM_TimeBaseStructure;
-
+uint32_t Idx = 0;  
+  
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 const uint16_t Sine12bit[32] = {
@@ -46,7 +47,6 @@ const uint16_t Sine12bit[32] = {
                       599, 344, 155, 38, 0, 38, 155, 344, 599, 909, 1263, 1647};
 
 uint32_t DualSine12bit[32];
-uint8_t Idx = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void RCC_Configuration(void);
@@ -68,7 +68,8 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
      */     
-       
+	  
+  
   /* System Clocks Configuration */
   RCC_Configuration();   
 

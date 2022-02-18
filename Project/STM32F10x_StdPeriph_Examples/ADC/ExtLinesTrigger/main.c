@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ExtLinesTrigger/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -153,7 +153,7 @@ int main(void)
   */
 void RCC_Configuration(void)
 {
-#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL)
+#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || defined (STM32F10X_HD_VL)
   /* ADCCLK = PCLK2/2 */
   RCC_ADCCLKConfig(RCC_PCLK2_Div2);
 #else
@@ -178,9 +178,13 @@ void RCC_Configuration(void)
 void EXTI_Configuration(void)
 {
   EXTI_InitTypeDef EXTI_InitStructure;
-
+#ifdef STM32F10X_HD_VL
   /* Select the EXTI Line11 the GPIO pin source */
+  GPIO_EXTILineConfig(GPIO_PortSourceGPIOF, GPIO_PinSource11);
+#else
   GPIO_EXTILineConfig(GPIO_PortSourceGPIOE, GPIO_PinSource11);
+#endif
+
   /* EXTI line11 configuration -----------------------------------------------*/  
   EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Event;
   EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising;
@@ -221,7 +225,11 @@ void GPIO_Configuration(void)
   /* Configure EXTI line11 ---------------------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+#ifdef STM32F10X_HD_VL 
+  GPIO_Init(GPIOF, &GPIO_InitStructure);
+#else
   GPIO_Init(GPIOE, &GPIO_InitStructure);
+#endif
 
   /* Configure EXTI line15 ---------------------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
@@ -239,7 +247,7 @@ void NVIC_Configuration(void)
   NVIC_InitTypeDef NVIC_InitStructure;
 
     /* Configure and enable ADC interrupt */
-#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL)
+#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || defined (STM32F10X_HD_VL)
   NVIC_InitStructure.NVIC_IRQChannel = ADC1_IRQn;
 #else
   NVIC_InitStructure.NVIC_IRQChannel = ADC1_2_IRQn;

@@ -109,7 +109,7 @@
 		<link>
 			<name>CMSIS/system_stm32f10x.c</name>
 			<type>1</type>
-			<locationURI>CurPath/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.c</locationURI>
+			<locationURI>CurPath/Project/STM32F10x_StdPeriph_Template/system_stm32f10x.c</locationURI>
 		</link>
 		<link>
 			<name>Doc/readme.txt</name>

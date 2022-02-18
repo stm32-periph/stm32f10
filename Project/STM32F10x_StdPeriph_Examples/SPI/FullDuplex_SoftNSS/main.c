@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/FullDuplex_SoftNSS/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -50,13 +50,13 @@ uint8_t SPIz_Buffer_Tx[BufferSize] = {0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
                                       0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B, 0x6C,
                                       0x6D, 0x6E, 0x6F, 0x70};
 uint8_t SPIy_Buffer_Rx[BufferSize], SPIz_Buffer_Rx[BufferSize];
-uint8_t TxIdx = 0, RxIdx = 0, k = 0;
+__IO uint8_t TxIdx = 0, RxIdx = 0, k = 0;
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 volatile TestStatus TransferStatus3 = FAILED, TransferStatus4 = FAILED;
 
 /* Private functions ---------------------------------------------------------*/
 void RCC_Configuration(void);
-void GPIO_Configuration(void);
+void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode);
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
 /**
@@ -76,10 +76,10 @@ int main(void)
   /* System clocks configuration ---------------------------------------------*/
   RCC_Configuration();
 
-  /* GPIO configuration ------------------------------------------------------*/
-  GPIO_Configuration();
-
   /* 1st phase: SPIy Master and SPIz Slave */
+  /* GPIO configuration ------------------------------------------------------*/
+  GPIO_Configuration(SPI_Mode_Master, SPI_Mode_Slave);
+  
   /* SPIy Config -------------------------------------------------------------*/
   SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
   SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
@@ -129,6 +129,9 @@ int main(void)
      are different */
 
   /* 2nd phase: SPIy Slave and SPIz Master */
+  /* GPIO configuration ------------------------------------------------------*/
+  GPIO_Configuration(SPI_Mode_Slave , SPI_Mode_Master);
+  
   /* SPIy Re-configuration ---------------------------------------------------*/
   SPI_InitStructure.SPI_Mode = SPI_Mode_Slave;
   SPI_Init(SPIy, &SPI_InitStructure);
@@ -201,11 +204,18 @@ void RCC_Configuration(void)
 }
 
 /**
-  * @brief  Configures the different GPIO ports.
-  * @param  None
+  * @brief  Configures the different SPIy and SPIz GPIO ports.
+  * @param  SPIy_Mode: Specifies the SPIy operating mode. 
+  *            This parameter can be:
+  *              -  SPIy_Mode_Master
+  *              -  SPIy_Mode_Slave                 
+  * @param  SPIz_Mode: Specifies the SPIz operating mode. 
+  *            This parameter can be:
+  *              -  SPIz_Mode_Master
+  *              -  SPIz_Mode_Slave 
   * @retval None
   */
-void GPIO_Configuration(void)
+void GPIO_Configuration(uint16_t SPIy_Mode, uint16_t SPIz_Mode)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
 
@@ -214,14 +224,61 @@ void GPIO_Configuration(void)
   GPIO_PinRemapConfig(GPIO_Remap_SPI3, ENABLE);
 #endif
 
-  /* Configure SPIy pins: SCK, MISO and MOSI */
-  GPIO_InitStructure.GPIO_Pin = SPIy_PIN_SCK | SPIy_PIN_MISO | SPIy_PIN_MOSI;
+  /* Configure SPIy pins: SCK, MISO and MOSI ---------------------------------*/
+  GPIO_InitStructure.GPIO_Pin = SPIy_PIN_SCK | SPIy_PIN_MOSI;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+
+  if(SPIy_Mode == SPI_Mode_Master)
+  {
+    /* Confugure SCK and MOSI pins as Alternate Function Push Pull */
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  }
+  else
+  {
+    /* Confugure SCK and MOSI pins as Input Floating */
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  }
   GPIO_Init(SPIy_GPIO, &GPIO_InitStructure);
 
-  /* Configure SPIz pins: SCK, MISO and MOSI */
-  GPIO_InitStructure.GPIO_Pin = SPIz_PIN_SCK | SPIz_PIN_MISO | SPIz_PIN_MOSI;
+  GPIO_InitStructure.GPIO_Pin = SPIy_PIN_MISO;
+
+  if(SPIy_Mode == SPI_Mode_Master)
+  {
+    /* Confugure MISO pin as Input Floating  */
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  }
+  else
+  {
+    /* Confugure MISO pin as Alternate Function Push Pull */
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  }
+  GPIO_Init(SPIy_GPIO, &GPIO_InitStructure);
+  
+  /* Configure SPIz pins: SCK, MISO and MOSI ---------------------------------*/
+  GPIO_InitStructure.GPIO_Pin = SPIz_PIN_SCK | SPIz_PIN_MOSI;
+
+  if(SPIz_Mode == SPI_Mode_Slave)
+  {
+    /* Confugure SCK and MOSI pins as Input Floating */
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  }
+  else
+  { 
+    /* Confugure SCK and MOSI pins as Alternate Function Push Pull */
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  }
+  GPIO_Init(SPIz_GPIO, &GPIO_InitStructure);
+
+  GPIO_InitStructure.GPIO_Pin = SPIz_PIN_MISO;
+  if(SPIz_Mode == SPI_Mode_Slave)
+  {
+    /* Confugure MISO pin as Alternate Function Push Pull */
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  }
+  else
+  { /* Confugure MISO pin as Input Floating  */
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  }
   GPIO_Init(SPIz_GPIO, &GPIO_InitStructure);
 }
 /**
@@ -229,7 +286,7 @@ void GPIO_Configuration(void)
   * @param  pBuffer1, pBuffer2: buffers to be compared.
   * @param  BufferLength: buffer's length
   * @retval PASSED: pBuffer1 identical to pBuffer2
-  *   FAILED: pBuffer1 differs from pBuffer2
+  *         FAILED: pBuffer1 differs from pBuffer2
   */
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
 {

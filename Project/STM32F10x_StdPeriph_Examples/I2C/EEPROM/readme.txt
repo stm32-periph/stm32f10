@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    I2C/EEPROM/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the I2C and M24CXX EEPROM communication example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -28,7 +28,11 @@ I2C peripheral is configured in Master transmitter during write operation and in
 Master receiver during read operation from I2C EEPROM. 
 
 The peripheral used is I2C1 but can be configured by modifying the defines values
-in stm32_eval_i2c_ee.c file. The speed is set to 200kHz.
+in stm32_eval_i2c_ee.c file. The speed is set to 200kHz and can be configured to
+other values by setting the define I2C_SPEED in stm32_eval_i2c_ee.h file.
+All transfers are performed through DMA access (except for One Byte Receiving case)
+which allows user application to perform parallel tasks while transfer to/from 
+EEPROM is ongoing.
 
 For M24C02 to M24C16 devices, one I2C EEPROM Block address where the program will 
 write the buffer have to be selected from the four address available and defined 
@@ -53,21 +57,28 @@ written data are read. The contents of the written and the read buffers are comp
 
 @par Directory contents 
 
-  - I2C/EEPROM/stm32f10x_conf.h  Library Configuration file
-  - I2C/EEPROM/stm32f10x_it.c    Interrupt handlers
-  - I2C/EEPROM/stm32f10x_it.h    Interrupt handlers header file
-  - I2C/EEPROM/main.c            Main program
-  - stm32_eval_i2c_ee.c          I2C EEPROM driver
-  - stm32_eval_i2c_ee.h          Header for stm32_eval_i2c_ee.c   
+  - I2C/EEPROM/stm32f10x_conf.h    Library Configuration file
+  - I2C/EEPROM/stm32f10x_it.c      Interrupt handlers
+  - I2C/EEPROM/stm32f10x_it.h      Interrupt handlers header file
+  - I2C/EEPROM/main.c              Main program
+  - I2C/EEPROM/system_stm32f10x.c  STM32F10x system source file  
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, High-Density
+    Value line, Medium-Density, XL-Density, Medium-Density Value line, Low-Density 
+    and Low-Density Value line Devices.
   
-  - This example has been tested with STM3210C-EVAL (STM32F10x Connectivity-Line) 
-    evaluation board (implemented EEPROM is M24C64) with no additional hardware,
-    and can be easily tailored to any other supported device and development board.
+  - This example has been tested with STM32100E-EVAL (STM32F10x High-Density Value 
+    line) evaluation board (implemented EEPROM is M24C64) and STM3210C-EVAL 
+    (STM32F10x Connectivity-Line) evaluation board (implemented EEPROM is M24C64) 
+    with no additional hardware, and can be easily tailored to any other supported 
+    device and development board.
+
+  - STM32100E-EVAL Set-up 
+    - Make sure the jumper JP14 "ROM_WP" is fitted on the board.
+    - No additional Hardware connections are needed.
+
 
   - STM3210C-EVAL Set-up 
     - Make sure the Jumper JP17 "I2C_SCK" is fitted on the board.
@@ -83,7 +94,6 @@ In order to make the program work, you must do the following :
   - stm32f10x_i2c.c 
   - stm32f10x_rcc.c
   - stm32f10x_spi.c 
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
   - stm32_eval.c (under Utilities\STM32_EVAL)
   - stm32_eval_i2c_ee.c (under Utilities\STM32_EVAL\Common)
       
@@ -105,6 +115,8 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.   
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file TIM/Cascade_Synchro/main.c 
+  * @file    TIM/Cascade_Synchro/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -95,7 +95,7 @@ int main(void)
       - At (TIM3 frequency)/ (TIM4 period + 1) = 17.578 KHz and a duty cycle
         equal to TIM4_CCR1/(TIM4_ARR + 1) = 25%
 
-     * For Low-Density Value line and Medium-Density Value line devices:
+     * For Low-Density Value line,Medium-Density and High-Density Value line devices:
        The TIMxCLK is fixed to 24 MHz, the TIM2 counter clock is 24 MHz.
        So TIM2 frequency = 93.750 KHz,
        TIM3 is running at 23.437 KHz,

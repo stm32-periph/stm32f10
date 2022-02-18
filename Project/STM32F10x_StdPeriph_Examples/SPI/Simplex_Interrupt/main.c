@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/Simplex_Interrupt/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -161,14 +161,21 @@ void GPIO_Configuration(void)
   GPIO_PinRemapConfig(GPIO_Remap_SPI3, ENABLE);
 #endif
 
-  /* Configure SPI_MASTER pins: SCK, MISO and MOSI */
-  GPIO_InitStructure.GPIO_Pin = SPI_MASTER_PIN_SCK | SPI_MASTER_PIN_MISO | SPI_MASTER_PIN_MOSI;
+  /* Configure SPI_MASTER pins: SCK and MOSI ---------------------------------*/
+  /* Confugure SCK and MOSI pins as Alternate Function Push Pull */
+  GPIO_InitStructure.GPIO_Pin = SPI_MASTER_PIN_SCK | SPI_MASTER_PIN_MOSI;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(SPI_MASTER_GPIO, &GPIO_InitStructure);
-
-  /* Configure SPI_SLAVE pins: SCK, MISO and MOSI */
-  GPIO_InitStructure.GPIO_Pin = SPI_SLAVE_PIN_SCK | SPI_SLAVE_PIN_MISO | SPI_SLAVE_PIN_MOSI;
+  
+  /* Configure SPI_SLAVE pins: SCK and MISO ---------------------------------*/
+  /* Confugure SCK and MOSI pins as Input Floating */
+  GPIO_InitStructure.GPIO_Pin = SPI_SLAVE_PIN_SCK ;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+  GPIO_Init(SPI_SLAVE_GPIO, &GPIO_InitStructure);
+  /* Confugure MISO pin as Alternate Function Push Pull */
+  GPIO_InitStructure.GPIO_Pin = SPI_SLAVE_PIN_MISO;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(SPI_SLAVE_GPIO, &GPIO_InitStructure);
 }
 

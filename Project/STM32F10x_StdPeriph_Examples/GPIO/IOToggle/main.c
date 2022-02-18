@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    GPIO/IOToggle/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body.
   ******************************************************************************
   * @copy
@@ -73,7 +73,7 @@ int main(void)
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB |
                          RCC_APB2Periph_GPIOC | RCC_APB2Periph_GPIOD |
                          RCC_APB2Periph_GPIOE, DISABLE);  
-#ifdef USE_STM3210E_EVAL
+#if defined USE_STM3210E_EVAL || defined USE_STM32100E_EVAL
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOF | RCC_APB2Periph_GPIOG, ENABLE);
 
   GPIO_Init(GPIOF, &GPIO_InitStructure);

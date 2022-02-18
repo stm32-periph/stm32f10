@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file I2S/Interrupt/main.c 
+  * @file    I2S/Interrupt/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -44,8 +44,8 @@ const uint16_t I2S3_Buffer_Tx[32] = {0x0102, 0x0304, 0x0506, 0x0708, 0x090A, 0x0
                                      0x3D3E, 0x3F40};
 
 uint16_t I2S2_Buffer_Rx[32];
-volatile uint8_t TxIdx = 0, RxIdx = 0;
-volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
+__IO uint32_t TxIdx = 0, RxIdx = 0;
+TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 ErrorStatus HSEStartUpStatus;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -298,7 +298,7 @@ void GPIO_Configuration(void)
   /* Configure SPI2 pins: CK, WS and SD ---------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13 | GPIO_Pin_15;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
 
 #ifdef USE_STM3210C_EVAL
@@ -308,6 +308,7 @@ void GPIO_Configuration(void)
   
   /* Configure SPI3 pins: CK and SD ------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10 | GPIO_Pin_12;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(GPIOC, &GPIO_InitStructure);  
 
   /* Configure SPI3 pins: WS -------------------------------------------*/
@@ -318,6 +319,7 @@ void GPIO_Configuration(void)
   
   /* Configure SPI3 pins: CK and SD ------------------------------------*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3 | GPIO_Pin_5;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
   GPIO_Init(GPIOB, &GPIO_InitStructure);
 
   /* Configure SPI3 pins: WS -------------------------------------------*/

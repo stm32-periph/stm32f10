@@ -5,11 +5,11 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   This sub-directory contains all the user-modifiable files needed
   *          to create a new project linked with the STM32F10x Standard Peripheral 
-  *          Library and working with HiTOP software toolchain (version 5.32 and later).
+  *          Library and working with HiTOP software toolchain (version 5.40 and later).
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
@@ -71,6 +71,8 @@
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 256 and 512 Kbytes. 
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

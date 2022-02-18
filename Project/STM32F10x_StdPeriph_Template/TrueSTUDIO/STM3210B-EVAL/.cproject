@@ -24,7 +24,7 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactExtension="elf" artifactName="STM3210B-EVAL" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="com.atollic.truestudio.exe.debug.316348137" name="Debug" parent="com.atollic.truestudio.exe.debug" prebuildStep="&quot;${CWD}\..\..\.metadata\Patch.exe&quot;">
+<configuration artifactExtension="elf" artifactName="STM3210B-EVAL" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="com.atollic.truestudio.exe.debug.316348137" name="Debug" parent="com.atollic.truestudio.exe.debug" postbuildStep="" prebuildStep="">
 <folderInfo id="com.atollic.truestudio.exe.debug.316348137." name="/" resourcePath="">
 <toolChain id="com.atollic.truestudio.exe.debug.toolchain.1057655060" name="Atollic ARM Tools" superClass="com.atollic.truestudio.exe.debug.toolchain">
 <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.debug.toolchain.platform.734843313" isAbstract="false" name="Debug platform" superClass="com.atollic.truestudio.exe.debug.toolchain.platform"/>
@@ -35,7 +35,7 @@
 <option id="com.atollic.truestudio.common_options.target.instr_set.424153249" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated"/>
 <inputType id="com.atollic.truestudio.as.input.2142008470" name="Input" superClass="com.atollic.truestudio.as.input"/>
 </tool>
-<tool commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} -Os ${INPUTS}" id="com.atollic.truestudio.exe.debug.toolchain.gcc.1973350339" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc">
+<tool commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="com.atollic.truestudio.exe.debug.toolchain.gcc.1973350339" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc">
 <option id="com.atollic.truestudio.gcc.directories.select.1988110866" name="Include path" superClass="com.atollic.truestudio.gcc.directories.select" valueType="includePath">
 <listOptionValue builtIn="false" value="../../../../../Libraries/CMSIS/CM3/CoreSupport"/>
 <listOptionValue builtIn="false" value="../../../../../Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x"/>
@@ -55,6 +55,7 @@
 <option id="com.atollic.truestudio.common_options.target.instr_set.175735774" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated"/>
 <option id="com.atollic.truestudio.gcc.optimization.prep_garbage.601877778" name="Prepare dead code removal" superClass="com.atollic.truestudio.gcc.optimization.prep_garbage" value="true" valueType="boolean"/>
 <option id="com.atollic.truestudio.gcc.optimization.prep_data.496634270" name="Prepare dead data removal" superClass="com.atollic.truestudio.gcc.optimization.prep_data" value="true" valueType="boolean"/>
+<option id="com.atollic.truestudio.gcc.misc.otherflags.185191015" superClass="com.atollic.truestudio.gcc.misc.otherflags" value=" -Os -w" valueType="string"/>
 <inputType id="com.atollic.truestudio.gcc.input.1633913031" superClass="com.atollic.truestudio.gcc.input"/>
 </tool>
 <tool id="com.atollic.truestudio.exe.debug.toolchain.ld.172484552" name="C Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ld">
@@ -68,7 +69,6 @@
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>
 </inputType>
 </tool>
-<tool id="com.atollic.truestudio.exe.debug.toolchain.objcopyflash.866514572" name="Flash Converter" superClass="com.atollic.truestudio.exe.debug.toolchain.objcopyflash"/>
 <tool id="com.atollic.truestudio.exe.debug.toolchain.gpp.315707442" name="C++ Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gpp">
 <option id="com.atollic.truestudio.gpp.symbols.defined.1911990920" name="Defined symbols" superClass="com.atollic.truestudio.gpp.symbols.defined" valueType="stringList">
 <listOptionValue builtIn="false" value="USE_STM3210B_EVAL"/>
@@ -92,7 +92,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="StdPeriph_Driver/stm32f10x_wwdg.c|StdPeriph_Driver/stm32f10x_tim.c|StdPeriph_Driver/stm32f10x_rtc.c|StdPeriph_Driver/stm32f10x_pwr.c|StdPeriph_Driver/stm32f10x_iwdg.c|StdPeriph_Driver/stm32f10x_dbgmcu.c|StdPeriph_Driver/stm32f10x_dac.c|StdPeriph_Driver/stm32f10x_crc.c|StdPeriph_Driver/stm32f10x_cec.c|StdPeriph_Driver/stm32f10x_can.c|StdPeriph_Driver/stm32f10x_bkp.c|StdPeriph_Driver/stm32f10x_adc.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>

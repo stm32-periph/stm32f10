@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    DMA/ADC_TIM1/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the DMA ADC1 TIM1 example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -34,15 +34,17 @@ PA.08 while changing the analog input on ADC channel14 using the potentiometer.
 
 @par Directory contents 
 
-  - DMA/ADC_TIM1/stm32f10x_conf.h  Library Configuration file
-  - DMA/ADC_TIM1/stm32f10x_it.c    Interrupt handlers
-  - DMA/ADC_TIM1/stm32f10x_it.h    Interrupt handlers header file
-  - DMA/ADC_TIM1/main.c            Main program
-
+  - DMA/ADC_TIM1/stm32f10x_conf.h    Library Configuration file
+  - DMA/ADC_TIM1/stm32f10x_it.c      Interrupt handlers
+  - DMA/ADC_TIM1/stm32f10x_it.h      Interrupt handlers header file
+  - DMA/ADC_TIM1/main.c              Main program
+  - DMA/ADC_TIM1/system_stm32f10x.c  STM32F10x system source file
+  
 @par Hardware and Software environment 
 
   - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+    XL-Density, High-Density Value line, Medium-Density Value line, Low-Density 
+    and Low-Density Value line Devices.
   
   - This example has been tested with STMicroelectronics STM32100B-EVAL (Medium-Density
     Value line), STM3210C-EVAL (Connectivity line), STM3210E-EVAL (High-Density and
@@ -69,6 +71,12 @@ PA.08 while changing the analog input on ADC channel14 using the potentiometer.
       PC.04 (potentiometer RV1)
     - Connect an oscilloscope to TIM1_CH1 (PA.08) pin       
 
+  - STM32100E-EVAL Set-up 
+    - Connect a variable power supply 0-3.3V to ADC Channel14 mapped on pin 
+      PC.04 (potentiometer RV1)
+    - Connect an oscilloscope to TIM1_CH1 (PA.08) pin  
+	
+	
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
@@ -78,8 +86,7 @@ In order to make the program work, you must do the following :
   - stm32f10x_dma.c 
   - stm32f10x_gpio.c 
   - stm32f10x_rcc.c   
-  - stm32f10x_tim.c
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)   
+  - stm32f10x_tim.c  
        
 - Edit stm32f10x.h file to select the device you are working on.
 - Edit stm32_eval.h file to select the evaluation board you will use.
@@ -100,6 +107,8 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

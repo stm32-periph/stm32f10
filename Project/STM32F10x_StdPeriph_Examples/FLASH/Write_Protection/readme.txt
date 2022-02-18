@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    FLASH/Write_Protection/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the FLASH Write_Protection Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -26,8 +26,10 @@ for the STM32F10x FLASH:
 - Enable Write protection: 
    To enable the Write Protection, uncomment the line "#define WRITE_PROTECTION_ENABLE"
    in main.c file.  
-   To protect a set of pages, the user has to call the function FLASH_EnableWriteProtection.
-   The parameter of this function will define the number of pages to be protected.
+   To protect a set of pages, the user has to call the function FLASH_EraseOptionBytes
+   to erase all the option bytes then to call the function  FLASH_EnableWriteProtection .
+   The parameter of the later function will define the number of pages to be protected
+   (The desired pages and already protected pages).
    To load the new option byte values, a system Reset is necessary, for this, the
    function NVIC_SystemReset() is used.
  
@@ -35,9 +37,14 @@ for the STM32F10x FLASH:
    To disable the Write Protection, uncomment the line "#define WRITE_PROTECTION_DISABLE"
    in main.c file.
    To disable the write protection of the STM32F10x Flash, an erase of the Option 
-   Bytes is necessary. This operation is done by the function FLASH_EraseOptionBytes.
+   Bytes is necessary by the function FLASH_EraseOptionBytes, then call the function 
+   FLASH_EnableWriteProtection to protect the pags that are already protected.
    To load the new option byte values, a system Reset is necessary, for this, the
    function NVIC_SystemReset() is used.
+   
+- Programm the selected pages:
+  To programm the desired pages (if the flash is not write protected) uncomment the line
+  "#define FLASH_PAGE_PROGRAM" in main.c file. 
 
 If the desired pages are not write protected, an erase and a write operation are
 performed.
@@ -49,17 +56,19 @@ performed.
   - FLASH/Write_Protection/stm32f10x_it.h       Interrupt handlers header file
   - FLASH/Write_Protection/stm32f10x_it.c       Interrupt handlers
   - FLASH/Write_Protection/main.c               Main program
-
+  - FLASH/Write_Protection/system_stm32f10x.c   STM32F10x system source file
 
 @par Hardware and Software environment 
 
   - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+    High-Density Value line, XL-Density, Medium-Density Value line, Low-Density 
+    and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL (Medium-Density
-    Value line), STM3210C-EVAL (Connectivity line), STM3210E-EVAL (High-Density and
-    XL-Density) and STM3210B-EVAL (Medium-Density) evaluation boards and can be easily
-    tailored to any other supported device and development board.  
+  - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density 
+    Value line), STM32100B-EVAL (Medium-Density Value line), STM3210C-EVAL 
+    (Connectivity line), STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL 
+    (Medium-Density) evaluation boards and can be easily tailored to any other 
+    supported device and development board.  
 
   
 @par How to use it ? 
@@ -67,8 +76,7 @@ performed.
 In order to make the program work, you must do the following:
 - Create a project and setup all project configuration
 - Add the required Library files:
-  - stm32f10x_flash.c
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x) 
+  - stm32f10x_flash.c 
    
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -88,6 +96,8 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

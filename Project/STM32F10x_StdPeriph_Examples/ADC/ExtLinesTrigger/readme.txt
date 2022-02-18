@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    ADC/ExtLinesTrigger/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the ADC external lines trigger example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -26,12 +26,12 @@ group channel conversion and configured to convert one regular channel on each
 external trigger.
 
 ADC1 is configured to start regular group channel conversion on EXTI11 event.
-On detection of the first rising edge on PE.11 pin, the conversion of the first regular
-channel (ADC channel4) is done and its converted value is transfered by DMA to 
-ADC_RegularConvertedValueTab table. On the following edge detection, the second 
-regular channel (ADC channel14) is automatically converted and its converted value
-is stored by DMA in the same table. The number of transmitted data by DMA, in this 
-example is limited to 64 data.
+On detection of the first rising edge on PE.11 pin (PF.11 pin for High-Density Value line),
+the conversion of the first regular channel (ADC channel4) is done and its converted 
+value is transfered by DMA to ADC_RegularConvertedValueTab table. On the following edge 
+detection, the second regular channel (ADC channel14) is automatically converted and 
+its converted value is stored by DMA in the same table. The number of transmitted data 
+by DMA, in this example is limited to 64 data.
 
 The procedure is repeated for both regular channels on each EXTI11 event.
 ADC1 is configured to start injected group channel conversion on EXTI15 event.
@@ -69,6 +69,13 @@ devices.
     - Connect a push-button to pin PE.11 (EXTI Line11) and another push-button 
       to pin PE.15 (EXTI Line15).
     @note Make shure that jumper JP3 is open.
+    
+  - STM32100E-EVAL Set-up 
+    - Connect a known voltage, between 0-3.3V, to ADC Channel14 mapped on pin 
+      PC.04 (potentiometer RV1), ADC Channel4 mapped on pin PA.04, ADC Channel11 
+      mapped on pin PC.01 and ADC Channel12 mapped on pin PC.02.
+    - Connect a push-button to pin PF.11 (EXTI Line11) and another push-button 
+      to pin PE.15 (EXTI Line15).
 
   - STM3210C-EVAL Set-up 
     - Connect a known voltage, between 0-3.3V, to ADC Channel14 mapped on pin 
@@ -122,6 +129,8 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.  
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

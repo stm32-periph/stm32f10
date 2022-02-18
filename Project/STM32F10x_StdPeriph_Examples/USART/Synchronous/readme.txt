@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    USART/Synchronous/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the USART Synchronous Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -63,22 +63,28 @@ SPIy configured as follow:
   - USART/Synchronous/stm32f10x_it.h       Interrupt handlers header file
   - USART/Synchronous/stm32f10x_it.c       Interrupt handlers
   - USART/Synchronous/main.c               Main program
-
+  - USART/Synchronous/system_stm32f10x.c   STM32F10x system source file
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, High-Density 
+    Value line, Medium-Density, XL-Density, Medium-Density Value line, Low-Density 
+    and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL 
-    (Medium-Density Value line), STM3210E-EVAL (High-Density and XL-Density)
-    and STM3210B-EVAL (Medium-Density) evaluation boards and can be 
-    easily tailored to any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density 
+    Value line), STM32100B-EVAL (Medium-Density Value line), STM3210E-EVAL 
+    (High-Density and XL-Density) and STM3210B-EVAL (Medium-Density) evaluation 
+    boards and can be easily tailored to any other supported device and development 
+    board.
     This example can't be tested with STM3210C-EVAL (Connectivity-Line) evaluation
     board since the USART CK pins are already used by other on-board modules.
     To select the STMicroelectronics evaluation board used to run the example, 
     uncomment the corresponding line in USART/Synchronous/platform_config.h file
 
+  - STM32100E-EVAL Set-up 
+    - Connect USART1_Tx(PA.09) to SPI1_MOSI(PA.07), USART1_Rx(PA.10) to 
+      SPI1_MISO(PA.06) and USART1_CK(PA.08) to SPI1_SCK(PA.05).  
+      
   - STM32100B-EVAL Set-up 
     - Connect USART1_Tx(PA.09) to SPI1_MOSI(PA.07), USART1_Rx(PA.10) to 
       SPI1_MISO(PA.06) and USART1_CK(PA.08) to SPI1_SCK(PA.05).      
@@ -90,7 +96,7 @@ SPIy configured as follow:
   - STM3210B-EVAL Set-up 
     - Connect USART1_Tx(PA.09) to SPI1_MOSI(PA.07), USART1_Rx(PA.10) to 
       SPI1_MISO(PA.06) and USART1_CK(PA.08) to SPI1_SCK(PA.05).        
-  
+ 
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
@@ -100,7 +106,6 @@ In order to make the program work, you must do the following :
   - stm32f10x_rcc.c 
   - stm32f10x_spi.c 
   - stm32f10x_usart.c 
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
      
 - Edit stm32f10x.h file to select the device you are working on.
 - Edit USART/Synchronous/platform_config.h file to select the evaluation board you will use.
@@ -121,6 +126,8 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

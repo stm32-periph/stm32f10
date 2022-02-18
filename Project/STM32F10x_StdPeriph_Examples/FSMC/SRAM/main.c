@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FSMC/SRAM/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -19,7 +19,12 @@
   */ 
 
 /* Includes ------------------------------------------------------------------*/
+#ifdef STM32F10X_HD_VL /* High-density Value line devices */
+#include "stm32100e_eval_fsmc_sram.h"
+#else /* High- and XL-denisty devices */
 #include "stm3210e_eval_fsmc_sram.h"
+#endif
+
 #include "stm32_eval.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Examples

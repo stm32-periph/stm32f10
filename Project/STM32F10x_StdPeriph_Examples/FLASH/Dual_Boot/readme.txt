@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    FLASH/Dual_Boot/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the FLASH Dual_Boot Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -72,11 +72,11 @@ in order to be able to execute the embedded Bootloader code he has to:
 
 @par Directory contents 
 
-  - FLASH/Dual_Boot/stm32f10x_conf.h   Library Configuration file
-  - FLASH/Dual_Boot/stm32f10x_it.h     Interrupt handlers header file
-  - FLASH/Dual_Boot/stm32f10x_it.c     Interrupt handlers
-  - FLASH/Dual_Boot/main.c             Main program
-
+  - FLASH/Dual_Boot/stm32f10x_conf.h    Library Configuration file
+  - FLASH/Dual_Boot/stm32f10x_it.h      Interrupt handlers header file
+  - FLASH/Dual_Boot/stm32f10x_it.c      Interrupt handlers
+  - FLASH/Dual_Boot/main.c              Main program
+  - FLASH/Dual_Boot/system_stm32f10x.c  STM32F10x system source file
 
 @par Hardware and Software environment 
 
@@ -89,7 +89,7 @@ in order to be able to execute the embedded Bootloader code he has to:
 @par How to use it ? 
     
 In order to load the IAP code, you have to do the following:
- - EWARMv5:
+ - EWARM:
     - Open the Project.eww workspace
     - In the workspace toolbar select the project config:
         - STM32F10X_XL_BANK1: to load the program in Flash bank1 (BOOT_FROM_BANK1
@@ -99,17 +99,6 @@ In order to load the IAP code, you have to do the following:
     - Rebuild all files: Project->Rebuild all
     - Load project image: Project->Debug
     - Run program: Debug->Go(F5)
-
- - MDK-ARM 
-    - Open Project.uvproj project
-    - In the build toolbar select the project config:
-        - STM32F10X_XL_BANK1: to load the program in Flash bank1 (BOOT_FROM_BANK1
-                              already defined in the project preprocessor)    
-        - STM32F10X_XL_BANK2: to load the program in Flash bank2 (BOOT_FROM_BANK2
-                              already defined in the project preprocessor)  
-    - Rebuild all files: Project->Rebuild all target files
-    - Load project image: Debug->Start/Stop Debug Session
-    - Run program: Debug->Run (F5)
 
  - HiTOP
     - Open the HiTOP toolchain.
@@ -123,7 +112,36 @@ In order to load the IAP code, you have to do the following:
      - Load project image : Click "ok" in the "Download application" window.
      - Run the "RESET_GO_MAIN" script to set the PC at the "main"
      - Run program: Debug->Go(F5).
+     
+ - MDK-ARM 
+    - Open Project.uvproj project
+    - In the build toolbar select the project config:
+        - STM32F10X_XL_BANK1: to load the program in Flash bank1 (BOOT_FROM_BANK1
+                              already defined in the project preprocessor)    
+        - STM32F10X_XL_BANK2: to load the program in Flash bank2 (BOOT_FROM_BANK2
+                              already defined in the project preprocessor)  
+    - Rebuild all files: Project->Rebuild all target files
+    - Load project image: Debug->Start/Stop Debug Session
+    - Run program: Debug->Run (F5)
 
+ - TrueSTUDIO 
+    - Open the TrueSTUDIO toolchain.
+    - Click on File->Switch Workspace->Other and browse to TrueSTUDIO workspace 
+      directory.
+    - Click on File->Import, select General->'Existing Projects into Workspace' 
+      and then click "Next". 
+    - Browse to the TrueSTUDIO workspace directory and select the project: 
+        - STM32F10X_XL_BANK1: to load the program in Flash bank1 (BOOT_FROM_BANK1
+                              already defined in the project preprocessor)    
+        - STM32F10X_XL_BANK2: to load the program in Flash bank2 (BOOT_FROM_BANK2
+                              already defined in the project preprocessor) 
+    - Under Windows->Preferences->General->Workspace->Linked Resources, add 
+      a variable path named "CurPath" which points to the folder containing
+      "Libraries", "Project" and "Utilities" folders.
+    - Rebuild all project files: Select the project in the "Project explorer" 
+      window then click on Project->build project menu.
+    - Run program: Select the project in the "Project explorer" window then click 
+      Run->Debug (F11)
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -134,6 +152,8 @@ In order to load the IAP code, you have to do the following:
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.   
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    WWDG/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and peripherals
   *          interrupt service routine.
@@ -166,8 +166,8 @@ void EXTI9_5_IRQHandler(void)
 {
   if (EXTI_GetITStatus(KEY_BUTTON_EXTI_LINE) != RESET)
   {
-    /* Turn off LED2 */
-    STM_EVAL_LEDOn(LED2);
+    /* Turn on LED2 */
+    STM_EVAL_LEDOff(LED2);
 
     /* As KEY_BUTTON_EXTI_LINE pending bit is not cleared, the CPU will execute
        indefinitely this ISR and when the WWDG counter falls to 3Fh the WWDG reset 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RCC/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body.
   ******************************************************************************
   * @copy
@@ -181,7 +181,7 @@ void SetSysClockToHSE(void)
 
   if (HSEStartUpStatus == SUCCESS)
   {
-#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL
+#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL && !defined STM32F10X_HD_VL
     /* Enable Prefetch Buffer */
     FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
 
@@ -250,7 +250,7 @@ void SetSysClockTo24(void)
 
   if (HSEStartUpStatus == SUCCESS)
   {
-#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL
+#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL && !defined STM32F10X_HD_VL
     /* Enable Prefetch Buffer */
     FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
 
@@ -283,7 +283,7 @@ void SetSysClockTo24(void)
     /* PLL configuration: PLLCLK = (PLL2 / 10) * 6 = 24 MHz */ 
     RCC_PREDIV1Config(RCC_PREDIV1_Source_PLL2, RCC_PREDIV1_Div10);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_6);
-#elif defined STM32F10X_LD_VL || defined STM32F10X_MD_VL 
+#elif defined STM32F10X_LD_VL || defined STM32F10X_MD_VL || defined STM32F10X_HD_VL 
     /* PLLCLK = (8MHz/2) * 6 = 24 MHz */
     RCC_PREDIV1Config(RCC_PREDIV1_Source_HSE, RCC_PREDIV1_Div2);
     RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_6);
@@ -318,7 +318,7 @@ void SetSysClockTo24(void)
     }
   }
 }
-#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL
+#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL && !defined STM32F10X_HD_VL
 /**
   * @brief  Sets System clock frequency to 36MHz and configure HCLK, PCLK2 
   *   and PCLK1 prescalers. 

@@ -1,16 +1,16 @@
 /**
-  @page ride7 RIDE7 Project Template
+  @page ride7 RIDE Project Template
   
   @verbatim
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   This sub-directory contains all the user-modifiable files 
   *          needed to create a new project linked with the STM32F10x  
   *          Standard Peripheral Library and working with RIDE7 software 
-  *          toolchain (RIDE7 IDE:7.24.09, RKitARM for RIDE7:1.24.10)
+  *          toolchain (RIDE7 IDE:7.30.10, RKitARM for RIDE7:1.30.10)
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
@@ -36,10 +36,12 @@
  
  - Open the Project.rprj project.
  - In the configuration toolbar(Project->properties) select the project config:
+     - STM32100E-EVAL: to configure the project for STM32 Value Line High-density devices
      - STM32100B-EVAL: to configure the project for STM32 Medium-density Value line devices
      - STM3210C-EVAL: to configure the project for STM32 Connectivity line devices
      - STM3210B-EVAL: to configure the project for STM32 Medium-density devices
      - STM3210E-EVAL: to configure the project for STM32 High-density devices
+     - STM3210E-EVAL_XL: to configure the project for STM32 XL-density devices
  - Rebuild all files: Project->build project
  - Load project image: Debug->start(ctrl+D)
  - Run program: Debug->Run(ctrl+F9)  
@@ -53,6 +55,8 @@
    the Flash memory density ranges between 32 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 32 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where the 
+   Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

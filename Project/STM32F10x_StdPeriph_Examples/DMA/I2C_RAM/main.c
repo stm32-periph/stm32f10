@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file DMA/I2C_RAM/main.c 
+  * @file    DMA/I2C_RAM/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy

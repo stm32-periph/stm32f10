@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/TimeBase/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the TIM Time Base example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -28,8 +28,8 @@ The TIM2CLK frequency is set to SystemCoreClock / 2 (Hz), to get TIM2 counter
 clock at 6 MHz so the Prescaler is computed as following:
    - Prescaler = (TIM2CLK / TIM2 counter clock) - 1
 SystemCoreClock is set to 72 MHz for Low-density, Medium-density, High-density
-and Connectivity line devices and to 24 MHz for Low-Density Value line and
-Medium-Density Value line devices
+and Connectivity line devices and to 24 MHz for Low-Density Value line,
+Medium-Density Value line and High-Density devices.
 
 The TIM2 CC1 register value is equal to 40961, 
 CC1 update rate = TIM2 counter clock / CCR1_Val = 146.48 Hz,
@@ -58,22 +58,25 @@ PC.08 and  PC.09) are toggled with the following frequencies:
 
 @par Directory contents 
 
-  - TIM/TimeBase/stm32f10x_conf.h  Library Configuration file
-  - TIM/TimeBase/stm32f10x_it.c    Interrupt handlers
-  - TIM/TimeBase/stm32f10x_it.h    Interrupt handlers header file
-  - TIM/TimeBase/main.c            Main program 
-
+  - TIM/TimeBase/stm32f10x_conf.h    Library Configuration file
+  - TIM/TimeBase/stm32f10x_it.c      Interrupt handlers
+  - TIM/TimeBase/stm32f10x_it.h      Interrupt handlers header file
+  - TIM/TimeBase/main.c              Main program 
+  - TIM/TimeBase/system_stm32f10x.c  STM32F10x system source file
+  
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, High-Density 
+    Value line, Medium-Density, XL-Density, Medium-Density Value line, Low-Density 
+    and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL (Medium-Density
-    Value line), STM3210C-EVAL (Connectivity line), STM3210E-EVAL (High-Density and
-    XL-Density) and STM3210B-EVAL (Medium-Density) evaluation boards and can be easily
-    tailored to any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density
+    Value line), STM32100B-EVAL (Medium-Density Value line), STM3210C-EVAL (Connectivity line), 
+    STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL (Medium-Density) 
+    evaluation boards and can be easily tailored to any other supported device 
+    and development board.
 
-  - STM32100B-EVAL, STM3210E-EVAL, STM3210B-EVAL and STM32100B-EVAL Set-up 
+  - STM32100E-EVAL, STM3210E-EVAL, STM32100E-EVAL, STM3210B-EVAL and STM3210C-EVAL Set-up 
     - Connect an oscilloscope on PC.06, PC.07, PC.08 and  PC.09 to show the 
       different Time Base signals.  
   
@@ -86,7 +89,6 @@ In order to make the program work, you must do the following:
   - stm32f10x_rcc.c 
   - stm32f10x_tim.c
   - misc.c 
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
   
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -106,6 +108,8 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ExtLinesTrigger/system_stm32f10x.c
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   CMSIS Cortex-M3 Device Peripheral Access Layer System Source File.
   ******************************************************************************  
   *
@@ -62,8 +62,8 @@
     source.
 
    4. The System clock configuration functions provided within this file assume that:
-        - For Low and Medium density Value line devices an external 8MHz crystal 
-          is used to drive the System clock.
+        - For Low, Medium and High density Value line devices an external 8MHz 
+          crystal is used to drive the System clock.
         - For Low, Medium and High density devices an external 8MHz crystal is
           used to drive the System clock.
         - For Connectivity line devices an external 25MHz crystal is used to drive
@@ -71,23 +71,31 @@
      If you are using different crystal you have to adapt those functions accordingly.
     */
     
-#if defined (STM32F10X_LD_VL) || (defined STM32F10X_MD_VL) 
-/* #define SYSCLK_FREQ_HSE    HSE_Value */
+#if defined (STM32F10X_LD_VL) || (defined STM32F10X_MD_VL) || (defined STM32F10X_HD_VL)
+/* #define SYSCLK_FREQ_HSE    HSE_VALUE */
  #define SYSCLK_FREQ_24MHz  24000000
 #else
-/* #define SYSCLK_FREQ_HSE    HSE_Value */
+/* #define SYSCLK_FREQ_HSE    HSE_VALUE */
 /* #define SYSCLK_FREQ_24MHz  24000000 */ 
 /* #define SYSCLK_FREQ_36MHz  36000000 */
 /* #define SYSCLK_FREQ_48MHz  48000000 */
-#define SYSCLK_FREQ_56MHz  56000000
+ #define SYSCLK_FREQ_56MHz  56000000
 /* #define SYSCLK_FREQ_72MHz  72000000 */
 #endif
 
 /*!< Uncomment the following line if you need to use external SRAM mounted
-     on STM3210E-EVAL board (STM32 High density and XL-density devices) as data memory  */ 
-#if defined (STM32F10X_HD) || (defined STM32F10X_XL)
+     on STM3210E-EVAL board (STM32 High density and XL-density devices) or on 
+     STM32100E-EVAL board (STM32 High-density value line devices) as data memory */ 
+#if defined (STM32F10X_HD) || (defined STM32F10X_XL) || (defined STM32F10X_HD_VL)
 /* #define DATA_IN_ExtSRAM */
 #endif
+
+/*!< Uncomment the following line if you need to relocate your vector Table in
+     Internal SRAM. */ 
+/* #define VECT_TAB_SRAM */
+#define VECT_TAB_OFFSET  0x0 /*!< Vector Table base offset field. 
+                                  This value must be a multiple of 0x100. */
+
 
 /**
   * @}
@@ -121,7 +129,7 @@
 #elif defined SYSCLK_FREQ_72MHz
   uint32_t SystemCoreClock         = SYSCLK_FREQ_72MHz;        /*!< System Clock Frequency (Core Clock) */
 #else /*!< HSI Selected as System Clock source */
-  uint32_t SystemCoreClock         = HSI_Value;        /*!< System Clock Frequency (Core Clock) */
+  uint32_t SystemCoreClock         = HSI_VALUE;        /*!< System Clock Frequency (Core Clock) */
 #endif
 
 __I uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
@@ -200,7 +208,7 @@ void SystemInit (void)
 
   /* Reset CFGR2 register */
   RCC->CFGR2 = 0x00000000;
-#elif defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) 
+#elif defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || (defined STM32F10X_HD_VL)
   /* Disable all interrupts and clear pending bits  */
   RCC->CIR = 0x009F0000;
 
@@ -211,7 +219,7 @@ void SystemInit (void)
   RCC->CIR = 0x009F0000;
 #endif /* STM32F10X_CL */
     
-#if defined (STM32F10X_HD) || (defined STM32F10X_XL)
+#if defined (STM32F10X_HD) || (defined STM32F10X_XL) || (defined STM32F10X_HD_VL)
   #ifdef DATA_IN_ExtSRAM
     SystemInit_ExtMemCtl(); 
   #endif /* DATA_IN_ExtSRAM */
@@ -221,6 +229,11 @@ void SystemInit (void)
   /* Configure the Flash Latency cycles and enable prefetch buffer */
   SetSysClock();
 
+#ifdef VECT_TAB_SRAM
+  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. */
+#else
+  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH. */
+#endif 
 }
 
 /**
@@ -237,9 +250,9 @@ void SystemCoreClockUpdate (void)
   uint32_t prediv1source = 0, prediv1factor = 0, prediv2factor = 0, pll2mull = 0;
 #endif /* STM32F10X_CL */
 
-#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL)
+#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || (defined STM32F10X_HD_VL)
   uint32_t prediv1factor = 0;
-#endif /* STM32F10X_LD_VL or STM32F10X_MD_VL */
+#endif /* STM32F10X_LD_VL or STM32F10X_MD_VL or STM32F10X_HD_VL */
     
   /* Get SYSCLK source -------------------------------------------------------*/
   tmp = RCC->CFGR & RCC_CFGR_SWS;
@@ -247,10 +260,10 @@ void SystemCoreClockUpdate (void)
   switch (tmp)
   {
     case 0x00:  /* HSI used as system clock */
-      SystemCoreClock = HSI_Value;
+      SystemCoreClock = HSI_VALUE;
       break;
     case 0x04:  /* HSE used as system clock */
-      SystemCoreClock = HSE_Value;
+      SystemCoreClock = HSE_VALUE;
       break;
     case 0x08:  /* PLL used as system clock */
 
@@ -264,23 +277,23 @@ void SystemCoreClockUpdate (void)
       if (pllsource == 0x00)
       {
         /* HSI oscillator clock divided by 2 selected as PLL clock entry */
-        SystemCoreClock = (HSI_Value >> 1) * pllmull;
+        SystemCoreClock = (HSI_VALUE >> 1) * pllmull;
       }
       else
       {
- #if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL)
+ #if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || (defined STM32F10X_HD_VL)
        prediv1factor = (RCC->CFGR2 & RCC_CFGR2_PREDIV1) + 1;
        /* HSE oscillator clock selected as PREDIV1 clock entry */
-       SystemCoreClock = (HSE_Value / prediv1factor) * pllmull; 
+       SystemCoreClock = (HSE_VALUE / prediv1factor) * pllmull; 
  #else
         /* HSE selected as PLL clock entry */
         if ((RCC->CFGR & RCC_CFGR_PLLXTPRE) != (uint32_t)RESET)
         {/* HSE oscillator clock divided by 2 */
-          SystemCoreClock = (HSE_Value >> 1) * pllmull;
+          SystemCoreClock = (HSE_VALUE >> 1) * pllmull;
         }
         else
         {
-          SystemCoreClock = HSE_Value * pllmull;
+          SystemCoreClock = HSE_VALUE * pllmull;
         }
  #endif
       }
@@ -299,7 +312,7 @@ void SystemCoreClockUpdate (void)
       if (pllsource == 0x00)
       {
         /* HSI oscillator clock divided by 2 selected as PLL clock entry */
-        SystemCoreClock = (HSI_Value >> 1) * pllmull;
+        SystemCoreClock = (HSI_VALUE >> 1) * pllmull;
       }
       else
       {/* PREDIV1 selected as PLL clock entry */
@@ -311,7 +324,7 @@ void SystemCoreClockUpdate (void)
         if (prediv1source == 0)
         { 
           /* HSE oscillator clock selected as PREDIV1 clock entry */
-          SystemCoreClock = (HSE_Value / prediv1factor) * pllmull;          
+          SystemCoreClock = (HSE_VALUE / prediv1factor) * pllmull;          
         }
         else
         {/* PLL2 clock selected as PREDIV1 clock entry */
@@ -319,14 +332,14 @@ void SystemCoreClockUpdate (void)
           /* Get PREDIV2 division factor and PLL2 multiplication factor */
           prediv2factor = ((RCC->CFGR2 & RCC_CFGR2_PREDIV2) >> 4) + 1;
           pll2mull = ((RCC->CFGR2 & RCC_CFGR2_PLL2MUL) >> 8 ) + 2; 
-          SystemCoreClock = (((HSE_Value / prediv2factor) * pll2mull) / prediv1factor) * pllmull;                         
+          SystemCoreClock = (((HSE_VALUE / prediv2factor) * pll2mull) / prediv1factor) * pllmull;                         
         }
       }
 #endif /* STM32F10X_CL */ 
       break;
 
     default:
-      SystemCoreClock = HSI_Value;
+      SystemCoreClock = HSI_VALUE;
       break;
   }
   
@@ -436,7 +449,7 @@ static void SetSysClockToHSE(void)
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
     StartUpCounter++;  
-  } while((HSEStatus == 0) && (StartUpCounter != HSEStartUp_TimeOut));
+  } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
   {
@@ -450,7 +463,7 @@ static void SetSysClockToHSE(void)
   if (HSEStatus == (uint32_t)0x01)
   {
 
-#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL 
+#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL && !defined STM32F10X_HD_VL
     /* Enable Prefetch Buffer */
     FLASH->ACR |= FLASH_ACR_PRFTBE;
 
@@ -460,7 +473,7 @@ static void SetSysClockToHSE(void)
 #ifndef STM32F10X_CL
     FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_0;
 #else
-    if (HSE_Value <= 24000000)
+    if (HSE_VALUE <= 24000000)
 	{
       FLASH->ACR |= (uint32_t)FLASH_ACR_LATENCY_0;
 	}
@@ -515,7 +528,7 @@ static void SetSysClockTo24(void)
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
     StartUpCounter++;  
-  } while((HSEStatus == 0) && (StartUpCounter != HSEStartUp_TimeOut));
+  } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
   {
@@ -528,7 +541,7 @@ static void SetSysClockTo24(void)
 
   if (HSEStatus == (uint32_t)0x01)
   {
-#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL 
+#if !defined STM32F10X_LD_VL && !defined STM32F10X_MD_VL && !defined STM32F10X_HD_VL 
     /* Enable Prefetch Buffer */
     FLASH->ACR |= FLASH_ACR_PRFTBE;
 
@@ -566,7 +579,7 @@ static void SetSysClockTo24(void)
     while((RCC->CR & RCC_CR_PLL2RDY) == 0)
     {
     }   
-#elif defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL)
+#elif defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || defined (STM32F10X_HD_VL)
     /*  PLL configuration:  = (HSE / 2) * 6 = 24 MHz */
     RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
     RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_PREDIV1 | RCC_CFGR_PLLXTPRE_PREDIV1_Div2 | RCC_CFGR_PLLMULL6);
@@ -619,7 +632,7 @@ static void SetSysClockTo36(void)
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
     StartUpCounter++;  
-  } while((HSEStatus == 0) && (StartUpCounter != HSEStartUp_TimeOut));
+  } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
   {
@@ -720,7 +733,7 @@ static void SetSysClockTo48(void)
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
     StartUpCounter++;  
-  } while((HSEStatus == 0) && (StartUpCounter != HSEStartUp_TimeOut));
+  } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
   {
@@ -821,7 +834,7 @@ static void SetSysClockTo56(void)
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
     StartUpCounter++;  
-  } while((HSEStatus == 0) && (StartUpCounter != HSEStartUp_TimeOut));
+  } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
   {
@@ -923,7 +936,7 @@ static void SetSysClockTo72(void)
   {
     HSEStatus = RCC->CR & RCC_CR_HSERDY;
     StartUpCounter++;  
-  } while((HSEStatus == 0) && (StartUpCounter != HSEStartUp_TimeOut));
+  } while((HSEStatus == 0) && (StartUpCounter != HSE_STARTUP_TIMEOUT));
 
   if ((RCC->CR & RCC_CR_HSERDY) != RESET)
   {

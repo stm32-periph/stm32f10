@@ -1,16 +1,16 @@
 /**
-  @page TrueSTUDIO Project Template for High-density devices
-
+  @page TrueSTUDIO_STM3210E Project Template for High-density devices
+ 
   @verbatim
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   This sub-directory contains all the user-modifiable files 
   *          needed to create a new project linked with the STM32F10x  
   *          Standard Peripheral Library and working with TrueSTUDIO software 
-  *          toolchain (Version 1.1.0 and later)
+  *          toolchain (Version 1.4.0 and later)
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
   * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE TIME.
@@ -34,16 +34,21 @@
                                You can customize this file to your need.
                            
  @par How to use it ?
- 
+
  - Open the TrueSTUDIO toolchain.
- - Click on File->Switch Workspace->Other and browse to TrueSTUDIO workspace directory.
- - Click on File->Import, select General->'Existing Projects into Workspace' and then click "Next". 
- - Browse to the TrueSTUDIO workspace directory, select the STM3210E-EVAL project and click "OK".
- - Rebuild all project files: Select the project in the "Project explorer" window then click on Project->build project menu.
- - Load project image: 
- 	- Run ST-Link gdbserver via the Microsoft Windows Start menu. 
- 	- Click on Run->Debug configuration menu. 
- 	- Expand the GDB Hardware Debugging tree node, select the STM3210E-EVAL Debug configuration then click on "Debug" button.
+ - Click on File->Switch Workspace->Other and browse to TrueSTUDIO workspace 
+   directory.
+ - Click on File->Import, select General->'Existing Projects into Workspace' 
+   and then click "Next". 
+ - Browse to the TrueSTUDIO workspace directory and select the project: 
+   - STM3210E-EVAL: to configure the project for STM32 High-density devices.
+ - Under Windows->Preferences->General->Workspace->Linked Resources, add 
+   a variable path named "CurPath" which points to the folder containing
+   "Libraries", "Project" and "Utilities" folders.
+ - Rebuild all project files: Select the project in the "Project explorer" 
+   window then click on Project->build project menu.
+ - Run program: Select the project in the "Project explorer" window then click 
+   Run->Debug (F11)
 
 @note
  - Low-density Value line devices are STM32F100xx microcontrollers where the 
@@ -54,6 +59,8 @@
    the Flash memory density ranges between 32 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 32 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

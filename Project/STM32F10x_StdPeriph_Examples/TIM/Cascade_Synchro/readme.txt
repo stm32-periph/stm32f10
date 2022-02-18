@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/Cascade_Synchro/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the TIM Cascade_Synchro example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -57,7 +57,7 @@ o For Low-density, Medium-density, High-density and Connectivity line devices:
   (TIM3 frequency)/ (TIM4 period + 1) = 17.578 Hz and a duty cycle equal 
   to TIM4_CCR1/(TIM4_ARR + 1) = 25%  
 
-o For Low-Density Value line and Medium-Density Value line devices:
+o For Low-Density Value line, Medium-Density and High-Density Value line devices:
   The TIMxCLK is fixed to 24 MHz, the TIM2 counter clock is 24 MHz.
   So TIM2 frequency = 93.750 KHz,
   TIM3 is running at 23.437 KHz,
@@ -65,20 +65,23 @@ o For Low-Density Value line and Medium-Density Value line devices:
 
 @par Directory contents 
 
-  - TIM/Cascade_Synchro/stm32f10x_conf.h  Library Configuration file
-  - TIM/Cascade_Synchro/stm32f10x_it.c    Interrupt handlers
-  - TIM/Cascade_Synchro/stm32f10x_it.h    Interrupt handlers header file
-  - TIM/Cascade_Synchro/main.c            Main program
- 
+  - TIM/Cascade_Synchro/stm32f10x_conf.h    Library Configuration file
+  - TIM/Cascade_Synchro/stm32f10x_it.c      Interrupt handlers
+  - TIM/Cascade_Synchro/stm32f10x_it.h      Interrupt handlers header file
+  - TIM/Cascade_Synchro/main.c              Main program
+  - TIM/Cascade_Synchro/system_stm32f10x.c  STM32F10x system source file
+   
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, High-Density 
+    Value line, Medium-Density, XL-Density, Medium-Density Value line, Low-Density 
+    and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL (Medium-Density
-    Value line), STM3210C-EVAL (Connectivity line), STM3210E-EVAL (High-Density and
-    XL-Density) and STM3210B-EVAL (Medium-Density) evaluation boards and can be easily
-    tailored to any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density
+    Value line), STM32100B-EVAL (Medium-Density Value line), STM3210C-EVAL (Connectivity line), 
+    STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL (Medium-Density) 
+    evaluation boards and can be easily tailored to any other supported device 
+    and development board.
 
   - STM3210C-EVAL Set-up 
     - Connect the following pins to an oscilloscope to monitor the different 
@@ -87,7 +90,7 @@ o For Low-Density Value line and Medium-Density Value line devices:
         - TIM3 CH1 (PC.06) Remapped pin
         - TIM4 CH1 (PB.06) 
 
-  - STM3210E-EVAL, STM3210B-EVAL and STM32100B Set-up 
+  - STM3210E-EVAL, STM3210B-EVAL, STM32100B-EVAL and STM32100E-EVAL Set-up 
     - Connect the following pins to an oscilloscope to monitor the different 
       waveforms:
         - TIM2 CH1 (PA.00) 
@@ -102,7 +105,6 @@ In order to make the program work, you must do the following:
   - stm32f10x_gpio.c 
   - stm32f10x_tim.c 
   - stm32f10x_rcc.c
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
     
 - Edit stm32f10x.h file to select the device you are working on.
   
@@ -122,6 +124,8 @@ In order to make the program work, you must do the following:
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

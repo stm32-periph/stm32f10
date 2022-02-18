@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/6Steps/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -241,7 +241,7 @@ void NVIC_Configuration(void)
   NVIC_InitTypeDef NVIC_InitStructure;
 
   /* Enable the TIM1 Interrupt */
-#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL)
+#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || defined (STM32F10X_HD_VL)
   NVIC_InitStructure.NVIC_IRQChannel = TIM1_TRG_COM_TIM17_IRQn;
 #else
   NVIC_InitStructure.NVIC_IRQChannel = TIM1_TRG_COM_IRQn;

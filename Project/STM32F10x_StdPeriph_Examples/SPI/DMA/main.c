@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/DMA/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -50,7 +50,7 @@ uint8_t SPI_MASTER_Buffer_Tx[BufferSize] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
                                             0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E,
                                             0x1F, 0x20};
 uint8_t SPI_SLAVE_Buffer_Rx[BufferSize];
-uint8_t TxIdx = 0;
+__IO uint8_t TxIdx = 0;
 volatile TestStatus TransferStatus = FAILED;
 
 
@@ -215,8 +215,14 @@ void GPIO_Configuration(void)
 #endif
 
   /* Configure SPI_SLAVE pins: NSS, SCK and MISO*/
-  GPIO_InitStructure.GPIO_Pin = SPI_SLAVE_PIN_NSS | SPI_SLAVE_PIN_SCK | SPI_SLAVE_PIN_MISO;
+  GPIO_InitStructure.GPIO_Pin = SPI_SLAVE_PIN_NSS | SPI_SLAVE_PIN_SCK;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_Init(SPI_SLAVE_GPIO, &GPIO_InitStructure);
+
+  GPIO_InitStructure.GPIO_Pin =  SPI_SLAVE_PIN_MISO;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+  GPIO_Init(SPI_SLAVE_GPIO, &GPIO_InitStructure);
+  
 }
 
 /**

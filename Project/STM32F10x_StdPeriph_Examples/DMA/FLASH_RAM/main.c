@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA/FLASH_RAM/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -38,8 +38,10 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 DMA_InitTypeDef  DMA_InitStructure;
-__IO uint16_t CurrDataCounterBegin = 0, CurrDataCounterEnd = 0;
-__IO TestStatus TransferStatus = FAILED;
+__IO uint32_t CurrDataCounterBegin = 0;
+__IO uint32_t CurrDataCounterEnd = 0x01; /* This variable should not be initialized to 0 */
+
+TestStatus TransferStatus = FAILED;
 const uint32_t SRC_Const_Buffer[BufferSize]= {
                                     0x01020304,0x05060708,0x090A0B0C,0x0D0E0F10,
                                     0x11121314,0x15161718,0x191A1B1C,0x1D1E1F20,

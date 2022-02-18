@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FLASH/Program/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -35,7 +35,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 /* Private define ------------------------------------------------------------*/
 /* Define the STM32F10x FLASH Page Size depending on the used STM32 device */
-#if defined (STM32F10X_HD) || defined (STM32F10X_CL) || defined (STM32F10X_XL)
+#if defined (STM32F10X_HD) || defined (STM32F10X_HD_VL) || defined (STM32F10X_CL) || defined (STM32F10X_XL)
   #define FLASH_PAGE_SIZE    ((uint16_t)0x800)
 #else
   #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
@@ -53,7 +53,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private variables ---------------------------------------------------------*/  
 uint32_t EraseCounter = 0x00, Address = 0x00;
 uint32_t Data = 0x3210ABCD;
-__IO uint32_t NbrOfPage = 0x00;
+uint32_t NbrOfPage = 0x00;
 volatile FLASH_Status FLASHStatus = FLASH_COMPLETE;
 volatile TestStatus MemoryProgramStatus = PASSED;
 

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file RTC/LSI_Calib/main.c 
+  * @file    RTC/LSI_Calib/main.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -120,7 +120,11 @@ int main(void)
   /* Compute the actual frequency of the LSI. (TIM5_CLK = 2 * PCLK1)  */
   if (PeriodValue != 0)
   {
+#if defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || defined (STM32F10X_HD_VL)
+    LsiFreq = (uint32_t)((uint32_t)(RCC_Clocks.PCLK1_Frequency) / (uint32_t)PeriodValue);
+#else
     LsiFreq = (uint32_t)((uint32_t)(RCC_Clocks.PCLK1_Frequency * 2) / (uint32_t)PeriodValue);
+#endif
   }
 
   /* Adjust the RTC prescaler value */

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CAN/Networking/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -35,9 +35,9 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
- CanRxMsg RxMessage;
- extern uint8_t Key_Pressed_Number  ;
- extern void LED_Display(uint8_t Ledstatus);
+CanRxMsg RxMessage;
+extern uint8_t KeyNumber  ;
+extern void LED_Display(uint8_t Ledstatus);
  
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -160,10 +160,10 @@ void CAN1_RX0_IRQHandler(void)
 #endif
 {
   CAN_Receive(CAN1, CAN_FIFO0, &RxMessage);
-  if ((RxMessage.StdId == 0x321)&&(RxMessage.IDE == CAN_ID_STD)&&(RxMessage.DLC == 1))
+  if ((RxMessage.StdId == 0x321)&&(RxMessage.IDE == CAN_ID_STD) && (RxMessage.DLC == 1))
   {
     LED_Display(RxMessage.Data[0]);
-    Key_Pressed_Number = RxMessage.Data[0];
+    KeyNumber = RxMessage.Data[0];
   }
 }
 

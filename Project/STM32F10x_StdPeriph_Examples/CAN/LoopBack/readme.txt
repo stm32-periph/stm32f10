@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    CAN/LoopBack/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the CAN example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -36,7 +36,8 @@ transmission and reception have been successful.
   - CAN/LoopBack/stm32f10x_it.c       Interrupt handlers
   - CAN/LoopBack/stm32f10x_it.h       Interrupt handlers header file
   - CAN/LoopBack/main.c               Main program
-
+  - CAN/LoopBack/system_stm32f10x.c   STM32F10x system source file
+  
 @par Hardware and Software environment 
 
   - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
@@ -74,8 +75,7 @@ In order to make the program work, you must do the following :
   - misc.c
   - stm32f10x_i2c.c
   - stm32f10x_spi.c
-  - stm32_eval.c       (under Utilities\STM32_EVAL)
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)     
+  - stm32_eval.c       (under Utilities\STM32_EVAL)    
           
 - Edit stm32f10x.h file to select the device you are working on.
 - Edit stm32_eval.h file to select the evaluation board you will use.
@@ -96,6 +96,8 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.   
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where

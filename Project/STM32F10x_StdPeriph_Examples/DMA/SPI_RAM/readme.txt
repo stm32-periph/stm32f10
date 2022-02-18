@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    DMA/SPI_RAM/readme.txt 
   * @author  MCD Application Team
-  * @version V3.3.0
-  * @date    04/16/2010
+  * @version V3.4.0
+  * @date    10/15/2010
   * @brief   Description of the DMA SPI example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -43,23 +43,30 @@ been correctly transferred.
 
 @par Directory contents 
 
-  - DMA/SPI_RAM/platform_config.h Evaluation board specific configuration file
-  - DMA/SPI_RAM/stm32f10x_conf.h  Library Configuration file
-  - DMA/SPI_RAM/stm32f10x_it.c    Interrupt handlers
-  - DMA/SPI_RAM/stm32f10x_it.h    Interrupt handlers header file
-  - DMA/SPI_RAM/main.c            Main program
-
+  - DMA/SPI_RAM/platform_config.h   Evaluation board specific configuration file
+  - DMA/SPI_RAM/stm32f10x_conf.h    Library Configuration file
+  - DMA/SPI_RAM/stm32f10x_it.c      Interrupt handlers
+  - DMA/SPI_RAM/stm32f10x_it.h      Interrupt handlers header file
+  - DMA/SPI_RAM/main.c              Main program
+  - DMA/SPI_RAM/system_stm32f10x.c  STM32F10x system source file
 
 @par Hardware and Software environment 
 
   - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+    XL-Density, High-Density Value line, Medium-Density Value line, Low-Density 
+    and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL (Medium-Density
-    Value line), STM3210C-EVAL (Connectivity line), STM3210E-EVAL (High-Density and
-    XL-Density) and STM3210B-EVAL (Medium-Density) evaluation boards and can be easily
-    tailored to any other supported device and development board.
-
+  - This example has been tested with STMicroelectronics STM32100E-EVAL (High-Density Value line)
+    STM32100B-EVAL (Medium-Density Value line), STM32100E-EVAL (High-Density Value line), STM3210C-EVAL 
+    (Connectivity line), STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL 
+    (Medium-Density) evaluation boards and can be easily tailored to any other 
+    supported device and development board.
+	
+  - STM32100E-EVAL Set-up 
+    - Connect SPI1 SCK pin (PA.05) to SPI2 SCK pin	(PB.13)
+    - Connect SPI1 MISO pin (PA.06) to SPI2 MISO pin (PB.14)
+    - Connect SPI1 MOSI pin (PA.07) to SPI2 MOSI pin (PB.15)  
+    
   - STM32100B-EVAL Set-up  
     - Connect SPI1 SCK pin  (PA.05) to SPI2 SCK  pin (PB.13)
     - Connect SPI1 MISO pin (PA.06) to SPI2 MISO pin (PB.14)
@@ -82,7 +89,7 @@ been correctly transferred.
     - Connect SPI1 SCK pin (PA.05) to SPI2 SCK pin	(PB.13)
     - Connect SPI1 MISO pin (PA.06) to SPI2 MISO pin (PB.14)
     - Connect SPI1 MOSI pin (PA.07) to SPI2 MOSI pin (PB.15)    
-
+ 
 
 @par How to use it ? 
 
@@ -93,7 +100,6 @@ In order to make the program work, you must do the following :
   - stm32f10x_gpio.c   
   - stm32f10x_rcc.c 
   - stm32f10x_spi.c 
-  - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
    
 - Edit stm32f10x.h file to select the device you are working on.
 - Edit DMA/SPI_RAM/platform_config.h file to select the evaluation board you will use.
@@ -114,6 +120,8 @@ In order to make the program work, you must do the following :
    the Flash memory density ranges between 64 and 128 Kbytes.  
  - Medium-density devices are STM32F101xx, STM32F102xx and STM32F103xx 
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
+ - High-density Value line devices are STM32F100xx microcontrollers where
+   the Flash memory density ranges between 256 and 512 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
  - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where
