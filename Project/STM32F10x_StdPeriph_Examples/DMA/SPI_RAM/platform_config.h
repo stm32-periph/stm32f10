@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA/SPI_RAM/platform_config.h 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Evaluation board specific configuration file.
   ******************************************************************************
   * @copy

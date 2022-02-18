@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    FSMC/SRAM_DataMemory/readme.txt 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Description of the FSMC SRAM_DataMemory Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -32,10 +32,10 @@ program data memory and internal SRAM for Stack.
 
 @par Hardware and Software environment 
 
-  - This example runs only on STM32F10x High-Density Devices.
+  - This example runs only on STM32F10x High-Density and XL-Density Devices.
   
-  - This example has been tested with STMicroelectronics STM3210E-EVAL (STM32F10x 
-    High-Density) evaluation board and can be easily tailored to any other 
+  - This example has been tested with STMicroelectronics STM3210E-EVAL (High-Density
+    and XL-Density) evaluation board and can be easily tailored to any other 
     supported device and development board.
     
 @par How to use it ? 
@@ -43,7 +43,7 @@ program data memory and internal SRAM for Stack.
 In order to make the program work, you must do the following:
 - Create a project and setup all project configuration:
 <ul>
- <li> RVMDK 
+ <li> MDK-ARM 
     - in Project->Options for Target window, select 'RAM1'and enter 0x68000000 
       as start address with size of 0x100000 (IRAM1 must be un-checked)
     - uncomment "#define DATA_IN_ExtSRAM " in the "system_stm32f10x.c" file               
@@ -55,7 +55,13 @@ In order to make the program work, you must do the following:
  <li> RIDE 
     - In the Application options -> script menu, set "Use Default Script File" 
       to "No" and use "stm32f10x_flash_extsram.ld" as Script File.
-    - uncomment "#define DATA_IN_ExtSRAM " in the "system_stm32f10x.c" file 
+    - uncomment "#define DATA_IN_ExtSRAM " in the "system_stm32f10x.c" file
+  
+ <li> TrueSTUDIO 
+    - In the project properties window, select 'C/C++ Build'->settings node then 
+      the 'C Linker'->General node and use "stm32f10x_flash_extsram.ld" as Script File.
+    - uncomment "#define DATA_IN_ExtSRAM " in the "system_stm32f10x.c" file
+      
 </ul>
 
 - Add the required Library files:
@@ -63,8 +69,7 @@ In order to make the program work, you must do the following:
   - system_stm32f10x.c (under Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x)
   - core_cm3.c (under Libraries\CMSIS\CM3\CoreSupport)
    
-- Edit stm32f10x.h file to select the device you are working on (#define 
-  STM32F10X_HD, in this case).
+- Edit stm32f10x.h file to select the device you are working on.
   
 @b Tip: You can tailor the provided project template to run this example, for 
         more details please refer to "stm32f10x_stdperiph_lib_um.chm" user 
@@ -84,6 +89,8 @@ In order to make the program work, you must do the following:
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
+ - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where
+   the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
  * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>

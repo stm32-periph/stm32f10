@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    I2S/SPI_I2S_Switch/readme.txt 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Description of the SPI_I2S_Switch Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -59,11 +59,11 @@ is PASSED if transmitted and received data are the same otherwise it is FAILED.
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x High-Density and STM32F10x Connectivity-Line 
+  - This example runs on STM32F10x High-Density, XL-Density and Connectivity Line 
     Devices.
   
-  - This example has been tested with STMicroelectronics STM3210E-EVAL (STM32F10x 
-    High-Density) and STM3210C-EVAL (STM32F10x Coneectivity-Line) evaluation boards 
+  - This example has been tested with STMicroelectronics STM3210E-EVAL (High-Density
+    and XL-Density) and STM3210C-EVAL (Coneectivity Line) evaluation boards 
     and can be easily tailored to any other supported device and development board.
 
   - STM3210C-EVAL Set-up 
@@ -121,6 +121,8 @@ In order to make the program work, you must do the following:
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
+ - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where
+   the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
  * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>

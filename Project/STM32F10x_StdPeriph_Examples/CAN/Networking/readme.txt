@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    CAN/Networking/readme.txt 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Description of the CAN Normal example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -21,7 +21,7 @@
 @par Example Description 
 
 This example shows how to configure the CAN peripheral to send and receive 
-CAN frames in normal mode. The sent frames are used to control Leds by presseing 
+CAN frames in normal mode. The sent frames are used to control Leds by pressing  
 key push button.
 	
 The CAN serial communication link is a bus to which a number of units may be
@@ -41,21 +41,21 @@ loaded in all units to send and receive frames.
 
 @par Directory contents 
 
-  - CAN/Normal/platform_config.h    Hardware configuration header file
-  - CAN/Normal/stm32f10x_conf.h     Library Configuration file
-  - CAN/Normal/stm32f10x_it.c       Interrupt handlers
-  - CAN/Normal/stm32f10x_it.h       Interrupt handlers header file
-  - CAN/Normal/main.c               Main program
+  - CAN/Networking/platform_config.h    Hardware configuration header file
+  - CAN/Networking/stm32f10x_conf.h     Library Configuration file
+  - CAN/Networking/stm32f10x_it.c       Interrupt handlers
+  - CAN/Networking/stm32f10x_it.h       Interrupt handlers header file
+  - CAN/Networking/main.c               Main program
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density 
-    and Low-Density Devices.
+  - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
+    XL-Density and Low-Density Devices.
   
-  - This example has been tested with STMicroelectronics STM3210C-EVAL (STM32F10x 
-    Connectivity line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL
-    (STM32F10x Medium-Density) evaluation boards and can be easily tailored to
-    any other supported device and development board.
+  - This example has been tested with STMicroelectronics STM3210C-EVAL (Connectivity line),
+    STM3210E-EVAL (High-Density and XL-Density) and STM3210B-EVAL (Medium-Density)
+    evaluation boards and can be easily tailored to any other supported device and
+    development board.
     To select the STMicroelectronics evaluation board used to run the example, 
     uncomment the corresponding line in CAN/Normal/platform_config.h or stm32_eval.h file  
 
@@ -138,6 +138,8 @@ In order to make the program work, you must do the following :
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
+ - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where
+   the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
  * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>

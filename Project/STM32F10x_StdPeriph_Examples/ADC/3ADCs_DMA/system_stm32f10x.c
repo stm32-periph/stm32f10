@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/3ADCs_DMA/system_stm32f10x.c
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   CMSIS Cortex-M3 Device Peripheral Access Layer System Source File.
   ******************************************************************************  
   *
@@ -84,10 +84,10 @@
 #endif
 
 /*!< Uncomment the following line if you need to use external SRAM mounted
-     on STM3210E-EVAL board (STM32 High density devices) as data memory  */ 
-#ifdef STM32F10X_HD
+     on STM3210E-EVAL board (STM32 High density and XL-density devices) as data memory  */ 
+#if defined (STM32F10X_HD) || (defined STM32F10X_XL)
 /* #define DATA_IN_ExtSRAM */
-#endif /* STM32F10X_HD */
+#endif
 
 /**
   * @}
@@ -163,7 +163,8 @@ static void SetSysClock(void);
 
 /**
   * @brief  Setup the microcontroller system
-  *         Initialize the Embedded Flash Interface, the PLL and update the SystemCoreClock variable.
+  *         Initialize the Embedded Flash Interface, the PLL and update the 
+  *         SystemCoreClock variable.
   * @note   This function should be used only after reset.
   * @param  None
   * @retval None
@@ -210,15 +211,15 @@ void SystemInit (void)
   RCC->CIR = 0x009F0000;
 #endif /* STM32F10X_CL */
     
-  /* Configure the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers */
-  /* Configure the Flash Latency cycles and enable prefetch buffer */
-  SetSysClock();
-
-#ifdef STM32F10X_HD
+#if defined (STM32F10X_HD) || (defined STM32F10X_XL)
   #ifdef DATA_IN_ExtSRAM
     SystemInit_ExtMemCtl(); 
   #endif /* DATA_IN_ExtSRAM */
-#endif /* STM32F10X_HD */  
+#endif 
+
+  /* Configure the System clock frequency, HCLK, PCLK2 and PCLK1 prescalers */
+  /* Configure the Flash Latency cycles and enable prefetch buffer */
+  SetSysClock();
 
 }
 
@@ -490,12 +491,7 @@ static void SetSysClockToHSE(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock 
-         configuration. User can add here some code to deal with this error */    
-
-    /* Go to infinite loop */
-    while (1)
-    {
-    }
+         configuration. User can add here some code to deal with this error */
   }  
 }
 #elif defined SYSCLK_FREQ_24MHz
@@ -599,12 +595,7 @@ static void SetSysClockTo24(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock 
-         configuration. User can add here some code to deal with this error */    
-
-    /* Go to infinite loop */
-    while (1)
-    {
-    }
+         configuration. User can add here some code to deal with this error */
   } 
 }
 #elif defined SYSCLK_FREQ_36MHz
@@ -705,12 +696,7 @@ static void SetSysClockTo36(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock 
-         configuration. User can add here some code to deal with this error */    
-
-    /* Go to infinite loop */
-    while (1)
-    {
-    }
+         configuration. User can add here some code to deal with this error */
   } 
 }
 #elif defined SYSCLK_FREQ_48MHz
@@ -810,12 +796,7 @@ static void SetSysClockTo48(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock 
-         configuration. User can add here some code to deal with this error */    
-
-    /* Go to infinite loop */
-    while (1)
-    {
-    }
+         configuration. User can add here some code to deal with this error */
   } 
 }
 
@@ -917,12 +898,7 @@ static void SetSysClockTo56(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock 
-         configuration. User can add here some code to deal with this error */    
-
-    /* Go to infinite loop */
-    while (1)
-    {
-    }
+         configuration. User can add here some code to deal with this error */
   } 
 }
 
@@ -1025,12 +1001,7 @@ static void SetSysClockTo72(void)
   }
   else
   { /* If HSE fails to start-up, the application will have wrong clock 
-         configuration. User can add here some code to deal with this error */    
-
-    /* Go to infinite loop */
-    while (1)
-    {
-    }
+         configuration. User can add here some code to deal with this error */
   }
 }
 #endif

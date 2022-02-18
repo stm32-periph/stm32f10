@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    NVIC/VectorTable_Relocation/readme.txt 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Description of the NVIC VectorTable_Relocation Example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -43,11 +43,7 @@ address 0x08003000.
 
 @par Directory contents 
 
- - NVIC/VectorTable_Relocation/linker:
-     - EWARMv5:                
-        - stm32f10x_flash_offset.icf    ILINK command file template for EWARM5 
-     - RIDE:                
-        - stm32f10x_flash_offset.ld     Linker script for RIDE        
+ - NVIC/VectorTable_Relocation/linker: modified linker to be used for this project 
  - NVIC/VectorTable_Relocation/stm32f10x_conf.h     Library Configuration file 
  - NVIC/VectorTable_Relocation/stm32f10x_it.c       Interrupt handlers 
  - NVIC/VectorTable_Relocation/stm32f10x_it.h       Interrupt handlers header file 
@@ -58,13 +54,12 @@ address 0x08003000.
 @par Hardware and Software environment 
 
   - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL 
-    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
-    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
-    Medium-Density) evaluation boards and can be easily tailored to any 
-    other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL (Medium-Density
+    Value line), STM3210C-EVAL (Connectivity line), STM3210E-EVAL (High-Density and
+    XL-Density) and STM3210B-EVAL (Medium-Density) evaluation boards and can be easily
+    tailored to any other supported device and development board.
     To select the STMicroelectronics evaluation board used to run the example, 
     uncomment the corresponding line in stm32_eval.h file (under Utilities\STM32_EVAL)
 
@@ -89,7 +84,7 @@ address 0x08003000.
 In order to make the program work, you must do the following :
 - Create a project and setup all project configuration:
 <ul>
-    <li> RVMDK 
+    <li> MDK-ARM 
          - In the project option menu, select 'Target' window and enter 0x08002000 
            as IROM start address
          - In the project option menu, select 'Linker' window and enter 0x08002000 
@@ -101,13 +96,22 @@ In order to make the program work, you must do the following :
     <li> RIDE 
          - In the Application options -> script menu, set "Use Default Script File" 
            to "No" and use "stm32f10x_flash_offset.ld" as Script File. 
-           This linker is configured for STM32 High-density devices. To use it with
-           Medium-density devices, this linker should be updated as follows: 
-              - Line39: RAM (xrw) : ORIGIN = 0x20000000, LENGTH = 20K
-              - Line40: FLASH (rx) : ORIGIN = 0x8002000, LENGTH = 128K-0x2000
-              - Line49: _estack = 0x20005000;
-           
-
+           This linker is configured for STM32 XL-density devices. To use it with
+           other STM32 devices, this linker should be updated.
+    
+    <li> HiTOP 
+         - From linker\HiTOP\[target], copy the "link_offset" and "STM32F10x_offset.lsl"
+           to "Settings" folder.
+         - In project -> settings -> project -> tool settings ->linker 
+             use "link_offset.lnk" as linker file. 
+         - Add the "setstack.asm" to the workspace.
+         
+    <li> TrueSTUDIO 
+         - In the project properties window, select 'C/C++ Build'->settings node then 
+           the 'C Linker'->General node and use "stm32f10x_flash_offset.ld" as Script File.
+           This linker is configured for STM32 STM32F10x XL-density devices. To use it with
+           other STM32 devices, this linker should be updated. 
+         
 </ul>        
 - Add the required Library files:
   - stm32f10x_gpio.c 
@@ -145,6 +149,8 @@ In order to make the program work, you must do the following :
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
+ - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where
+   the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
  * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>

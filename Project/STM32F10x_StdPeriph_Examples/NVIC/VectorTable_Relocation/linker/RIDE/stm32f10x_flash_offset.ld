@@ -1,5 +1,5 @@
 /*
-Default linker script for STM32F10x_512K_64K
+Default linker script for STM32F10x_1024K_96K
 Copyright RAISONANCE S.A.S. 2008
 */
 
@@ -30,14 +30,14 @@ _Minimum_Stack_Size = 0x100 ;
 
 /* include the memory spaces definitions sub-script */
 /*
-Linker subscript for STM32F10x definitions with 512K Flash and 64K RAM */
+Linker subscript for STM32F10x definitions with 1024K Flash and 96K RAM */
 
 /* Memory Spaces Definitions */
 
 MEMORY
 {
-  RAM (xrw) : ORIGIN = 0x20000000, LENGTH = 64K
-  FLASH (rx) : ORIGIN = 0x8002000, LENGTH = 512K-0x2000
+  RAM (xrw) : ORIGIN = 0x20000000, LENGTH = 96K
+  FLASH (rx) : ORIGIN = 0x8002000, LENGTH = 1024K-0x2000
   FLASHB1 (rx) : ORIGIN = 0x00000000, LENGTH = 0
   EXTMEMB0 (rx) : ORIGIN = 0x00000000, LENGTH = 0
   EXTMEMB1 (rx) : ORIGIN = 0x00000000, LENGTH = 0
@@ -46,7 +46,7 @@ MEMORY
 }
 
 /* higher address of the user mode stack */
-_estack = 0x20010000;
+_estack = 0x20018000;
 
 
 

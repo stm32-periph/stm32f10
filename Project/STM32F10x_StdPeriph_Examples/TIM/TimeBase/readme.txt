@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    TIM/TimeBase/readme.txt 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Description of the TIM Time Base example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -66,13 +66,12 @@ PC.08 and  PC.09) are toggled with the following frequencies:
 @par Hardware and Software environment 
 
   - This example runs on STM32F10x Connectivity line, High-Density, Medium-Density, 
-    Medium-Density Value line, Low-Density and Low-Density Value line Devices.
+    XL-Density, Medium-Density Value line, Low-Density and Low-Density Value line Devices.
   
-  - This example has been tested with STMicroelectronics STM32100B-EVAL 
-    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
-    line), STM3210E-EVAL (STM32F10x High-Density) and STM3210B-EVAL (STM32F10x 
-    Medium-Density) evaluation boards and can be easily tailored to any 
-    other supported device and development board.
+  - This example has been tested with STMicroelectronics STM32100B-EVAL (Medium-Density
+    Value line), STM3210C-EVAL (Connectivity line), STM3210E-EVAL (High-Density and
+    XL-Density) and STM3210B-EVAL (Medium-Density) evaluation boards and can be easily
+    tailored to any other supported device and development board.
 
   - STM32100B-EVAL, STM3210E-EVAL, STM3210B-EVAL and STM32100B-EVAL Set-up 
     - Connect an oscilloscope on PC.06, PC.07, PC.08 and  PC.09 to show the 
@@ -109,6 +108,8 @@ In order to make the program work, you must do the following:
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
+ - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where
+   the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
    
  * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>

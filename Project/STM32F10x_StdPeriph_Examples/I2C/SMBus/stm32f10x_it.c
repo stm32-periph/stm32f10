@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/SMBus/stm32f10x_it.c 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and peripherals
   *          interrupt service routine.

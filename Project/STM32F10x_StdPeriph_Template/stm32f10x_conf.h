@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Project/STM32F10x_StdPeriph_Template/stm32f10x_conf.h 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Library configuration file.
   ******************************************************************************
   * @copy
@@ -31,9 +31,9 @@
 /* #include "stm32f10x_crc.h" */
 /* #include "stm32f10x_dac.h" */
 /* #include "stm32f10x_dbgmcu.h" */
-/* #include "stm32f10x_dma.h" */
+#include "stm32f10x_dma.h"
 #include "stm32f10x_exti.h"
-/* #include "stm32f10x_flash.h" */
+#include "stm32f10x_flash.h"
 #include "stm32f10x_fsmc.h"
 #include "stm32f10x_gpio.h"
 /*#include "stm32f10x_i2c.h"*/

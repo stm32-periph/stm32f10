@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FLASH/Write_Protection/main.c 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -33,28 +33,20 @@
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 /* Private define ------------------------------------------------------------*/
-/* Define the STM32F10x FLASH Page Size depending on the used STM32 device */
-#ifdef STM32F10X_LD_VL
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
-#elif defined STM32F10X_LD
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
-#elif defined STM32F10X_MD_VL
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)  
-#elif defined STM32F10X_MD
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
-#elif defined STM32F10X_HD
+/* Define the STM32F10x FLASH Page Size depending on the used device */
+#if defined (STM32F10X_HD) || defined (STM32F10X_CL) || defined (STM32F10X_XL)
   #define FLASH_PAGE_SIZE    ((uint16_t)0x800)
-#elif defined STM32F10X_CL
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x800)  
-#endif /* STM32F10X_LD */
+#else
+  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
+#endif
 
-#define StartAddr  ((uint32_t)0x08006000)
-#define EndAddr    ((uint32_t)0x08008000)
+#define BANK1_WRITE_START_ADDR  ((uint32_t)0x08006000)
+#define BANK1_WRITE_END_ADDR    ((uint32_t)0x08008000)
  
 /* Uncomment this line to Enable Write Protection */
-//#define WriteProtection_Enable
+//#define WRITE_PROTECTION_ENABLE
 /* Uncomment this line to Disable Write Protection */
-#define WriteProtection_Disable
+#define WRITE_PROTECTION_DISABLE
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/  
@@ -91,7 +83,7 @@ int main(void)
   FLASH_Unlock();
 
   /* Define the number of page to be erased */
-  NbrOfPage = (EndAddr - StartAddr) / FLASH_PAGE_SIZE;
+  NbrOfPage = (BANK1_WRITE_END_ADDR - BANK1_WRITE_START_ADDR) / FLASH_PAGE_SIZE;
   
   FLASH_ClearFlag(FLASH_FLAG_EOP|FLASH_FLAG_PGERR |FLASH_FLAG_WRPRTERR);
 
@@ -99,7 +91,7 @@ int main(void)
   WRPR_Value = FLASH_GetWriteProtectionOptionByte();
   ProtectedPages = WRPR_Value & 0x000000C0;
 
-#ifdef WriteProtection_Disable
+#ifdef WRITE_PROTECTION_DISABLE
   if (ProtectedPages == 0x00)
   {/* Pages are write protected */
 
@@ -109,21 +101,17 @@ int main(void)
     /* Generate System Reset to load the new option byte values */
     NVIC_SystemReset();
   }
-#elif defined WriteProtection_Enable
+#elif defined WRITE_PROTECTION_ENABLE
   
   if (ProtectedPages != 0x00)
-  {
-    /* Pages not write protected */
-    /* (STM32F10X_LD_VL) || defined (STM32F10X_LD) || defined (STM32F10X_MD_VL) || defined (STM32F10X_MD) */ 
-    #if !defined (STM32F10X_HD) && !defined (STM32F10X_CL)
+  { /* Pages not write protected */
+
       /* Enable the pages write protection */
-      FLASHStatus = FLASH_EnableWriteProtection(FLASH_WRProt_Pages24to27 |FLASH_WRProt_Pages28to31);    
-    
-    #else /* (STM32F10X_HD) || defined (STM32F10X_CL) */  
-      /* Enable the pages write protection */
+   #if defined (STM32F10X_HD) || defined (STM32F10X_CL) || defined (STM32F10X_XL)
       FLASHStatus = FLASH_EnableWriteProtection(FLASH_WRProt_Pages12to13 |FLASH_WRProt_Pages14to15);
-    #endif
-    
+   #else
+      FLASHStatus = FLASH_EnableWriteProtection(FLASH_WRProt_Pages24to27 |FLASH_WRProt_Pages28to31); 
+   #endif   
     /* Generate System Reset to load the new option byte values */
     NVIC_SystemReset();
   }
@@ -139,22 +127,22 @@ int main(void)
     /* erase the FLASH pages */
     for(EraseCounter = 0; (EraseCounter < NbrOfPage) && (FLASHStatus == FLASH_COMPLETE); EraseCounter++)
     {
-      FLASHStatus = FLASH_ErasePage(StartAddr + (FLASH_PAGE_SIZE * EraseCounter));
+      FLASHStatus = FLASH_ErasePage(BANK1_WRITE_START_ADDR + (FLASH_PAGE_SIZE * EraseCounter));
     }
   
-    /* FLASH Half Word program of data 0x1753 at addresses defined by  StartAddr and EndAddr */
-    Address = StartAddr;
+    /* FLASH Half Word program of data 0x1753 at addresses defined by  BANK1_WRITE_START_ADDR and BANK1_WRITE_END_ADDR */
+    Address = BANK1_WRITE_START_ADDR;
 
-    while((Address < EndAddr) && (FLASHStatus == FLASH_COMPLETE))
+    while((Address < BANK1_WRITE_END_ADDR) && (FLASHStatus == FLASH_COMPLETE))
     {
       FLASHStatus = FLASH_ProgramHalfWord(Address, Data);
       Address = Address + 2;
     }
 
     /* Check the corectness of written data */
-    Address = StartAddr;
+    Address = BANK1_WRITE_START_ADDR;
 
-    while((Address < EndAddr) && (MemoryProgramStatus != FAILED))
+    while((Address < BANK1_WRITE_END_ADDR) && (MemoryProgramStatus != FAILED))
     {
       if((*(__IO uint16_t*) Address) != Data)
       {

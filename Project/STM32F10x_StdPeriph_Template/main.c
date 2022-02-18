@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Project/STM32F10x_StdPeriph_Template/main.c 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -43,15 +43,19 @@
   #define MESSAGE1   "STM32 MD Value Line " 
   #define MESSAGE2   " Device running on  " 
   #define MESSAGE3   "  STM32100B-EVAL    " 
-#elif defined USE_STM3210B_EVAL
+#elif defined (USE_STM3210B_EVAL)
   #define MESSAGE1   "STM32 Medium Density" 
   #define MESSAGE2   " Device running on  " 
   #define MESSAGE3   "   STM3210B-EVAL    " 
-#elif defined USE_STM3210E_EVAL
+#elif defined (STM32F10X_XL) && defined (USE_STM3210E_EVAL)
+  #define MESSAGE1   "  STM32 XL Density  " 
+  #define MESSAGE2   " Device running on  " 
+  #define MESSAGE3   "   STM3210E-EVAL    "
+#elif defined (USE_STM3210E_EVAL)
   #define MESSAGE1   " STM32 High Density " 
   #define MESSAGE2   " Device running on  " 
   #define MESSAGE3   "   STM3210E-EVAL    " 
-#elif defined USE_STM3210C_EVAL
+#elif defined (USE_STM3210C_EVAL)
   #define MESSAGE1   " STM32 Connectivity " 
   #define MESSAGE2   " Line Device running" 
   #define MESSAGE3   " on STM3210C-EVAL   " 
@@ -79,6 +83,13 @@
   */
 int main(void)
 {
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f10x_xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f10x.c file
+     */     
+
   /* Initialize LEDs, Key Button, LCD and COM port(USART) available on
      STM3210X-EVAL board ******************************************************/
   STM_EVAL_LEDInit(LED1);
@@ -106,11 +117,11 @@ int main(void)
   /* Initialize the LCD */
 #ifdef USE_STM32100B_EVAL
   STM32100B_LCD_Init();
-#elif defined USE_STM3210B_EVAL
+#elif defined (USE_STM3210B_EVAL)
   STM3210B_LCD_Init();
-#elif defined USE_STM3210E_EVAL
+#elif defined (USE_STM3210E_EVAL)
   STM3210E_LCD_Init();
-#elif defined USE_STM3210C_EVAL
+#elif defined (USE_STM3210C_EVAL)
   STM3210C_LCD_Init();
 #endif
 

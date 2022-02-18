@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/EEPROM/main.c 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -33,12 +33,12 @@
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 /* Private define ------------------------------------------------------------*/
-#define EEPROM_WriteAddress1    0x50
-#define EEPROM_ReadAddress1     0x50
-#define BufferSize1             (countof(Tx1_Buffer)-1)
-#define BufferSize2             (countof(Tx2_Buffer)-1)
-#define EEPROM_WriteAddress2    (EEPROM_WriteAddress1 + BufferSize1)
-#define EEPROM_ReadAddress2     (EEPROM_ReadAddress1 + BufferSize1)
+#define sEE_WRITE_ADDRESS1        0x50
+#define sEE_READ_ADDRESS1         0x50
+#define BUFFER_SIZE1             (countof(Tx1_Buffer)-1)
+#define BUFFER_SIZE2             (countof(Tx2_Buffer)-1)
+#define sEE_WRITE_ADDRESS2       (sEE_WRITE_ADDRESS1 + BUFFER_SIZE1)
+#define sEE_READ_ADDRESS2        (sEE_READ_ADDRESS1 + BUFFER_SIZE1)
 
 /* Private macro -------------------------------------------------------------*/
 #define countof(a) (sizeof(a) / sizeof(*(a)))
@@ -46,9 +46,10 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private variables ---------------------------------------------------------*/
 uint8_t Tx1_Buffer[] = "/* STM32F10x I2C Firmware ";
 uint8_t Tx2_Buffer[] = "Library Example */";
-uint8_t Rx1_Buffer[BufferSize1], Rx2_Buffer[BufferSize2];
+uint8_t Rx1_Buffer[BUFFER_SIZE1], Rx2_Buffer[BUFFER_SIZE2];
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
-    
+volatile uint16_t NumDataRead = 0;
+
 /* Private functions ---------------------------------------------------------*/
 TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
@@ -70,14 +71,35 @@ int main(void)
   sEE_Init();  
 
   /* First write in the memory followed by a read of the written data --------*/
-  /* Write on I2C EEPROM from EEPROM_WriteAddress1 */
-  sEE_WriteBuffer(Tx1_Buffer, EEPROM_WriteAddress1, BufferSize1); 
+  /* Write on I2C EEPROM from sEE_WRITE_ADDRESS1 */
+  sEE_WriteBuffer(Tx1_Buffer, sEE_WRITE_ADDRESS1, BUFFER_SIZE1); 
 
-  /* Read from I2C EEPROM from EEPROM_ReadAddress1 */
-  sEE_ReadBuffer(Rx1_Buffer, EEPROM_ReadAddress1, BufferSize1); 
+  /* Set the Number of data to be read */
+  NumDataRead = BUFFER_SIZE1;
+  
+  /* Read from I2C EEPROM from sEE_READ_ADDRESS1 */
+  sEE_ReadBuffer(Rx1_Buffer, sEE_READ_ADDRESS1, (uint16_t *)(&NumDataRead)); 
 
+
+  /* Starting from this point, if the requested number of data is higher than 1, 
+     then only the DMA is managing the data transfer. Meanwhile, CPU is free to 
+     perform other tasks:
+     
+    // Add your code here: 
+    //...
+    //...
+
+     For simplicity reasons, this example is just waiting till the end of the 
+     transfer. */
+
+
+  /* Wait till DMA transfer is compelete (Tranfer complete interrupt handler 
+    resets the variable holding the number of data to be read) */
+  while (NumDataRead > 0)
+  {}  
+  
   /* Check if the data written to the memory is read correctly */
-  TransferStatus1 = Buffercmp(Tx1_Buffer, Rx1_Buffer, BufferSize1);
+  TransferStatus1 = Buffercmp(Tx1_Buffer, Rx1_Buffer, BUFFER_SIZE1);
   /* TransferStatus1 = PASSED, if the transmitted and received data 
      to/from the EEPROM are the same */
   /* TransferStatus1 = FAILED, if the transmitted and received data 
@@ -87,18 +109,42 @@ int main(void)
   sEE_WaitEepromStandbyState();
 
   /* Second write in the memory followed by a read of the written data -------*/
-  /* Write on I2C EEPROM from EEPROM_WriteAddress2 */
-  sEE_WriteBuffer(Tx2_Buffer, EEPROM_WriteAddress2, BufferSize2); 
+  /* Write on I2C EEPROM from sEE_WRITE_ADDRESS2 */
+  sEE_WriteBuffer(Tx2_Buffer, sEE_WRITE_ADDRESS2, BUFFER_SIZE2); 
 
-  /* Read from I2C EEPROM from EEPROM_ReadAddress2 */
-  sEE_ReadBuffer(Rx2_Buffer, EEPROM_ReadAddress2, BufferSize2);
+  /* Set the Number of data to be read */
+  NumDataRead = BUFFER_SIZE2;  
+  
+  /* Read from I2C EEPROM from sEE_READ_ADDRESS2 */
+  sEE_ReadBuffer(Rx2_Buffer, sEE_READ_ADDRESS2, (uint16_t *)(&NumDataRead));
 
+
+  /* Starting from this point, if the requested number of data is higher than 1, 
+     then only the DMA is managing the data transfer. Meanwhile, CPU is free to 
+     perform other tasks:
+     
+    // Add your code here: 
+    //...
+    //...
+
+     For simplicity reasons, this example is just waiting till the end of the 
+     transfer. */
+
+
+  /* Wait till DMA transfer is compelete (Tranfer complete interrupt handler 
+    resets the variable holding the number of data to be read) */
+  while (NumDataRead > 0)
+  {}
+  
   /* Check if the data written to the memory is read correctly */
-  TransferStatus2 = Buffercmp(Tx2_Buffer, Rx2_Buffer, BufferSize2);
+  TransferStatus2 = Buffercmp(Tx2_Buffer, Rx2_Buffer, BUFFER_SIZE2);
   /* TransferStatus2 = PASSED, if the transmitted and received data 
      to/from the EEPROM are the same */
   /* TransferStatus2 = FAILED, if the transmitted and received data 
      to/from the EEPROM are different */
+
+  /* Free all used resources */
+  sEE_DeInit();
 
   while (1)
   {

@@ -1,5 +1,5 @@
 /*
-Default linker script for STM32F10x_512K_64K
+Default linker script for STM32F10x_1024K_1024K
 Copyright RAISONANCE S.A.S. 2008
 */
 
@@ -30,14 +30,14 @@ _Minimum_Stack_Size = 0x100 ;
 
 /* include the memory spaces definitions sub-script */
 /*
-Linker subscript for STM32F10x definitions with 512K Flash and 1024K RAM */
+Linker subscript for STM32F10x definitions with 1024K Flash and 1024K External SRAM */
 
 /* Memory Spaces Definitions */
 
 MEMORY
 {
   RAM (xrw) : ORIGIN = 0x68000000, LENGTH = 1024K
-  FLASH (rx) : ORIGIN = 0x8000000, LENGTH = 512K
+  FLASH (rx) : ORIGIN = 0x8000000, LENGTH = 1024K
   FLASHB1 (rx) : ORIGIN = 0x00000000, LENGTH = 0
   EXTMEMB0 (rx) : ORIGIN = 0x00000000, LENGTH = 0
   EXTMEMB1 (rx) : ORIGIN = 0x00000000, LENGTH = 0

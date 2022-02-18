@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FLASH/Program/main.c 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Main program body
   ******************************************************************************
   * @copy
@@ -35,30 +35,31 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 /* Private define ------------------------------------------------------------*/
 /* Define the STM32F10x FLASH Page Size depending on the used STM32 device */
-#ifdef STM32F10X_LD_VL
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
-#elif defined STM32F10X_LD
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
-#elif defined STM32F10X_MD_VL
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
-#elif defined STM32F10X_MD
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
-#elif defined STM32F10X_HD
+#if defined (STM32F10X_HD) || defined (STM32F10X_CL) || defined (STM32F10X_XL)
   #define FLASH_PAGE_SIZE    ((uint16_t)0x800)
-#elif defined STM32F10X_CL
-  #define FLASH_PAGE_SIZE    ((uint16_t)0x800)  
-#endif /* STM32F10X_LD_VL */
+#else
+  #define FLASH_PAGE_SIZE    ((uint16_t)0x400)
+#endif
 
-#define StartAddr  ((uint32_t)0x08008000)
-#define EndAddr    ((uint32_t)0x0800C000)
+#define BANK1_WRITE_START_ADDR  ((uint32_t)0x08008000)
+#define BANK1_WRITE_END_ADDR    ((uint32_t)0x0800C000)
+
+#ifdef STM32F10X_XL
+ #define BANK2_WRITE_START_ADDR   ((uint32_t)0x08088000)
+ #define BANK2_WRITE_END_ADDR     ((uint32_t)0x0808C000)
+#endif /* STM32F10X_XL */
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/  
 uint32_t EraseCounter = 0x00, Address = 0x00;
-uint32_t Data;
+uint32_t Data = 0x3210ABCD;
 __IO uint32_t NbrOfPage = 0x00;
-volatile FLASH_Status FLASHStatus;
-volatile TestStatus MemoryProgramStatus;
+volatile FLASH_Status FLASHStatus = FLASH_COMPLETE;
+volatile TestStatus MemoryProgramStatus = PASSED;
+
+#ifdef STM32F10X_XL
+volatile TestStatus MemoryProgramStatus2 = PASSED;
+#endif /* STM32F10X_XL */
 
 /* Private function prototypes -----------------------------------------------*/   
 /* Private functions ---------------------------------------------------------*/
@@ -76,16 +77,13 @@ int main(void)
        To reconfigure the default setting of SystemInit() function, refer to
        system_stm32f10x.c file
      */     
-       
-  FLASHStatus = FLASH_COMPLETE;
-  MemoryProgramStatus = PASSED;
-  Data = 0x15041979;
 
-  /* Unlock the Flash Program Erase controller */
-  FLASH_Unlock();
+/* Porgram FLASH Bank1 ********************************************************/       
+  /* Unlock the Flash Bank1 Program Erase controller */
+  FLASH_UnlockBank1();
 
   /* Define the number of page to be erased */
-  NbrOfPage = (EndAddr - StartAddr) / FLASH_PAGE_SIZE;
+  NbrOfPage = (BANK1_WRITE_END_ADDR - BANK1_WRITE_START_ADDR) / FLASH_PAGE_SIZE;
 
   /* Clear All pending flags */
   FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);	
@@ -93,22 +91,24 @@ int main(void)
   /* Erase the FLASH pages */
   for(EraseCounter = 0; (EraseCounter < NbrOfPage) && (FLASHStatus == FLASH_COMPLETE); EraseCounter++)
   {
-    FLASHStatus = FLASH_ErasePage(StartAddr + (FLASH_PAGE_SIZE * EraseCounter));
+    FLASHStatus = FLASH_ErasePage(BANK1_WRITE_START_ADDR + (FLASH_PAGE_SIZE * EraseCounter));
   }
   
-  /*  FLASH Word program of data 0x15041979 at addresses defined by StartAddr and EndAddr*/
-  Address = StartAddr;
+  /* Program Flash Bank1 */
+  Address = BANK1_WRITE_START_ADDR;
 
-  while((Address < EndAddr) && (FLASHStatus == FLASH_COMPLETE))
+  while((Address < BANK1_WRITE_END_ADDR) && (FLASHStatus == FLASH_COMPLETE))
   {
     FLASHStatus = FLASH_ProgramWord(Address, Data);
     Address = Address + 4;
   }
+
+  FLASH_LockBank1();
   
   /* Check the corectness of written data */
-  Address = StartAddr;
+  Address = BANK1_WRITE_START_ADDR;
 
-  while((Address < EndAddr) && (MemoryProgramStatus != FAILED))
+  while((Address < BANK1_WRITE_END_ADDR) && (MemoryProgramStatus != FAILED))
   {
     if((*(__IO uint32_t*) Address) != Data)
     {
@@ -116,7 +116,47 @@ int main(void)
     }
     Address += 4;
   }
+
+#ifdef STM32F10X_XL
+/* Porgram FLASH Bank2 ********************************************************/  
+  /* Unlock the Flash Bank2 Program Erase controller */
+  FLASH_UnlockBank2();
+
+  /* Define the number of page to be erased */
+  NbrOfPage = (BANK2_WRITE_END_ADDR - BANK2_WRITE_START_ADDR) / FLASH_PAGE_SIZE;
+
+  /* Clear All pending flags */
+  FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);	
+
+  /* Erase the FLASH pages */
+  for(EraseCounter = 0; (EraseCounter < NbrOfPage) && (FLASHStatus == FLASH_COMPLETE); EraseCounter++)
+  {
+    FLASHStatus = FLASH_ErasePage(BANK2_WRITE_START_ADDR + (FLASH_PAGE_SIZE * EraseCounter));
+  }
   
+  /* Program Flash Bank2 */
+  Address = BANK2_WRITE_START_ADDR;
+
+  while((Address < BANK2_WRITE_END_ADDR) && (FLASHStatus == FLASH_COMPLETE))
+  {
+    FLASHStatus = FLASH_ProgramWord(Address, Data);
+    Address = Address + 4;
+  }
+
+  FLASH_LockBank2();
+    
+  /* Check the corectness of written data */
+  Address = BANK2_WRITE_START_ADDR;
+
+  while((Address < BANK2_WRITE_END_ADDR) && (MemoryProgramStatus2 != FAILED))
+  {
+    if((*(__IO uint32_t*) Address) != Data)
+    {
+      MemoryProgramStatus2 = FAILED;
+    }
+    Address += 4;
+  }
+#endif /* STM32F10X_XL */ 
   
   while (1)
   {

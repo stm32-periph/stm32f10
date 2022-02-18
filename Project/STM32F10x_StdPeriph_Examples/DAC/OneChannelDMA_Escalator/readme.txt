@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2010 STMicroelectronics *******************
   * @file    DAC/OneChannelDMA_Escalator/readme.txt 
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    03/01/2010
+  * @version V3.3.0
+  * @date    04/16/2010
   * @brief   Description of the DAC one channel DMA escalator example.
   ******************************************************************************
   * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -21,7 +21,7 @@
 @par Example Description 
 
 This example describes how to use one DAC channel mode with DMA to generate an
-escalator signal on DAC channel1 outpout.
+escalator signal on DAC channel1 output.
 
 DAC channel1 conversion is configured to be triggered by TIM6 TRGO triggers and
 without noise/triangle wave generation. 8bit right data alignement is selected
@@ -44,12 +44,12 @@ pin to an oscilloscope.
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F10x Connectivity line, High-Density, 
+  - This example runs on STM32F10x Connectivity line, High-Density, XL-Density,
     Medium-Density Value line and Low-Density Value line Devices.
   
   - This example has been tested with STMicroelectronics STM32100B-EVAL 
-    (STM32F10x Medium-Density Value line), STM3210C-EVAL (STM32F10x Connectivity 
-    line)and STM3210E-EVAL (STM32F10x High-Density) evaluation boards and can be 
+    (Medium-Density Value line), STM3210C-EVAL (Connectivity line) and 
+    STM3210E-EVAL (High-Density and XL-Density) evaluation boards and can be 
     easily tailored to any other supported device and development board.   
 
   - STM32100B-EVAL Set-up 
@@ -95,6 +95,8 @@ In order to make the program work, you must do the following:
    microcontrollers where the Flash memory density ranges between 64 and 128 Kbytes.
  - High-density devices are STM32F101xx and STM32F103xx microcontrollers where
    the Flash memory density ranges between 256 and 512 Kbytes.
+ - XL-density devices are STM32F101xx and STM32F103xx microcontrollers where
+   the Flash memory density ranges between 512 and 1024 Kbytes.
  - Connectivity line devices are STM32F105xx and STM32F107xx microcontrollers.
     
  * <h3><center>&copy; COPYRIGHT 2010 STMicroelectronics</center></h3>
