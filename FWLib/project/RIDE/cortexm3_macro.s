@@ -1,8 +1,8 @@
 /*;******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 ;* File Name          : cortexm3_macro.s
 ;* Author             : MCD Application Team
-;* Version            : V2.0.1
-;* Date               : 06/13/2008
+;* Version            : V2.0.3
+;* Date               : 09/22/2008
 ;* Description        : Instruction wrappers for special Cortex-M3 instructions.
 ;*                      to be used with RIDE7 toolchain.
 ;*******************************************************************************

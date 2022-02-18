@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : version.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Version file for STM32F10x Firmware Library (FWLib).
 *                      The enclosed firmware and all the related documentation
 *                      are not covered by a License Agreement, if you need such
@@ -17,6 +17,146 @@
 * INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
 *******************************************************************************/
 
+* V2.0.3 - 09/22/2008
+=====================
+   
+General
+*******
+     + stm32f10xfwlib_contents_html file updated:
+        - Description of firmware library package content
+        - Easy-to-use firmware library examples: add description of
+          how to use the project template to run the selected example
+
+
+< library >
+***********
+
+     + stm32f10x_map.h: add all STM32 Hardware registers bits definitions
+
+     + stm32f10x_conf.h: add a define for HSEStartUp_TimeOut
+
+     + stm32f10x_fsmc.h/.c:
+       - FSMC_MemoryType_CRAM is changed to FSMC_MemoryType_PSRAM
+       - FSMC_AsyncWait member removed from FSMC_NORSRAMInitTypeDef structure
+       - FSMC_BusTurnAroundDuration parameter removed in case of write configuration
+
+     + stm32f10x_rcc.h/.c:
+       - RCC_FLAG_HSIRDY define value changed to 0x21.
+       - StartUpCounterand HSEStatus variables are now local for RCC_WaitForHSEStartUp
+         function. 
+
+     + stm32f10x_i2c.h/.c: 
+       - Add new event: EV8: I2C_EVENT_MASTER_BYTE_TRANSMITTING
+
+     + stm32f10x_tim.c: 
+       - "=" operator changed to "|=" inside TIM_SelectOCxM function
+
+     + stm32f10x_can.c: Definitions names changed
+         
+
+< examples >
+************
+   + I2C Interrupt example
+     - Example updated according to I2C driver update
+
+   + I2C M24C08_EEPROM example
+     - i2c_ee.c file: add a loop on I2C_FLAG_BUSY in I2C_EE_PageWrite and
+       I2C_EE_BufferRead functions
+     - i2c_ee.c file: add STOP condition in I2C_EE_WaitEepromStandbyState
+       function
+
+   + SDIO example
+     - Example updated to support SD Card V2.0 and SD High Capacity cards.
+
+   + USART Polling example
+     - USART TC flag check changed by USART TXE flag check
+
+
+* V2.0.2 - 07/11/2008
+=====================
+   
+< library >
+***********
+     + stm32f10x_spi.c /.h
+       - SPI_I2S_ClearFlag function: some flags are removed from the possible 
+         flags parameters list. 
+         This function can clear only CRCERR flag.
+         
+       - SPI_I2S_ClearITPendingBit function: some pending bits are removed from 
+         the possible pending bits parameters list. 
+         This function can clear only CRCERR pending bit.         
+     
+    + stm32f10x_i2c.c /.h
+       - I2C_ClearFlag function: some flags are removed from the possible 
+         flags parameters list.
+         This function can clear only SMBALER, TIMEOUT, PECERR, OVR, AF, ARLO and
+         BERR flags. The passed parameter can be any combination of above flags.
+        
+      - I2C_GetITStatus function checks on interrupt pending bit and the interrupt
+        enable bit.
+         
+       - I2C_ClearITPendingBit function: some pending bits are removed from the 
+         possible pending bits parameters list.
+         This function can clear only SMBALER, TIMEOUT, PECERR, OVR, AF, ARLO and
+         BERR pending bits. The passed parameter can be any combination of above 
+         pending bits.         
+
+    + stm32f10x_usart.c /.h
+       - USART_ClearFlag function: some flags are removed from the possible flags 
+         parameters list. 
+         This function can clear only CTS, LBD, TC and RXNE flags.
+             
+       - USART_GetITStatus function: IS_USART_IT macro is changed to IS_USART_GET_IT
+       
+       - USART_ClearITPendingBit function: some pending bits are removed from 
+         the possible pending bits parameters list. 
+         This function can clear only CTS, LBD, TC and RXNE pending bits.
+          
+    + stm32f10x_tim.c
+       - remove IS_TIM_PERIPH_FLAG(TIMx, TIM_FLAG) macro from TIM_ClearFlag 
+         function
+         
+    + stm32f10x_wwdg.c
+       - use register direct access in the WWDG_GetFlagStatus function instead
+         of bit banding access
+
+    + stm32f10x_gpio.c
+       - GPIO_Init function update        
+
+            
+< examples >
+************
+   + I2C Interrupt example
+     - The example is changed to provide a description of how to manage data 
+       transfer from master transmitter to slave receiver and from slave 
+       transmitter to master receiver using interrupts.
+     - add main.h file
+       
+   + I2C 10bitAddress example
+     - Updated according to the I2C driver update
+     
+   + I2C DualAddress example
+     - Updated according to the I2C driver update
+     
+   + I2C SMBus example
+     - Updated according to the I2C driver update
+     
+   + USART DMA_Interrupt example
+     - Updated according to the USART driver update
+     
+   + USART Smartcard example
+     - Updated according to the USART driver update
+     
+   + DAC Examples
+     - GPIO_Configuration function updated: Once the DAC channel is enabled, 
+       the corresponding GPIO pin is automatically connected to the DAC 
+       converter. In order to avoid parasitic consumption, the GPIO pin should 
+       be configured in analog.
+     
+   + RTC LSI_Calib example
+     - Example Update: add main.h file
+
+  
 * V2.0.1 - 06/13/2008
 =====================
     + Remove the Firmware License Agreement file
@@ -143,7 +283,7 @@ General
              
 
 < examples >
-***********
+************
    + FWLib V1.0 examples ported to run on STMicroelectronics STM3210E-EVAL
      evaluation board (in addition to STM3210B-EVAL)
 

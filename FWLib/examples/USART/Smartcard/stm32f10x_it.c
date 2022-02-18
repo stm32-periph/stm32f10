@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : stm32f10x_it.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Main Interrupt Service Routines.
 *                      This file provides template for all exceptions handler
 *                      and peripherals interrupt service routine.
@@ -602,11 +602,16 @@ void USART3_IRQHandler(void)
   /* If the USART3 detects a parity error */
   if(USART_GetITStatus(USART3, USART_IT_PE) != RESET)
   {
-    while(USART_GetFlagStatus(USART3, USART_FLAG_RXNE) == RESET)
-    {
-    }
-    /* Clear the USART3 Parity error pending bit */
-    USART_ClearITPendingBit(USART3, USART_IT_PE);
+    /* Enable USART3 RXNE Interrupt (until receiving the corrupted byte) */
+    USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
+    /* Flush the USART3 DR register */
+    USART_ReceiveData(USART3);
+  }
+  
+  if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
+  {
+    /* Disable USART3 RXNE Interrupt */
+    USART_ITConfig(USART3, USART_IT_RXNE, DISABLE);
     USART_ReceiveData(USART3);
   }
 }

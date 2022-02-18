@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : sdcard.h
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : This file contains all the functions prototypes for the
 *                      SD Card driver firmware library.
 ********************************************************************************
@@ -173,7 +173,7 @@ typedef struct       /* Card Specific Data */
   vu8  RdBlockMisalign;      /* Read block misalignment */
   vu8  DSRImpl;              /* DSR implemented */
   vu8  Reserved2;            /* Reserved */
-  vu16 DeviceSize;           /* Device Size */
+  vu32 DeviceSize;           /* Device Size */
   vu8  MaxRdCurrentVDDMin;   /* Max. read current @ VDD min */
   vu8  MaxRdCurrentVDDMax;   /* Max. read current @ VDD max */
   vu8  MaxWrCurrentVDDMin;   /* Max. write current @ VDD min */
@@ -217,14 +217,26 @@ typedef struct
 {
   SD_CSD SD_csd;
   SD_CID SD_cid;
-  u8 CardType;
+  u32 CardCapacity; /* Card Capacity */
+  u32 CardBlockSize; /* Card Block Size */
   u16 RCA;
+  u8 CardType;
 } SD_CardInfo;
 
 /* Exported constants --------------------------------------------------------*/
 #define SD_DMA_MODE                     ((u32)0x00000000)
 #define SD_INTERRUPT_MODE               ((u32)0x00000001)
 #define SD_POLLING_MODE                 ((u32)0x00000002)
+
+/* Supported Memory Cards */
+#define SDIO_STD_CAPACITY_SD_CARD_V1_1     ((u32)0x0)
+#define SDIO_STD_CAPACITY_SD_CARD_V2_0     ((u32)0x1)
+#define SDIO_HIGH_CAPACITY_SD_CARD         ((u32)0x2)
+#define SDIO_MULTIMEDIA_CARD               ((u32)0x3)
+#define SDIO_SECURE_DIGITAL_IO_CARD        ((u32)0x4)
+#define SDIO_HIGH_SPEED_MULTIMEDIA_CARD    ((u32)0x5)
+#define SDIO_SECURE_DIGITAL_IO_COMBO_CARD  ((u32)0x6)
+#define SDIO_HIGH_CAPACITY_MMC_CARD        ((u32)0x7)
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

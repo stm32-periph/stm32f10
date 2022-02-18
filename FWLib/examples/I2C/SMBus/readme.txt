@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : readme.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Description of the I2C SMBus mode example.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -30,7 +30,7 @@ A correct transmission leads to obtaining the following variable values:
          - Status = 0x01 (the flag SMBDEFAULT has been set)
          - ReceivedCommand = 0x01 (the Command value has been correctly received)
          
-The communication clock speed is set to 200KHz.
+The communication clock speed is set to 20KHz.
 
 
 Directory contents

@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : readme.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Description of the SDIO Example.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -16,8 +16,8 @@
 Example description
 ===================
 This example provides a basic example of how to use the SDIO firmware library and
-an associate driver to perform read/write operations on the SD Card memory 
-mounted on the STM3210E-EVAL board.
+an associate driver to perform read/write operations on the SD Card memory (SD Card 
+V1.1 protocol) mounted on the STM3210E-EVAL board.
 Below is a description of the different example steps:
   - Configure the SDIO according to the desired SDIO_CK clock frequency.
   - Reset the SD Card

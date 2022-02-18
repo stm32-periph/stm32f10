@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : main.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Main program body
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -114,8 +114,10 @@ int main(void)
   I2C_GenerateSTOP(I2C1, ENABLE);
   /* Test on I2C2 EV4 and clear it */
   while(!I2C_CheckEvent(I2C2, I2C_EVENT_SLAVE_STOP_DETECTED)); 
-  /* Clear I2C2 STOPF flag */
-  I2C_ClearFlag(I2C2, I2C_FLAG_STOPF);
+  /* Clear I2C2 STOPF flag: read operation to I2C_SR1 followed by a 
+  write operation to I2C_CR1 */
+  (void)(I2C_GetFlagStatus(I2C2, I2C_FLAG_STOPF));
+  I2C_Cmd(I2C2, ENABLE); 
 
   /* Check the corectness of written data */
   TransferStatus = Buffercmp(I2C1_Buffer_Tx, I2C2_Buffer_Rx, BufferSize);

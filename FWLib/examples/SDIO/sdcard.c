@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : sdcard.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : This file provides all the SD Card driver firmware
 *                      functions.
 ********************************************************************************
@@ -83,20 +83,12 @@
    SDIO_APP_CMD should be sent before sending these commands. */
 #define SDIO_SEND_IF_COND               ((u32)0x00000008)
 
-#define SDIO_MULTIMEDIA_CARD               ((u32)0x0)
-#define SDIO_SECURE_DIGITAL_CARD           ((u32)0x1)
-#define SDIO_SECURE_DIGITAL_IO_CARD        ((u32)0x2)
-#define SDIO_HIGH_SPEED_MULTIMEDIA_CARD    ((u32)0x3)
-#define SDIO_SECURE_DIGITAL_IO_COMBO_CARD  ((u32)0x4)
-#define SDIO_HIGH_CAPACITY_SD_CARD         ((u32)0x5)
-#define SDIO_HIGH_CAPACITY_MMC_CARD        ((u32)0x6)
-
 #define SDIO_INIT_CLK_DIV                  ((u8)0xB2)
 #define SDIO_TRANSFER_CLK_DIV              ((u8)0x1) 
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-static u32 CardType =  SDIO_SECURE_DIGITAL_CARD;
+static u32 CardType =  SDIO_STD_CAPACITY_SD_CARD_V1_1;
 static u32 CSD_Tab[4], CID_Tab[4], RCA = 0;
 static u32 DeviceMode = SD_POLLING_MODE;
 static u32 TotalNumberOfBytes = 0, StopCondition = 0;
@@ -242,7 +234,8 @@ SD_Error SD_PowerON(void)
 
   if (errorstatus == SD_OK)
   {
-    SDType = SD_HIGH_CAPACITY; /* SD Card 2.0 */
+    CardType = SDIO_STD_CAPACITY_SD_CARD_V2_0; /* SD Card 2.0 */
+    SDType = SD_HIGH_CAPACITY;
   }
   else
   {
@@ -311,14 +304,11 @@ SD_Error SD_PowerON(void)
       return(errorstatus);
     }
 
-    if (SDType == SD_HIGH_CAPACITY)
+    if (response &= SD_HIGH_CAPACITY)
     {
       CardType = SDIO_HIGH_CAPACITY_SD_CARD;
     }
-    else
-    {
-      CardType = SDIO_SECURE_DIGITAL_CARD;
-    }
+
   }/* else MMC Card */
 
   return(errorstatus);
@@ -382,7 +372,7 @@ SD_Error SD_InitializeCards(void)
     CID_Tab[2] = SDIO_GetResponse(SDIO_RESP3);
     CID_Tab[3] = SDIO_GetResponse(SDIO_RESP4);
   }
-  if ((SDIO_SECURE_DIGITAL_CARD == CardType) ||  (SDIO_SECURE_DIGITAL_IO_CARD == CardType) ||  (SDIO_SECURE_DIGITAL_IO_COMBO_CARD == CardType)
+  if ((SDIO_STD_CAPACITY_SD_CARD_V1_1 == CardType) ||  (SDIO_STD_CAPACITY_SD_CARD_V2_0 == CardType) ||  (SDIO_SECURE_DIGITAL_IO_COMBO_CARD == CardType)
       ||  (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
   {
     /* Send CMD3 SET_REL_ADDR with argument 0 */
@@ -482,28 +472,60 @@ SD_Error SD_GetCardInfo(SD_CardInfo *cardinfo)
   cardinfo->SD_csd.RdBlockMisalign = (tmp & 0x20) >> 5;
   cardinfo->SD_csd.DSRImpl = (tmp & 0x10) >> 4;
   cardinfo->SD_csd.Reserved2 = 0; /* Reserved */
-  cardinfo->SD_csd.DeviceSize = (tmp & 0x03) << 10;
 
-  /* Byte 7 */
-  tmp = (u8)(CSD_Tab[1] & 0x000000FF);
-  cardinfo->SD_csd.DeviceSize |= (tmp) << 2;
+  if ((CardType == SDIO_STD_CAPACITY_SD_CARD_V1_1) || (CardType == SDIO_STD_CAPACITY_SD_CARD_V2_0))
+  {
+    cardinfo->SD_csd.DeviceSize = (tmp & 0x03) << 10;
 
-  /* Byte 8 */
-  tmp = (u8)((CSD_Tab[2] & 0xFF000000) >> 24);
+    /* Byte 7 */
+    tmp = (u8)(CSD_Tab[1] & 0x000000FF);
+    cardinfo->SD_csd.DeviceSize |= (tmp) << 2;
 
-  cardinfo->SD_csd.DeviceSize |= (tmp & 0xC0) >> 6;
-  cardinfo->SD_csd.MaxRdCurrentVDDMin = (tmp & 0x38) >> 3;
-  cardinfo->SD_csd.MaxRdCurrentVDDMax = (tmp & 0x07);
+    /* Byte 8 */
+    tmp = (u8)((CSD_Tab[2] & 0xFF000000) >> 24);
+    cardinfo->SD_csd.DeviceSize |= (tmp & 0xC0) >> 6;
 
-  /* Byte 9 */
-  tmp = (u8)((CSD_Tab[2] & 0x00FF0000) >> 16);
-  cardinfo->SD_csd.MaxWrCurrentVDDMin = (tmp & 0xE0) >> 5;
-  cardinfo->SD_csd.MaxWrCurrentVDDMax = (tmp & 0x1C) >> 2;
-  cardinfo->SD_csd.DeviceSizeMul = (tmp & 0x03) << 1;
+    cardinfo->SD_csd.MaxRdCurrentVDDMin = (tmp & 0x38) >> 3;
+    cardinfo->SD_csd.MaxRdCurrentVDDMax = (tmp & 0x07);
 
-  /* Byte 10 */
-  tmp = (u8)((CSD_Tab[2] & 0x0000FF00) >> 8);
-  cardinfo->SD_csd.DeviceSizeMul |= (tmp & 0x80) >> 7;
+    /* Byte 9 */
+    tmp = (u8)((CSD_Tab[2] & 0x00FF0000) >> 16);
+    cardinfo->SD_csd.MaxWrCurrentVDDMin = (tmp & 0xE0) >> 5;
+    cardinfo->SD_csd.MaxWrCurrentVDDMax = (tmp & 0x1C) >> 2;
+    cardinfo->SD_csd.DeviceSizeMul = (tmp & 0x03) << 1;
+    /* Byte 10 */
+    tmp = (u8)((CSD_Tab[2] & 0x0000FF00) >> 8);
+    cardinfo->SD_csd.DeviceSizeMul |= (tmp & 0x80) >> 7;
+    
+    cardinfo->CardCapacity = (cardinfo->SD_csd.DeviceSize + 1) ;
+    cardinfo->CardCapacity *= (1 << (cardinfo->SD_csd.DeviceSizeMul + 2));
+    cardinfo->CardBlockSize = 1 << (cardinfo->SD_csd.RdBlockLen);
+    cardinfo->CardCapacity *= cardinfo->CardBlockSize;
+  }
+  else if (CardType == SDIO_HIGH_CAPACITY_SD_CARD)
+  {
+    /* Byte 7 */
+    tmp = (u8)(CSD_Tab[1] & 0x000000FF);
+    cardinfo->SD_csd.DeviceSize = (tmp & 0x3F) << 16;
+
+    /* Byte 8 */
+    tmp = (u8)((CSD_Tab[2] & 0xFF000000) >> 24);
+
+    cardinfo->SD_csd.DeviceSize |= (tmp << 8);
+
+    /* Byte 9 */
+    tmp = (u8)((CSD_Tab[2] & 0x00FF0000) >> 16);
+
+    cardinfo->SD_csd.DeviceSize |= (tmp);
+
+    /* Byte 10 */
+    tmp = (u8)((CSD_Tab[2] & 0x0000FF00) >> 8);
+    
+    cardinfo->CardCapacity = (cardinfo->SD_csd.DeviceSize + 1) * 512 * 1024;
+    cardinfo->CardBlockSize = 512;    
+  }
+
+
   cardinfo->SD_csd.EraseGrSize = (tmp & 0x40) >> 6;
   cardinfo->SD_csd.EraseGrMul = (tmp & 0x3F) << 1;
 
@@ -606,7 +628,7 @@ SD_Error SD_GetCardInfo(SD_CardInfo *cardinfo)
   tmp = (u8)(CID_Tab[3] & 0x000000FF);
   cardinfo->SD_cid.CID_CRC = (tmp & 0xFE) >> 1;
   cardinfo->SD_cid.Reserved2 = 1;
-
+  
   return(errorstatus);
 }
 
@@ -632,7 +654,7 @@ SD_Error SD_EnableWideBusOperation(u32 WideMode)
     errorstatus = SD_UNSUPPORTED_FEATURE;
     return(errorstatus);
   }
-  else if ((SDIO_SECURE_DIGITAL_CARD == CardType) || (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
+  else if ((SDIO_STD_CAPACITY_SD_CARD_V1_1 == CardType) || (SDIO_STD_CAPACITY_SD_CARD_V2_0 == CardType) || (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
   {
     if (SDIO_BusWide_8b == WideMode)
     {
@@ -769,7 +791,12 @@ SD_Error SD_ReadBlock(u32 addr, u32 *readbuff, u16 BlockSize)
     errorstatus = SD_LOCK_UNLOCK_FAILED;
     return(errorstatus);
   }
-
+  
+  if (CardType == SDIO_HIGH_CAPACITY_SD_CARD)
+  {
+    BlockSize = 512;
+    addr /= 512;
+  }
   if ((BlockSize > 0) && (BlockSize <= 2048) && ((BlockSize & (BlockSize - 1)) == 0))
   {
     power = convert_from_bytes_to_power_of_two(BlockSize);
@@ -934,6 +961,12 @@ SD_Error SD_ReadMultiBlocks(u32 addr, u32 *readbuff, u16 BlockSize, u32 NumberOf
     return(errorstatus);
   }
 
+  if (CardType == SDIO_HIGH_CAPACITY_SD_CARD)
+  {
+    BlockSize = 512;
+    addr /= 512;
+  }
+  
   if ((BlockSize > 0) && (BlockSize <= 2048) && (0 == (BlockSize & (BlockSize - 1))))
   {
     power = convert_from_bytes_to_power_of_two(BlockSize);
@@ -1043,7 +1076,7 @@ SD_Error SD_ReadMultiBlocks(u32 addr, u32 *readbuff, u16 BlockSize, u32 NumberOf
       if (SDIO_GetFlagStatus(SDIO_FLAG_DATAEND) != RESET)
       {
         /* In Case Of SD-CARD Send Command STOP_TRANSMISSION */
-        if ((SDIO_SECURE_DIGITAL_CARD == CardType) || (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
+        if ((SDIO_STD_CAPACITY_SD_CARD_V1_1 == CardType) || (SDIO_HIGH_CAPACITY_SD_CARD == CardType) || (SDIO_STD_CAPACITY_SD_CARD_V2_0 == CardType))
         {
           /* Send CMD12 STOP_TRANSMISSION */
           SDIO_CmdInitStructure.SDIO_Argument = 0x0;
@@ -1136,6 +1169,12 @@ SD_Error SD_WriteBlock(u32 addr, u32 *writebuff, u16 BlockSize)
     return(errorstatus);
   }
 
+  if (CardType == SDIO_HIGH_CAPACITY_SD_CARD)
+  {
+    BlockSize = 512;
+    addr /= 512;
+  }
+  
   /* Set the block size, both on controller and card */
   if ((BlockSize > 0) && (BlockSize <= 2048) && ((BlockSize & (BlockSize - 1)) == 0))
   {
@@ -1367,6 +1406,12 @@ SD_Error SD_WriteMultiBlocks(u32 addr, u32 *writebuff, u16 BlockSize, u32 Number
     return(errorstatus);
   }
 
+  if (CardType == SDIO_HIGH_CAPACITY_SD_CARD)
+  {
+    BlockSize = 512;
+    addr /= 512;
+  }
+  
   /* Set the block size, both on controller and card */
   if ((BlockSize > 0) && (BlockSize <= 2048) && ((BlockSize & (BlockSize - 1)) == 0))
   {
@@ -1416,7 +1461,7 @@ SD_Error SD_WriteMultiBlocks(u32 addr, u32 *writebuff, u16 BlockSize, u32 Number
       return(errorstatus);
     }
 
-    if ((SDIO_SECURE_DIGITAL_CARD == CardType) || (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
+    if ((SDIO_STD_CAPACITY_SD_CARD_V1_1 == CardType) || (SDIO_STD_CAPACITY_SD_CARD_V2_0 == CardType) || (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
     {
       /* To improve performance */
       SDIO_CmdInitStructure.SDIO_Argument = (u32) (RCA << 16);
@@ -1531,7 +1576,7 @@ SD_Error SD_WriteMultiBlocks(u32 addr, u32 *writebuff, u16 BlockSize, u32 Number
 
       if (SDIO_GetFlagStatus(SDIO_FLAG_DATAEND) != RESET)
       {
-        if ((SDIO_SECURE_DIGITAL_CARD == CardType) || (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
+       if ((SDIO_STD_CAPACITY_SD_CARD_V1_1 == CardType) || (SDIO_STD_CAPACITY_SD_CARD_V2_0 == CardType) || (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
         {
           /* Send CMD12 STOP_TRANSMISSION */
           SDIO_CmdInitStructure.SDIO_Argument = 0x0;
@@ -1666,8 +1711,14 @@ SD_Error SD_Erase(u32 startaddr, u32 endaddr)
     return(errorstatus);
   }
 
+  if (CardType == SDIO_HIGH_CAPACITY_SD_CARD)
+  {
+    startaddr /= 512;
+    endaddr /= 512;
+  }
+  
   /* According to sd-card spec 1.0 ERASE_GROUP_START (CMD32) and erase_group_end(CMD33) */
-  if ((SDIO_SECURE_DIGITAL_CARD == CardType) ||  (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
+  if ((SDIO_STD_CAPACITY_SD_CARD_V1_1 == CardType) || (SDIO_STD_CAPACITY_SD_CARD_V2_0 == CardType) || (SDIO_HIGH_CAPACITY_SD_CARD == CardType))
   {
     /* Send CMD32 SD_ERASE_GRP_START with argument as addr  */
     SDIO_CmdInitStructure.SDIO_Argument = startaddr;
@@ -2090,6 +2141,7 @@ static SD_Error CmdResp7Error(void)
   {
     /* Card is SD V2.0 compliant */
     errorstatus = SD_OK;
+    SDIO_ClearFlag(SDIO_FLAG_CMDREND);
     return(errorstatus);
   }
   return(errorstatus);

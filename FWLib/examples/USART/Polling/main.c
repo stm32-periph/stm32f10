@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : main.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Main program body
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -97,8 +97,8 @@ int main(void)
     /* Send one byte from USART1 to USART2 */
     USART_SendData(USART1, TxBuffer[TxCounter++]);
     
-    /* Loop until the end of transmit */ 
-    while(USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET)
+    /* Loop until USART1 DR register is empty */ 
+    while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
     {
     }
     

@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : readme.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Description of the I2C interrupt mode example.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -15,20 +15,31 @@
 
 Example description
 ===================
-This example provides a description of how to transfer a data buffer from I2C1 to
-I2C2 using interrupts.
+This example provides a description of how to manage data transfer from 
+master transmitter to slave receiver and from slave transmitter to master receiver 
+using interrupts.
 
-After enabling the two I2C peripherals and both event and buffer interrupts,
-the transfer in 7-bit addressing mode starts after I2C1 start condition generation.
+After enabling the two I2C peripherals, both event and buffer interrupts for 
+I2C1 and I2C2 and error interrupt for I2C2, the transfer in 7-bit addressing 
+mode starts after I2C1 start condition generation.
 
-Each time an event occurs on the master or the slave, it is managed in the I2C1 or
-I2C2 interrupt routine, respectively. In this application, Tx_Buffer is transmitted 
-from the master I2C1 to the slave I2C2 and stored into Rx_Buffer. 
+First, the master transmitter I2C1 send I2C1_Buffer_Tx data buffer to the 
+salve receiver I2C2. Data received by I2C2 is stored in I2C2_Buffer_Rx buffer.
+Each time an event occurs on the master or the slave, it is managed in the I2C1 
+or I2C2 interrupts routines, respectively. 
+The PEC value is also transmitted from master transmitter to slave receiver and 
+it is stored in the same reception buffer I2C2_Buffer_Rx.
+The transmitted and received buffers are compared to check that all data have 
+been correctly transferred (except the PEC value). This transfer status is stored 
+in TransferStatus1 variable.
 
-At the end of the transfer, the PEC is transmitted from	master to slave and it is  
-stored in the PEC_Value variable by I2C2 after reception. 
+Once the Re-Start condition is sent, thus the second step is started and the 
+I2C2_Buffer_Tx will be sent from the slave transmitter I2C2 to be recieved by 
+the master receiver I2C1 and stored in I2C1_Buffer_Rx. 
+Each time an event occurs on the master or the slave, it is managed in the I2C1 
+or I2C2 interrupts routines, respectively. 
 The transmitted and received buffers are compared to check that all data have been 
-correctly transferred.
+correctly transferred. This transfer status is stored in TransferStatus2 variable.
 
 The communication clock speed is set to 200KHz.
 
@@ -38,6 +49,7 @@ Directory contents
 stm32f10x_conf.h  Library Configuration file
 stm32f10x_it.c    Interrupt handlers
 stm32f10x_it.h    Interrupt handlers header file
+main.h            Main header file
 main.c            Main program
 
 

@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : readme.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Description of the SPI M25P64_Flash Example.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -79,6 +79,8 @@ If a different platform is used:
     - Connect SPI Flash Vcc (pin8) to Vdd
     - Connect SPI Flash Vss (pin4) to Vss
 
+Note: in STM3210E-EVAL board, the jumper 14 (USB Disconnect) must be set in 
+      position 1<->2 in order to not interfer with SPI2 MISO pin PB14.
 
 How to use it
 =============

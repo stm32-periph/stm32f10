@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : readme.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Description of the I2C and M24C08 EEPROM communication example.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -51,8 +51,8 @@ This example runs on STMicroelectronics STM3210B-EVAL and STM3210E-EVAL evaluati
 boards with addition of the following hardware connection:
    - Connect I2C1 SCL pin (PB.06) to I2C EEPROM SCL (pin6)
    - Connect I2C1 SDA pin (PB.07) to I2C EEPROM SDA (pin5)
-   - Check that a pull-up resistor is connected on one I2C SDA pin
-   - Check that a pull-up resistor is connected on one I2C SCL pin
+   - Check that a pull-up resistor (4.7K) is connected on one I2C SDA pin
+   - Check that a pull-up resistor (4.7K) is connected on one I2C SCL pin
    - Connect I2C EEPROM Vcc (pin8) to Vdd
    - Connect I2C EEPROM Vss (pin4) to Vss
 

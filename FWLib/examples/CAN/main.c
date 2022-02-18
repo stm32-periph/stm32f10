@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : main.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Main program body
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -24,7 +24,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-vu32 ret; /* for return of the interrupt handling */
+vu32 ret = 0; /* for return of the interrupt handling */
 volatile TestStatus TestRx;
 ErrorStatus HSEStartUpStatus;
 
@@ -208,7 +208,7 @@ TestStatus CAN_Polling(void)
   CanTxMsg TxMessage;
   CanRxMsg RxMessage;
   u32 i = 0;
-  u8 TransmitMailbox;
+  u8 TransmitMailbox = 0;
 
   /* CAN register init */
   CAN_DeInit();
@@ -269,13 +269,25 @@ TestStatus CAN_Polling(void)
   RxMessage.Data[1]=0x00;
   CAN_Receive(CAN_FIFO0, &RxMessage);
 
-  if (RxMessage.StdId!=0x11) return FAILED;
+  if (RxMessage.StdId!=0x11)
+  {
+    return FAILED;  
+  }
 
-  if (RxMessage.IDE!=CAN_ID_STD) return FAILED;
+  if (RxMessage.IDE!=CAN_ID_STD)
+  {
+    return FAILED;
+  }
 
-  if (RxMessage.DLC!=2) return FAILED;
+  if (RxMessage.DLC!=2)
+  {
+    return FAILED;  
+  }
 
-  if ((RxMessage.Data[0]<<8|RxMessage.Data[1])!=0xCAFE) return FAILED;
+  if ((RxMessage.Data[0]<<8|RxMessage.Data[1])!=0xCAFE)
+  {
+    return FAILED;
+  }
   
   return PASSED; /* Test Passed */
 }

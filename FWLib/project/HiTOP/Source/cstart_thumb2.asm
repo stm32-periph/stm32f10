@@ -1,8 +1,8 @@
 ;******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 ;* File Name          : cstart_thum2.asm
 ;* Author             : MCD Application Team
-;* Version            : V2.0.1
-;* Date               : 06/13/2008
+;* Version            : V2.0.3
+;* Date               : 09/22/2008
 ;* Description        : STM32F10x vector table for HiTOP toolchain. 
 ;*                      This module performs:
 ;*                      - Set the initial SP

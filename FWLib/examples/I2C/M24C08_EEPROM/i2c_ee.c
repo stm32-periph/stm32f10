@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : i2c_ee.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : This file provides a set of functions needed to manage the
 *                      communication between I2C peripheral and I2C M24C08 EEPROM.
 ********************************************************************************
@@ -247,6 +247,9 @@ void I2C_EE_ByteWrite(u8* pBuffer, u8 WriteAddr)
 *******************************************************************************/
 void I2C_EE_PageWrite(u8* pBuffer, u8 WriteAddr, u8 NumByteToWrite)
 {
+  /* While the bus is busy */
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_BUSY));
+  
   /* Send START condition */
   I2C_GenerateSTART(I2C1, ENABLE);
   
@@ -294,6 +297,9 @@ void I2C_EE_PageWrite(u8* pBuffer, u8 WriteAddr, u8 NumByteToWrite)
 *******************************************************************************/
 void I2C_EE_BufferRead(u8* pBuffer, u8 ReadAddr, u16 NumByteToRead)
 {  
+    /* While the bus is busy */
+  while(I2C_GetFlagStatus(I2C1, I2C_FLAG_BUSY));
+  
   /* Send START condition */
   I2C_GenerateSTART(I2C1, ENABLE);
   
@@ -380,6 +386,9 @@ void I2C_EE_WaitEepromStandbyState(void)
   
   /* Clear AF flag */
   I2C_ClearFlag(I2C1, I2C_FLAG_AF);
+  
+  /* STOP condition */    
+  I2C_GenerateSTOP(I2C1, ENABLE);  
 }
 
 /******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/

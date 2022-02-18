@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : main.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Main program body
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -15,6 +15,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_lib.h"
+#include "main.h"
 #include <stdio.h>
 
 /* Private typedef -----------------------------------------------------------*/
@@ -297,6 +298,44 @@ void RTC_Configuration(void)
 
   /* Enable the RTC Second Output on Tamper Pin */
   BKP_RTCOutputConfig(BKP_RTCOutputSource_Second);
+}
+/*******************************************************************************
+* Function Name  : IncrementVar_OperationComplete
+* Description    : Increments OperationComplete variable and return its value 
+*                  before increment operation.
+* Input          : None
+* Output         : None
+* Return         : OperationComplete value befor increment
+*******************************************************************************/
+u32 IncrementVar_OperationComplete(void)
+{
+  OperationComplete++;
+  
+  return (u32)(OperationComplete -1);
+}
+
+/*******************************************************************************
+* Function Name  : GetVar_OperationComplete
+* Description    : Returns OperationComplete value.
+* Input          : None
+* Output         : None
+* Return         : OperationComplete value
+*******************************************************************************/
+u32 GetVar_OperationComplete(void)
+{
+  return (u32)OperationComplete;
+}
+
+/*******************************************************************************
+* Function Name  : SetVar_PeriodValue
+* Description    : Sets the PeriodValue variable with input parameter.
+* Input          : Value: Value of PeriodValue to be set.
+* Output         : None
+* Return         : None
+*******************************************************************************/
+void SetVar_PeriodValue(u32 Value)
+{
+  PeriodValue = (vu32)(Value);
 }
 
 #ifdef  DEBUG

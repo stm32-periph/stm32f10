@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : readme.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : This sub-directory contains all the user-modifiable files 
 *                      needed to create a new project linked with the STM32F10x  
 *                      Firmware Library and working with IAR Embedded Workbench 

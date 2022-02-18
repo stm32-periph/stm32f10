@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : main.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Main program body.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -50,7 +50,9 @@ int main(void)
   /* System Clocks Configuration */
   RCC_Configuration();   
 
-  /* GPIO configuration */
+  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically 
+     connected to the DAC converter. In order to avoid parasitic consumption, 
+     the GPIO pin should be configured in analog */
   GPIO_Configuration();
 
   /* NVIC Configuration */
@@ -78,10 +80,12 @@ int main(void)
   DAC_InitStructure.DAC_LFSRUnmask_TriangleAmplitude = DAC_TriangleAmplitude_1023;
   DAC_Init(DAC_Channel_2, &DAC_InitStructure);
 
-  /* Enable DAC Channel1 */
+  /* Enable DAC Channel1: Once the DAC channel1 is enabled, PA.04 is 
+     automatically connected to the DAC converter. */
   DAC_Cmd(DAC_Channel_1, ENABLE);
 
-  /* Enable DAC Channel2 */
+  /* Enable DAC Channel2: Once the DAC channel2 is enabled, PA.05 is 
+     automatically connected to the DAC converter. */
   DAC_Cmd(DAC_Channel_2, ENABLE);
 
   /* Set DAC dual channel DHR12RD register */
@@ -151,8 +155,8 @@ void RCC_Configuration(void)
   }
 
 /* Enable peripheral clocks --------------------------------------------------*/
-  /* AFIO and GPIOA Periph clock enable */
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO | RCC_APB2Periph_GPIOA, ENABLE);
+  /* GPIOA Periph clock enable */
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
   /* DAC Periph clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE);
   /* TIM2 Periph clock enable */
@@ -170,10 +174,11 @@ void GPIO_Configuration(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
 
-  /* Configure DAC channe1 and DAC channel2 outputs pins */
+  /* Once the DAC channel is enabled, the corresponding GPIO pin is automatically 
+     connected to the DAC converter. In order to avoid parasitic consumption, 
+     the GPIO pin should be configured in analog */
   GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_4 | GPIO_Pin_5;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 

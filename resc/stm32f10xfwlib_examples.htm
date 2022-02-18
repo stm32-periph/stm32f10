@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>STM32F10x Firmware Library Examples</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></head>
+<body>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="900">
+<tbody>
+<tr valign="top">
+<td>
+<table width="100%">
+<tbody>
+<tr>
+<td align="right"><img style="width: 900px; height: 85px;" alt="STM32 Releasing your creativity" src="stm32_ryc.jpg"></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table border="0" cellpadding="2" cellspacing="0" width="900">
+<tbody>
+<tr>
+<td class="tabtitle"><strong><font color="#000000" face="Arial, Helvetica, sans-serif" size="4">Easy-to-use STM32F10x Firmware Library Examples</font></strong></td>
+</tr>
+</tbody>
+</table>
+<table style="width: 900px; height: 1054px;" border="0" cellpadding="0" cellspacing="2">
+<tbody>
+<tr>
+<td valign="top">
+<p><font face="Arial, Helvetica, sans-serif" size="2"><span style="font-weight: bold;">STM32F10x
+Firmware Library</span></font></p>
+<p><font face="Arial, Helvetica, sans-serif" size="2">The firmware library is supplied in one single zip
+file. The</font><font face="Arial, Helvetica, sans-serif" size="2"> extractio</font><font face="Arial, Helvetica, sans-serif" size="2">n of the
+zip file generates one folder, STM32F10xFWLib, which contains the
+following subfolders:</font></p>
+<p style="text-align: center;"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 262px; height: 706px;" alt="STM32F10x Firmware Library folder structure" src="fwlib_struct.JPG"></font></p>
+<p style="text-align: center;"><font face="Arial, Helvetica, sans-serif" size="2"><span style="font-weight: bold;">STM32F10x Firmware Library folder
+Structure</span></font></p>
+<p><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 14px; height: 12px;" alt="" src="ar_s.gif"> <a target="_blank" href="../FWLib/examples"><span style="font-style: italic; font-weight: bold;">examples</span>
+</a>folder</font><br>
+This Examples folder contains, for each peripheral
+sub-folder, the minimum set of files needed to run a typical example on
+how to use a peripheral:<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">readme.txt:</span>&nbsp;brief
+text file describing the example
+and how to make it work.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_conf.h:</span>
+header file allowing to configure the
+peripherals that are used, and containing miscellaneous DEFINE
+statements.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_it.c:</span>
+source file containing the interrupt handlers
+(the function bodies may be emptied if not used).<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_it.h:</span>
+header file&nbsp;ncluding all interrupt handler
+prototypes.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">main.c:</span>
+example of code.<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">platform_config.h:</span> STMicroelectronics Evaluation board specific configuration file.</font></p>
+<font face="Arial, Helvetica, sans-serif" size="2">
+
+</font>
+<p><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 14px; height: 12px;" alt="" src="ar_s.gif"> <a target="_blank" href="../FWLib/library"><span style="font-weight: bold; font-style: italic;">library</span>
+</a>folder</font><br>
+The Library folder contains all the subdirectories and files that make
+up the core of the library:</font></p>
+<p><font face="Arial, Helvetica, sans-serif" size="2">&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp;
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 14px; height: 12px;" alt="" src="ar_s.gif">
+<span style="font-style: italic; font-weight: bold;">inc
+</span><span style="font-style: italic;"></span>sub-folder
+contains the firmware library header files. They do not need to be
+modified by the user:</font><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_type.h</span>:
+common data types and enumeration used in all other files.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_map.h</span>:
+peripherals memory mappings and registers data structures.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_lib.h</span>:
+main header file including all other headers.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_ppp.h</span>
+(one header file per peripheral): Function prototypes, data structures
+and enumeration.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">cortexm3_macro.h</span>:
+header file for cortexm3_macro.s.</font></p>
+<p><font face="Arial, Helvetica, sans-serif" size="2">&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp;
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 14px; height: 12px;" alt="" src="ar_s.gif">
+<span style="font-style: italic;"><span style="font-weight: bold;">src</span></span><span style="font-style: italic; font-weight: bold;"> </span><span style="font-style: italic;"></span>sub-folder contains
+the firmware library source files. They do not need to be modified by
+the user:</font><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_ppp.c
+</span>(one source file per peripheral): function
+bodies of each peripheral.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_lib.c:</span>
+all peripherals pointers initialization.</font></p>
+<p><font face="Arial, Helvetica, sans-serif" size="2">All
+library files are coded in Strict ANSI-C and are independent from the
+software toolchain.<br>
+</font></p>
+<p><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 14px; height: 12px;" alt="" src="ar_s.gif"> <a target="_blank" href="../FWLib/project"><span style="font-weight: bold; font-style: italic;">project</span>
+</a>folder</font><br>
+The Project folder contains a standard template project program that
+compiles all library files plus all the user-modifiable files that are
+necessary to create a new project:<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_conf.h:</span>
+configuration header file with all peripherals defined by default.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_it.c:</span>
+source file containing the interrupt handlers (the function bodies are
+empty in this template).<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">stm32f10x_it.h:</span>
+header file including all interrupt handlers prototypes.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">main.c:</span>
+main program body.<br>
+</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"> &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;<img style="width: 14px; height: 12px;" alt="" src="ar_s.gif"> </font></font><font face="Arial, Helvetica, sans-serif" size="2"><span style="font-weight: bold;">EWARM</span>, <span style="font-weight: bold;">RVMDK</span>, <span style="font-weight: bold;">RIDE</span>, <span style="font-weight: bold;">HiTOP</span>:
+it is used by
+the toolchain, and refers to the readme.txt file located in the same
+folder. Two &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;workspaces are provided for each project template:<br>&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-
+STM3210B-EVAL: to configure the project for STM32 Medium-density devices<br>&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-
+STM3210E-EVAL: to configure the project for STM32 High-density devices</font></p><p><span style="font-weight: bold; color: rgb(51, 51, 255);">What do I need to start successfully with Examples</span><br><br><font face="Arial, Helvetica, sans-serif" size="2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">Hardware platform:</span> </font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2">STMicroelectronics &nbsp;</font></font><font face="Arial, Helvetica, sans-serif" size="2">STM3210B-EVAL and STM3210E-EVAL </font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"> evaluation boards</font></font><font face="Arial, Helvetica, sans-serif" size="2"> or you can use&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2">any
+other &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;hardware.</font></font></p><p><font face="Arial, Helvetica, sans-serif" size="2"><span style="font-style: italic;"></span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2">
+&nbsp;<span style="font-style: italic;">Software Environment: </span>Use your preferred tool chain.<br></font><span style="font-weight: bold;"></span></p><p style="color: rgb(51, 51, 255);"><span style="font-weight: bold;">How to proceed</span></p><p style="color: rgb(51, 51, 255);"><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"><span style="color: black;"> Hardware platform set-up: when using&nbsp;&nbsp;</span></font></font><font style="color: black;" face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2">STMicroelectronics
+evaluation board you have to select the right board by uncommenting the
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; corresponding line in
+platform_config.h file. Otherwise, &nbsp;adapt your the firmware
+according to your hardware.</font></font></p><p><font face="Arial, Helvetica, sans-serif" size="2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2"> Copy the preconfigured project provided within
+STM32F10xFWLib\FWLib\project to the example directory you want to use.
+This &nbsp;<br>&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; project folder contains already all
+tool chain startup files needed for creating projects for STM32
+microcontrollers.</font></p><p><font face="Arial, Helvetica, sans-serif" size="2"><span style="font-style: italic;"></span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;</font><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2"> As the preconfigured project by default compiles all library files and
+all these files path are changed, you will need to remove all these
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; files from the project. For the
+selected example, you have to add </font><font face="Arial, Helvetica, sans-serif" size="2">the needed FWLib source
+files according to the &#8220;How to use it&#8221; &nbsp; &nbsp; &nbsp; &nbsp;<br>&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; section of the readme file.</font></p><p><font face="Arial, Helvetica, sans-serif" size="2"><font face="Arial, Helvetica, sans-serif" size="2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img style="width: 16px; height: 13px;" alt="" src="bulb16.gif"></font></font><font face="Arial, Helvetica, sans-serif" size="2"> Open the Project options
+and update the Compiler&nbsp;include path; example relative
+path and library\inc</font></p><p><font face="Arial, Helvetica, sans-serif" size="2">&nbsp;
+&nbsp; &nbsp; &nbsp;<font face="Arial, Helvetica, sans-serif" size="2"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img style="height: 13px; width: 16px;" alt="" src="bulb16.gif"> Select the Project workspace according to your hardware and STM32 products</font></font></p><p><font face="Arial, Helvetica, sans-serif" size="2">&nbsp;
+&nbsp; &nbsp; &nbsp;<font face="Arial, Helvetica, sans-serif" size="2"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img style="height: 13px; width: 16px;" alt="" src="bulb16.gif"> Finally compile, load and run the example</font></font></p>
+<font face="Arial, Helvetica, sans-serif" size="2">
+<table border="0" cellpadding="0" cellspacing="5" width="100%">
+<tbody>
+<tr valign="top">
+<td height="42"><br>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td class="tabtitle"><strong><font face="Arial, Helvetica, sans-serif" size="4">Firmware
+and documents</font></strong></td>
+</tr>
+</tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="5" width="100%">
+<tbody>
+<tr>
+<td width="3%"><font face="Arial, Helvetica, sans-serif" size="2"><img style="width: 14px; height: 12px;" alt="" src="ar_s.gif"></font></td>
+<td width="97%"><font face="Arial, Helvetica, sans-serif" size="2">For
+complete documentation refer to <a href="http://www.st.com/stm32" target="_blank">www.st.com/STM32</a><strong> </strong></font>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</font></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</body></html>

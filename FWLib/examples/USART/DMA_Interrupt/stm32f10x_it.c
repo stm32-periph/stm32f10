@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : stm32f10x_it.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Main Interrupt Service Routines.
 *                      This file provides template for all exceptions handler
 *                      and peripherals interrupt service routine.
@@ -579,9 +579,6 @@ void USART2_IRQHandler(void)
   {
     /* Read one byte from the receive data register */
     RxBuffer2[RxCounter++] = USART_ReceiveData(USART2);         
-
-    /* Clear the USART2 Receive interrupt */
-    USART_ClearITPendingBit(USART2, USART_IT_RXNE);
 
     if(RxCounter == NbrOfDataToRead)
     {

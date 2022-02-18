@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : readme.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Description of the RCC Example.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -34,6 +34,8 @@ HSE clock failure). You can monitor the HSE clock on the MCO pin (PA.08).
 Four LEDs connected to the GPIO_LED Pin 6, Pin 7, Pin 8 and Pin 9 are toggled
 with a timing defined by the Delay function.
 
+Note: To adjust the External High Speed oscillator (HSE) Startup Timeout value,
+use HSEStartUp_TimeOut variable defined in the stm32f10x_conf.h file.
 
 Directory contents
 ==================
@@ -41,6 +43,7 @@ platform_config.h    Evaluation board specific configuration file
 stm32f10x_conf.h     Library Configuration file
 stm32f10x_it.c       Interrupt handlers
 stm32f10x_it.h       Header for stm32f10x_it.c
+main.h               Main header file
 main.c               Main program
 
 

@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : readme.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Description of the GPIO IOToggle Example.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -19,7 +19,7 @@ This example describes how to use GPIO BSRR (Port bit set/reset register) and
 BRR (Port bit reset register) for IO toggling.
 These registers allow modifying only one or several GPIO pins in a single atomic
 write access.
-
+GPIO_LED Port Pin 6, Pin 7, Pin 8 and Pin 9 are toggled in an infinite loop.
 
 Directory contents
 ==================

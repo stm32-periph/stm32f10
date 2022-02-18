@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : spi_flash.c
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : This file provides a set of functions needed to manage the
 *                      communication between SPI peripheral and SPI M25P64 FLASH.
 ********************************************************************************
@@ -18,7 +18,7 @@
 #include "spi_flash.h"
 
 /* Private typedef -----------------------------------------------------------*/
-#define SPI_FLASH_PageSize    0x1006
+#define SPI_FLASH_PageSize    0x100
 
 /* Private define ------------------------------------------------------------*/
 #define WRITE      0x02  /* Write to Memory instruction */

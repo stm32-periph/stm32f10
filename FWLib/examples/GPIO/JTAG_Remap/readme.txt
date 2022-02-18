@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : readme.txt
 * Author             : MCD Application Team
-* Version            : V2.0.1
-* Date               : 06/13/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Description of the GPIO JTAG Remap Example.
 ********************************************************************************
 * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
@@ -24,11 +24,14 @@ PB.03(JTDO) and PB.04(JTRST) pins are toggled in an infinite loop.
 
 Note that once the JTAG IOs are disabled, the connection with the host debugger is
 lost and cannot be re-established as long as the JTAG IOs remain disabled. 
+
 To avoid this situation, a specified pin is connected to a push-button that is used
 to disable or not the JTAG IOs:
  1. push-button pressed at reset: JTAG IOs disabled
  2. push-button not pressed at reset: JTAG IOs unchanged
 
+Before starting this example, you should disconnect your tool chain debugging probe
+and run the example in standalone mode.
 
 Directory contents
 ==================

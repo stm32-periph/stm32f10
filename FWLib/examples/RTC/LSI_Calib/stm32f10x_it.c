@@ -1,8 +1,8 @@
 /******************** (C) COPYRIGHT 2008 STMicroelectronics ********************
 * File Name          : stm32f10x_it.c
 * Author             : MCD Application Team
-* Version            : V3.0
-* Date               : 02/25/2008
+* Version            : V2.0.3
+* Date               : 09/22/2008
 * Description        : Main Interrupt Service Routines.
 *                      This file provides template for all exceptions handler
 *                      and peripherals interrupt service routine.
@@ -17,14 +17,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
+#include "main.h" 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-vu16 tmpCC4[2] = {0, 0};
-extern vu32 OperationComplete;
-extern vu32 PeriodValue;
+u16 tmpCC4[2] = {0, 0};
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -659,16 +658,19 @@ void SDIO_IRQHandler(void)
 *******************************************************************************/
 void TIM5_IRQHandler(void)
 {
+  u32 tmp = 0; 
+  
   if (TIM_GetITStatus(TIM5, TIM_IT_CC4) == SET)
   {
-    tmpCC4[OperationComplete++] = (u16)(TIM5->CCR4);
+    tmpCC4[IncrementVar_OperationComplete()] = (u16)(TIM5->CCR4);
 
     TIM_ClearITPendingBit(TIM5, TIM_IT_CC4);
 
-    if (OperationComplete >= 2)
+    if (GetVar_OperationComplete() >= 2)
     {
       /* Compute the period length */
-      PeriodValue = (u16)(tmpCC4[1] - tmpCC4[0] + 1);
+      tmp = (u16)(tmpCC4[1] - tmpCC4[0] + 1);
+      SetVar_PeriodValue(tmp);
 
       /* Disable the interrupt */
       TIM_ITConfig(TIM5, TIM_IT_CC4, DISABLE);
